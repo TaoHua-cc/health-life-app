@@ -18,7 +18,7 @@
 [data-theme=dark]{--bg:#0a0a0c;--sf:#1c1c1e;--sf2:#2c2c2e;--bd:#3a3a3e;--t1:#f5f5f7;--t2:#b4b4b9;--t3:#a0a0a8;--priBg:#0a2540;--priBd:#1f4f80;--grnBg:#0d2818;--orgBg:#2d1f08;--purBg:#1a0d2e;--btn-bg:#2c2c2e;--btn-bd:#3a3a3c;--btn-sh:0 4px 14px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);--btn-acc-bg:var(--priBg);--redBg:#3a1413;--fatBg:#3a1820}
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);display:flex;justify-content:center;color:var(--t1);line-height:1.55;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;letter-spacing:.1px;font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
 .ph{width:100%;max-width:480px;min-height:100vh;min-height:100dvh;background:var(--bg);position:relative;overflow-x:hidden;padding-bottom:calc(88px + env(safe-area-inset-bottom, 34px))}
-.hdr{padding:calc(14px + env(safe-area-inset-top)) 16px 10px;background:transparent;color:var(--t1);position:relative;z-index:1}
+.hdr{padding:calc(8px + env(safe-area-inset-top,0px)) 16px 10px;background:transparent;color:var(--t1);position:relative;z-index:1}
 .hdr-inner{display:flex;align-items:center;justify-content:space-between}
 .hdr-greet{font-size:1.42rem;font-weight:700;letter-spacing:-0.4px;color:var(--t1);line-height:1.2}
 .hdr-greet .emoji{margin-left:4px}
@@ -1046,7 +1046,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .mp-cat.on,.lib-cat.on{background:var(--priBg);color:var(--pri);border-color:var(--pri)}
 /* 生活标签卡（吃喝/玩乐切换） */
 /* ===== 生活页 · 截图对齐改版 ===== */
-.life-header{padding-top:calc(18px + env(safe-area-inset-top,0px));margin:0 0 12px}
+.life-header{padding-top:calc(8px + env(safe-area-inset-top,0px));margin:0 0 12px}
 .life-title{font-size:1.5rem;font-weight:800;color:var(--t1);letter-spacing:-.3px;line-height:1.2}
 .life-sub{font-size:.74rem;color:var(--t3);margin-top:2px;letter-spacing:.5px}
 /* 横栏 tab（吃喝/玩乐/健康/财务/学习/目标） */
@@ -1098,7 +1098,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .sec{margin:18px 0 10px}
 .sl{margin:18px 0 10px}
 /* 页面标题头（工作/健身/饮食） */
-.page-hd{padding:calc(18px + env(safe-area-inset-top,0px)) 0 6px}
+.page-hd{padding:calc(8px + env(safe-area-inset-top,0px)) 0 6px}
 .page-hd .ph-t{font-size:1.72rem;font-weight:800;letter-spacing:-0.5px;color:var(--t1);line-height:1.2}
 .page-hd .ph-s{font-size:.8rem;color:var(--t2);margin-top:4px;line-height:1.4}
 </style>
