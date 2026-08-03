@@ -24,7 +24,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .hdr-greet .emoji{margin-left:4px}
 .hdr-date{font-size:.8rem;color:var(--t2);margin-top:4px;line-height:1.4}
 .hdr-date .cd-dot{color:var(--pri);font-weight:600}
-.hdr .hb.avbtn{background:var(--sf2);color:var(--t1);border:1px solid var(--bd);border-radius:50%}
+.hdr .hb.avbtn{background-color:var(--sf2);color:var(--t1);border:1px solid var(--bd);border-radius:50%}
 .ha{display:flex;gap:6px}
 .hb.thc{position:relative}
 .hb.thc .dot{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:var(--pri);border:1.5px solid var(--sf);box-shadow:0 0 0 1px var(--bd)}
@@ -563,7 +563,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
   border:1px solid rgba(255,255,255,.5);
 }
 /* 10) 头像大圆 / 选项块 → 玻璃 */
-.av-big{background:var(--glass-2);border:1px solid var(--glass-brd);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.av-big{background-color:var(--glass-2);border:1px solid var(--glass-brd);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .av-opt{background:var(--glass-2);border:1px solid var(--glass-brd)}
 
 /* ===== 深色主题：同样的高级感 ===== */
@@ -2636,6 +2636,7 @@ function updateHdr(){
   var hr=new Date().getHours();
   var greet=hr<6?'凌晨好':hr<11?'早上好':hr<13?'中午好':hr<18?'下午好':'晚上好';
   var av=S.avatar||'🐸';
+  if(av.indexOf('data:image')===0)av=''; // 照片头像时不在问候语里塞 base64，按钮本身已显示照片
   g.textContent=greet+'，'+av;
   if(ab)setAvatarEl(ab,S.avatar||'👤');
   // 日期 + 碳水日类型
