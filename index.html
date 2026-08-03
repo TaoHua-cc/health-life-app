@@ -1101,6 +1101,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .page-hd{padding:calc(8px + env(safe-area-inset-top,0px)) 0 6px}
 .page-hd .ph-t{font-size:1.72rem;font-weight:800;letter-spacing:-0.5px;color:var(--t1);line-height:1.2}
 .page-hd .ph-s{font-size:.8rem;color:var(--t2);margin-top:4px;line-height:1.4}
+/* 语音/文字智能助手：悬浮按钮 + 底部面板（辅助录入，不改底层数据逻辑） */
+.fab{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:110;width:56px;height:56px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,var(--brand-g),#8b5cf6);color:#fff;font-size:1.45rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px rgba(99,102,241,.5);cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;
+  transition:transform .15s,box-shadow .2s}
+.fab:active{transform:scale(.9);box-shadow:0 6px 16px rgba(99,102,241,.5)}
+[data-theme=dark] .fab{box-shadow:0 10px 26px rgba(0,0,0,.6)}
+.vf-hint{font-size:.72rem;line-height:1.55;color:var(--t2);background:var(--sf2);border:1px solid var(--btn-bd);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.vf-hint b{color:var(--t1)}
+.vf-input{width:100%;box-sizing:border-box;border:1px solid var(--btn-bd);background:var(--sf2);color:var(--t1);border-radius:14px;padding:12px;
+  font-size:.9rem;line-height:1.5;resize:none;outline:none;font-family:inherit}
+.vf-input:focus{border-color:var(--pri)}
+.vf-row{display:flex;gap:10px;margin-top:12px}
+.vf-mic{flex:1;padding:12px;border-radius:14px;border:1px solid var(--btn-bd);background:var(--btn-bg);color:var(--t1);font-size:.85rem;font-weight:600;
+  cursor:pointer;box-shadow:var(--btn-sh);-webkit-appearance:none;appearance:none}
+.vf-mic.on{background:var(--redBg);color:var(--red);border-color:var(--red)}
+.vf-row .mbn.ok{flex:0 0 auto;min-width:96px}
+.vf-log{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.vf-log .vfi{font-size:.8rem;line-height:1.5;background:var(--sf2);border:1px solid var(--btn-bd);border-radius:10px;padding:8px 10px;color:var(--t1)}
+.vf-log .vfi.u{color:var(--t2);font-style:italic;background:transparent;border-style:dashed}
 </style>
 </head>
 <body>
@@ -1254,6 +1274,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 
 
 <div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
+
+<button class="fab" id="voiceFab" onclick="openVoice()" aria-label="智能语音助手">🎙️</button>
+<div class="ov" id="voiceOv" onclick="if(event.target===this)closeVoice()"><div class="ms2" onclick="event.stopPropagation()">
+<div class="ct">🎙️ 智能语音助手 <span class="dx" onclick="closeVoice()">✕</span></div>
+<div class="vf-hint">说或输入即可<b>快捷添加</b>：<br>· 健身「卧推3组12次60公斤」「跑步20分钟」<br>· 饮食「早餐吃一个鸡蛋」「喝一杯牛奶」「米饭200克」<br>· 工作「任务：写周报」<br>· 提醒「三点开会」「提醒我取快递」<br>· 生活「随记今天很开心」「学习看了书」<br>· 其他「喝水3杯」「体重70.5」「睡眠7.5小时」</div>
+<textarea class="vf-input" id="voiceInput" rows="3" placeholder="点击麦克风说话，或手动输入…"></textarea>
+<div class="vf-row"><button class="vf-mic" id="voiceMic" onclick="toggleVoiceRec()">🎤 点击说话</button><button class="mbn ok" onclick="runVoiceCommand(document.getElementById('voiceInput').value)">添加</button></div>
+<div class="vf-log" id="voiceLog"></div>
+</div></div>
 
 <div class="ov" id="mealOv" onclick="if(event.target===this)closeMeal()"><div class="ms2" onclick="event.stopPropagation()"><h3 id="mealTitle">添加饮食</h3><div class="mf"><label>🔍 搜索食物（模糊匹配，自动识别热量）</label><div class="m-food-row"><input type="text" id="m-food" placeholder="输入食物名，如：米饭、鸡胸肉、牛奶…" oninput="foodSearch()" autocomplete="off"><button type="button" class="m-cam" onclick="mealCamera()" aria-label="拍照识别食物" title="拍照识别食物"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.2A1.6 1.6 0 0 1 5.6 6.6h2L9 4.6h6l1.4 2h2A1.6 1.6 0 0 1 20 8.2v8.2A1.6 1.6 0 0 1 18.4 18H5.6A1.6 1.6 0 0 1 4 16.4z"/><circle cx="12" cy="12.4" r="3.3"/></svg></button></div></div>
 <input type="file" id="mealCam" accept="image/*" capture="environment" style="display:none" onchange="mealCamChange(this)">
@@ -5102,6 +5131,192 @@ function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.c
 
 // Start
 init();
+
+/* ============ 语音/文字智能助手（悬浮按钮，辅助录入，不改底层数据逻辑） ============ */
+var voiceRec=null, voiceRecOn=false;
+function openVoice(){var o=document.getElementById('voiceOv');if(o)o.classList.add('on')}
+function closeVoice(){var o=document.getElementById('voiceOv');if(o)o.classList.remove('on');stopVoiceRec()}
+function pad2(n){n=''+n;return n.length<2?'0'+n:n}
+function numAfter(t,re){var m=t.match(re);return m?parseFloat(m[1]):null}
+function matchFood(text){
+  var best=null,bestLen=0;
+  for(var i=0;i<FOOD_DB.length;i++){var f=FOOD_DB[i];
+    if(text.indexOf(f.name)>=0&&f.name.length>bestLen){best=f;bestLen=f.name.length;}
+    if(f.alias)for(var a=0;a<f.alias.length;a++){var al=f.alias[a];if(al.length>=2&&text.indexOf(al)>=0&&al.length>bestLen){best=f;bestLen=al.length;}}
+  }
+  return best;
+}
+function mealTypeFromText(t){
+  if(/早/.test(t))return 'breakfast';
+  if(/夜宵|宵夜|零食|加餐|夜/.test(t))return 'snack';
+  if(/午|中饭/.test(t))return 'lunch';
+  if(/晚|晚饭|晚餐/.test(t))return 'dinner';
+  var h=new Date().getHours();
+  if(h<10)return 'breakfast';
+  if(h<14)return 'lunch';
+  if(h<21)return 'dinner';
+  return 'snack';
+}
+function extractTime(text){
+  var m=text.match(/(\d{1,2})[:：](\d{2})/);if(m&&+m[1]<24)return pad2(m[1])+':'+m[2];
+  var cn={'一':1,'二':2,'两':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9,'十':10,'十一':11,'十二':12};
+  var mer=(text.match(/(下午|晚上|傍晚)/)||[])[1];
+  var cm=text.match(/(?:([一二两三四五六七八九十]+)|(\d{1,2}))\s*点\s*(半)?/);
+  if(cm){var h=cm[1]?cn[cm[1]]:+cm[2];if(h==null||isNaN(h))return '';
+    if(mer&&h<12)h+=12;return pad2(h)+':'+(cm[3]?'30':'00');}
+  return '';
+}
+function subMatch(text,w){
+  if(!w||w.length<2)return false;
+  if(text.indexOf(w)>=0)return true;
+  if(w.length>=3&&text.indexOf(w.slice(1))>=0)return true;
+  if(w.length>=3&&text.indexOf(w.slice(0,-1))>=0)return true;
+  for(var i=0;i+2<=w.length;i++){if(text.indexOf(w.substr(i,2))>=0)return true;}
+  return false;
+}
+function detectExercise(text){
+  var hit=null;
+  for(var i=0;i<EXERCISE_DB.length;i++){var e=EXERCISE_DB[i];
+    if(subMatch(text,e.name)){hit=e;break;}
+    if(e.alias){for(var a=0;a<e.alias.length;a++){if(subMatch(text,e.alias[a])){hit=e;break;}}}
+    if(hit)break;
+  }
+  if(!hit)return null;
+  var sets=numAfter(text,/(\d+)\s*(?:组|sets?)/i);
+  var reps=numAfter(text,/(\d+)\s*(?:次|下|reps?|rep)/i);
+  var wm=text.match(/(\d+(?:\.\d+)?)\s*(?:kg|公斤|千克|斤)/i);
+  var weight=wm?parseFloat(wm[1]):null;if(weight!=null&&/斤/.test(text))weight/=2;
+  var dur=numAfter(text,/(\d+)\s*(?:分钟|分|min)/i);
+  return {ex:hit,sets:sets,reps:reps,weight:weight,dur:dur};
+}
+function detectMeal(text){
+  if(!/(吃|喝|早餐|早饭|午餐|午饭|中饭|晚餐|晚饭|夜宵|宵夜|零食|加餐|进食|来份|点了个|点了|啃|吞|尝)/.test(text))return null;
+  var food=matchFood(text);if(!food)return null;
+  var am=text.match(/(\d+(?:\.\d+)?)\s*(克|g|毫升|ml|碗|个|份|杯|瓶|根|块|片|包|罐|只|条|颗|枚|根)/i);
+  return {food:food,num:am?parseFloat(am[1]):null,unit:am?am[2]:null,mealType:mealTypeFromText(text)};
+}
+function detectReminder(text){
+  var m=text.match(/(?:提醒我?|备忘|记得|闹钟|别忘|按时|记一下提醒|提醒[:：])\s*[:：]?\s*(.+)/i);
+  if(!m)return null;
+  var content=m[1].replace(/^[:：]\s*/,'').trim();if(!content)return null;
+  return {text:content,time:extractTime(text)};
+}
+function detectTask(text){
+  var m=text.match(/(?:工作|任务|待办|要做|todo|安排|记一下任务|记个任务|任务[:：])\s*[:：]?\s*(.+)/i);
+  if(!m)return null;
+  var content=m[1].replace(/^[:：]\s*/,'').trim();if(!content)return null;
+  return {text:content,time:extractTime(text)};
+}
+function detectLife(text){
+  var tag='随记',hasTagKw=false;
+  if(/吃喝|美食|饭局|探店|聚餐/.test(text)){tag='吃喝';hasTagKw=true;}
+  else if(/玩乐|游玩|出去玩|打游戏|游戏/.test(text)){tag='玩乐';hasTagKw=true;}
+  else if(/学习|看书|读书|上课|课程|网课/.test(text)){tag='学习';hasTagKw=true;}
+  else if(/财务|花钱|花了|消费|支出|记账|存钱|理财/.test(text)){tag='财务';hasTagKw=true;}
+  else if(/目标|计划/.test(text)){tag='目标';hasTagKw=true;}
+  else if(/心情|感慨|随笔|碎碎念|健身|运动/.test(text)){tag='健康';hasTagKw=true;}
+  var m=text.match(/(?:随记|记一下|记录|写|生活|心情|随笔|碎碎念|记[:：])\s*[:：]?\s*(.+)/i);
+  if(!m&&!hasTagKw)return null;
+  var content=m?m[1].replace(/^[:：]\s*/,'').trim():text.replace(/^(?:随记|记一下|记录|生活|心情|随笔|碎碎念)\s*[:：]?\s*/,'').trim();
+  if(!content)return null;
+  return {tag:tag,text:content};
+}
+function detectMetric(text){
+  var wm=text.match(/(\d+)\s*杯/);
+  if(/喝|水/.test(text)&&wm)return {type:'water',val:+wm[1]};
+  var bw=text.match(/体重[^\d]*(\d+(?:\.\d+)?)\s*(?:kg|公斤|千克)?/i);
+  if(bw)return {type:'weight',val:parseFloat(bw[1])};
+  var sl=text.match(/(?:睡|睡眠)[^\d]*(\d+(?:\.\d+)?)\s*小时/);
+  if(sl)return {type:'sleep',val:parseFloat(sl[1])};
+  return null;
+}
+function quickAddMeal(food,num,unit,mealType){
+  var day=gd(curDate);var cat=mealType||'lunch';
+  var serv=defaultServing(food);
+  var weightUnits=/^(?:克|g|ml|毫升)$/i.test(unit||'');
+  var grams,dispAmount,dispUnit;
+  if(num==null){grams=serv.amt;dispAmount=1;dispUnit=serv.label;}
+  else if(weightUnits){grams=num;dispAmount=Math.round(num);dispUnit=unit;}
+  else{dispAmount=num;dispUnit=unit||serv.label;grams=num*serv.amt;}
+  var k=grams/100;
+  var item={food:food.name,cal:Math.round(food.cal*k),carb:+(food.carb*k).toFixed(1),protein:+(food.protein*k).toFixed(1),fat:+(food.fat*k).toFixed(1)};
+  item.amount=dispAmount;item.unit=dispUnit;
+  day.meals[cat].push(item);bumpFoodFreq(food.name);
+  save();renderMeals();renderDietSummary();buildCal('diet');
+  return cat;
+}
+function quickAddExercise(ex,sets,reps,weight,dur){
+  var day=gd(curDate);if(!day.fit)day.fit={parts:[]};
+  var grp=ex.grp;var part=day.fit.parts.find(function(x){return x.name===grp});
+  if(!part){part={id:'fp'+Date.now()+Math.floor(Math.random()*1e4),name:grp,items:[]};day.fit.parts.unshift(part)}
+  var isCardio=(ex.cat==='cardio'||grp==='有氧');
+  var item;
+  if(isCardio){item={eid:'fe'+Date.now()+Math.floor(Math.random()*1e4),name:ex.name,type:'cardio',duration:dur||30,incline:1,speed:6,done:false};}
+  else{item={eid:'fe'+Date.now()+Math.floor(Math.random()*1e4),name:ex.name,sets:sets||3,reps:reps||12,weight:weight||0,done:false};}
+  part.items.push(item);markDayCustomized(curDate);
+  save();renderFit();buildCal('fit');return grp;
+}
+function quickAddTask(text,time){
+  var day=gd(curDate);day.tasks.push({id:'t'+Date.now()+Math.floor(Math.random()*1e4),text:text,time:time||'',urgency:'normal',done:false,createdAt:Date.now()});
+  save();renderTasks();buildCal('work');
+}
+function quickAddReminder(text,time){
+  var day=gd(curDate);day.reminders.push({id:'r'+Date.now()+Math.floor(Math.random()*1e4),text:text,time:time||'',done:false,createdAt:Date.now()});
+  save();renderReminders();buildCal('life');
+}
+function quickAddLife(tag,text){
+  var day=gd(curDate),l=day.life;if(!l.tags)l.tags={};if(!l.tags[tag])l.tags[tag]=[];
+  l.tags[tag].push({id:'lr'+Date.now()+Math.floor(Math.random()*1e4),text:text,ts:Date.now()});
+  save();renderLifeCats();renderLifePanel();buildCal('life');
+}
+function quickSetMetric(type,val){
+  var day=gd(curDate);
+  if(type==='water'){var c=Math.max(0,Math.min(8,val|0));day.water=c;save();renderWater();}
+  else if(type==='weight'){S.profile.weight=val;day.life.weight=val;
+    var pw=document.getElementById('p-weight');if(pw)pw.value=val;
+    var lw=document.getElementById('l-weight');if(lw)lw.value=val;
+    save();renderLife();renderDietSummary();renderCarbDays();}
+  else if(type==='sleep'){day.life.sleep=val;save();renderLife();}
+}
+function appendVoiceLog(input,lines){
+  var box=document.getElementById('voiceLog');if(!box)return;
+  var h='<div class="vfi u">你说：'+escHtml(input)+'</div>';
+  h+=lines.map(function(l){return '<div class="vfi">'+escHtml(l)+'</div>'}).join('');
+  box.innerHTML=h+box.innerHTML;
+}
+function runVoiceCommand(raw){
+  var text=(raw||'').trim();if(!text){toast('请输入或说点什么');return;}
+  var log=[],done=false;
+  var ex=detectExercise(text);
+  if(ex){var g=quickAddExercise(ex.ex,ex.sets,ex.reps,ex.weight,ex.dur);
+    var desc=ex.ex.name+(ex.sets?(' '+ex.sets+'组'+(ex.reps?('×'+ex.reps):'')):'')+(ex.weight?(' '+ex.weight+'kg'):'')+((ex.ex.cat==='cardio'||ex.ex.grp==='有氧')&&ex.dur?(' '+ex.dur+'分钟'):'');
+    log.push('💪 已加入训练「'+desc+'」到'+g+'部位');done=true;}
+  if(!done){var meal=detectMeal(text);if(meal){var mk=quickAddMeal(meal.food,meal.num,meal.unit,meal.mealType);
+    var mn=(MEALS||[]).filter(function(m){return m.k===mk})[0];
+    log.push('🍽️ 已记录「'+meal.food.name+'」到'+(mn?mn.n:'')+(meal.num?(' '+meal.num+(meal.unit||'份')):''));done=true;}}
+  if(!done){var rm=detectReminder(text);if(rm){quickAddReminder(rm.text,rm.time);log.push('⏰ 已添加提醒「'+rm.text+'」'+(rm.time?(' '+rm.time):''));done=true;}}
+  if(!done){var tk=detectTask(text);if(tk){quickAddTask(tk.text,tk.time);log.push('📋 已添加任务「'+tk.text+'」'+(tk.time?(' '+tk.time):''));done=true;}}
+  if(!done){var mc=detectMetric(text);if(mc){quickSetMetric(mc.type,mc.val);
+    log.push(mc.type==='water'?('💧 已设置喝水 '+mc.val+' 杯'):mc.type==='weight'?('⚖️ 已记录体重 '+mc.val+'kg'):('😴 已记录睡眠 '+mc.val+'小时'));done=true;}}
+  if(!done){var lf=detectLife(text);if(lf){quickAddLife(lf.tag,lf.text);log.push('📝 已记'+lf.tag+'「'+lf.text+'」');done=true;}}
+  if(!done){log.push('🤔 没听懂，试试：「早餐吃一个鸡蛋」「卧推3组12次60公斤」「提醒我三点开会」「任务写周报」「随记今天开心」');}
+  appendVoiceLog(text,log);
+}
+function toggleVoiceRec(){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){toast('当前浏览器不支持语音识别，请手动输入');return;}
+  var inp=document.getElementById('voiceInput');
+  if(voiceRecOn){stopVoiceRec();return;}
+  try{
+    voiceRec=new SR();voiceRec.lang='zh-CN';voiceRec.interimResults=true;voiceRec.continuous=false;
+    voiceRec.onresult=function(e){var s='';for(var i=0;i<e.results.length;i++)s+=e.results[i][0].transcript;if(inp)inp.value=s;};
+    voiceRec.onerror=function(e){toast('语音识别出错：'+(e.error||''));voiceRecOn=false;updateMicBtn();};
+    voiceRec.onend=function(){voiceRecOn=false;updateMicBtn();};
+    voiceRec.start();voiceRecOn=true;updateMicBtn();
+  }catch(err){toast('无法启动语音识别');}
+}
+function stopVoiceRec(){if(voiceRec){try{voiceRec.stop()}catch(e){}}voiceRecOn=false;updateMicBtn();}
+function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b.classList.toggle('on',voiceRecOn);b.textContent=voiceRecOn?'🛑 停止识别':'🎤 点击说话';}
 </script>
 </body>
 </html>
