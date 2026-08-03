@@ -347,6 +347,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .cld.sel{outline:2px solid var(--pri);outline-offset:-2px;font-weight:700}
 [data-theme=dark] .cld.sel{outline:none;background:var(--pri);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.7),0 0 18px rgba(10,132,255,.65);font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.55)}
 [data-theme=dark] .cld.sel .cld-tg,[data-theme=dark] .cld.sel .cld-tc{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+[data-theme=dark] .cld.tdy{background:var(--priBg);color:var(--t1)}
+[data-theme=dark] .cld.tdy .cld-tg,[data-theme=dark] .cld.tdy .cld-tc{color:var(--t2)}
 .cld-tags{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;width:100%;line-height:1.05}
 .cld-tg{font-size:.5rem;color:var(--grn);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cld-tc{font-size:.5rem;color:var(--org);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -5016,6 +5018,7 @@ function applySystemTheme(){
   var dark=window.matchMedia('(prefers-color-scheme: dark)').matches;
   if(dark){document.documentElement.setAttribute('data-theme','dark')}
   else{document.documentElement.removeAttribute('data-theme')}
+  applyThemeColor();
   updateStatusBarStyle();
 }
 function toggleTheme(){applySystemTheme()}
@@ -5040,8 +5043,9 @@ var THEME_COLORS=[
   {n:'石墨',c:'#1c1c1e',bg:'#e9e9ec',ic:'⚫'}
 ];
 function lighten(hex,amt){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(function(x){return x+x}).join('');var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);function m(c){return Math.round(c+(255-c)*amt)}return '#'+[m(r),m(g),m(b)].map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
+function darken(hex,amt){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(function(x){return x+x}).join('');var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);function m(c){return Math.round(c*(1-amt))}return '#'+[m(r),m(g),m(b)].map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
 function curColor(){if(S.themeColor===-1&&S.themeColorCustom)return S.themeColorCustom;var i=Math.max(0,Math.min(S.themeColor|0,THEME_COLORS.length-1));return{c:THEME_COLORS[i].c,bg:THEME_COLORS[i].bg}}
-function applyThemeColor(){var col=curColor();var r=document.documentElement.style;r.setProperty('--pri',col.c);r.setProperty('--priBg',col.bg);PRI_COLOR=col.c;var dot=document.getElementById('thcDot');if(dot)dot.style.backgroundColor=col.c;var row=document.getElementById('thcCustomRow');if(row)row.classList.toggle('on',S.themeColor===-1)}
+function applyThemeColor(){var col=curColor();var r=document.documentElement.style;var isDark=document.documentElement.getAttribute('data-theme')==='dark';r.setProperty('--pri',col.c);r.setProperty('--priBg',isDark?darken(col.c,0.72):col.bg);PRI_COLOR=col.c;var dot=document.getElementById('thcDot');if(dot)dot.style.backgroundColor=col.c;var row=document.getElementById('thcCustomRow');if(row)row.classList.toggle('on',S.themeColor===-1)}
 function renderThemeColorSwatches(){var box=document.getElementById('thcSwatches');if(!box)return;box.innerHTML=THEME_COLORS.map(function(col,i){return '<div class="sw'+(i===S.themeColor?' on':'')+'" style="background:'+col.bg+'" onclick="setThemeColor('+i+')">'+col.ic+(i===S.themeColor?'<span class="ck">✓</span>':'')+'</div>'}).join('')}
 function setThemeColor(i){S.themeColor=i|0;save();applyThemeColor();renderThemeColorSwatches()}
 function setCustomColor(hex){if(!hex)return;S.themeColor=-1;S.themeColorCustom={c:hex,bg:lighten(hex,0.86)};save();applyThemeColor();renderThemeColorSwatches()}
