@@ -471,6 +471,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .av-acts{display:flex;flex-wrap:wrap;gap:8px}
 .av-big{overflow:hidden;background-size:cover;background-position:center}
 .av-opt.on{border-color:var(--btn-acc);box-shadow:0 0 0 2px var(--btn-acc) inset;background:var(--btn-acc-bg)}
+.avp-menu{position:absolute;left:16px;right:16px;bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:6px}
+.avp-title{text-align:center;font-size:.78rem;color:var(--t2);padding:8px 0 4px}
+.avp-opt{border:none;background:var(--sf2);color:var(--t1);border-radius:11px;padding:13px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s,transform .1s}
+.avp-opt:active{transform:scale(.98);background:var(--bd)}
+.avp-opt.c{color:var(--t2);font-weight:500}
 /* goal mode */
 .gm-row{display:flex;gap:5px;margin-top:6px}
 .gm-opt{flex:1;padding:7px;border-radius:12px;font-size:.72rem;text-align:center;background:var(--btn-bg);color:var(--t2);cursor:pointer;border:1px solid var(--btn-bd)}
@@ -1206,7 +1211,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 
 <!-- PROFILE OVERLAY -->
 <div class="ov" id="profileOv" onclick="if(event.target===this)closeProfile()"><div class="ms2" onclick="event.stopPropagation()">
-<div class="pf-top"><div class="av-edit"><div class="av-big" id="avBig">👤</div><div class="av-acts"><button class="av-change" onclick="toggleAvPicker()">😀 表情</button><button class="av-change" onclick="document.getElementById('avUp').click()">📁 上传</button><button class="av-change" onclick="document.getElementById('avCam').click()">📷 拍照</button></div><input type="file" id="avUp" accept="image/*" style="display:none" onchange="avUpload(this)"><input type="file" id="avCam" accept="image/*" capture="environment" style="display:none" onchange="avUpload(this)"></div><span class="pf-tools"><button class="hb txt" onclick="exportData()">导出</button><button class="hb txt" onclick="document.getElementById('fi').click()">导入</button><button class="hb thc" id="thcBtn" onclick="openThemeColor()" title="主题色"><span class="dot" id="thcDot"></span>🎨</button></span></div>
+<div class="pf-top"><div class="av-edit"><div class="av-big" id="avBig">👤</div><div class="av-acts"><button class="av-change" onclick="toggleAvPicker()">😀 表情</button><button class="av-change" onclick="openAvPhotoMenu()">📷 照片</button></div><input type="file" id="avUp" accept="image/*" style="display:none" onchange="avUpload(this)"><input type="file" id="avCam" accept="image/*" capture="environment" style="display:none" onchange="avUpload(this)"></div><span class="pf-tools"><button class="hb txt" onclick="exportData()">导出</button><button class="hb txt" onclick="document.getElementById('fi').click()">导入</button><button class="hb thc" id="thcBtn" onclick="openThemeColor()" title="主题色"><span class="dot" id="thcDot"></span>🎨</button></span></div>
 <div class="av-picker" id="avPicker" style="display:none"><div class="av-opts" id="avOpts"></div></div>
 <div class="card">
 <div class="ct">📋 身体数据</div>
@@ -1244,6 +1249,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 </div>
 <div class="macts"><button class="mbn c" onclick="closeProfile()">关闭</button></div>
 </div></div>
+
+<div class="ov" id="avPhotoOv" style="display:none" onclick="if(event.target===this)closeAvPhotoMenu()"><div class="avp-menu" onclick="event.stopPropagation()"><div class="avp-title">选择照片来源</div><button class="avp-opt" onclick="document.getElementById('avCam').click();closeAvPhotoMenu()">📷 拍照</button><button class="avp-opt" onclick="document.getElementById('avUp').click();closeAvPhotoMenu()">🖼 从相册选择</button><button class="avp-opt c" onclick="closeAvPhotoMenu()">取消</button></div></div>
 
 <div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
 
@@ -2664,6 +2671,8 @@ function loadProfileUI(){
 function openProfile(){loadProfileUI();setAvatarEl(document.getElementById('avBig'),S.avatar||'👤');renderAvPicker();document.getElementById('profileOv').classList.add('on')}
 function closeProfile(){document.getElementById('profileOv').classList.remove('on')}
 function toggleAvPicker(){var p=document.getElementById('avPicker');p.style.display=p.style.display==='none'?'grid':'none';if(p.style.display==='grid')renderAvPicker()}
+function openAvPhotoMenu(){var m=document.getElementById('avPhotoOv');if(m)m.classList.add('on')}
+function closeAvPhotoMenu(){var m=document.getElementById('avPhotoOv');if(m)m.classList.remove('on')}
 function renderAvPicker(){var opts=['👤','😀','😎','🐱','🐶','🌟','🔥','🌈','🍎','⚽','🎮','🌸','🦊','🐼','💡','🚀'];var box=document.getElementById('avOpts');if(!box)return;box.innerHTML=opts.map(function(e){return '<div class="av-opt'+(e===(S.avatar||'👤')?' on':'')+'" onclick="setAvatar(\''+e+'\')">'+e+'</div>'}).join('')}
 function setAvatarEl(el,val){if(!el)return;if(val&&val.indexOf('data:image')===0){el.textContent='';el.style.backgroundImage='url('+val+')';el.style.backgroundSize='cover';el.style.backgroundPosition='center'}else{el.style.backgroundImage='';el.textContent=val||'👤'}}
 function avUpload(input){var f=input.files&&input.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var img=new Image();img.onload=function(){var s=240,cnv=document.createElement('canvas');cnv.width=s;cnv.height=s;var c=cnv.getContext('2d');c.drawImage(img,0,0,s,s);setAvatar(cnv.toDataURL('image/jpeg',0.85))};img.src=rd.result};rd.readAsDataURL(f);input.value=''}
