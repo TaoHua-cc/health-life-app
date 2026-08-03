@@ -56,6 +56,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .mine-hd .t{font-size:1.05rem;font-weight:700}
 .mine-hd .s{font-size:.72rem;color:var(--t2)}
 .ct{font-size:1rem;font-weight:700;letter-spacing:-0.2px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;line-height:1.3}
+.ct-ai{display:inline-flex;align-items:center;gap:6px}
 .sl{font-size:.76rem;font-weight:600;color:var(--t2);letter-spacing:.5px;margin:26px 0 12px;padding-left:13px;position:relative;line-height:1.3}
 .sl::before{content:'';position:absolute;left:0;top:52%;transform:translateY(-50%);width:3px;height:.74rem;background:var(--pri);border-radius:2px}
 /* profile */
@@ -1169,15 +1170,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 <div class="pnl" id="p-life">
 <div class="life-header">
   <div class="life-title">生活</div>
-  <div class="life-sub">标签 · 提醒 · 随记</div>
+  <div class="life-sub">标签 · 随记</div>
 </div>
 <div class="life-cats" id="lifeCats"></div>
 <div class="life-panel" id="lifePanel"></div>
-<div class="sec"><span>🔔 提醒</span></div>
-<div class="card">
-  <button class="addbtn" onclick="openReminderModal()">＋ 添加提醒</button>
-  <div id="reminderList"></div>
-</div>
 </div>
 <div class="pnl" id="p-fit">
 <div class="page-hd"><div class="ph-t">健身</div><div class="ph-s">今日训练 · 动作讲解 · 进度追踪</div></div>
@@ -1275,9 +1271,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 
 <div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
 
-<button class="fab" id="voiceFab" onclick="openVoice()" aria-label="智能语音助手">🎙️</button>
+<button class="fab" id="voiceFab" onclick="openVoice()" aria-label="AI 智能助手"><svg class="fab-ic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3 L16.7 7.8 L21.5 12.5 L16.7 17.2 L12 22 L7.3 17.2 L2.5 12.5 L7.3 7.8 Z" fill="#fff"/><path d="M19 0.8 L20.6 2.6 L22.2 4 L20.6 5.4 L19 7.2 L17.4 5.4 L15.8 4 L17.4 2.6 Z" fill="#fff" opacity="0.9"/></svg></button>
 <div class="ov" id="voiceOv" onclick="if(event.target===this)closeVoice()"><div class="ms2" onclick="event.stopPropagation()">
-<div class="ct">🎙️ 智能语音助手 <span class="dx" onclick="closeVoice()">✕</span></div>
+<div class="ct"><span class="ct-ai"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3 L16.7 7.8 L21.5 12.5 L16.7 17.2 L12 22 L7.3 17.2 L2.5 12.5 L7.3 7.8 Z" fill="currentColor"/><path d="M19 0.8 L20.6 2.6 L22.2 4 L20.6 5.4 L19 7.2 L17.4 5.4 L15.8 4 L17.4 2.6 Z" fill="currentColor" opacity="0.6"/></svg> AI 智能助手</span> <span class="dx" onclick="closeVoice()">✕</span></div>
 <div class="vf-hint">说或输入即可<b>快捷添加</b>：<br>· 健身「卧推3组12次60公斤」「跑步20分钟」<br>· 饮食「早餐吃一个鸡蛋」「喝一杯牛奶」「米饭200克」<br>· 工作「任务：写周报」<br>· 提醒「三点开会」「提醒我取快递」<br>· 生活「随记今天很开心」「学习看了书」<br>· 其他「喝水3杯」「体重70.5」「睡眠7.5小时」</div>
 <textarea class="vf-input" id="voiceInput" rows="3" placeholder="点击麦克风说话，或手动输入…"></textarea>
 <div class="vf-row"><button class="vf-mic" id="voiceMic" onclick="toggleVoiceRec()">🎤 点击说话</button><button class="mbn ok" onclick="runVoiceCommand(document.getElementById('voiceInput').value)">添加</button></div>
@@ -3681,7 +3677,11 @@ function renderLifePanel(){
   var tag=LIFE_TAGS.filter(function(t){return t.k===lifeTag})[0]||LIFE_TAGS[0];
   var recs=(l.tags&&l.tags[lifeTag])||[];
   var html='';
-  if(lifeTag==='随记'){html+='<div class="card"><textarea class="nt" id="notesArea" placeholder="写下今天的想法..." oninput="saveNotes(this.value)"></textarea></div>';}
+  if(lifeTag==='随记'){
+    html+='<div class="card"><textarea class="nt" id="notesArea" placeholder="写下今天的想法..." oninput="saveNotes(this.value)"></textarea></div>';
+    html+='<div class="sec" style="margin-top:16px"><span>🔔 提醒</span></div>';
+    html+='<div class="card"><button class="addbtn" onclick="openReminderModal()">＋ 添加提醒</button><div id="reminderList"></div></div>';
+  }
   else if(lifeTag==='吃喝'){html+='<div class="card fr-card">'
     +'<div class="fr-sels" id="frSels"></div>'
     +'<div class="fr-subtabs">'
@@ -3721,7 +3721,7 @@ function renderLifePanel(){
   html+='</div>';
   html+='<div class="life-add"><input id="lifeRecInput" placeholder="添加'+lifeTag+'记录，回车保存" onkeydown="if(event.key===\'Enter\')addLifeRec()"><button onclick="addLifeRec()">＋</button></div>';
   box.innerHTML=html;
-  if(lifeTag==='随记'){var na=document.getElementById('notesArea');if(na)na.value=gd(curDate).notes||'';}
+  if(lifeTag==='随记'){var na=document.getElementById('notesArea');if(na)na.value=gd(curDate).notes||'';renderReminders();}
   if(lifeTag==='吃喝'){paintFrSels();renderFoodRank();renderExplore();}
   if(lifeTag==='玩乐'){paintPlSels();renderPlayRank();renderPlayExplore();}
   if(mets&&mets.length){
