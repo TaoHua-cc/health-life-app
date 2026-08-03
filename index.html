@@ -1250,7 +1250,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 <div class="macts"><button class="mbn c" onclick="closeProfile()">关闭</button></div>
 </div></div>
 
-<div class="ov" id="avPhotoOv" style="display:none" onclick="if(event.target===this)closeAvPhotoMenu()"><div class="avp-menu" onclick="event.stopPropagation()"><div class="avp-title">选择照片来源</div><button class="avp-opt" onclick="document.getElementById('avCam').click();closeAvPhotoMenu()">📷 拍照</button><button class="avp-opt" onclick="document.getElementById('avUp').click();closeAvPhotoMenu()">🖼 从相册选择</button><button class="avp-opt c" onclick="closeAvPhotoMenu()">取消</button></div></div>
+<div class="ov" id="avPhotoOv" onclick="if(event.target===this)closeAvPhotoMenu()"><div class="avp-menu" onclick="event.stopPropagation()"><div class="avp-title">选择照片来源</div><button class="avp-opt" onclick="document.getElementById('avCam').click();closeAvPhotoMenu()">📷 拍照</button><button class="avp-opt" onclick="document.getElementById('avUp').click();closeAvPhotoMenu()">🖼 从相册选择</button><button class="avp-opt c" onclick="closeAvPhotoMenu()">取消</button></div></div>
 
 <div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
 
