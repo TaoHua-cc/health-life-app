@@ -1008,6 +1008,108 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .life-add input{flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:11px 13px;font-size:.86rem;color:var(--t1);font-family:inherit;outline:none}
 .life-add input:focus{border-color:var(--pri)}
 .life-add button{width:46px;border:none;border-radius:12px;background:var(--brand-g);color:#fff;font-size:1.1rem;cursor:pointer;flex-shrink:0}
+/* ===== 记账（生活·财务，对标 iOS 主流记账：记一笔大键盘 + 月账单 + 汇总） ===== */
+.ledger-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ledger-mo{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:800;color:var(--t1)}
+.ledger-mo button{border:none;background:var(--sf2);border:1px solid var(--bd);width:30px;height:30px;border-radius:9px;font-size:1rem;cursor:pointer;color:var(--t1);line-height:1}
+.ledger-sum{display:flex;background:linear-gradient(135deg,#0a84ff,#6366f1);border-radius:16px;padding:16px 18px;color:#fff;margin-bottom:14px;box-shadow:0 10px 24px rgba(79,110,246,.28)}
+.ledger-sum .ls-item{flex:1;text-align:center}
+.ledger-sum .ls-item+.ls-item{border-left:1px solid rgba(255,255,255,.25)}
+.ls-label{font-size:.7rem;opacity:.85;margin-bottom:3px}
+.ls-value{font-size:1.05rem;font-weight:800;letter-spacing:-.3px}
+.ls-value.red{color:#ffd60a}
+.ls-value.grn{color:#b7f7d0}
+.ls-value.bal{color:#fff}
+.ledger-day{margin-bottom:10px}
+.ld-head{display:flex;align-items:center;justify-content:space-between;font-size:.74rem;color:var(--t3);font-weight:700;padding:2px 2px 6px}
+.ld-sub{font-size:.7rem;font-weight:600}
+.ld-sub .red{color:#e0523c;margin-left:8px}
+.ld-sub .grn{color:#2ea86b;margin-left:8px}
+.ledger-item{display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:9px 12px;margin-bottom:6px;box-shadow:var(--sh)}
+.li-ic{width:34px;height:34px;border-radius:10px;background:var(--sf2);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.li-mid{flex:1;min-width:0}
+.li-cat{font-size:.85rem;font-weight:700;color:var(--t1)}
+.li-note{font-size:.72rem;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-amt{font-size:.92rem;font-weight:800;flex-shrink:0}
+.li-amt.exp{color:var(--t1)}
+.li-amt.inc{color:#2ea86b}
+.li-del{color:var(--t3);font-size:.8rem;cursor:pointer;padding:4px}
+.ledger-add{width:100%;margin-top:4px}
+.ledger-empty{text-align:center;color:var(--t3);font-size:.8rem;padding:22px 0 8px}
+/* 记一笔 · 底部抽屉 */
+.ledger-sheet{position:fixed;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;background:var(--bg2,#fff);border-radius:22px 22px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.18);padding:10px 18px calc(18px + env(safe-area-inset-bottom,0px));z-index:600;transform:translateY(105%);transition:transform .26s cubic-bezier(.32,.72,.3,1);max-height:92vh;overflow-y:auto}
+.ledger-sheet.on{transform:translateY(0)}
+.ls-grip{width:38px;height:4px;border-radius:3px;background:var(--bd);margin:2px auto 12px}
+.ls-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ls-type{display:flex;background:var(--sf2);border:1px solid var(--bd);border-radius:22px;padding:3px}
+.ls-type button{border:none;background:transparent;font-size:.82rem;font-weight:800;color:var(--t2);padding:7px 22px;border-radius:20px;cursor:pointer}
+.ls-type button.on-exp{background:#e0523c;color:#fff}
+.ls-type button.on-inc{background:#2ea86b;color:#fff}
+.ls-x{width:30px;height:30px;border:none;background:var(--sf2);border-radius:50%;color:var(--t2);cursor:pointer;font-size:.9rem}
+.ls-amt{font-size:2.3rem;font-weight:800;letter-spacing:-1px;text-align:center;padding:14px 0 4px;color:var(--t1);font-variant-numeric:tabular-nums;min-height:58px}
+.ls-amt.exp{color:#e0523c}
+.ls-amt.inc{color:#2ea68b}
+.ls-cats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 6px;padding:10px 0 6px;max-height:34vh;overflow-y:auto}
+.ls-cat{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:8px 2px;cursor:pointer}
+.ls-cat.on{border-color:var(--pri);background:var(--priBg);box-shadow:0 0 0 1px var(--pri)}
+.ls-cat .c-ic{font-size:1.3rem;line-height:1}
+.ls-cat .c-lb{font-size:.68rem;color:var(--t2);font-weight:600}
+.ls-note{display:flex;gap:8px;margin:6px 0 8px}
+.ls-note input{flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:11px;padding:9px 12px;font-size:.85rem;color:var(--t1);font-family:inherit;outline:none;min-width:0}
+.ls-note input:focus{border-color:var(--pri)}
+.ls-note input[type=date]{flex:0 0 auto;width:132px}
+.ls-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.ls-key{border:none;background:var(--sf2);border:1px solid var(--bd);border-radius:13px;padding:15px 0;font-size:1.25rem;font-weight:700;color:var(--t1);cursor:pointer;transition:background .12s;font-family:inherit}
+.ls-key:active{background:var(--bd)}
+.ls-key.op{background:linear-gradient(135deg,#0a84ff,#6366f1);color:#fff;border-color:transparent;font-size:1.15rem}
+.ls-key.dot{font-size:1.5rem}
+.ls-save{width:100%;border:none;background:var(--brand-g);color:#fff;font-size:1rem;font-weight:800;padding:15px 0;border-radius:15px;cursor:pointer;box-shadow:0 8px 20px rgba(79,110,246,.3)}
+.ls-save:active{opacity:.85}
+/* 记账 · 预算 */
+.ledger-budget{margin-top:12px;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
+.ledger-budget.no{text-align:center;color:var(--t2);font-size:.78rem;cursor:pointer}
+.lg-bd-row{display:flex;justify-content:space-between;font-size:.78rem;color:var(--t2);margin-bottom:7px}
+.lg-bd-row b{color:var(--t1)}
+.lg-bd-row .over{color:#e0523c;font-weight:700}
+.lg-bd-row .ok{color:#2ea86b;font-weight:700}
+.lg-bd-bar{height:8px;border-radius:5px;background:var(--bd);overflow:hidden}
+.lg-bd-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#0a84ff,#6366f1);transition:width .3s}
+.lg-bd-fill.over{background:linear-gradient(90deg,#ff9500,#e0523c)}
+/* 记账 · 统计报表 */
+.ls-title{font-size:.88rem;font-weight:800;color:var(--t1);margin-bottom:10px}
+.lg-line-tip{font-size:.62rem;color:#ff9500;font-weight:600;margin-left:6px}
+/* 图表容器：柱状 + 折线叠加 */
+.stat-chart{position:relative;height:140px;margin-top:2px}
+.stat-bars{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:flex-end;gap:8px;padding:0 2px}
+.stat-line{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.stat-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:4px}
+.sb-bars{display:flex;align-items:flex-end;gap:4px;height:calc(100% - 22px);width:100%;justify-content:center}
+.sb-bar{width:13px;border-radius:4px 4px 2px 2px;min-height:3px}
+.sb-bar.exp{background:#e0523c}
+.sb-bar.inc{background:#2ea86b}
+.sb-lb{font-size:.66rem;color:var(--t3);font-weight:600}
+.sb-v{font-size:.62rem;color:var(--t2);font-weight:700;font-variant-numeric:tabular-nums}
+.stat-cat{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.8rem}
+.sc-ic{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
+.sc-nm{width:44px;color:var(--t1);font-weight:600;flex-shrink:0}
+.sc-bar{flex:1;height:9px;border-radius:5px;background:var(--sf2);border:1px solid var(--bd);overflow:hidden}
+.sc-fill{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#0a84ff,#6366f1)}
+.sc-v{font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums;flex-shrink:0;width:70px;text-align:right}
+.sc-pct{color:var(--t3);font-size:.7rem;width:38px;text-align:right;flex-shrink:0}
+/* 统计 · 范围切换（周/月/半年/一年） */
+.ls-ranges{display:flex;gap:6px;margin-bottom:12px}
+.ls-range{flex:1;text-align:center;padding:7px 0;border:1px solid var(--bd);background:var(--sf2);border-radius:10px;font-size:.74rem;font-weight:700;color:var(--t2);cursor:pointer}
+.ls-range.on{background:var(--brand-g);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(79,110,246,.25)}
+/* 预算弹窗 */
+.budget-box{background:var(--bg2,#fff);border-radius:18px;padding:20px 20px 16px;width:86%;max-width:340px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.bb-title{font-size:1rem;font-weight:800;color:var(--t1);text-align:center;margin-bottom:14px}
+.bb-input{display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
+.bb-input span{font-size:1.1rem;font-weight:800;color:var(--t2)}
+.bb-input input{flex:1;border:none;outline:none;background:transparent;font-size:1.15rem;font-weight:700;color:var(--t1);font-family:inherit}
+.bb-hint{font-size:.72rem;color:var(--t3);text-align:center;margin-top:8px;min-height:16px}
+.bb-btns{display:flex;gap:10px;margin-top:14px}
+.bb-btn{flex:1;border:none;border-radius:12px;padding:11px 0;font-size:.9rem;font-weight:800;background:var(--brand-g);color:#fff;cursor:pointer}
+.bb-btn.c{background:var(--sf2);color:var(--t2)}
 /* 健身训练项（renderFit 输出类） */
 .fit-part{background:var(--sf);border:1px solid var(--bd);border-radius:15px;padding:12px;margin-bottom:11px;box-shadow:var(--sh)}
 .fp-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-weight:700;color:var(--t1);font-size:.92rem}
@@ -1173,6 +1275,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
   <div class="life-title">生活</div>
   <div class="life-sub">标签 · 随记</div>
 </div>
+<div class="card cal-card" id="lifeCalCard" style="margin-bottom:12px"><div class="ds-wrap"><div class="date-strip" id="lifeDateStrip"></div><button class="ds-expand" type="button" onclick="toggleCal('life')" title="展开日历">📅</button></div><div id="lifeCalBody" style="display:none;margin-top:10px"><div class="clh"><div class="diet-cal-hd"><button class="cln" onclick="calNav('life',-1)">‹</button><button class="cln" onclick="calNav('life',1)">›</button></div><div class="clt" id="lifeCalTitle"></div><button class="cln" style="width:auto;padding:0 12px;font-size:.72rem;font-weight:600" onclick="calToday('life')">今日</button></div><div class="clg" id="lifeCalGrid"></div></div></div>
 <div class="life-cats" id="lifeCats"></div>
 <div class="life-panel" id="lifePanel"></div>
 </div>
@@ -1222,6 +1325,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 <div id="homeContent"></div>
 </div>
 
+<!-- 记账 · 记一笔（底部抽屉） -->
+<div class="ledger-sheet" id="ledgerSheet" onclick="event.stopPropagation()">
+  <div class="ls-grip"></div>
+  <div class="ls-top">
+    <div class="ls-type" id="lsType">
+      <button id="lsBtnExp" class="on-exp" onclick="setLedgerType('exp')">支出</button>
+      <button id="lsBtnInc" onclick="setLedgerType('inc')">收入</button>
+    </div>
+    <button class="ls-x" onclick="closeLedger()">✕</button>
+  </div>
+  <div class="ls-amt exp" id="lsAmt">¥0.00</div>
+  <div class="ls-cats" id="lsCats"></div>
+  <div class="ls-note">
+    <input id="lsNote" placeholder="备注（选填）" maxlength="30">
+    <input type="date" id="lsDate">
+  </div>
+  <div class="ls-keys" id="lsKeys"></div>
+  <button class="ls-save" onclick="saveLedger()">保存</button>
+</div>
+<div class="ov" id="ledgerMask" onclick="closeLedger()"></div>
+<!-- 预算设置弹窗 -->
+<div class="ov" id="budgetOv" onclick="if(event.target===this)closeBudget()">
+  <div class="budget-box" onclick="event.stopPropagation()">
+    <div class="bb-title">💰 设置每月支出预算</div>
+    <div class="bb-input"><span>¥</span><input type="number" id="budgetInput" placeholder="如 3000" inputmode="decimal"></div>
+    <div class="bb-hint" id="budgetHint"></div>
+    <div class="bb-btns">
+      <button class="bb-btn c" onclick="closeBudget()">取消</button>
+      <button class="bb-btn" onclick="saveBudget()">确定</button>
+    </div>
+  </div>
+</div>
 <!-- AI ADVICE OVERLAY -->
 <div class="ov aiad-ov" id="aiAdviceOv" onclick="if(event.target===this)closeAiAdvice()"><div class="aiad-page" onclick="event.stopPropagation()">
 <div class="aiad-hd"><span id="aiadTitle">🤖 AI 营养建议</span><button class="aiad-close" onclick="closeAiAdvice()">✕</button></div>
@@ -1395,7 +1530,7 @@ var FOOD_DB=[
   {name:'南瓜',cat:'蔬菜菌菇',cal:26,carb:5.3,protein:0.7,fat:0.1,unit:'g',alias:['nangua','ng','pumpkin']},
   {name:'年糕',cat:'主食米面',cal:156,carb:34,protein:3,fat:0.6,unit:'g',alias:['niangao','ng','rice','cake']},
   {name:'烙饼',cat:'主食米面',cal:257,carb:52,protein:8,fat:3.5,unit:'g',alias:['laobing','lb','flatbread']},
-  {name:'油条',cat:'调味品',cal:388,carb:51,protein:6.9,fat:18,unit:'g',alias:['youtiao','yt','fried','dough','stick']},
+  {name:'油条',cat:'主食米面',cal:388,carb:51,protein:6.9,fat:18,unit:'g',alias:['youtiao','yt','fried','dough','stick']},
   {name:'煎饼',cat:'主食米面',cal:333,carb:60,protein:9,fat:8,unit:'g',alias:['jianbing','jb','jianbing']},
   {name:'烧饼',cat:'主食米面',cal:298,carb:58,protein:8,fat:7,unit:'g',alias:['shaobing','sb','shaobing']},
   {name:'小米(干)',cat:'其他',cal:358,carb:73,protein:9,fat:3.1,unit:'g',alias:['xiaomigan','xmg','millet']},
@@ -1448,7 +1583,7 @@ var FOOD_DB=[
   {name:'鹅肉',cat:'肉蛋水产',cal:251,carb:0,protein:18,fat:19,unit:'g',alias:['erou','er','goose']},
   {name:'鹌鹑',cat:'肉蛋水产',cal:110,carb:0,protein:20,fat:4,unit:'g',alias:['anchun','ac','quail']},
   {name:'鸡蛋',cat:'肉蛋水产',cal:144,carb:1.5,protein:13.3,fat:8.8,unit:'g',alias:['jidan','jd','egg']},
-  {name:'煎蛋',cat:'肉蛋水产',cal:196,carb:1.3,protein:13.6,fat:15.2,unit:'g',alias:['jiandan','jdf','fried','egg']},
+  {name:'煎蛋',cat:'肉蛋水产',cal:196,carb:1.3,protein:13.6,fat:15.2,unit:'g',alias:['jiandan','jdf','fried','egg','煎鸡蛋']},
   {name:'鸡蛋白',cat:'肉蛋水产',cal:60,carb:3.1,protein:11.6,fat:0.1,unit:'g',alias:['jidanbai','jdb','egg','white']},
   {name:'蛋黄',cat:'肉蛋水产',cal:328,carb:3.4,protein:15.2,fat:28.2,unit:'g',alias:['danhuang','dh','egg','yolk']},
   {name:'鸭蛋',cat:'肉蛋水产',cal:180,carb:3.1,protein:12.6,fat:13,unit:'g',alias:['yadan','yd','duck','egg']},
@@ -1520,7 +1655,7 @@ var FOOD_DB=[
   {name:'白萝卜',cat:'蔬菜菌菇',cal:21,carb:5,protein:0.9,fat:0.1,unit:'g',alias:['bailuobo','blb','radish']},
   {name:'红萝卜',cat:'蔬菜菌菇',cal:37,carb:8,protein:1,fat:0.2,unit:'g',alias:['hongluobo','hlb','red','radish']},
   {name:'芥蓝',cat:'蔬菜菌菇',cal:24,carb:3.7,protein:2.8,fat:0.4,unit:'g',alias:['jielan','jl','gai','lan']},
-  {name:'油麦菜',cat:'调味品',cal:15,carb:2.5,protein:1.4,fat:0.4,unit:'g',alias:['youmaicai','ymc','lettuce','stem']},
+  {name:'油麦菜',cat:'蔬菜菌菇',cal:15,carb:2.5,protein:1.4,fat:0.4,unit:'g',alias:['youmaicai','ymc','lettuce','stem']},
   {name:'空心菜',cat:'蔬菜菌菇',cal:20,carb:3.6,protein:2.2,fat:0.3,unit:'g',alias:['kongxincai','kxc','water','spinach']},
   {name:'茼蒿',cat:'蔬菜菌菇',cal:21,carb:3.9,protein:1.9,fat:0.3,unit:'g',alias:['tonghao','th','crown','daisy']},
   {name:'卷心菜',cat:'蔬菜菌菇',cal:24,carb:4.6,protein:1.3,fat:0.2,unit:'g',alias:['juanxincai','jxc','cabbage']},
@@ -1577,7 +1712,7 @@ var FOOD_DB=[
   {name:'夏威夷果',cat:'坚果种子',cal:718,carb:14,protein:8,fat:76,unit:'g',alias:['xiaweiyiguo','xwyg','macadamia']},
   {name:'南瓜子',cat:'零食甜点',cal:574,carb:15,protein:30,fat:49,unit:'g',alias:['nanguazi','ngz','pumpkin','seed']},
   {name:'芝麻',cat:'坚果种子',cal:517,carb:24,protein:18,fat:46,unit:'g',alias:['zhima','zm','sesame']},
-  {name:'牛油果',cat:'调味品',cal:160,carb:8.5,protein:2,fat:15,unit:'g',alias:['niuyouguo','nyg','avocado']},
+  {name:'牛油果',cat:'水果',cal:160,carb:8.5,protein:2,fat:15,unit:'g',alias:['niuyouguo','nyg','avocado']},
   {name:'橄榄油',cat:'调味品',cal:899,carb:0,protein:0,fat:99.9,unit:'g',alias:['ganlanyou','gly','olive','oil']},
   {name:'椰子油',cat:'调味品',cal:862,carb:0,protein:0,fat:100,unit:'g',alias:['yeziyou','yzy','coconut','oil']},
   {name:'花生油',cat:'调味品',cal:899,carb:0,protein:0,fat:100,unit:'g',alias:['huashengyou','hsy','peanut','oil']},
@@ -1614,7 +1749,7 @@ var FOOD_DB=[
   {name:'甜甜圈',cat:'零食甜点',cal:452,carb:51,protein:5,fat:25,unit:'g',alias:['tiantianquan','ttq','donut']},
   {name:'布丁',cat:'零食甜点',cal:120,carb:20,protein:3,fat:3,unit:'g',alias:['buding','bd','pudding']},
   {name:'旺旺雪饼',cat:'零食甜点',cal:480,carb:70,protein:6,fat:22,unit:'g',alias:['wangwangxuebing','wwxb','rice','cracker']},
-  {name:'旺仔小馒头',cat:'饮品',cal:420,carb:76,protein:3,fat:10,unit:'g',alias:['wangzaixiaomantou','wzxmt','baby','bun']},
+  {name:'旺仔小馒头',cat:'零食甜点',cal:420,carb:76,protein:3,fat:10,unit:'g',alias:['wangzaixiaomantou','wzxmt','baby','bun']},
   {name:'可乐',cat:'饮品',cal:43,carb:10.6,protein:0,fat:0,unit:'ml',alias:['kele','kl','cola']},
   {name:'雪碧',cat:'饮品',cal:41,carb:10.4,protein:0,fat:0,unit:'ml',alias:['xuebi','xb','sprite']},
   {name:'芬达',cat:'其他',cal:45,carb:11,protein:0,fat:0,unit:'ml',alias:['fenda','fd','fanta']},
@@ -1656,7 +1791,7 @@ var FOOD_DB=[
   {name:'酸辣粉',cat:'主食米面',cal:140,carb:28,protein:2,fat:2,unit:'g',alias:['suanlafen','slf','suanlafen']},
   {name:'沙拉(油醋)',cat:'调味品',cal:90,carb:8,protein:3,fat:5,unit:'g',alias:['shalayoucu','slyc','salad']},
   {name:'回锅肉',cat:'中式菜肴',cal:430,carb:6,protein:14,fat:40,unit:'g',alias:['huiguorou','hgr','twice','cooked','pork']},
-  {name:'糖醋里脊',cat:'调味品',cal:280,carb:25,protein:14,fat:14,unit:'g',alias:['tangculiji','tclj','sweet','sour','pork']},
+  {name:'糖醋里脊',cat:'中式菜肴',cal:280,carb:25,protein:14,fat:14,unit:'g',alias:['tangculiji','tclj','sweet','sour','pork']},
   {name:'鱼香肉丝',cat:'中式菜肴',cal:160,carb:10,protein:9,fat:9,unit:'g',alias:['yuxiangrousi','yxrs','yuxiang','pork']},
   {name:'青椒肉丝',cat:'蔬菜菌菇',cal:130,carb:6,protein:12,fat:7,unit:'g',alias:['qingjiaorousi','qjrs','pepper','pork']},
   {name:'红烧排骨',cat:'中式菜肴',cal:350,carb:8,protein:16,fat:30,unit:'g',alias:['hongshaopaigu','hspg','braised','ribs']},
@@ -1669,7 +1804,7 @@ var FOOD_DB=[
   {name:'黄焖鸡米饭',cat:'主食米面',cal:200,carb:25,protein:12,fat:6,unit:'g',alias:['huangmenjimifan','hmjmf','braised','chicken','rice']},
   {name:'冒菜',cat:'中式菜肴',cal:120,carb:8,protein:9,fat:6,unit:'g',alias:['maocai','mc','maocai']},
   {name:'过桥米线',cat:'主食米面',cal:150,carb:25,protein:5,fat:5,unit:'g',alias:['guoqiaomixian','gqmx','crossing','bridge','noodles']},
-  {name:'葱油拌面',cat:'调味品',cal:350,carb:45,protein:8,fat:16,unit:'g',alias:['congyoubanmian','cybm','scallion','noodles']},
+  {name:'葱油拌面',cat:'主食米面',cal:350,carb:45,protein:8,fat:16,unit:'g',alias:['congyoubanmian','cybm','scallion','noodles']},
   {name:'扬州炒饭',cat:'主食米面',cal:190,carb:30,protein:6,fat:6,unit:'g',alias:['yangzhouchaofan','yzcf','yangzhou','fried','rice']},
   {name:'叉烧',cat:'中式菜肴',cal:300,carb:10,protein:18,fat:22,unit:'g',alias:['chashao','cs','char','siu']},
   {name:'白切鸡',cat:'中式菜肴',cal:200,carb:0,protein:25,fat:12,unit:'g',alias:['baiqieji','bqj','white','cut','chicken']},
@@ -1805,8 +1940,8 @@ var FOOD_DB=[
   {name:'沙县炖罐(花旗参)',cat:'沙县小吃',cal:120,carb:4,protein:12,fat:6,unit:'g',alias:['shaxiandunguanhuaqican','sxdghqc','shaxian','stew','ginseng']},
   {name:'沙县炖罐(小肠)',cat:'沙县小吃',cal:160,carb:5,protein:12,fat:10,unit:'g',alias:['shaxiandunguanxiaochang','sxdgxc','shaxian','stew','intestine']},
   {name:'沙县炖罐(枸杞)',cat:'沙县小吃',cal:110,carb:4,protein:9,fat:5,unit:'g',alias:['shaxiandunguangouqi','sxdggq','shaxian','stew','gou','qi']},
-  {name:'沙县鸡腿饭',cat:'沙县小吃',cal:186,carb:21,protein:10,fat:7,unit:'g',alias:['shaxianjituifan','sxjtf','shaxian','chicken','leg','rice']},
-  {name:'沙县鸭腿饭',cat:'沙县小吃',cal:200,carb:23,protein:11,fat:9,unit:'g',alias:['shaxianyatuifan','sxytf','shaxian','duck','leg','rice']},
+  {name:'沙县鸡腿饭',cat:'沙县小吃',cal:125,carb:14,protein:6.5,fat:4.5,unit:'g',alias:['shaxianjituifan','sxjtf','shaxian','chicken','leg','rice']},
+  {name:'沙县鸭腿饭',cat:'沙县小吃',cal:135,carb:15,protein:7,fat:5.5,unit:'g',alias:['shaxianyatuifan','sxytf','shaxian','duck','leg','rice']},
   {name:'沙县鸡腿',cat:'沙县小吃',cal:170,carb:2,protein:20,fat:8,unit:'g',alias:['shaxianjitui','sxjt','shaxian','chicken','leg']},
   {name:'沙县鸭腿',cat:'沙县小吃',cal:210,carb:3,protein:17,fat:13,unit:'g',alias:['shaxianyatui','sxyt','shaxian','duck','leg']},
   {name:'卤鸡腿',cat:'卤味熟食',cal:220,carb:3,protein:20,fat:14,unit:'g',alias:['lujitui','ljt','luji','tui','braised','chicken','leg']},
@@ -1908,7 +2043,7 @@ var FOOD_DB=[
   {name:'德克士手枪腿',cat:'快餐外卖',cal:280,carb:15,protein:18,fat:18,unit:'g',alias:['dekeshishouqiangtui','dkssqt','dicos','chicken','leg']},
   {name:'德克士脆皮炸鸡',cat:'快餐外卖',cal:300,carb:18,protein:16,fat:20,unit:'g',alias:['dekeshicuipizhaji','dkscpzj','dicos','fried','chicken']},
   {name:'真功夫香汁排骨饭',cat:'快餐外卖',cal:180,carb:25,protein:10,fat:5,unit:'g',alias:['zhengongfuxiangzhipaigufan','zgfxzpgf','kungfu','sparerib','rice']},
-  {name:'真功夫蒸鸡腿饭',cat:'快餐外卖',cal:190,carb:25,protein:12,fat:5,unit:'g',alias:['zhengongfuzhengjituifan','zgfzjtf','kungfu','chicken','rice']},
+  {name:'真功夫蒸鸡腿饭',cat:'快餐外卖',cal:130,carb:17,protein:8,fat:3.5,unit:'g',alias:['zhengongfuzhengjituifan','zgfzjtf','kungfu','chicken','rice']},
   {name:'永和豆浆',cat:'快餐外卖',cal:40,carb:4,protein:3,fat:1,unit:'ml',alias:['yonghedoujiang','yhdj','yonghe','soy','milk']},
   {name:'永和油条',cat:'快餐外卖',cal:388,carb:51,protein:7,fat:18,unit:'g',alias:['yongheyoutiao','yhyt','yonghe','fried','dough']},
   {name:'永和皮蛋瘦肉粥',cat:'快餐外卖',cal:70,carb:11,protein:4,fat:1,unit:'g',alias:['yonghepidanshourouzhou','yhpdsrz','yonghe','century','egg','pork','congee']},
@@ -3212,20 +3347,21 @@ function setMpVal(idx,v){var it=mpSel[idx];if(!it)return;it.val=parseFloat(v)||0
 function delMpItem(idx){mpSel.splice(idx,1);renderMpSel();renderCatFoods()}
 function defaultServing(f){
   var n=f.name,tbl=[
+    ['炖罐','罐',300],['汤','碗',300],['羹','碗',300],
     ['鸡腿饭','份',500],['鸭腿饭','份',500],['盖饭','份',500],['套餐','份',500],['便当','份',500],['盒饭','份',500],['咖喱饭','份',500],['双拼饭','份',500],['煲仔饭','份',500],['石锅饭','份',500],
     ['炒饭','份',300],['烩饭','份',300],['拌饭','份',300],['泡面','包',100],['方便面','包',100],['杯面','包',100],
     ['米饭','碗',150],['白饭','碗',150],['糙米饭','碗',150],['粥','碗',250],['稀饭','碗',250],['米糊','碗',250],['八宝粥','碗',250],
     ['拌面','碗',300],['汤面','碗',300],['拉面','碗',300],['牛肉面','碗',300],['炸酱面','碗',300],['凉面','碗',300],['热干面','碗',300],['担担面','碗',300],['油泼面','碗',300],['米线','碗',300],['米粉','碗',300],['河粉','碗',300],['肠粉','碗',300],['乌冬面','碗',300],['意面','碗',300],['螺蛳粉','碗',300],['酸辣粉','碗',300],
     ['饺子','个',30],['蒸饺','个',30],['锅贴','个',30],['馄饨','碗',250],['扁肉','碗',250],['云吞','碗',250],
+    ['拌粉','碗',300],['牛肉粉','碗',300],['沙茶面','碗',350],['卤面','碗',350],['炒粿条','份',300],['芋饺','个',30],['米冻','份',100],['豆腐丸','份',100],['芋头糕','块',100],['烧麦','个',35],
     ['馒头','个',100],['花卷','个',100],['包子','个',100],['小笼包','个',25],['烧麦','个',35],['饼','个',100],['煎饼','个',100],['手抓饼','个',100],['葱油饼','个',100],['烧饼','个',100],['春卷','个',40],
     ['饭团','份',200],['寿司','份',200],
     ['汉堡','个',200],['鸡腿堡','个',200],['肉夹馍','个',200],['三明治','个',200],['卷饼','个',200],['手卷','个',200],['墨西哥卷','个',200],
     ['披萨','块',100],['薯条','份',100],['鸡米花','份',100],['鸡块','份',100],
     ['鸡腿','个',100],['鸭腿','个',150],['鸡翅','个',50],['鸡爪','个',30],['鸭脖','根',100],['猪蹄','份',100],['排骨','份',100],['猪耳','份',100],['牛排','份',100],['羊排','份',100],
-    ['卤蛋','个',50],['鸡蛋','个',50],['鸭蛋','个',50],['鹌鹑蛋','个',10],['茶叶蛋','个',50],
+    ['卤蛋','个',50],['鸡蛋','个',50],['鸭蛋','个',50],['煎蛋','个',50],['鹌鹑蛋','个',10],['茶叶蛋','个',50],
     ['鸡胸肉','份',100],['鸡柳','份',100],['牛肉','份',100],['羊肉','份',100],['猪肉','份',100],['里脊','份',100],['肉丝','份',100],
     ['鱼','份',100],['虾','份',100],['蟹','份',100],['鱿鱼','份',100],['墨鱼','份',100],['贝','份',100],['虾仁','份',100],
-    ['炖罐','罐',300],['汤','碗',300],['羹','碗',300],
     ['苹果','个',200],['梨','个',200],['桃子','个',200],['橙子','个',200],['橘子','个',200],['柚子','个',200],
     ['香蕉','根',120],['葡萄','份',150],['草莓','份',150],['樱桃','份',150],['蓝莓','份',150],['杨梅','份',150],
     ['西瓜','块',200],['哈密瓜','块',200],['木瓜','块',200],['菠萝','块',200],
@@ -3240,7 +3376,7 @@ function defaultServing(f){
   var ca={'主食米面':150,'快餐外卖':300,'沙县小吃':300,'卤味熟食':100,'中式菜肴':150,'肉蛋水产':100,'蔬菜菌菇':100,'豆制品':100,'水果':150,'奶类':250,'坚果种子':30,'饮品':250,'零食甜点':50,'调味品':10,'补剂':30,'其他':100};
   return {amt:ca[f.cat]||100,label:'份'};
 }
-var FOOD_CAT_ICON={'主食米面':'🍚','蔬菜菌菇':'🥬','肉蛋水产':'🍖','豆制品':'🫘','坚果种子':'🌰','饮品':'🥤','奶类':'🥛','水果':'🍎','调味品':'🧂','卤味熟食':'🍢','其他':'🍽️'};
+var FOOD_CAT_ICON={'主食米面':'🍚','蔬菜菌菇':'🥬','肉蛋水产':'🍖','豆制品':'🫘','坚果种子':'🌰','饮品':'🥤','奶类':'🥛','水果':'🍎','调味品':'🧂','卤味熟食':'🍢','其他':'🍽️','沙县小吃':'🍜','快餐外卖':'🍔','零食甜点':'🍪','中式菜肴':'🥘','补剂':'💊'};
 function foodIcon(name){
   if(!name)return '🍽️';
   var n=name;
@@ -3296,6 +3432,15 @@ function foodIcon(name){
     '橄榄油':'🫒','椰子油':'🥥','花生油':'🫒','葵花籽油':'🌻','亚麻籽油':'🌻','芝麻油':'🫘','牛油果':'🥑','蜂蜜':'🍯',
     // 中式菜肴
     '红烧肉':'🍖','宫保鸡丁':'🍗',
+    // 沙县小吃
+    '沙县拌面':'🍜','沙县扁肉':'🥟','沙县馄饨':'🥟','沙县蒸饺':'🥟','沙县烧麦':'🥟','沙县拌粉':'🍜','沙县牛肉粉':'🍜','沙县酸辣粉':'🍜','沙县炒粿条':'🍜','沙县芋饺':'🥟','沙县锅贴':'🥟','沙县春卷':'🥟','沙县卤面':'🍜','沙县沙茶面':'🍜','沙县鸡腿饭':'🍗','沙县鸭腿饭':'🍗','沙县鸡腿':'🍗','沙县鸭腿':'🍗','沙县米冻':'🍮','沙县豆腐丸':'🍲','沙县芋头糕':'🍡','沙县炖罐(排骨)':'🍲','沙县炖罐(乌鸡)':'🍲','沙县炖罐(花旗参)':'🍲','沙县炖罐(小肠)':'🍲','沙县炖罐(枸杞)':'🍲',
+    // 快餐外卖
+    '麦当劳巨无霸':'🍔','麦当劳麦辣鸡腿堡':'🍔','麦当劳麦香鸡':'🍔','麦当劳双层吉士':'🍔','麦当劳麦辣鸡翅':'🍗','麦当劳薯条(中)':'🍟','麦当劳麦旋风(奥利奥)':'🍨','肯德基原味鸡':'🍗','肯德基上校鸡块':'🍟','肯德基香辣鸡腿堡':'🍔','肯德基劲脆鸡腿堡':'🍔','肯德基黄金鸡块':'🍟','肯德基全家桶':'🍗','赛百味意大利经典':'🥪','赛百味照烧鸡':'🥪','德克士手枪腿':'🍗','德克士脆皮炸鸡':'🍗','永和油条':'🥖','海底捞虾滑':'🦐','海底捞鸭血':'🍲','海底捞毛肚':'🍲','火锅麻酱蘸料':'🫙','西贝莜面':'🍜','西贝牛大骨':'🍖','呷哺呷哺套餐':'🍲','蜜雪冰城甜筒':'🍨','CoCo百香果双拼':'🧃','东鹏特饮':'⚡','维他奶':'🥛','旺旺牛奶':'🥛','三只松鼠每日坚果':'🥜','真功夫蒸鸡腿饭':'🍗',
+    // 中式菜肴/小吃补充
+    '冒菜':'🍲','叉烧':'🍖','地三鲜':'🥘','佛跳墙':'🍲','自热火锅':'🍲','自嗨锅自热火锅':'🍲','串串香':'🍲','关东煮':'🍲','驴肉火烧':'🥟','生煎包':'🥟','流沙包':'🥟','煎饺':'🥟','锅贴':'🥟','驴打滚':'🍡','杨枝甘露':'🥭','东坡肉':'🍖','梅菜扣肉':'🍖','狮子头':'🍖','锅包肉':'🍖','夫妻肺片':'🥘','酱牛肉':'🥩','炸鸡':'🍗','糖醋里脊':'🥘','葱油拌面':'🍜','番茄炒蛋':'🍳','玛芬':'🧁','即食麦圈':'🥣','肌酸':'💪',
+    // 零食补充
+    '农夫山泉东方树叶':'🍵',
+    '辣条':'🍢','海苔':'🌿','能量棒':'🍫','能量胶':'⚡','旺旺仙贝':'🍘','卫龙魔芋爽':'🍢','好时 Kisses':'🍫','雀巢脆脆鲨':'🍫','上好佳鲜虾片':'🦐','格力高百奇':'🍫','趣多多':'🍪','老干妈':'🌶️','薯条':'🍟','培根':'🥓','火腿':'🥓','油条':'🥖',
     // 其他
     '牡蛎':'🦪','柿子':'🥭'
   };
@@ -3660,7 +3805,7 @@ var LIFE_METRICS={
 };
 var TAG_METRICS={};
 var lifeTag='随记';
-function renderLife(){renderLifeCats();renderLifePanel()}
+function renderLife(){renderDateStrip('life');renderLifeCats();renderLifePanel()}
 function renderLifeCats(){
   var box=document.getElementById('lifeCats');if(!box)return;
   var day=gd(curDate),l=day.life;
@@ -3701,6 +3846,11 @@ function renderLifePanel(){
     +'<div id="plHotPanel"></div>'
     +'<div id="plExpPanel" style="display:none"></div>'
     +'</div>';}
+  else if(lifeTag==='财务'){
+    html+='<div class="card" id="ledgerCard"></div>';
+    html+='<div class="card" id="ledgerStatCard" style="margin-top:12px"></div>';
+    html+='<div class="sec" style="margin-top:18px"><span>📒 财务随手记</span></div>';
+  }
   var mets=TAG_METRICS[lifeTag];
   if(mets&&mets.length){
     html+='<div class="life-metrics">';
@@ -3731,7 +3881,317 @@ function renderLifePanel(){
       if(el){var v=mk==='weight'?(l[mk]!=null?l[mk]:(S.profile.weight||'')):(l[mk]||'');el.value=v;}
     });
   }
+  if(lifeTag==='财务')renderLedger();
 }
+// ===== 记账（生活·财务）：记一笔大键盘 + 月账单 + 汇总（对标 iOS 主流记账） =====
+var LEDGER_CATS={
+  exp:[
+    {k:'餐饮',ic:'🍜'},{k:'交通',ic:'🚗'},{k:'购物',ic:'🛍️'},{k:'日用',ic:'🧻'},{k:'娱乐',ic:'🎮'},
+    {k:'住房',ic:'🏠'},{k:'医疗',ic:'💊'},{k:'教育',ic:'📚'},{k:'人情',ic:'🎁'},{k:'美容',ic:'💄'},
+    {k:'通讯',ic:'📱'},{k:'宠物',ic:'🐾'},{k:'旅行',ic:'✈️'},{k:'其他',ic:'📦'}
+  ],
+  inc:[
+    {k:'工资',ic:'💼'},{k:'奖金',ic:'🎉'},{k:'理财',ic:'📈'},{k:'兼职',ic:'💪'},
+    {k:'红包',ic:'🧧'},{k:'报销',ic:'📋'},{k:'其他',ic:'💰'}
+  ]
+};
+var ldType='exp',ldCat='餐饮';
+function ledgerOf(d){var day=gd(d);if(!day.ledger)day.ledger=[];return day.ledger}
+function fmtMoney(v){var n=Math.round(v*100)/100;var s=(''+n).split('.');s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return s.join('.');}
+function renderLedger(){
+  var box=document.getElementById('ledgerCard');if(!box)return;
+  // 月份跟随选中日期（日期条/日历切日 → 汇总与账单联动）
+  var c=new Date(curDate+'T00:00:00'),yy=c.getFullYear(),mm=c.getMonth();
+  var key=yy+'-'+(''+(mm+1)).padStart(2,'0');
+  var exp=0,inc=0,dayRecs=[];
+  Object.keys(S.days).forEach(function(dk){
+    if(dk.indexOf(key)!==0)return;
+    var recs=ledgerOf(dk).filter(function(r){return r.amount>0});
+    recs.forEach(function(r){if(r.type==='exp'){exp+=r.amount}else{inc+=r.amount}});
+    if(dk===curDate)dayRecs=dayRecs.concat(recs);
+  });
+  exp=Math.round(exp*100)/100;inc=Math.round(inc*100)/100;
+  dayRecs.sort(function(a,b){return (b.ts||0)-(a.ts||0)});
+  var budget=+S.budget||0;
+  var html='<div class="ledger-head"><div class="ledger-mo"><span>'+yy+'年'+(mm+1)+'月</span></div>'
+    +'<button class="addbtn ledger-add" style="width:auto;margin:0" onclick="openLedger()">＋ 记一笔</button></div>';
+  html+='<div class="ledger-sum">'
+    +'<div class="ls-item"><div class="ls-label">支出</div><div class="ls-value red">¥'+fmtMoney(exp)+'</div></div>'
+    +'<div class="ls-item"><div class="ls-label">收入</div><div class="ls-value grn">¥'+fmtMoney(inc)+'</div></div>'
+    +'<div class="ls-item"><div class="ls-label">结余</div><div class="ls-value bal">¥'+fmtMoney(inc-exp)+'</div></div>'
+    +'</div>';
+  // 预算进度条（点击可设置/修改）
+  if(budget>0){
+    var pct=Math.min(100,Math.round(exp/budget*100)),over=exp>budget;
+    html+='<div class="ledger-budget" onclick="openBudgetModal()"><div class="lg-bd-row"><span>💰 本月预算 <b>¥'+fmtMoney(budget)+'</b></span>'
+      +'<span class="'+(over?'over':'ok')+'">'+(over?'已超支 ¥'+fmtMoney(exp-budget):'剩余 ¥'+fmtMoney(budget-exp))+'</span></div>'
+      +'<div class="lg-bd-bar"><div class="lg-bd-fill'+(over?' over':'')+'" style="width:'+pct+'%"></div></div></div>';
+  }else{
+    html+='<div class="ledger-budget no" onclick="openBudgetModal()"><span>💰 未设置预算 · 点击设置每月支出预算</span></div>';
+  }
+  // 选中日期当天账单
+  var c2=new Date(curDate+'T00:00:00');
+  var dlabel2=curDate===td()?'今天':(curDate===fmtDate(new Date(Date.now()-864e5))?'昨天':((mm+1)+'月'+c2.getDate()+'日'));
+  html+='<div class="ledger-day" style="margin-top:12px"><div class="ld-head"><span>📅 '+dlabel2+'</span><span class="ld-sub">支出 <b class="red">¥'+fmtMoney(dayRecs.filter(function(r){return r.type==='exp'}).reduce(function(s,r){return s+r.amount},0))+'</b>'
+    +'　收入 <b class="grn">¥'+fmtMoney(dayRecs.filter(function(r){return r.type==='inc'}).reduce(function(s,r){return s+r.amount},0))+'</b></span></div></div>';
+  if(!dayRecs.length){html+='<div class="ledger-empty">这一天还没有账单，点「＋ 记一笔」记下这笔账</div>';}
+  else{
+    dayRecs.forEach(function(r){
+      var cat=null;(LEDGER_CATS.exp.concat(LEDGER_CATS.inc)).forEach(function(c){if(c.k===r.cat)cat=c;});
+      var ic=cat?cat.ic:(r.type==='inc'?'💰':'📦');
+      html+='<div class="ledger-item" onclick="openLedger(\''+r.id+'\',\''+curDate+'\')"><span class="li-ic">'+ic+'</span><div class="li-mid">'
+        +'<div class="li-cat">'+escHtml(r.cat||'其他')+'</div>'
+        +(r.note?'<div class="li-note">'+escHtml(r.note)+'</div>':'')
+        +'</div><span class="li-amt '+(r.type==='inc'?'inc':'exp')+'">'+(r.type==='inc'?'+':'−')+'¥'+fmtMoney(r.amount)+'</span>'
+        +'<span class="li-del" onclick="event.stopPropagation();delLedger(\''+curDate+'\',\''+r.id+'\')">✕</span></div>';
+    });
+  }
+  box.innerHTML=html;
+  renderLedgerStat(ldStatRange);
+}
+// ===== 预算（自定义弹窗，替代 prompt：iOS Safari 不支持 prompt） =====
+function openBudgetModal(){
+  var inp=document.getElementById('budgetInput');
+  if(inp)inp.value=S.budget||'';
+  var h=document.getElementById('budgetHint');
+  if(h)h.textContent=S.budget?('当前预算 ¥'+fmtMoney(S.budget)+'，留空可清除'):'';
+  document.getElementById('budgetOv').style.display='flex';
+  if(inp)setTimeout(function(){inp.focus()},120);
+}
+function closeBudget(){document.getElementById('budgetOv').style.display='none';}
+function saveBudget(){
+  var inp=document.getElementById('budgetInput');
+  var n=parseFloat(inp.value);
+  if(isNaN(n)||n<0){toast('请输入有效金额');return;}
+  S.budget=n>0?Math.round(n*100)/100:0;
+  closeBudget();save();renderLedger();
+  toast(n>0?'预算已设置 ¥'+fmtMoney(S.budget):'已清除预算');
+}
+// ===== 统计报表（常驻卡片，周/月/半年/一年） =====
+var ldStatRange='month';
+function renderLedgerStat(range){
+  var box=document.getElementById('ledgerStatCard');if(!box)return;
+  ldStatRange=range||ldStatRange;
+  var ranges=[['week','周'],['month','月'],['half','半年'],['year','一年']];
+  var html='<div class="ls-ranges">'+ranges.map(function(r){
+    return '<div class="ls-range'+(r[0]===ldStatRange?' on':'')+'" onclick="renderLedgerStat(\''+r[0]+'\')">'+r[1]+'</div>';
+  }).join('')+'</div>';
+  var now=new Date();
+  var labels=[],expArr=[],incArr=[],totExp=0,totInc=0;
+  function dayKey(d){return d.getFullYear()+'-'+(''+(d.getMonth()+1)).padStart(2,'0')+'-'+(''+d.getDate()).padStart(2,'0')}
+  function monthKey(d){return d.getFullYear()+'-'+(''+(d.getMonth()+1)).padStart(2,'0')}
+  function collect(dk){
+    var e=0,ic=0;
+    (S.days[dk]&&S.days[dk].ledger||[]).forEach(function(r){
+      if(r.amount>0){if(r.type==='exp')e+=r.amount;else ic+=r.amount;}
+    });
+    return {e:Math.round(e*100)/100,ic:Math.round(ic*100)/100};
+  }
+  var title='';
+  if(ldStatRange==='week'){
+    title='近 7 天';
+    for(var i=6;i>=0;i--){
+      var d=new Date(now);d.setDate(d.getDate()-i);
+      var v=collect(dayKey(d));
+      labels.push((d.getMonth()+1)+'/'+d.getDate());expArr.push(v.e);incArr.push(v.ic);
+      totExp+=v.e;totInc+=v.ic;
+    }
+  }else if(ldStatRange==='month'){
+    title='近 4 周';
+    for(var w=3;w>=0;w--){
+      var e=0,ic=0;
+      for(var dd=0;dd<7;dd++){
+        var d2=new Date(now);d2.setDate(d2.getDate()-(w*7+dd));
+        var v2=collect(dayKey(d2));e+=v2.e;ic+=v2.ic;
+      }
+      labels.push('前'+((3-w)*7+1)+'天');expArr.push(Math.round(e*100)/100);incArr.push(Math.round(ic*100)/100);
+      totExp+=e;totInc+=ic;
+    }
+  }else if(ldStatRange==='half'){
+    title='近 6 个月';
+    for(var mh=5;mh>=0;mh--){
+      var d3=new Date(now.getFullYear(),now.getMonth()-mh,1);
+      var k3=monthKey(d3),e3=0,ic3=0;
+      Object.keys(S.days).forEach(function(dk){if(dk.indexOf(k3)===0){var v3=collect(dk);e3+=v3.e;ic3+=v3.ic;}});
+      labels.push((d3.getMonth()+1)+'月');expArr.push(Math.round(e3*100)/100);incArr.push(Math.round(ic3*100)/100);
+      totExp+=e3;totInc+=ic3;
+    }
+  }else{
+    title='近 12 个月';
+    for(var my=11;my>=0;my--){
+      var d4=new Date(now.getFullYear(),now.getMonth()-my,1);
+      var k4=monthKey(d4),e4=0,ic4=0;
+      Object.keys(S.days).forEach(function(dk){if(dk.indexOf(k4)===0){var v4=collect(dk);e4+=v4.e;ic4+=v4.ic;}});
+      labels.push((d4.getMonth()+1)+'月');expArr.push(Math.round(e4*100)/100);incArr.push(Math.round(ic4*100)/100);
+      totExp+=e4;totInc+=ic4;
+    }
+  }
+  totExp=Math.round(totExp*100)/100;totInc=Math.round(totInc*100)/100;
+  var maxV=1;expArr.forEach(function(v){maxV=Math.max(maxV,v)});incArr.forEach(function(v){maxV=Math.max(maxV,v)});
+  var barsHtml=labels.map(function(lb,i){
+    return '<div class="stat-col"><div class="sb-bars"><div class="sb-bar exp" style="height:'+Math.round(expArr[i]/maxV*70)+'%"></div><div class="sb-bar inc" style="height:'+Math.round(incArr[i]/maxV*70)+'%"></div></div>'
+      +'<div class="sb-lb">'+lb+'</div></div>';
+  }).join('');
+  // 折线叠加（支出趋势，方便看波动）：柱底=容器底-标签区(18px)，柱高=值比例×70%×柱区高
+  var H=140,cap=0.7,n=expArr.length,barArea=H-18;
+  var linePts=[],lineDots='';
+  expArr.forEach(function(v,i){
+    var x=((i+0.5)/n*100).toFixed(1);
+    var y=(barArea-v/maxV*barArea*cap).toFixed(1);
+    linePts.push(x+','+y);
+    lineDots+='<circle cx="'+x+'" cy="'+y+'" r="1.8" fill="#ff9500"/>';
+  });
+  var svg='<svg class="stat-line" viewBox="0 0 100 '+H+'" preserveAspectRatio="none"><polyline points="'+linePts.join(' ')+'" fill="none" stroke="#ff9500" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>'+lineDots+'</svg>';
+  html+='<div class="ls-title">📈 '+title+'收支（支出 ¥'+fmtMoney(totExp)+' · 收入 ¥'+fmtMoney(totInc)+'）<span class="lg-line-tip">— 橙线=支出趋势</span></div>'
+    +'<div class="stat-chart"><div class="stat-bars">'+barsHtml+'</div>'+svg+'</div>';
+  // 范围内支出分类占比
+  var cats={},tot=0;
+  var ck=(ldStatRange==='week'||ldStatRange==='month');
+  if(ldStatRange==='week'){
+    for(var i2=6;i2>=0;i2--){var d5=new Date(now);d5.setDate(d5.getDate()-i2);var dk5=dayKey(d5);(S.days[dk5]&&S.days[dk5].ledger||[]).forEach(function(r){if(r.type==='exp'){cats[r.cat||'其他']=(cats[r.cat||'其他']||0)+r.amount;tot+=r.amount;}});}
+  }else{
+    var kk=(ldStatRange==='half')?6:12,kk2=(ldStatRange==='half')?5:11;
+    var ckey=new Date(now.getFullYear(),now.getMonth()-(ldStatRange==='half'?5:11),1);
+    var m0=ckey.getFullYear()+'-'+(''+(ckey.getMonth()+1)).padStart(2,'0');
+    Object.keys(S.days).forEach(function(dk){if(dk>=m0){var arr=(S.days[dk]&&S.days[dk].ledger||[]);arr.forEach(function(r){if(r.type==='exp'){cats[r.cat||'其他']=(cats[r.cat||'其他']||0)+r.amount;tot+=r.amount;}});}});
+  }
+  tot=Math.round(tot*100)/100;
+  html+='<div class="ls-title" style="margin-top:16px">🍩 支出分类占比（¥'+fmtMoney(tot)+'）</div>';
+  if(tot<=0){html+='<div class="ledger-empty">该时段暂无支出</div>';}
+  else{
+    var arr=Object.keys(cats).map(function(k){return {k:k,v:Math.round(cats[k]*100)/100}}).sort(function(a,b){return b.v-a.v});
+    var maxC=arr[0].v;
+    arr.forEach(function(x){
+      var ic2='📦';LEDGER_CATS.exp.forEach(function(c){if(c.k===x.k)ic2=c.ic;});
+      html+='<div class="stat-cat"><span class="sc-ic">'+ic2+'</span><span class="sc-nm">'+escHtml(x.k)+'</span>'
+        +'<span class="sc-bar"><span class="sc-fill" style="width:'+Math.round(x.v/maxC*100)+'%"></span></span>'
+        +'<span class="sc-v">¥'+fmtMoney(x.v)+'</span><span class="sc-pct">'+Math.round(x.v/tot*100)+'%</span></div>';
+    });
+  }
+  box.innerHTML=html;
+}
+function delLedger(dk,id){
+  var arr=ledgerOf(dk);
+  for(var i=0;i<arr.length;i++){if(arr[i].id===id){arr.splice(i,1);break;}}
+  save();renderLedger();
+  var c=document.getElementById('lifeCatsCnt');if(c)c.textContent=(arr.length||'');
+}
+var ldEditId=null;
+function openLedger(editId,dk){
+  ldEditId=editId||null;
+  var rec=null;
+  if(ldEditId){var arr=ledgerOf(dk||curDate);for(var i=0;i<arr.length;i++){if(arr[i].id===ldEditId){rec=arr[i];break;}}}
+  ldExpr=rec?(''+rec.amount):'';ldType=rec?rec.type:'exp';ldCat=rec?(rec.cat||'其他'):LEDGER_CATS.exp[0].k;
+  var d=document.getElementById('lsDate');if(d)d.value=(dk||curDate);
+  var n=document.getElementById('lsNote');if(n)n.value=rec?(rec.note||''):'';
+  setLedgerType(ldType);ldRenderAmt();
+  var tp=document.getElementById('lsType');
+  if(tp){var b1=document.getElementById('lsBtnExp'),b2=document.getElementById('lsBtnInc');b1.className=ldType==='exp'?'on-exp':'';b2.className=ldType==='inc'?'on-inc':'';}
+  document.getElementById('ledgerMask').style.display='block';
+  var sh=document.getElementById('ledgerSheet');sh.classList.add('on');
+}
+function closeLedger(){
+  document.getElementById('ledgerMask').style.display='none';
+  document.getElementById('ledgerSheet').classList.remove('on');
+}
+function setLedgerType(t){
+  ldType=t;
+  var b1=document.getElementById('lsBtnExp'),b2=document.getElementById('lsBtnInc');
+  b1.className=t==='exp'?'on-exp':'';b2.className=t==='inc'?'on-inc':'';
+  if(LEDGER_CATS[t].every(function(c){return c.k!==ldCat}))ldCat=LEDGER_CATS[t][0].k;
+  renderLdCats();ldRenderAmt();
+}
+function renderLdCats(){
+  var box=document.getElementById('lsCats');if(!box)return;
+  box.innerHTML=LEDGER_CATS[ldType].map(function(c){
+    return '<div class="ls-cat'+(c.k===ldCat?' on':'')+'" onclick="selLdCat(\''+c.k+'\')"><span class="c-ic">'+c.ic+'</span><span class="c-lb">'+c.k+'</span></div>';
+  }).join('');
+}
+function selLdCat(k){ldCat=k;renderLdCats()}
+// ===== 金额计算器（支持 + − × ÷，实时显示计算结果） =====
+var ldExpr='';
+function calcExpr(expr){
+  if(!expr)return 0;
+  var s=(''+expr).replace(/×/g,'*').replace(/÷/g,'/');
+  if(!/^[\d.+\-*\/]+$/.test(s))return 0;
+  var nums=[],ops=[],cur='';
+  for(var i=0;i<s.length;i++){
+    var ch=s[i];
+    if(/[+\-*\/]/.test(ch)){nums.push(parseFloat(cur)||0);ops.push(ch);cur='';}
+    else cur+=ch;
+  }
+  nums.push(parseFloat(cur)||0);
+  // 先乘除
+  var i2=0;
+  while(i2<ops.length){
+    if(ops[i2]==='*'||ops[i2]==='/'){
+      var a=nums[i2],b=nums[i2+1];
+      nums[i2]=(ops[i2]==='*')?(a*b):(b!==0?a/b:0);
+      nums.splice(i2+1,1);ops.splice(i2,1);
+    }else i2++;
+  }
+  var r=nums[0];
+  for(var i3=0;i3<ops.length;i3++){
+    r=(ops[i3]==='+')?r+nums[i3+1]:r-nums[i3+1];
+  }
+  return Math.round(r*100)/100;
+}
+function ldKey(k){
+  if(k==='del'){ldExpr=ldExpr.slice(0,-1);}
+  else if(k==='+'||k==='-'||k==='×'||k==='÷'){
+    if(!ldExpr)return;
+    if(/[+\-×÷]/.test(ldExpr.slice(-1)))ldExpr=ldExpr.slice(0,-1)+k;
+    else ldExpr+=k;
+  }
+  else if(k==='.'){
+    var seg=ldExpr.split(/[+\-×÷]/).pop();
+    if(!seg||seg.indexOf('.')>=0)return;
+    ldExpr+=k;
+  }
+  else{
+    var seg2=ldExpr.split(/[+\-×÷]/).pop();
+    if(seg2.indexOf('.')>=0&&seg2.split('.')[1].length>=2)return;
+    if(seg2.replace('.','').length>=7)return; // 最多 7 位整数
+    ldExpr+=k;
+  }
+  ldRenderAmt();
+}
+function ldRenderAmt(){
+  var el=document.getElementById('lsAmt');if(!el)return;
+  el.textContent='¥'+fmtMoney(calcExpr(ldExpr));
+  el.className='ls-amt '+(ldType==='inc'?'inc':'exp');
+}
+function saveLedger(){
+  var v=calcExpr(ldExpr);if(!(v>0)){toast('请输入金额');return;}
+  var dk=document.getElementById('lsDate').value||curDate;
+  var note=(document.getElementById('lsNote').value||'').trim();
+  if(ldEditId){
+    var arr=ledgerOf(dk);
+    for(var i=0;i<arr.length;i++){
+      if(arr[i].id===ldEditId){
+        arr[i].type=ldType;arr[i].cat=ldCat;arr[i].amount=Math.round(v*100)/100;arr[i].note=note;arr[i].ts=Date.now();
+        break;
+      }
+    }
+  }else{
+    ledgerOf(dk).push({id:'lg'+Date.now()+Math.floor(Math.random()*1e4),type:ldType,cat:ldCat,amount:Math.round(v*100)/100,note:note,ts:Date.now()});
+  }
+  save();closeLedger();
+  var edited=!!ldEditId;
+  ldEditId=null;ldExpr='';
+  renderLedger();renderLifeCats();buildCal('life');
+  toast(edited?'已更新这笔账':'已记一笔');
+}
+// 初始化大键盘（一次性挂载：数字 + 四则运算，iOS 记账风格计算器）
+(function(){
+  if(document.getElementById('lsKeys').children.length)return;
+  var keys=['1','2','3','+','4','5','6','-','7','8','9','×','.','0','÷','del'];
+  var icons={'del':'⌫','×':'×','÷':'÷'};
+  document.getElementById('lsKeys').innerHTML=keys.map(function(k){
+    var isOp=(k==='+'||k==='-'||k==='×'||k==='÷');
+    return '<button class="ls-key'+(isOp?' op':'')+(k==='.'?' dot':'')+'" onclick="ldKey(\''+k+'\')">'+(icons[k]||k)+'</button>';
+  }).join('');
+})();
 function addLifeRec(){
   var inp=document.getElementById('lifeRecInput');if(!inp)return;
   var text=inp.value.trim();if(!text){toast('请输入内容');return;}
@@ -4918,6 +5378,7 @@ function buildCal(prefix){
       if(cparts.length)cellTags+='<span class="cld-tg">'+escHtml(cparts.slice(0,2).map(function(p){return p.name}).join('/'))+'</span>';
       var ccd=(dayData.carbDay)?(dayData.carbDays||[]).find(function(x){return x.id===dayData.carbDay}):null;
       if(ccd)cellTags+='<span class="cld-tc">'+escHtml(ccd.name)+'</span>';
+      if(prefix==='life'&&dayData.ledger&&dayData.ledger.length)cellTags+='<span class="cld-tg">💰</span>';
     }
     html+='<div class="cld'+(dk===today?' tdy':'')+(dk===curDate?' sel':'')+'" onclick="calSelectDate(\''+prefix+'\',\''+dk+'\')">'+d+(cellTags?'<div class="cld-tags">'+cellTags+'</div>':'')+'</div>';
   }
