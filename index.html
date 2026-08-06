@@ -3232,7 +3232,26 @@ function lookupFoodNutrition(name){
     }).catch(function(){});
 }
 function mealPush(name,kcal,carb,protein,fat,brand){
-  if(mpSel.some(function(s){return s.name===name})){toast('已在已选列表');return}
+  var existedIdx=-1;
+  mpSel.forEach(function(s,i){if(s.name===name)existedIdx=i});
+  if(existedIdx>=0){
+    /* 拍照识别同款 → 用新识别的营养更新（不重复添加），并同步自定义食物库 */
+    var hasNewN=(Number(kcal)||0)>0||carb!=null||protein!=null||fat!=null;
+    if(hasNewN){
+      var k2=Number(kcal)||100;
+      var hn2=carb!=null&&protein!=null&&fat!=null;
+      var c2=hn2?Number(carb):Math.round(k2*0.5/4);
+      var p2=hn2?Number(protein):Math.round(k2*0.3/4);
+      var f2=hn2?Number(fat):Math.round(k2*0.2/9);
+      mpSel[existedIdx]=Object.assign({},mpSel[existedIdx],{cal:Math.round(hn2?Number(kcal):k2),carb:Math.round(c2*10)/10,protein:Math.round(p2*10)/10,fat:Math.round(f2*10)/10});
+      addCustomFood({name:name,cal:hn2?Number(kcal):k2,carb:c2,protein:p2,fat:f2,brand:brand||''});
+      renderMpSel();renderCatFoods();
+      if(!hn2)lookupFoodNutrition(name);
+      toast('已更新「'+name+'」营养');
+      return;
+    }
+    toast('已在已选列表');return;
+  }
   var f=findFood(name);
   if(f){addToMeal(f.name);return}
   var cal=Math.max(0,Number(kcal)||0);
@@ -3406,12 +3425,50 @@ function renderMpSel(){
       ? '<input class="mp-av" type="number" min="1" step="1" value="'+it.val+'" oninput="setMpVal('+idx+',this.value)"> <span class="mp-au">'+it.unit+'</span>'
       : '<input class="mp-av" type="number" min="0.5" step="0.5" value="'+it.val+'" oninput="setMpVal('+idx+',this.value)"> <span class="mp-au">'+it.slabel+'（≈'+it.serv+it.unit+'）</span>';
     var seg='<div class="seg sm"><button type="button" class="seg-btn'+(it.mode==='g'?' on':'')+'" onclick="setMpMode('+idx+',\'g\')">克</button><button type="button" class="seg-btn'+(it.mode==='p'?' on':'')+'" onclick="setMpMode('+idx+',\'p\')">份</button></div>';
-    return '<div class="mp-sel-item"><div class="mp-si-top"><span class="mp-si-nm">'+it.name+'</span><span class="mp-si-cal">'+m.cal+' kcal</span><span class="mp-si-del" onclick="delMpItem('+idx+')">✕</span></div><div class="mp-si-bot">'+seg+'<div class="mp-amt">'+amtHtml+'</div><div class="mp-si-mac">碳'+m.carb+' 蛋'+m.protein+' 脂'+m.fat+'g</div></div></div>';
+    return '<div class="mp-sel-item"><div class="mp-si-top"><span class="mp-si-nm">'+it.name+'</span><span class="mp-si-cal">'+m.cal+' kcal</span><span class="mp-si-edit" title="编辑营养成分" onclick="openSelEdit('+idx+')">✏️</span><span class="mp-si-del" onclick="delMpItem('+idx+')">✕</span></div><div class="mp-si-bot">'+seg+'<div class="mp-amt">'+amtHtml+'</div><div class="mp-si-mac">碳'+m.carb+' 蛋'+m.protein+' 脂'+m.fat+'g</div></div></div>';
   }).join('');
 }
 function setMpMode(idx,m){var it=mpSel[idx];if(!it)return;if(m==='p'){if(it.mode!=='p')it.val=1}else{if(it.mode!=='g')it.val=it.serv||100}it.mode=m;renderMpSel()}
 function setMpVal(idx,v){var it=mpSel[idx];if(!it)return;it.val=parseFloat(v)||0;renderMpSel()}
 function delMpItem(idx){mpSel.splice(idx,1);renderMpSel();renderCatFoods()}
+/* 长按/点编辑：修改已选食物每100g营养成分 */
+var _selEditIdx=-1;
+function openSelEdit(idx){
+  var it=mpSel[idx];if(!it)return;
+  _selEditIdx=idx;
+  var ov=document.getElementById('selEditOv');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id='selEditOv';
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:flex;align-items:center;justify-content:center;padding:32px;box-sizing:border-box';
+    ov.onclick=function(ev){if(ev.target===ov)closeSelEdit()};
+    ov.innerHTML='<div style="background:#fff;border-radius:28px;padding:28px;width:100%;max-width:460px;box-sizing:border-box;box-shadow:0 32px 96px rgba(0,0,0,.3)">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><b style="font-size:17px">✏️ 编辑营养（每100g）</b><span style="cursor:pointer;color:#999" onclick="closeSelEdit()">✕</span></div>'+
+      '<div class="se-name" style="font-weight:800;font-size:15px;margin:8px 0 16px"></div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label style="width:90px;flex-shrink:0;color:#666;font-size:14px">热量 kcal</label><input id="seKcal" type="number" style="flex:1;height:40px;border:1px solid #ddd;border-radius:10px;padding:0 12px;font-size:16px"></div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label style="width:90px;flex-shrink:0;color:#666;font-size:14px">碳水 g</label><input id="seCarb" type="number" style="flex:1;height:40px;border:1px solid #ddd;border-radius:10px;padding:0 12px;font-size:16px"></div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label style="width:90px;flex-shrink:0;color:#666;font-size:14px">蛋白 g</label><input id="sePro" type="number" style="flex:1;height:40px;border:1px solid #ddd;border-radius:10px;padding:0 12px;font-size:16px"></div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><label style="width:90px;flex-shrink:0;color:#666;font-size:14px">脂肪 g</label><input id="seFat" type="number" style="flex:1;height:40px;border:1px solid #ddd;border-radius:10px;padding:0 12px;font-size:16px"></div>'+
+      '<div style="display:flex;gap:10px"><button class="exp-save c" onclick="closeSelEdit()" style="flex:1">取消</button><button class="exp-save" onclick="saveSelEdit()" style="flex:1">保存</button></div></div>';
+    document.body.appendChild(ov);
+  }
+  ov.querySelector('.se-name').textContent=it.name;
+  ov.querySelector('#seKcal').value=it.cal;
+  ov.querySelector('#seCarb').value=it.carb;
+  ov.querySelector('#sePro').value=it.protein;
+  ov.querySelector('#seFat').value=it.fat;
+  ov.style.display='flex';
+}
+function closeSelEdit(){var ov=document.getElementById('selEditOv');if(ov)ov.style.display='none'}
+function saveSelEdit(){
+  var ov=document.getElementById('selEditOv');if(!ov||_selEditIdx<0)return;
+  var it=mpSel[_selEditIdx];if(!it)return;
+  var cal=parseFloat(ov.querySelector('#seKcal').value),carb=parseFloat(ov.querySelector('#seCarb').value),pro=parseFloat(ov.querySelector('#sePro').value),fat=parseFloat(ov.querySelector('#seFat').value);
+  if(isNaN(cal)||isNaN(carb)||isNaN(pro)||isNaN(fat)){toast('请填写完整数字');return}
+  it.cal=Math.round(cal);it.carb=Math.round(carb*10)/10;it.protein=Math.round(pro*10)/10;it.fat=Math.round(fat*10)/10;
+  closeSelEdit();renderMpSel();
+  toast('已更新「'+it.name+'」营养');
+}
 function defaultServing(f){
   var n=f.name,tbl=[
     ['炖罐','罐',300],['汤','碗',300],['羹','碗',300],
