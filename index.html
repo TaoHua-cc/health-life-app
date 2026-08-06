@@ -2158,6 +2158,7 @@ if(!S.ratio)S.ratio={c:50,p:30,f:20};
 /* 碳水日类型已改为按日期独立存储（见 gd().carbDays），不再使用全局 S.carbDays */
 if(!S.days)S.days={};
 if(!S.foodFreq)S.foodFreq={};
+if(!S.customFoods)S.customFoods=[];/* 拍照识别新增的食物库（品牌/营养表/AI 搜索），持久化、随拍照增长 */
 if(!S.trainPlans)S.trainPlans=[];
 var _planMig=false;
 S.trainPlans.forEach(function(p){if(!p.startDate){p.startDate=tk();_planMig=true;}if(!p.slots)p.slots=[];if(p.slots.length<p.days){for(var i=p.slots.length;i<p.days;i++)p.slots.push({parts:[]});_planMig=true;}});
@@ -3001,20 +3002,23 @@ function renderCats(){
   var cats=FOOD_CATS.filter(function(c){return cnt[c]});
   Object.keys(cnt).forEach(function(c){if(FOOD_CATS.indexOf(c)<0)cats.push(c)});
   cats.unshift('常见食物');
-  if(!curCat||!cnt[curCat])curCat=cats[0]||'';
-  document.getElementById('mpCats').innerHTML=cats.map(function(c){var lbl=c==='常见食物'?'🔥 常见食物':c;var n=c==='常见食物'?commonFoodList().length:cnt[c];return '<div class="mp-cat'+(c===curCat?' on':'')+'" onclick="selCat(\''+c+'\')"><span>'+lbl+'</span><span class="cnt">'+n+'</span></div>'}).join('');
+  if((S.customFoods||[]).length)cats.splice(1,0,'我的食物');
+  if(!curCat)curCat=cats[0]||'';
+  document.getElementById('mpCats').innerHTML=cats.map(function(c){var lbl=c==='常见食物'?'🔥 常见食物':(c==='我的食物'?'📷 我的食物':c);var n=c==='常见食物'?commonFoodList().length:(c==='我的食物'?(S.customFoods||[]).length:cnt[c]);return '<div class="mp-cat'+(c===curCat?' on':'')+'" onclick="selCat(\''+c+'\')"><span>'+lbl+'</span><span class="cnt">'+n+'</span></div>'}).join('');
 }
 function selCat(c){curCat=c;renderCats();renderCatFoods()}
 function renderCatFoods(){
   var box=document.getElementById('foodList');
   var list;
   if(curCat==='常见食物'){
-    list=commonFoodList().map(function(n){return FOOD_DB.find(function(x){return x.name===n})}).filter(function(f){return f});
+    list=commonFoodList().map(function(n){return findFood(n)}).filter(function(f){return f});
+  }else if(curCat==='我的食物'){
+    list=S.customFoods||[];
   }else{
     list=FOOD_DB.filter(function(f){return f.cat===curCat});
   }
   mpItems=list;
-  if(!list.length){box.innerHTML='<div class="food-item" style="color:var(--t3);justify-content:center">'+(curCat==='常见食物'?'常吃的食物会按频率出现在这里':('该分类暂无食物'))+'</div>';return}
+  if(!list.length){box.innerHTML='<div class="food-item" style="color:var(--t3);justify-content:center">'+(curCat==='常见食物'?'常吃的食物会按频率出现在这里':(curCat==='我的食物'?'拍照识别到的食物会出现在这里':'该分类暂无食物'))+'</div>';return}
   box.innerHTML=list.map(function(f,idx){var inSel=mpSel.some(function(s){return s.name===f.name});return '<div class="food-item'+(inSel?' sel':'')+'" onclick="pickFood('+idx+')"><span class="fi-nm"><span class="fi-ic">'+foodIcon(f.name)+'</span>'+f.name+'</span><span class="fi-cal">'+f.cal+' kcal/100'+f.unit+'</span>'+(inSel?'<span class="fi-sel">已选✓</span>':'')+'</div>'}).join('');
 }
 function pickFood(idx){var f=mpItems[idx];if(f)addToMeal(f.name)}
@@ -3023,6 +3027,8 @@ function foodSearch(){
   var box=document.getElementById('foodList');
   if(!q){box.classList.remove('show');renderCatFoods();return}
   var scored=fuzzySearch(FOOD_DB,q,'name','alias');
+  /* 自定义食物库并入搜索 */
+  (S.customFoods||[]).forEach(function(x){if(x.name.toLowerCase().indexOf(q)>=0&&!scored.some(function(l){return l.name===x.name}))scored.push(x)});
   if(!scored.length){box.innerHTML='<div class="food-item" style="color:var(--t3);justify-content:center">未找到相关食物</div>';return}
   box.innerHTML=scored.slice(0,60).map(function(f){var inSel=mpSel.some(function(s){return s.name===f.name});return '<div class="food-item'+(inSel?' sel':'')+'" onclick="addToMeal(\''+f.name.replace(/'/g,'\\\'')+'\')"><span class="fi-nm"><span class="fi-ic">'+foodIcon(f.name)+'</span>'+f.name+'</span><span class="fi-cal">'+f.cal+' kcal/100'+f.unit+'</span>'+(inSel?'<span class="fi-sel">已选✓</span>':'')+'</div>'}).join('');
   box.classList.add('show');
@@ -3178,13 +3184,69 @@ function renderCamPreds(){
 }
 function camAdd(i){if(_camCands[i]){try{addToMeal(_camCands[i].f.name);}catch(e){}}renderCamPreds();}
 function closeCamRes(){var box=document.getElementById('camRes');box.style.display='none';setCamBody('');var pv=document.getElementById('camPv');if(pv){pv.style.display='none';pv.removeAttribute('src');}}
-function mealPush(name,kcal){
+/* 食物查找：优先自定义食物库（拍照识别新增，品牌+真实营养），再查内置 FOOD_DB */
+function findFood(name){
+  if(!name)return null;
+  var cf=S.customFoods||[];
+  for(var i=0;i<cf.length;i++){if(cf[i].name===name)return cf[i];}
+  for(var i=0;i<FOOD_DB.length;i++){if(FOOD_DB[i].name===name)return FOOD_DB[i];}
+  return null;
+}
+/* 拍照识别入库：自定义食物（品牌/营养表/AI 搜索），同名更新营养，新增置顶 */
+function addCustomFood(f){
+  if(!f||!f.name)return null;
+  var list=S.customFoods||(S.customFoods=[]);
+  for(var i=0;i<list.length;i++){
+    if(list[i].name===f.name){
+      if(f.cal!=null)list[i].cal=f.cal;
+      if(f.carb!=null)list[i].carb=f.carb;
+      if(f.protein!=null)list[i].protein=f.protein;
+      if(f.fat!=null)list[i].fat=f.fat;
+      if(f.brand!=null)list[i].brand=f.brand;
+      save();return list[i];
+    }
+  }
+  var item={name:f.name,cal:f.cal||0,carb:f.carb||0,protein:f.protein||0,fat:f.fat||0,unit:'g',cat:'我的食物'};
+  if(f.brand)item.brand=f.brand;
+  list.unshift(item);save();return item;
+}
+/* 库外食物：AI（通义千问）搜索该食物 100g 真实营养，替换估算值并更新自定义库 */
+function lookupFoodNutrition(name){
+  if(!S.aiKey||!name)return;
+  var prompt='请提供食物「'+name+'」每100克（液体为每100毫升）的营养成分，用你掌握的真实营养数据。热量单位必须是千卡(kcal)（若数据源是千焦kJ请换算，1千卡≈4.184千焦），营养素为克(g)。只输出一行 JSON，不要任何其他文字：{"kcal":热量数值,"carb":碳水化合物克数,"protein":蛋白质克数,"fat":脂肪克数}';
+  var realApi='https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+  var url=S.aiProxy?(S.aiProxy.replace(/\/?$/,'')+'?target='+encodeURIComponent(realApi)):realApi;
+  fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+S.aiKey},body:JSON.stringify({model:S.aiModel||'qwen-turbo',messages:[{role:'user',content:prompt}],temperature:0.2})})
+    .then(function(r){return r.json()})
+    .then(function(j){
+      var txt='';
+      if(j&&j.choices&&j.choices[0]&&j.choices[0].message)txt=j.choices[0].message.content||'';
+      var m=(''+txt).match(/\{[\s\S]*\}/);if(!m)return;
+      var o=JSON.parse(m[0]);
+      var cal=Number(o.kcal),carb=Number(o.carb),protein=Number(o.protein),fat=Number(o.fat);
+      if(!(cal>0)||!(carb>=0)||!(protein>=0)||!(fat>=0))return;
+      mpSel=mpSel.map(function(s){if(s.name===name)return Object.assign({},s,{cal:Math.round(cal),carb:Math.round(carb*10)/10,protein:Math.round(protein*10)/10,fat:Math.round(fat*10)/10});return s});
+      addCustomFood({name:name,cal:cal,carb:carb,protein:protein,fat:fat});
+      renderMpSel();renderCatFoods();
+      toast('已获取「'+name+'」真实营养');
+    }).catch(function(){});
+}
+function mealPush(name,kcal,carb,protein,fat,brand){
   if(mpSel.some(function(s){return s.name===name})){toast('已在已选列表');return}
-  var f=FOOD_DB.find(function(x){return x.name===name});
+  var f=findFood(name);
   if(f){addToMeal(f.name);return}
   var cal=Math.max(0,Number(kcal)||0);
-  mpSel.push({name:name,cal:cal,carb:0,protein:0,fat:0,unit:'g',serv:100,slabel:'份',mode:'p',val:1});
+  var hasN=carb!=null&&protein!=null&&fat!=null;
+  var base=cal||100;
+  var nCal=hasN?cal:base;
+  var nCarb=hasN?Number(carb):Math.round(base*0.5/4);
+  var nPro=hasN?Number(protein):Math.round(base*0.3/4);
+  var nFat=hasN?Number(fat):Math.round(base*0.2/9);
+  mpSel.push({name:name,cal:Math.round(nCal),carb:Math.round(nCarb*10)/10,protein:Math.round(nPro*10)/10,fat:Math.round(nFat*10)/10,unit:'g',serv:100,slabel:'份',mode:'p',val:1});
+  /* 入自定义食物库（品牌/营养表/AI 数据），下次可直接添加 */
+  addCustomFood({name:name,cal:nCal,carb:nCarb,protein:nPro,fat:nFat,brand:brand||''});
   renderMpSel();renderCatFoods();
+  if(!hasN)lookupFoodNutrition(name);/* 无营养 → AI 补全真实营养并更新库 */
 }
 /* 参照物估算：AI 识别食物后，按分类给出「拳头/掌心/一杯」等日常参照，帮助用户估量 */
 var REF_PORTION={
@@ -3211,7 +3273,7 @@ var REF_OVERRIDE={
 };
 function refHint(name){
   var txt=REF_OVERRIDE[name];
-  if(!txt){var f=FOOD_DB.find(function(x){return x.name===name});var r=REF_PORTION[(f&&f.cat)||'其他']||REF_PORTION['其他'];txt=r.ic+' '+r.ref;}
+  if(!txt){var f=findFood(name);var r=REF_PORTION[(f&&f.cat)||'其他']||REF_PORTION['其他'];txt=r.ic+' '+r.ref;}
   var i=txt.indexOf('≈');
   if(i<0)return '📏 '+escHtml(txt);
   return '📏 '+escHtml(txt.slice(0,i))+' ≈ <b>'+escHtml(txt.slice(i+1))+'</b>';
@@ -3243,7 +3305,7 @@ function cloudRecog(url){
   var box=document.getElementById('camRes');box.style.display='block';
   setCamBody('<div class="cam-loading"><div class="cam-spin"></div><div class="cam-tip">大模型识别中…</div></div>');
   compressImg(url,1000,0.8,function(b64){
-    var prompt='请识别这张食物照片。只输出一个 JSON，不要任何额外文字、不要 markdown 代码块。格式：{"foods":[{"name":"食物中文名","kcal":每100克的估算热量数值},...],"best":"最可能的主食名称"}。最多给 5 个候选，第一项为最突出食物。';
+    var prompt='请识别这张食物照片。如果是包装/品牌食品，请读出品牌名和包装上的营养成分表（按每100克或每100毫升）的 kcal/碳水/蛋白/脂肪数据；如果没有营养成分表，请凭你的营养知识给出该食物每100克（液体为每100毫升）的真实营养数据。注意单位换算：营养成分表能量通常标为千焦(kJ)，请换算成每100克千卡(kcal)（1千卡≈4.184千焦）填入 kcal 字段；营养素若是毫克(mg)请换算成克(g)。只输出一个 JSON，不要任何额外文字、不要 markdown 代码块。格式：{"foods":[{"name":"品牌+食物中文名","brand":"品牌名(没有则为空)","hasTable":true或false,"energyUnit":"kcal或kJ(表上原始单位)","kcal":每100克热量(已换算为千卡的数值),"carb":每100克碳水化合物克数,"protein":每100克蛋白质克数,"fat":每100克脂肪克数},...],"best":"最可能的主食名称"}。最多给 5 个候选，第一项为最突出食物。';
     if(prov==='sensenova'){
       if(!S.aiProxy){
         setCamBody('<div class="cam-fail">商汤 SenseNova 不支持浏览器直接调用（跨域被拦截）。<br>请在「我的 → AI 识别设置」填写中转代理 URL（可用免费 Cloudflare Worker）。<br>或切换引擎为「通义千问」（支持浏览器直连）。</div><div class="cam-acts"><button class="exp-save" onclick="openProfile()">去设置</button><button class="exp-save c" onclick="closeCamRes()">关闭</button></div>');
@@ -3293,15 +3355,20 @@ function parseCloudFoods(txt){
   if(Array.isArray(obj))arr=obj;
   else if(obj.foods&&Array.isArray(obj.foods))arr=obj.foods;
   else if(obj.name)arr=[obj];
-  return arr.filter(function(x){return x&&x.name;}).map(function(x){return {name:(''+x.name).toString().trim(),kcal:Number(x.kcal)||0};});
+  return arr.filter(function(x){return x&&x.name;}).map(function(x){
+    var kcal=Number(x.kcal)||0;
+    /* 单位兜底换算：能量若标 kJ（千焦）→ 千卡 ÷4.184；>1200 明显是 kJ 量级也换算 */
+    if(((''+ (x.energyUnit||'')).toLowerCase()==='kj'||kcal>1200)&&kcal>0)kcal=Math.round(kcal/4.184);
+    return {name:(''+x.name).toString().trim(),kcal:kcal,carb:x.carb!=null?Number(x.carb):null,protein:x.protein!=null?Number(x.protein):null,fat:x.fat!=null?Number(x.fat):null,brand:(x.brand||'').trim(),hasTable:!!x.hasTable};
+  });
 }
 function renderCloudPreds(foods){
   var box=document.getElementById('camRes');
-  if(foods[0])mealPush(foods[0].name,foods[0].kcal);
+  if(foods[0])mealPush(foods[0].name,foods[0].kcal,foods[0].carb,foods[0].protein,foods[0].fat,foods[0].brand);
   var html='<div class="cam-tip">大模型识别结果（已自动加入最匹配项，其余可点选加入）</div><div class="cam-list">';
   foods.forEach(function(it){
     var added=mpSel.some(function(s){return s.name===it.name});
-    var addBtn=added?'<button class="cam-add on" disabled>已加入</button>':'<button class="cam-add" onclick="mealPush(\''+escHtml(it.name).replace(/'/g,'&#39;')+'\','+it.kcal+')">加入</button>';
+    var addBtn=added?'<button class="cam-add on" disabled>已加入</button>':'<button class="cam-add" onclick="mealPush(\''+escHtml(it.name).replace(/'/g,'&#39;')+'\','+it.kcal+','+(it.carb!=null?it.carb:'null')+','+(it.protein!=null?it.protein:'null')+','+(it.fat!=null?it.fat:'null')+',\''+escHtml(it.brand||'').replace(/'/g,'&#39;')+'\')">加入</button>';
     html+='<div class="cam-item"><span class="cam-nm" title="'+escHtml(it.name)+'">'+escHtml(it.name)+'</span>'+(it.kcal?'<span class="cam-cal">≈'+it.kcal+' kcal/100g</span>':'')+addBtn+'<div class="cam-ref">'+refHint(it.name)+'</div></div>';
   });
   html+='</div><div class="cam-acts"><button class="exp-save" onclick="mealCamera()">重新拍照</button><button class="exp-save c" onclick="closeCamRes()">关闭</button></div>';
@@ -3311,7 +3378,7 @@ function saveAiCfg(){S.aiProvider=document.getElementById('aiProvider').value||'
 function refreshAiProviderUI(){var prov=S.aiProvider||'qwen';var q=document.getElementById('qwenBox'),qm=document.getElementById('qwenModelBox'),s=document.getElementById('senseBox');if(q)q.style.display=prov==='qwen'?'':'none';if(qm)qm.style.display=prov==='qwen'?'':'none';if(s)s.style.display=prov==='sensenova'?'':'none';}
 function addToMeal(name){
   if(mpSel.some(function(s){return s.name===name})){toast('已在已选列表');return}
-  var f=FOOD_DB.find(function(x){return x.name===name});if(!f)return;
+  var f=findFood(name);if(!f)return;
   var sv=defaultServing(f);
   mpSel.push({name:f.name,cal:f.cal,carb:f.carb,protein:f.protein,fat:f.fat,unit:f.unit,serv:sv.amt,slabel:sv.label,mode:'p',val:1});
   renderMpSel();renderCatFoods();
@@ -3563,7 +3630,7 @@ function foodIcon(name){
   // 汤羹
   if(/汤|羹|粥|炖汤|煲汤|浓汤/.test(n))return '🍲';
   // 最后：从 FOOD_DB 查分类
-  var f=FOOD_DB.find(function(x){return x.name===n})||FOOD_DB.find(function(x){return n.indexOf(x.name.replace(/\(.*?\)/g,''))>=0});
+  var f=findFood(n)||FOOD_DB.find(function(x){return n.indexOf(x.name.replace(/\(.*?\)/g,''))>=0});
   var cat=f?f.cat:null;
   if(cat&&FOOD_CAT_ICON[cat])return FOOD_CAT_ICON[cat];
   return '🍽️';
@@ -3595,7 +3662,7 @@ var editMealK=null,editMealIdx=-1;
 function openEditMeal(k,idx){
   var day=gd(curDate),item=day.meals[k]&&day.meals[k][idx];if(!item)return;
   editMealK=k;editMealIdx=idx;
-  var f=FOOD_DB.find(function(x){return x.name===item.food});
+  var f=findFood(item.food);
   document.getElementById('emName').textContent=item.food;
   document.getElementById('emAmt').value=item.amount!=null?item.amount:1;
   var sel=document.getElementById('emUnit'),units=[];
@@ -3615,7 +3682,7 @@ function closeEditMeal(){var o=document.getElementById('editMealOv');if(o)o.clas
 function unitToGrams(a,u,f){if(u==='克'||u==='g')return a;if(u==='ml')return a;return a*defaultServing(f).amt;}
 function emPreview(){
   var day=gd(curDate),item=editMealK!=null&&editMealIdx>=0?day.meals[editMealK][editMealIdx]:null;if(!item)return;
-  var f=FOOD_DB.find(function(x){return x.name===item.food});
+  var f=findFood(item.food);
   var amount=parseFloat(document.getElementById('emAmt').value)||0,unit=document.getElementById('emUnit').value;
   var cal,carb,protein,fat;
   if(f){var g=unitToGrams(amount,unit,f),k=g/100;cal=Math.round(f.cal*k);carb=+(f.carb*k).toFixed(1);protein=+(f.protein*k).toFixed(1);fat=+(f.fat*k).toFixed(1)}
@@ -3625,7 +3692,7 @@ function emPreview(){
 function applyEditMeal(){
   if(editMealK==null||editMealIdx<0)return;
   var day=gd(curDate),item=day.meals[editMealK][editMealIdx];
-  var f=FOOD_DB.find(function(x){return x.name===item.food});
+  var f=findFood(item.food);
   var amount=parseFloat(document.getElementById('emAmt').value)||0,unit=document.getElementById('emUnit').value;
   if(amount<=0){toast('请输入有效数量');return}
   var cal,carb,protein,fat;
