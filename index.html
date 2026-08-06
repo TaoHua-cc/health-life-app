@@ -2777,6 +2777,8 @@ function init(){
   updateStatusBarStyle();
   applyThemeColor();
   loadProfileUI();
+  // 吃喝玩乐攻略数据：每天自动更新一次（拉取 GitHub Pages 最新 boards-data.json，成功替换数据，失败用内置兜底）
+  try{loadRemoteBoards()}catch(e){console.error('loadRemoteBoards',e)}
   // 仅当数据版本低于当前时执行迁移，避免每次启动重复遍历
   if(!S._v||S._v<SCHEMA){migrateTasks();migrateExercises();S._v=SCHEMA}
   migrateCarbDays(); // 独立于 SCHEMA，每次加载都执行，彻底清除历史脏数据（被全局套用的"基础"类型）且不回生
@@ -4356,6 +4358,26 @@ function frUpdatedToday(k){try{var o=JSON.parse(localStorage.getItem('frUpd')||'
 function frMarkUpdated(k){try{var o=JSON.parse(localStorage.getItem('frUpd')||'{}');o[k]=td();localStorage.setItem('frUpd',JSON.stringify(o));}catch(e){}}
 function frTodayPicks(d){var arr=d.top.slice();var sd=parseInt(td().replace(/-/g,''),10)+(parseInt(localStorage.getItem('frSalt')||'0',10));var s=sd||1;for(var i=arr.length-1;i>0;i--){s=(s*1103515245+12345)&0x7fffffff;var j=s%(i+1);var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr.slice(0,3);}
 function frRefresh(){var k=FOOD_PROV+'/'+FOOD_CITY;frMarkUpdated(k);var salt=parseInt(localStorage.getItem('frSalt')||'0',10)+1;localStorage.setItem('frSalt',String(salt));renderFoodRank();}
+/* 吃喝玩乐攻略数据：每天自动更新一次，拉取 GitHub Pages 最新 boards-data.json；
+   成功则替换全局 FOOD_DATA/PLAY_DATA（所有引用自动生效），失败静默用内置兜底 */
+function loadRemoteBoards(){
+  try{
+    var today=frTodayStr();
+    if(localStorage.getItem('boardsUpd')===today)return; // 当天已更新过，不再重复拉取
+    fetch('https://taohua-cc.github.io/health-life-app/boards-data.json',{cache:'no-store'})
+      .then(function(r){return r.json()})
+      .then(function(d){
+        if(d&&d.food&&d.play&&Object.keys(d.food).length&&Object.keys(d.play).length){
+          FOOD_DATA=d.food;PLAY_DATA=d.play;
+          localStorage.setItem('boardsUpd',today);
+          console.log('攻略数据已更新（'+today+'）');
+          try{renderLife()}catch(e){console.error('renderLife after boards',e)}
+        }
+      })
+      .catch(function(e){console.warn('攻略数据拉取失败（使用内置数据）',e)});
+  }catch(e){}
+}
+function frTodayStr(){var d=new Date();return d.getFullYear()+'-'+((d.getMonth()+1)<10?'0':'')+(d.getMonth()+1)+'-'+(d.getDate()<10?'0':'')+d.getDate();}
 function paintFrSels(){var box=document.getElementById('frSels');if(!box)return;var provs=Object.keys(FOOD_DATA);var cities=Object.keys(FOOD_DATA[FOOD_PROV]);if(cities.indexOf(FOOD_CITY)<0)FOOD_CITY=cities[0];var hh='';hh+='<div class="fr-sel-col"><div class="fr-flabel">省份 / 地区</div><div class="fr-sel-w"><select class="fr-sel" onchange="frSetProv(this.value)">';provs.forEach(function(p){hh+='<option value="'+p+'"'+(p===FOOD_PROV?' selected':'')+'>'+p+'</option>';});hh+='</select></div></div>';hh+='<div class="fr-sel-col"><div class="fr-flabel">城市</div><div class="fr-sel-w"><select class="fr-sel" onchange="frSetCity(this.value)">';cities.forEach(function(c){hh+='<option value="'+c+'"'+(c===FOOD_CITY?' selected':'')+'>'+c+'</option>';});hh+='</select></div></div>';box.innerHTML=hh;}
 function renderFrAll(){paintFrSels();renderFoodRank();var exp=document.getElementById('frExpPanel');if(exp&&exp.style.display!=='none')renderExplore();}
 /* 点击被省略的内容 -> 浮现显示全部 */
