@@ -3930,11 +3930,10 @@ var LIFE_METRICS={
 var TAG_METRICS={};
 var lifeTag='随记';
 function renderLife(){renderDateStrip('life');renderLifeCats();renderLifePanel();lifeCalCtrl()}
-/* 生活页日历仅榜单/记账标签显示（随记/健康/学习/目标/购物隐藏） */
+/* 生活页日历 UI 已移除（吃喝/玩乐榜单仍按 curDate 跟随取数） */
 function lifeCalCtrl(){
   var el=document.getElementById('lifeCalCard');if(!el)return;
-  var hide=['随记','健康','学习','目标','购物'].indexOf(lifeTag||'随记')>=0;
-  el.style.display=hide?'none':'';
+  el.style.display='none';
 }
 function renderLifeCats(){
   var box=document.getElementById('lifeCats');if(!box)return;
