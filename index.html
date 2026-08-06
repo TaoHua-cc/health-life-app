@@ -3929,7 +3929,13 @@ var LIFE_METRICS={
 };
 var TAG_METRICS={};
 var lifeTag='随记';
-function renderLife(){renderDateStrip('life');renderLifeCats();renderLifePanel()}
+function renderLife(){renderDateStrip('life');renderLifeCats();renderLifePanel();lifeCalCtrl()}
+/* 生活页日历仅榜单/记账标签显示（随记/健康/学习/目标/购物隐藏） */
+function lifeCalCtrl(){
+  var el=document.getElementById('lifeCalCard');if(!el)return;
+  var hide=['随记','健康','学习','目标','购物'].indexOf(lifeTag||'随记')>=0;
+  el.style.display=hide?'none':'';
+}
 function renderLifeCats(){
   var box=document.getElementById('lifeCats');if(!box)return;
   var day=gd(curDate),l=day.life;
@@ -3940,7 +3946,7 @@ function renderLifeCats(){
     return '<button class="life-cat'+(t.k===lifeTag?' on':'')+'" onclick="selLifeTag(\''+t.k+'\')">'+ (t.ic?'<span class="lic">'+t.ic+'</span>':'') +'<span>'+t.k+'</span>'+(cnt?'<span class="lcnt">'+cnt+'</span>':'')+'</button>';
   }).join('');
 }
-function selLifeTag(k){lifeTag=k;renderLifeCats();renderLifePanel()}
+function selLifeTag(k){lifeTag=k;renderLifeCats();renderLifePanel();lifeCalCtrl()}
 function renderLifePanel(){
   var box=document.getElementById('lifePanel');if(!box)return;
   var day=gd(curDate),l=day.life;
