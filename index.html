@@ -412,7 +412,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .cam-ref b{color:var(--pri);font-weight:700}
 [data-theme=dark] .cam-ref{background:var(--priBg);border-color:var(--pri)}
 .cam-add{flex:0 0 auto;border:1px solid var(--pri);background:var(--brand-g);color:#fff;border-radius:9px;padding:5px 13px;font-size:.78rem;cursor:pointer;font-family:inherit}
-.cam-add.on{background:var(--priBg);color:var(--pri);cursor:default}
+.cam-add.on{background:var(--priBg);color:var(--pri);cursor:pointer}
+.cam-note{flex:1 0 100%;font-size:.7rem;color:var(--pri);font-weight:500;margin-top:2px}
+[data-theme=dark] .cam-note{color:#9cc3ff}
 .cam-acts{display:flex;gap:8px;margin-top:8px}
 .cam-acts .exp-save{flex:1}
 .cam-acts .exp-save.c{background:var(--sf2);color:var(--t1);border:1px solid var(--bd)}
@@ -3252,7 +3254,10 @@ function mealPush(name,kcal,carb,protein,fat,brand){
       toast('已更新「'+name+'」营养');
       return;
     }
-    toast('已在已选列表');return;
+    /* 无新营养数据：再次点击「已加入」→ 请求 AI 搜索真实营养并更新 */
+    toast('正在更新「'+name+'」营养…');
+    lookupFoodNutrition(name);
+    return;
   }
   var f=findFood(name);
   if(f){addToMeal(f.name);return}
@@ -3389,8 +3394,9 @@ function renderCloudPreds(foods){
   var html='<div class="cam-tip">大模型识别结果（已自动加入最匹配项，其余可点选加入）</div><div class="cam-list">';
   foods.forEach(function(it){
     var added=mpSel.some(function(s){return s.name===it.name});
-    var addBtn=added?'<button class="cam-add on" disabled>已加入</button>':'<button class="cam-add" onclick="mealPush(\''+escHtml(it.name).replace(/'/g,'&#39;')+'\','+it.kcal+','+(it.carb!=null?it.carb:'null')+','+(it.protein!=null?it.protein:'null')+','+(it.fat!=null?it.fat:'null')+',\''+escHtml(it.brand||'').replace(/'/g,'&#39;')+'\')">加入</button>';
-    html+='<div class="cam-item"><span class="cam-nm" title="'+escHtml(it.name)+'">'+escHtml(it.name)+'</span>'+(it.kcal?'<span class="cam-cal">≈'+it.kcal+' kcal/100g</span>':'')+addBtn+'<div class="cam-ref">'+refHint(it.name)+'</div></div>';
+    var args="'"+escHtml(it.name).replace(/'/g,'&#39;')+"',"+it.kcal+','+(it.carb!=null?it.carb:'null')+','+(it.protein!=null?it.protein:'null')+','+(it.fat!=null?it.fat:'null')+",'"+escHtml(it.brand||'').replace(/'/g,'&#39;')+"'";
+    var addBtn=added?'<button class="cam-add on" onclick="mealPush('+args+')">已加入</button>':'<button class="cam-add" onclick="mealPush('+args+')">加入</button>';
+    html+='<div class="cam-item"><span class="cam-nm" title="'+escHtml(it.name)+'">'+escHtml(it.name)+'</span>'+(it.kcal?'<span class="cam-cal">≈'+it.kcal+' kcal/100g</span>':'')+addBtn+(added?'<div class="cam-note">✓ 已加入 · 点击「已加入」可更新营养数据</div>':'')+'<div class="cam-ref">'+refHint(it.name)+'</div></div>';
   });
   html+='</div><div class="cam-acts"><button class="exp-save" onclick="mealCamera()">重新拍照</button><button class="exp-save c" onclick="closeCamRes()">关闭</button></div>';
   setCamBody(html);
