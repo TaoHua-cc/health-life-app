@@ -3621,7 +3621,6 @@
     "version": 1,
     "updated": "2026-08-07",
     "lastCheck": "2026-08-07",
-    "provider": "manual",
-    "source": "AI 攻略整理 + 地图 POI 每日更新"
+    "source": "静态攻略数据（小程序端另有每日 AI 生成覆盖）"
   }
 }
