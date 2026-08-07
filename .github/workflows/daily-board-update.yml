@@ -1,0 +1,49 @@
+name: Daily Board Update
+
+# 每日自动更新吃喝玩乐榜单（boards-data.json）
+# 数据源：地图开放平台 POI 搜索（高德/腾讯），需在仓库 Secrets 配置 MAP_KEY
+# 配置方法：GitHub → Settings → Secrets and variables → Actions → New repository secret
+#   MAP_PROVIDER = amap（或 tencent）
+#   MAP_KEY = 高德开放平台 Web服务 key（https://console.amap.com 免费申请）
+#
+# 未配置 key 时任务照常执行但跳过真实更新（不产生无意义 commit）
+
+on:
+  schedule:
+    # 每天 06:00 北京时间（22:00 UTC）执行
+    - cron: '0 22 * * *'
+  workflow_dispatch: # 支持手动触发（仓库 Actions 页点 Run workflow）
+
+permissions:
+  contents: write # 允许自动提交推送
+
+jobs:
+  update-boards:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run board update script
+        env:
+          MAP_PROVIDER: ${{ secrets.MAP_PROVIDER }}
+          MAP_KEY: ${{ secrets.MAP_KEY }}
+        run: node scripts/update-boards.js
+
+      - name: Commit & push if changed
+        run: |
+          if git status --porcelain | grep -q 'boards-data.json'; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add boards-data.json
+            git commit -m "chore: 每日榜单自动更新 $(date +%Y-%m-%d)"
+            git push
+            echo "✅ boards-data.json 已更新并推送"
+          else
+            echo "ℹ️ 无数据变化，跳过提交"
+          fi
