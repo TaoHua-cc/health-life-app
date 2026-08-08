@@ -344,12 +344,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .clg{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;touch-action:pan-y;will-change:transform}
 .cdw{text-align:center;font-size:.62rem;color:var(--t3);padding:2px;font-weight:600}
 .cld{aspect-ratio:.9;min-height:56px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;font-size:.7rem;cursor:pointer;background:var(--sf2);position:relative}
-.cld:hover{outline:2px solid var(--pri)}.cld.tdy{background:var(--pri);color:#fff;font-weight:700}.cld.oth{opacity:.25}
-.cld.sel{outline:2px solid var(--pri);outline-offset:-2px;font-weight:700}
-[data-theme=dark] .cld.sel{outline:none;background:var(--pri);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.7),0 0 18px rgba(10,132,255,.65);font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.55)}
-[data-theme=dark] .cld.sel .cld-tg,[data-theme=dark] .cld.sel .cld-tc{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
-[data-theme=dark] .cld.tdy{background:var(--priBg);color:var(--t1)}
-[data-theme=dark] .cld.tdy .cld-tg,[data-theme=dark] .cld.tdy .cld-tc{color:var(--t2)}
+.cld:hover{outline:2px solid var(--pri)}.cld.tdy{background:var(--priBg);color:var(--pri);font-weight:700}.cld.oth{opacity:.25}
+.cld.sel{outline:none;background:var(--sf2);font-weight:700}
+.cld.sel .cld-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 4px 12px rgba(10,132,255,.38)}
+.cld-num{line-height:1;display:flex;align-items:center;justify-content:center}
+[data-theme=dark] .cld.tdy{background:rgba(74,163,255,.18);color:#9cc3ff}
+[data-theme=dark] .cld.sel{outline:none;background:var(--sf2)}
+[data-theme=dark] .cld.sel .cld-num{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .cld-tags{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;width:100%;line-height:1.05}
 .cld-tg{font-size:.5rem;color:var(--grn);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cld-tc{font-size:.5rem;color:var(--org);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1302,6 +1303,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .pm-btn.acc{background:linear-gradient(135deg,#ff8fb3,#e84d8a);color:#fff;border:none;box-shadow:0 8px 22px rgba(232,77,138,.38)}
 [data-theme=dark] .pd-overview{background:linear-gradient(135deg,#c2557e,#a83a68 55%,#8e2f57);box-shadow:0 24px 60px rgba(0,0,0,.4)}
 [data-theme=dark] .pd-cell.tdy::after{background:var(--pri)}
+/* 生活页横栏排序 */
+.life-cat.lc-sort{background:transparent;border:2px dashed var(--btn-bd);color:var(--t3);box-shadow:none}
+.pm-sort-row{display:flex;align-items:center;gap:10px;padding:9px 10px;background:var(--sf2);border-radius:9px;margin-bottom:6px}
+.pm-sort-h{width:22px;height:22px;border-radius:7px;background:var(--btn-bd);color:var(--t2);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pm-sort-ic{font-size:1rem;flex-shrink:0}
+.pm-sort-nm{flex:1;font-size:.82rem;font-weight:600;color:var(--t1)}
+.pm-sort-btns{display:flex;gap:6px;flex-shrink:0}
+.pm-sort-btn{width:30px;height:28px;border-radius:8px;background:var(--sf);border:1px solid var(--btn-bd);color:var(--pri);font-size:.85rem;font-weight:700;cursor:pointer}
+.pm-sort-btn.dis{opacity:.3;cursor:default}
 </style>
 </head>
 <body>
@@ -2243,6 +2253,7 @@ if(!S.period.logs)S.period.logs=[];
 if(!S.period.sym)S.period.sym={};
 if(!S.period.notes)S.period.notes={};
 if(!S.period.advice)S.period.advice=null;
+if(S.lifeTagOrder===undefined)S.lifeTagOrder=null;
 var _planMig=false;
 S.trainPlans.forEach(function(p){if(!p.startDate){p.startDate=tk();_planMig=true;}if(!p.slots)p.slots=[];if(p.slots.length<p.days){for(var i=p.slots.length;i<p.days;i++)p.slots.push({parts:[]});_planMig=true;}});
 if(!S.theme)S.theme='light';
@@ -4049,13 +4060,34 @@ function lifeCalCtrl(){
 function renderLifeCats(){
   var box=document.getElementById('lifeCats');if(!box)return;
   var day=gd(curDate),l=day.life;
-  box.innerHTML=LIFE_TAGS.map(function(t){
+  var tags=applyLifeTagOrder(LIFE_TAGS.slice());
+  box.innerHTML=tags.map(function(t){
     var cnt=0;
     var recs=(l.tags&&l.tags[t.k])||[];
     cnt+=recs.length;
     return '<button class="life-cat'+(t.k===lifeTag?' on':'')+'" onclick="selLifeTag(\''+t.k+'\')">'+ (t.ic?'<span class="lic">'+t.ic+'</span>':'') +'<span>'+t.k+'</span>'+(cnt?'<span class="lcnt">'+cnt+'</span>':'')+'</button>';
-  }).join('');
+  }).join('')
+  +'<button class="life-cat lc-sort" onclick="openLifeSort()"><span class="lic">🎛</span><span>排序</span></button>';
 }
+// 生活页横栏排序（对齐小程序 3.0，持久化 S.lifeTagOrder）
+function applyLifeTagOrder(list){
+  var order=S.lifeTagOrder;if(!order||!order.length)return list;
+  var byK={};list.forEach(function(t){byK[t.k]=t});
+  var o=[];order.forEach(function(k){if(byK[k]&&o.indexOf(byK[k])<0)o.push(byK[k])});
+  list.forEach(function(t){if(o.indexOf(t)<0)o.push(t)});
+  return o;
+}
+var _lifeSortList=[];
+function openLifeSort(){ensurePeriodModal();document.getElementById('pmTitle').textContent='🎛 横栏排序';_lifeSortList=applyLifeTagOrder(LIFE_TAGS.slice());rerenderLifeSort();document.getElementById('periodModalWrap').style.display='flex';}
+function rerenderLifeSort(){
+  var list=_lifeSortList;
+  document.getElementById('pmBody').innerHTML=list.map(function(t,i){
+    return '<div class="pm-sort-row"><span class="pm-sort-h">'+(i+1)+'</span><span class="pm-sort-ic">'+t.ic+'</span><span class="pm-sort-nm">'+t.k+'</span><span class="pm-sort-btns"><button class="pm-sort-btn'+(i===0?' dis':'')+'" onclick="lifeSortMove('+i+',-1)">↑</button><button class="pm-sort-btn'+(i===list.length-1?' dis':'')+'" onclick="lifeSortMove('+i+',1)">↓</button></span></div>';
+  }).join('')+'<div class="pm-acts"><button class="pm-btn" onclick="lifeSortReset()">恢复默认</button><button class="pm-btn acc" onclick="lifeSortSave()">保存</button></div>';
+}
+function lifeSortMove(i,d){var j=i+d;if(j<0||j>=_lifeSortList.length)return;var t=_lifeSortList[i];_lifeSortList[i]=_lifeSortList[j];_lifeSortList[j]=t;rerenderLifeSort();}
+function lifeSortReset(){_lifeSortList=LIFE_TAGS.slice();rerenderLifeSort();}
+function lifeSortSave(){S.lifeTagOrder=_lifeSortList.map(function(t){return t.k});save();closePeriodModal();renderLifeCats();toast('排序已保存');}
 function selLifeTag(k){lifeTag=k;renderLifeCats();renderLifePanel();lifeCalCtrl()}
 function renderLifePanel(){
   var box=document.getElementById('lifePanel');if(!box)return;
@@ -5810,7 +5842,7 @@ function buildCal(prefix){
       if(ccd)cellTags+='<span class="cld-tc">'+escHtml(ccd.name)+'</span>';
       if(prefix==='life'&&dayData.ledger&&dayData.ledger.length)cellTags+='<span class="cld-tg">💰</span>';
     }
-    html+='<div class="cld'+(dk===today?' tdy':'')+(dk===curDate?' sel':'')+'" onclick="calSelectDate(\''+prefix+'\',\''+dk+'\')">'+d+(cellTags?'<div class="cld-tags">'+cellTags+'</div>':'')+'</div>';
+    html+='<div class="cld'+(dk===today?' tdy':'')+(dk===curDate?' sel':'')+'" onclick="calSelectDate(\''+prefix+'\',\''+dk+'\')"><span class="cld-num">'+d+'</span>'+(cellTags?'<div class="cld-tags">'+cellTags+'</div>':'')+'</div>';
   }
   var totalCells=first+daysInMonth,remain=(7-totalCells%7)%7;
   // 下个月的灰色日期（可点击：切换到下月并选中该日）
