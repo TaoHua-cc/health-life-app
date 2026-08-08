@@ -1232,6 +1232,76 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .vf-log{margin-top:14px;display:flex;flex-direction:column;gap:8px}
 .vf-log .vfi{font-size:.8rem;line-height:1.5;background:var(--sf2);border:1px solid var(--btn-bd);border-radius:10px;padding:8px 10px;color:var(--t1)}
 .vf-log .vfi.u{color:var(--t2);font-style:italic;background:transparent;border-style:dashed}
+/* ===== 经期（对齐小程序 3.0） ===== */
+.pd-overview{background:linear-gradient(135deg,#ff8fb3,#ff5f96 55%,#e84d8a);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:var(--rd);box-shadow:0 24px 60px rgba(255,95,150,.30)}
+.pd-ov-stage{font-size:1.4rem;font-weight:800;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,.18)}
+.pd-ov-next{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.26);border:1px solid rgba(255,255,255,.45);box-shadow:0 4px 14px rgba(0,0,0,.10),inset 0 1px 0 rgba(255,255,255,.4)}
+.pd-ov-next-lb{font-size:.75rem;font-weight:700;opacity:.95;flex-shrink:0}
+.pd-ov-next-v{flex:1;font-size:1.15rem;font-weight:900;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pd-ov-next-d{flex-shrink:0;font-size:.8rem;font-weight:800;color:#e84d8a;background:rgba(255,255,255,.95);padding:5px 10px;border-radius:10px}
+.pd-ov-sub{font-size:.8rem;font-weight:600;opacity:.97;margin-top:10px;line-height:1.6}
+.pd-ov-stats{display:flex;gap:10px;margin-top:12px}
+.pd-stat{flex:1;text-align:center;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.30);border-radius:12px;padding:8px 0}
+.pd-stat b{display:block;font-size:1.05rem;font-weight:800}
+.pd-stat span{display:block;font-size:.62rem;opacity:.95;margin-top:2px}
+.pd-ov-btns{display:flex;gap:10px;margin-top:12px}
+.pd-btn{flex:1;background:rgba(255,255,255,.95);color:#e84d8a;font-size:.85rem;font-weight:700;border:none;border-radius:12px;padding:9px 0;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.pd-cal-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pd-cal-nav{width:30px;height:30px;border-radius:8px;background:var(--sf2);border:1px solid var(--btn-bd);color:var(--t2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pd-cal-title{flex:1;text-align:center;font-size:.95rem;font-weight:700;color:var(--t1)}
+.pd-cal-today{font-size:.72rem;color:var(--pri);font-weight:600;background:var(--priBg);border:none;border-radius:9px;padding:5px 10px;cursor:pointer}
+.pd-cal-dow{display:flex}
+.pd-cal-dow span{flex:1;text-align:center;font-size:.66rem;color:var(--t3);padding:4px 0}
+.pd-cal-grid{display:flex;flex-wrap:wrap}
+.pd-cell{width:14.285%;height:38px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--t1);border-radius:7px;position:relative;cursor:pointer;box-sizing:border-box}
+.pd-cell.oth{color:var(--t3);opacity:.4}
+.pd-cell.tdy{font-weight:800;color:var(--pri)}
+.pd-cell.tdy::after{content:'';position:absolute;left:50%;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--pri);transform:translateX(-50%)}
+.pd-cell.period{background:rgba(255,59,48,.14);color:#ff3b30;font-weight:700}
+.pd-cell.ovu{background:rgba(191,90,242,.16);color:#bf5af2;font-weight:700}
+.pd-cell.fert{background:rgba(255,159,10,.14);color:#ff9f0a;font-weight:600}
+.pd-cell.sel{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(10,132,255,.38)}
+.pd-cell.sel.period,.pd-cell.sel.ovu,.pd-cell.sel.fert{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff}
+.pd-cell.sel.tdy::after{display:none}
+.pd-legend{display:flex;gap:14px;margin-top:8px}
+.pd-legend span{display:flex;align-items:center;gap:4px;font-size:.66rem;color:var(--t2)}
+.pd-lg-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.pd-lg-dot.period{background:#ff3b30}
+.pd-lg-dot.ovu{background:#bf5af2}
+.pd-lg-dot.fert{background:#ff9f0a}
+.pd-sec-t{font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:10px}
+.pd-syms{display:flex;flex-wrap:wrap;gap:8px}
+.pd-sym{display:inline-flex;align-items:center;gap:4px;padding:7px 11px;border-radius:10px;background:var(--sf2);border:1px solid var(--btn-bd);color:var(--t2);font-size:.78rem;cursor:pointer;user-select:none}
+.pd-sym.on{background:rgba(255,59,48,.10);border-color:rgba(255,59,48,.35);color:#ff3b30;font-weight:600}
+.pd-note-in{width:100%;box-sizing:border-box;min-height:60px;line-height:1.5;background:var(--sf2);border:1px solid var(--btn-bd);border-radius:10px;padding:8px 10px;font-size:.8rem;color:var(--t1);font-family:inherit;margin-top:10px;resize:vertical}
+.pd-note-save{display:inline-block;margin-top:8px;background:var(--priBg);color:var(--pri);font-size:.8rem;font-weight:700;border:none;border-radius:9px;padding:7px 16px;cursor:pointer}
+.pd-adv-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.pd-adv-title{font-size:.92rem;font-weight:800;color:var(--t1);flex:1;min-width:0}
+.pd-adv-btn{flex-shrink:0;background:linear-gradient(135deg,#ff8fb3,#e84d8a);color:#fff;font-size:.76rem;font-weight:700;border:none;border-radius:10px;padding:8px 13px;cursor:pointer;box-shadow:0 6px 16px rgba(232,77,138,.30)}
+.pd-adv-btn:disabled{opacity:.6;cursor:default}
+.pd-adv-gen{font-size:.66rem;color:var(--t3);margin:-4px 0 8px}
+.pd-adv-block{background:var(--sf2);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.pd-adv-t{font-size:.78rem;font-weight:700;color:var(--t1);margin-bottom:4px}
+.pd-adv-c{font-size:.76rem;color:var(--t2);line-height:1.7}
+.pd-adv-tag{font-size:.66rem;color:var(--t3);margin-top:2px}
+.pd-adv-empty{font-size:.78rem;color:var(--t3);padding:10px 0;line-height:1.6}
+.pd-log{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;background:var(--sf2);border-radius:9px;margin-bottom:6px}
+.pd-log span{font-size:.8rem;color:var(--t1);font-weight:600}
+.pd-log-del{color:var(--t3);cursor:pointer;padding:2px 6px}
+.pm-wrap{display:none;position:fixed;inset:0;z-index:999;align-items:flex-end;justify-content:center}
+.pm-mask{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.pm-box{position:relative;width:100%;max-width:520px;background:var(--sf);border-radius:18px 18px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom));box-sizing:border-box;box-shadow:0 -12px 40px rgba(0,0,0,.25)}
+.pm-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pm-hd b{font-size:1rem;color:var(--t1)}
+.pm-x{width:28px;height:28px;border-radius:50%;background:var(--sf2);color:var(--t3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem}
+.pm-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pm-row label{width:90px;font-size:.8rem;color:var(--t1);flex-shrink:0}
+.pm-row input{flex:1;height:36px;background:var(--sf2);border:1px solid var(--btn-bd);border-radius:9px;padding:0 10px;font-size:.85rem;color:var(--t1);font-family:inherit;box-sizing:border-box}
+.pm-acts{display:flex;gap:10px;margin-top:14px}
+.pm-btn{flex:1;height:40px;border-radius:11px;font-size:.9rem;font-weight:700;border:1px solid var(--btn-bd);background:var(--sf2);color:var(--t2);cursor:pointer}
+.pm-btn.acc{background:linear-gradient(135deg,#ff8fb3,#e84d8a);color:#fff;border:none;box-shadow:0 8px 22px rgba(232,77,138,.38)}
+[data-theme=dark] .pd-overview{background:linear-gradient(135deg,#c2557e,#a83a68 55%,#8e2f57);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+[data-theme=dark] .pd-cell.tdy::after{background:var(--pri)}
 </style>
 </head>
 <body>
@@ -2167,6 +2237,12 @@ if(!S.days)S.days={};
 if(!S.foodFreq)S.foodFreq={};
 if(!S.customFoods)S.customFoods=[];/* 拍照识别新增的食物库（品牌/营养表/AI 搜索），持久化、随拍照增长 */
 if(!S.trainPlans)S.trainPlans=[];
+/* ===== 经期数据（对齐小程序 3.0）：S.period = {logs:[{start,end}],cycleLen,periodLen,sym:{date:[k]},notes:{date:文本},advice:null} ===== */
+if(!S.period)S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};
+if(!S.period.logs)S.period.logs=[];
+if(!S.period.sym)S.period.sym={};
+if(!S.period.notes)S.period.notes={};
+if(!S.period.advice)S.period.advice=null;
 var _planMig=false;
 S.trainPlans.forEach(function(p){if(!p.startDate){p.startDate=tk();_planMig=true;}if(!p.slots)p.slots=[];if(p.slots.length<p.days){for(var i=p.slots.length;i<p.days;i++)p.slots.push({parts:[]});_planMig=true;}});
 if(!S.theme)S.theme='light';
@@ -3953,7 +4029,7 @@ function checkBackupReminder(){}
 
 
 // Life
-var LIFE_TAGS=[{k:'随记',ic:'📝'},{k:'吃喝',ic:'🍽️'},{k:'玩乐',ic:'🎮'},{k:'健康',ic:'💪'},{k:'财务',ic:'💰'},{k:'学习',ic:'📚'},{k:'目标',ic:'🎯'}];
+var LIFE_TAGS=[{k:'随记',ic:'📝'},{k:'吃喝',ic:'🍽️'},{k:'玩乐',ic:'🎮'},{k:'健康',ic:'💪'},{k:'经期',ic:'🌸'},{k:'财务',ic:'💰'},{k:'学习',ic:'📚'},{k:'目标',ic:'🎯'},{k:'购物',ic:'🛒'}];
 var LIFE_METRICS={
   sleep:{ic:'😴',lb:'睡眠(小时)',step:'0.5',min:'0',max:'24'},
   exercise:{ic:'🏃',lb:'运动(分钟)',step:'1',min:'0'},
@@ -4015,6 +4091,9 @@ function renderLifePanel(){
     html+='<div class="card" id="ledgerStatCard" style="margin-top:12px"></div>';
     html+='<div class="sec" style="margin-top:18px"><span>📒 财务随手记</span></div>';
   }
+  else if(lifeTag==='经期'){
+    html+=periodPanelHtml();
+  }
   var mets=TAG_METRICS[lifeTag];
   if(mets&&mets.length){
     html+='<div class="life-metrics">';
@@ -4035,6 +4114,7 @@ function renderLifePanel(){
   }
   html+='</div>';
   html+='<div class="life-add"><input id="lifeRecInput" placeholder="添加'+lifeTag+'记录，回车保存" onkeydown="if(event.key===\'Enter\')addLifeRec()"><button onclick="addLifeRec()">＋</button></div>';
+  if(lifeTag==='经期'){box.innerHTML=html;periodLifeInit();return;}
   box.innerHTML=html;
   if(lifeTag==='随记'){var na=document.getElementById('notesArea');if(na)na.value=gd(curDate).notes||'';renderReminders();}
   if(lifeTag==='吃喝'){paintFrSels();renderFoodRank();renderExplore();}
@@ -4047,6 +4127,118 @@ function renderLifePanel(){
   }
   if(lifeTag==='财务')renderLedger();
 }
+// ===== 经期前端（对齐小程序 3.0：总览/月历/症状/文字记录/AI建议/历史） =====
+var PERIOD_SYMS=[{k:'腹痛',ic:'😣'},{k:'腰酸',ic:'😩'},{k:'乏力',ic:'😪'},{k:'头痛',ic:'🤕'},{k:'乳胀',ic:'🤱'},{k:'情绪低落',ic:'😞'},{k:'畏寒',ic:'🥶'},{k:'食欲旺盛',ic:'🍰'}];
+var _periodCalY,_periodCalM,_periodSel;
+function periodPanelHtml(){
+  var pred=periodPredict(),stats=periodStats(),logs=periodLogs();
+  var st=periodStageAt(_periodSel||tk());
+  var stTxt='📝 经期 · 今日建议';
+  if(st.stage==='period')stTxt='🌸 经期第 '+st.dayN+' 天 · 今日建议';
+  else if(st.stage==='ovu')stTxt='💜 排卵期 · 今日建议';
+  else if(st.stage==='safe')stTxt='🟢 安全期 · 今日建议';
+  var adv=periodAdviceLoad(),advDone=!!(adv&&adv.date===tk());
+  var h='';
+  h+='<div class="card pd-overview">';
+  if(pred){
+    h+='<div class="pd-ov-stage">'+(pred.stage==='period'?'🌸 经期第 '+pred.dayN+' 天':(pred.stage==='ovu'?'💜 排卵期 · 易孕期':'🟢 安全期'))+'</div>';
+    h+='<div class="pd-ov-next"><span class="pd-ov-next-lb">📅 下次月经预计</span><span class="pd-ov-next-v">'+pred.nextStart+'</span><span class="pd-ov-next-d">还有 '+pred.daysLeft+' 天</span></div>';
+    h+='<div class="pd-ov-sub">排卵日 '+pred.ovuDay+' · 易孕期 '+pred.fertStart+' ~ '+pred.fertEnd+'</div>';
+    if(stats.count>0){h+='<div class="pd-ov-stats"><div class="pd-stat"><b>'+stats.count+'</b><span>记录次数</span></div><div class="pd-stat"><b>'+(stats.avgCycle||'—')+'</b><span>平均周期(天)</span></div><div class="pd-stat"><b>'+(stats.avgLen||'—')+'</b><span>平均经期(天)</span></div></div>';}
+  }else{
+    h+='<div class="pd-ov-stage">🌸 记录你的经期</div><div class="pd-ov-sub">记录 1 次后即可预测下次月经、排卵期</div>';
+  }
+  h+='<div class="pd-ov-btns"><button class="pd-btn" onclick="openPeriodAdd()">📅 记录经期</button><button class="pd-btn" onclick="openPeriodSet()">⚙️ 周期设置</button></div>';
+  h+='</div>';
+  h+='<div class="card"><div class="pd-cal-head"><button class="pd-cal-nav" onclick="periodCalNav(-1)">‹</button><div class="pd-cal-title" id="pdCalTitle"></div><button class="pd-cal-nav" onclick="periodCalNav(1)">›</button><button class="pd-cal-today" onclick="periodCalToday()">今天</button></div><div class="pd-cal-dow"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="pd-cal-grid" id="pdCalGrid"></div><div class="pd-legend"><span><i class="pd-lg-dot period"></i>经期</span><span><i class="pd-lg-dot ovu"></i>排卵日</span><span><i class="pd-lg-dot fert"></i>易孕期</span></div></div>';
+  var sd=_periodSel||tk(),syms=periodSymList(sd);
+  h+='<div class="card"><div class="pd-sec-t">📌 '+sd.replace(/-/g,'.')+' 状态</div><div class="pd-syms">'+PERIOD_SYMS.map(function(x){return '<span class="pd-sym'+(syms.indexOf(x.k)>=0?' on':'')+'" onclick="periodSymToggle(\''+x.k+'\')">'+x.ic+' '+x.k+'</span>';}).join('')+'</div><textarea class="pd-note-in" id="pdNoteIn" rows="2" placeholder="写下当天状态或感受…"></textarea><button class="pd-note-save" onclick="periodNoteSave()">保存记录</button></div>';
+  h+='<div class="card"><div class="pd-adv-head"><div class="pd-adv-title">'+stTxt+'</div><button class="pd-adv-btn" id="pdAdvBtn" onclick="periodAdviceGen()">'+(advDone?'✨ AI 已生成':'✨ AI 生成')+'</button></div>';
+  if(advDone)h+='<div class="pd-adv-gen">🕐 生成于 '+adv.genTime+' · 可再次点击重新生成</div>';
+  h+='<div class="pd-adv-body" id="pdAdvBody">';
+  if(advDone&&adv.diet){h+='<div class="pd-adv-block"><div class="pd-adv-t">🍲 饮食建议</div><div class="pd-adv-c">'+escHtml(adv.diet)+'</div></div><div class="pd-adv-block"><div class="pd-adv-t">🏃 训练建议</div><div class="pd-adv-c">'+escHtml(adv.train)+'</div></div><div class="pd-adv-tag">'+escHtml(adv.tag||'')+'</div>';}
+  else h+='<div class="pd-adv-empty">点击「✨ AI 生成」获取今日饮食与训练建议（结合当天阶段与你的状态）</div>';
+  h+='</div></div>';
+  if(logs.length){h+='<div class="card"><div class="pd-sec-t">历史记录</div>'+logs.map(function(x,i){return '<div class="pd-log"><span>🌸 '+x.start+' ~ '+(x.end||x.start)+'</span><span class="pd-log-del" onclick="periodDelLog('+i+')">✕</span></div>';}).join('')+'</div>';}
+  return h;
+}
+function periodLifeInit(){
+  var now=new Date();
+  if(_periodCalY===undefined){_periodCalY=now.getFullYear();_periodCalM=now.getMonth();}
+  if(!_periodSel)_periodSel=tk();
+  periodCalRender();
+  var ni=document.getElementById('pdNoteIn');if(ni)ni.value=periodNoteList(_periodSel);
+}
+function periodCalRender(){
+  var y=_periodCalY,m=_periodCalM,sel=_periodSel||tk(),pred=periodPredict(),logs=periodLogs();
+  var first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),h='';
+  for(var i=0;i<first;i++)h+='<span class="pd-cell oth"></span>';
+  for(var d=1;d<=dim;d++){
+    var dk=y+'-'+pad2(m+1)+'-'+pad2(d),pd='';
+    if(pred){if(dk>=pred.nextStart&&dk<=pred.nextEnd)pd='period';else if(dk===pred.ovuDay)pd='ovu';else if(dk>=pred.fertStart&&dk<=pred.fertEnd)pd='fert';}
+    for(var j=0;j<logs.length;j++){if(dk>=logs[j].start&&dk<=(logs[j].end||logs[j].start)){pd='period';break;}}
+    var cls='pd-cell '+pd+(dk===tk()?' tdy':'')+(dk===sel?' sel':'');
+    h+='<span class="'+cls+'" onclick="periodSelDay(\''+dk+'\')">'+d+'</span>';
+  }
+  var g=document.getElementById('pdCalGrid');if(g)g.innerHTML=h;
+  var t=document.getElementById('pdCalTitle');if(t)t.textContent=y+'年'+(m+1)+'月';
+}
+function periodCalNav(d){var now=new Date();if(_periodCalY===undefined){_periodCalY=now.getFullYear();_periodCalM=now.getMonth();}_periodCalM+=d;if(_periodCalM<0){_periodCalM=11;_periodCalY--;}if(_periodCalM>11){_periodCalM=0;_periodCalY++;}periodCalRender();}
+function periodCalToday(){var now=new Date();_periodCalY=now.getFullYear();_periodCalM=now.getMonth();_periodSel=tk();renderLifePanel();}
+function periodSelDay(dk){_periodSel=dk;renderLifePanel();}
+function periodSymToggle(k){periodSym(_periodSel||tk(),k);renderLifePanel();}
+function periodNoteSave(){var v=document.getElementById('pdNoteIn');if(!v)return;periodNote(_periodSel||tk(),v.value);renderLifePanel();toast('已保存');}
+function periodAdviceGen(){
+  var btn=document.getElementById('pdAdvBtn');if(btn){btn.textContent='⏳ AI 生成中…';btn.disabled=true;}
+  var body=document.getElementById('pdAdvBody');if(body)body.innerHTML='<div class="pd-adv-empty">🤖 AI 正在结合今天的阶段与状态生成建议…</div>';
+  var d=tk(),st=periodStageAt(d),syms=periodSymList(d),note=periodNoteList(d),pred=periodPredict();
+  var stageDesc='安全期';if(st.stage==='period')stageDesc='经期第'+st.dayN+'天';else if(st.stage==='ovu')stageDesc='排卵期（易孕期）';else if(st.stage==='none')stageDesc='未记录经期';
+  var prompt='你是健康生活 App 的经期健康助手。今天是 '+d+'，用户处于「'+stageDesc+'」（月经周期 '+(pred?pred.cycleLen:28)+' 天、经期 '+(pred?pred.periodLen:5)+' 天）。今日状态症状：'+(syms.length?syms.join('、'):'无')+'；文字记录：'+(note||'无')+'。请输出 JSON（仅 JSON，不要其它文字或 markdown 代码块）：{"diet":"饮食建议（100字内，结合阶段与症状，含推荐/避免的食物）","train":"训练建议（100字内，注明这个阶段可做与应避免的运动）"}';
+  if(!S.aiKey){finishPeriodAdvice(periodAdviceLocal(st),'本地建议（可到 我的 → AI 识别设置 配置通义千问 Key 后 AI 生成）');return;}
+  var realApi='https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+  var url=S.aiProxy?(S.aiProxy.replace(/\/?$/,'')+'?target='+encodeURIComponent(realApi)):realApi;
+  fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+S.aiKey},body:JSON.stringify({model:'qwen-turbo',messages:[{role:'user',content:prompt}],temperature:0.2})})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      var txt='';try{txt=j.choices&&j.choices[0]&&j.choices[0].message?j.choices[0].message.content:'';}catch(e){}
+      var diet='',train='';
+      if(txt){try{var jm=txt.match(/\{[\s\S]*\}/);if(jm){var jo=JSON.parse(jm[0]);diet=jo.diet||'';train=jo.train||'';}}catch(e){}
+        if(!diet&&!train)diet=txt;}
+      if(!diet&&!train){finishPeriodAdvice(periodAdviceLocal(st),'AI 未返回有效内容，已用本地模板');return;}
+      finishPeriodAdvice({diet:diet,train:train},'✨ AI 生成');
+    })
+    .catch(function(){finishPeriodAdvice(periodAdviceLocal(st),'网络错误，已用本地模板');});
+}
+function finishPeriodAdvice(adv,tag){
+  var now=new Date();var genTime=(''+now.getHours()).padStart(2,'0')+':'+(''+now.getMinutes()).padStart(2,'0');
+  periodAdviceSave({date:tk(),diet:adv.diet,train:adv.train,tag:tag,genTime:genTime});renderLifePanel();
+}
+function periodAdviceLocal(st){
+  if(st.stage==='period')return{diet:'🍲 经期宜温补：多吃高铁食物（红肉、动物肝脏、菠菜、红枣）补铁补血，喝温热的红糖姜茶/鸡汤；忌生冷、辛辣、咖啡浓茶，少盐少糖，注意保暖多喝温水。',train:'🏃 经期以舒缓为主：散步、瑜伽拉伸、太极等低强度运动；避免剧烈跑跳、深蹲硬拉、腹部挤压类动作和倒立体式，感觉疲劳就休息。'};
+  if(st.stage==='ovu')return{diet:'🥗 排卵期身体状态好：保证优质蛋白（鱼虾、鸡蛋、豆制品）+ 蔬菜水果，适量补充维生素B6 与锌（坚果、全谷物），多喝水。',train:'💪 排卵期是体能高峰期：可进行力量训练与中高强度有氧（慢跑、游泳、HIIT），注意运动前热身、及时补水，适合冲刺训练目标。'};
+  return{diet:'🥦 均衡饮食：主食粗细搭配，多吃蔬菜水果、优质蛋白，控制油盐糖；保持规律三餐，避免暴饮暴食。',train:'🚶 保持规律运动：每周 3-5 次中等强度训练（快走、慢跑、力量），量力而行，注意睡眠与恢复。'};
+}
+var _periodModalInjected=false;
+function ensurePeriodModal(){
+  if(_periodModalInjected)return;_periodModalInjected=true;
+  var d=document.createElement('div');d.id='periodModalWrap';d.className='pm-wrap';
+  d.innerHTML='<div class="pm-mask" onclick="closePeriodModal()"></div><div class="pm-box"><div class="pm-hd"><b id="pmTitle"></b><span class="pm-x" onclick="closePeriodModal()">✕</span></div><div class="pm-body" id="pmBody"></div></div>';
+  document.body.appendChild(d);
+}
+function openPeriodAdd(){ensurePeriodModal();document.getElementById('pmTitle').textContent='🌸 记录经期';
+  var t=tk(),P=S.period||{},pl=Math.max(1,+P.periodLen||5);
+  document.getElementById('pmBody').innerHTML='<div class="pm-row"><label>开始日期</label><input type="date" id="pmStart" value="'+t+'"></div><div class="pm-row"><label>结束日期</label><input type="date" id="pmEnd" value="'+addDays(t,pl-1)+'"></div><div class="pm-acts"><button class="pm-btn c" onclick="closePeriodModal()">取消</button><button class="pm-btn acc" onclick="periodAddSave()">保存</button></div>';
+  document.getElementById('periodModalWrap').style.display='flex';
+}
+function periodAddSave(){var s=document.getElementById('pmStart').value,e=document.getElementById('pmEnd').value;if(!s){toast('请选择开始日期');return;}periodAdd(s,e||s);closePeriodModal();renderLifePanel();toast('已记录');}
+function openPeriodSet(){ensurePeriodModal();document.getElementById('pmTitle').textContent='⚙️ 周期设置';
+  var P=S.period||{};
+  document.getElementById('pmBody').innerHTML='<div class="pm-row"><label>周期长度(天)</label><input type="number" id="pmCycle" value="'+(P.cycleLen||28)+'" min="15" max="45"></div><div class="pm-row"><label>经期天数(天)</label><input type="number" id="pmLen" value="'+(P.periodLen||5)+'" min="2" max="10"></div><div class="pm-acts"><button class="pm-btn c" onclick="closePeriodModal()">取消</button><button class="pm-btn acc" onclick="periodSetSave()">保存</button></div>';
+  document.getElementById('periodModalWrap').style.display='flex';
+}
+function periodSetSave(){var c=parseInt(document.getElementById('pmCycle').value,10)||28,l=parseInt(document.getElementById('pmLen').value,10)||5;periodSet(c,l);closePeriodModal();renderLifePanel();toast('已保存');}
+function closePeriodModal(){var w=document.getElementById('periodModalWrap');if(w)w.style.display='none';}
+function periodDelLog(idx){if(!confirm('确定删除这条经期记录？'))return;periodDel(idx);renderLifePanel();}
 // ===== 记账（生活·财务）：记一笔大键盘 + 月账单 + 汇总（对标 iOS 主流记账） =====
 var LEDGER_CATS={
   exp:[
@@ -5154,6 +5346,60 @@ function delPlanPart(planId,slotIdx,partName){
   if(!p.slots)p.slots=[];if(!p.slots[slotIdx])p.slots[slotIdx]={parts:[]};
   p.slots[slotIdx].parts=p.slots[slotIdx].parts.filter(function(x){return x.name!==partName});
   save();syncPlanSlotToDate(p,slotIdx);renderPlanEdit(planId);
+}
+// ===== 经期（对齐小程序 3.0：记录+预测+症状+文字记录+AI建议） =====
+function pDayDiff(a,b){var da=new Date(a+'T00:00:00'),db=new Date(b+'T00:00:00');return Math.round((db-da)/86400000);}
+function periodPredict(){
+  var P=S.period;if(!P||!P.logs||!P.logs.length)return null;
+  var today=tk();var cl=Math.max(15,Math.min(45,+P.cycleLen||28));var pl=Math.max(2,Math.min(10,+P.periodLen||5));
+  var last=P.logs[0].start;for(var i=1;i<P.logs.length;i++)if(P.logs[i].start>last)last=P.logs[i].start;
+  var next=addDays(last,cl);while(next<=today)next=addDays(next,cl);
+  var nextEnd=addDays(next,pl-1);var ovuDay=addDays(next,-14);var fertStart=addDays(ovuDay,-4);var fertEnd=addDays(ovuDay,4);
+  var stage='safe',dayN=0;
+  for(var j=0;j<P.logs.length;j++){var s=P.logs[j].start,e=P.logs[j].end||s;if(today>=s&&today<=e){stage='period';dayN=pDayDiff(s,today)+1;break;}}
+  if(stage==='safe'){if(today>=next&&today<=nextEnd){stage='period';dayN=pDayDiff(next,today)+1;}
+    else if(today===ovuDay)stage='ovu';else if(today>=fertStart&&today<=fertEnd)stage='ovu';}
+  return{nextStart:next,nextEnd:nextEnd,ovuDay:ovuDay,fertStart:fertStart,fertEnd:fertEnd,stage:stage,dayN:dayN,daysLeft:pDayDiff(today,next),cycleLen:cl,periodLen:pl};
+}
+function periodAdd(start,end){
+  var P=S.period;if(!P){P=S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};}
+  start=start||tk();end=end||start;if(end<start)end=start;
+  var hit=-1;for(var i=0;i<P.logs.length;i++)if(P.logs[i].start===start){hit=i;break;}
+  if(hit>=0)P.logs[hit].end=end;else P.logs.push({start:start,end:end});
+  P.logs.sort(function(a,b){return a.start<b.start?1:(a.start>b.start?-1:0);});save();return P.logs;
+}
+function periodDel(idx){var P=S.period;if(!P||!P.logs||!P.logs[idx])return;P.logs.splice(idx,1);save();}
+function periodSet(cycleLen,periodLen){var P=S.period;if(!P){P=S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};}
+  P.cycleLen=Math.max(15,Math.min(45,+cycleLen||28));P.periodLen=Math.max(2,Math.min(10,+periodLen||5));save();}
+function periodLogs(){return(S.period&&S.period.logs)?S.period.logs.slice():[];}
+function periodStats(){
+  var logs=periodLogs(),avgCycle=0,avgLen=0;
+  if(logs.length>=2){var sumC=0,c=0;for(var i=0;i<logs.length-1;i++){var gap=pDayDiff(logs[i+1].start,logs[i].start);if(gap>0&&gap<=60){sumC+=gap;c++;}}if(c)avgCycle=Math.round(sumC/c);}
+  if(logs.length){var sumL=0;logs.forEach(function(x){var len=pDayDiff(x.start,x.end)+1;if(len>0&&len<=20)sumL+=len;});avgLen=Math.round(sumL/logs.length);}
+  return{count:logs.length,avgCycle:avgCycle,avgLen:avgLen};
+}
+function periodSym(date,k){
+  var P=S.period;if(!P){P=S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};}
+  if(!P.sym)P.sym={};if(!P.sym[date])P.sym[date]=[];
+  var idx=P.sym[date].indexOf(k);if(idx>=0)P.sym[date].splice(idx,1);else P.sym[date].push(k);save();return P.sym[date].slice();
+}
+function periodSymList(date){return(S.period&&S.period.sym&&S.period.sym[date])?S.period.sym[date].slice():[];}
+function periodNote(date,text){
+  var P=S.period;if(!P){P=S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};}
+  if(!P.notes)P.notes={};text=(text||'').trim();
+  if(text)P.notes[date]=text;else delete P.notes[date];save();return text;
+}
+function periodNoteList(date){return(S.period&&S.period.notes&&S.period.notes[date])?S.period.notes[date]:'';}
+function periodAdviceSave(adv){var P=S.period;if(!P){P=S.period={logs:[],cycleLen:28,periodLen:5,sym:{},notes:{},advice:null};}P.advice=adv||null;save();return P.advice;}
+function periodAdviceLoad(){return(S.period&&S.period.advice)?S.period.advice:null;}
+function periodStageAt(date){
+  date=date||tk();var P=periodPredict();if(!P)return{stage:'none'};
+  var logs=periodLogs();
+  for(var i=0;i<logs.length;i++){if(date>=logs[i].start&&date<=(logs[i].end||logs[i].start))return{stage:'period',dayN:pDayDiff(logs[i].start,date)+1};}
+  if(date>=P.nextStart&&date<=P.nextEnd)return{stage:'period',dayN:pDayDiff(P.nextStart,date)+1,pred:true};
+  if(date===P.ovuDay)return{stage:'ovu'};
+  if(date>=P.fertStart&&date<=P.fertEnd)return{stage:'ovu'};
+  return{stage:'safe'};
 }
 // ===== 训练计划 ↔ 日历 双向同步 =====
 function addDays(dk,n){var d=new Date(dk+'T00:00:00');d.setDate(d.getDate()+n);return fmtDate(d);}
