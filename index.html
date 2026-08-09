@@ -1312,6 +1312,97 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .pm-sort-btns{display:flex;gap:6px;flex-shrink:0}
 .pm-sort-btn{width:30px;height:28px;border-radius:8px;background:var(--sf);border:1px solid var(--btn-bd);color:var(--pri);font-size:.85rem;font-weight:700;cursor:pointer}
 .pm-sort-btn.dis{opacity:.3;cursor:default}
+
+/* ═══════════════════════════════════════════════════════════════
+   Ronas Travel v6 主题层（追加在最末 · 仅覆盖视觉令牌与少量关键类）
+   约定：--pri / --priBg / --priBd 蓝系保留给日历三态，勿动
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#f4f4f7;--sf:#ffffff;--sf2:#f5f5f7;--bd:#eaeaee;
+  --t1:#0a0a0d;--t2:#6b6b76;--t3:#a6a6b0;
+  --brand-g:linear-gradient(135deg,#1c1c22 0%,#2c2c34 100%);
+  --hl:inset 0 1px 0 rgba(255,255,255,.72);
+  --glass:rgba(255,255,255,.74);
+  --glass-2:rgba(255,255,255,.58);
+  --glass-brd:rgba(255,255,255,.90);
+  --glass-sh:0 10px 30px rgba(16,18,26,.07),0 2px 8px rgba(16,18,26,.05),inset 0 1px 0 rgba(255,255,255,.72);
+  --sh:0 2px 10px rgba(16,18,26,.05);
+  --nav:rgba(20,20,26,.72);
+  --ph-bg:radial-gradient(130% 92% at 50% -12%,#ffffff 0%,#f7f7fa 52%,#eef0f3 100%);
+  --rd:20px;--rs:14px;
+}
+[data-theme=dark]{
+  --bg:#0b0b0e;--sf:#16161b;--sf2:#1c1c22;--bd:#2a2a32;
+  --t1:#f2f2f5;--t2:#a3a3ae;--t3:#71717e;
+  --brand-g:linear-gradient(135deg,#23232c 0%,#33333e 100%);
+  --hl:inset 0 1px 0 rgba(255,255,255,.07);
+  --glass:rgba(30,30,38,.60);
+  --glass-2:rgba(30,30,38,.44);
+  --glass-brd:rgba(255,255,255,.09);
+  --glass-sh:0 12px 34px rgba(0,0,0,.46),0 2px 8px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.07);
+  --sh:0 2px 10px rgba(0,0,0,.4);
+  --nav:rgba(16,16,21,.78);
+  --ph-bg:radial-gradient(130% 92% at 50% -12%,#1e1e26 0%,#141419 55%,#0b0b0e 100%);
+}
+/* 1) 页面底：纯白径向渐变（取代蓝/粉/绿光晕）。overflow-x:clip 让头部 sticky 生效 */
+.ph{background:var(--ph-bg);overflow-x:hidden;overflow-x:clip}
+[data-theme=dark] .ph{background:var(--ph-bg)}
+/* 2) 顶部头部：吸顶玻璃 */
+.hdr{position:sticky;top:0;z-index:40;background:var(--glass);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);
+  border-bottom:1px solid var(--bd)}
+[data-theme=dark] .hdr{background:var(--glass)}
+/* 3) 底部导航：半透深玻璃 + 白胶囊指示条（深浅两态统一） */
+.bnav{background:var(--nav);border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);backdrop-filter:blur(24px) saturate(200%);
+  box-shadow:0 16px 44px rgba(10,10,14,.30),inset 0 1px 0 rgba(255,255,255,.14)}
+[data-theme=dark] .bnav{background:var(--nav);border-color:rgba(255,255,255,.10);
+  box-shadow:0 16px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.10)}
+.bnav::after,[data-theme=dark] .bnav::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent)}
+.bn,.bn .lb{color:rgba(255,255,255,.58)}
+.bn.on,.bn.on .lb{color:#1c1c22}
+.bn.on .ic{filter:drop-shadow(0 1px 3px rgba(0,0,0,.18))}
+.bn-ind,[data-theme=dark] .bn-ind{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.86));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 4px 14px rgba(0,0,0,.22),inset 0 1px 1px rgba(255,255,255,1)}
+/* 4) FAB：深灰实体 + 绿色呼吸光环 */
+.fab{background:var(--brand-g);box-shadow:0 12px 28px rgba(16,18,26,.34)}
+[data-theme=dark] .fab{box-shadow:0 12px 28px rgba(0,0,0,.6)}
+.fab::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid var(--grn);
+  opacity:0;pointer-events:none;animation:fabPulse 2.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes fabPulse{0%{transform:scale(1);opacity:.5}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+.fab:active{transform:scale(.9);box-shadow:0 6px 16px rgba(16,18,26,.42)}
+/* 5) AI 卡片：深灰渐变（去蓝紫） */
+.ai-card{background:linear-gradient(135deg,#1c1c22 0%,#2c2c34 100%);box-shadow:0 14px 34px rgba(16,18,26,.28)}
+[data-theme=dark] .ai-card{background:linear-gradient(135deg,#23232c 0%,#33333e 100%);box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.ai-card .ai-btn{background:#fff;color:#1c1c22}
+/* 6) 首页 Ronas 主视觉卡（类名避开已占用的 .hero） */
+.rhero{position:relative;height:196px;border-radius:24px;overflow:hidden;margin:0 0 14px;cursor:pointer;
+  background:linear-gradient(135deg,#2a2a32 0%,#3a3a46 46%,#4b4b59 100%);
+  box-shadow:0 18px 40px rgba(16,18,26,.22),inset 0 1px 0 rgba(255,255,255,.14);
+  transition:transform .28s cubic-bezier(.2,1.08,.3,1),box-shadow .28s}
+.rhero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 14% 8%,rgba(255,255,255,.17),transparent 58%),
+             radial-gradient(90% 74% at 100% 100%,rgba(48,209,88,.20),transparent 60%)}
+.rhero:active{transform:scale(.985);box-shadow:0 10px 26px rgba(16,18,26,.24),inset 0 1px 0 rgba(255,255,255,.14)}
+[data-theme=dark] .rhero{box-shadow:0 18px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.10)}
+.rhero-fav{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.30);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.rhero-glass{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;padding:12px 14px;border-radius:18px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30)}
+.rhero-tag{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:600;
+  color:rgba(255,255,255,.86);letter-spacing:.4px}
+.rhero-dot{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn)}
+.rhero-t{font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:-.3px;margin-top:3px;line-height:1.25}
+.rhero-s{font-size:.72rem;color:rgba(255,255,255,.72);margin-top:2px}
+.rhero-go{width:38px;height:38px;flex:0 0 auto;border-radius:50%;background:#fff;color:#1c1c22;
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:700;
+  box-shadow:0 4px 14px rgba(0,0,0,.2)}
 </style>
 </head>
 <body>
@@ -2363,6 +2454,18 @@ function renderHome(){
   var streak=getStreak();
   var hg='hg'+Math.floor(Math.random()*1e6);
   var C2=2*Math.PI*46;
+
+  // 0) Ronas 主视觉卡（点击进入健身页）
+  var rhTag=fitTotal?(fitDone+'/'+fitTotal+' 已完成'):'今日计划';
+  var rhTitle=(parts.length&&parts[0].name)?escHtml(parts[0].name)+'训练':'健康生活';
+  var rhSub=fitTotal?('训练容量 '+Math.round(fitVol)+' kg · 点击查看'):'记录你的每一步进展';
+  h+='<div class="rhero" onclick="sw(\'fit\')">';
+  h+='<div class="rhero-fav">♡</div>';
+  h+='<div class="rhero-glass"><div><div class="rhero-tag"><span class="rhero-dot"></span>'+rhTag+'</div>'
+    +'<div class="rhero-t">'+rhTitle+'</div><div class="rhero-s">'+rhSub+'</div></div>'
+    +'<div class="rhero-go">→</div></div>';
+  h+='</div>';
+
   h+='<div class="ai-card">';
   h+='<div class="ai-title">🤖 '+aiTitle+'</div>';
   h+='<div class="ai-sub">'+aiSub+'</div>';
