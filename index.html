@@ -8,15 +8,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<!-- 方圆体：MiSans（小米官方免费可商用），走小米官方 HyperOS 字体 CDN（国内直连稳定，不被墙） -->
+<link rel="stylesheet" href="https://cdn-font.hyperos.mi.com/font/css?family=MiSans:400,500,600,700,900:Chinese_Simplify,Latin&display=swap">
 <title>知微见几</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#f5f5f7;--sf:#fff;--sf2:#f8f8fa;--bd:#e4e4ea;--t1:#1c1c1e;--t2:#5e5f66;--t3:#6f7077;--pri:#0a84ff;--priBg:#e3f0ff;--priBd:#b3d7ff;--grn:#30d158;--grnBg:#e8f9ee;--red:#ff3b30;--org:#ff9500;--orgBg:#fff5e6;--pur:#af52de;--purBg:#f6effd;--tea:#5ac8fa;--rd:14px;--rs:10px;--sh:0 1px 3px rgba(0,0,0,.06);--btn-r:14px;--btn-bg:var(--sf2);--btn-bd:var(--bd);--btn-sh:0 4px 14px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.85);--btn-acc:var(--pri);--btn-acc-bg:var(--priBg);--redBg:#ffeae8;--fat:#ff7a8a;--fatBg:#ffe9ec;--brand-g:linear-gradient(135deg,#0a84ff,#6366f1);--ease:cubic-bezier(.4,0,.2,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--tap:.16s}
-[data-theme=dark]{--bg:#0a0a0c;--sf:#1c1c1e;--sf2:#2c2c2e;--bd:#3a3a3e;--t1:#f5f5f7;--t2:#b4b4b9;--t3:#a0a0a8;--priBg:#0a2540;--priBd:#1f4f80;--grnBg:#0d2818;--orgBg:#2d1f08;--purBg:#1a0d2e;--btn-bg:#2c2c2e;--btn-bd:#3a3a3c;--btn-sh:0 4px 14px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);--btn-acc-bg:var(--priBg);--redBg:#3a1413;--fatBg:#3a1820}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);display:flex;justify-content:center;color:var(--t1);line-height:1.55;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;letter-spacing:.1px;font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
+:root{--bg:#f5f5f7;--sf:#fff;--sf2:#f8f8fa;--bd:#e4e4ea;--t1:#1c1c1e;--t2:#5e5f66;--t3:#6f7077;--pri:#8fa855;--priBg:#f1f6e8;--priBd:#d4e0bf;--grn:#30d158;--grnBg:#e8f9ee;--red:#ff3b30;--org:#ff9500;--orgBg:#fff5e6;--pur:#a89b5c;--purBg:#f5f0e6;--tea:#5ac8fa;--rd:14px;--rs:10px;--sh:0 1px 3px rgba(0,0,0,.06);--btn-r:14px;--btn-bg:var(--sf2);--btn-bd:var(--bd);--btn-sh:0 4px 14px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.85);--btn-acc:var(--pri);--btn-acc-bg:var(--priBg);--redBg:#ffeae8;--fat:#ff7a8a;--fatBg:#ffe9ec;--brand-g:linear-gradient(135deg,#8fa855,#9eb868);--ease:cubic-bezier(.4,0,.2,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--tap:.16s}
+[data-theme=dark]{--bg:#0a0a0c;--sf:#1c1c1e;--sf2:#2c2c2e;--bd:#3a3a3e;--t1:#f5f5f7;--t2:#b4b4b9;--t3:#a0a0a8;--priBg:#1a2910;--priBd:#3a4a25;--grnBg:#0d2818;--orgBg:#2d1f08;--purBg:#2a2615;--btn-bg:#2c2c2e;--btn-bd:#3a3a3c;--btn-sh:0 4px 14px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);--btn-acc-bg:var(--priBg);--redBg:#3a1413;--fatBg:#3a1820}
+body{font-family:'MiSans','Nunito',-apple-system,BlinkMacSystemFont,'SF Pro Rounded','SF Pro Text','SF Pro Display','Helvetica Neue','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);display:flex;justify-content:center;color:var(--t1);line-height:1.55;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;letter-spacing:.1px;font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
 .ph{width:100%;max-width:480px;min-height:100vh;min-height:100dvh;background:var(--bg);position:relative;overflow-x:hidden;padding-bottom:calc(88px + env(safe-area-inset-bottom, 34px))}
 .hdr{padding:calc(8px + env(safe-area-inset-top,0px)) 16px 10px;background:transparent;color:var(--t1);position:relative;z-index:1}
 .hdr-inner{display:flex;align-items:center;justify-content:space-between}
@@ -151,7 +154,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 @keyframes rippleGo{0%{transform:scale(.3);opacity:.55}100%{transform:scale(5.5);opacity:0}}
 /* 8杯水庆祝 */
 .wb-celebrate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:9998}
-.wb-badge{font-size:1.45rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#0a84ff,#34c759);padding:14px 26px;border-radius:22px;box-shadow:0 14px 44px rgba(10,132,255,.5);animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) both;text-align:center}
+.wb-badge{font-size:1.45rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#8fa855,#34c759);padding:14px 26px;border-radius:22px;box-shadow:0 14px 44px rgba(143,168,85,.5);animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) both;text-align:center}
 @keyframes badgePop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
 .wb-badge .wb-emoji{font-size:2rem;display:block;margin-bottom:4px}
 .confetti{position:fixed;top:-24px;width:9px;height:14px;border-radius:2px;z-index:9997;pointer-events:none;animation:confettiFall linear forwards}
@@ -178,7 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .fit-sp{display:flex;align-items:center;gap:8px;font-size:.74rem}
 .fit-sp-nm{width:44px;color:var(--t1);font-weight:600;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fit-sp-bar{flex:1;height:8px;border-radius:6px;background:var(--sf2);overflow:hidden}
-.fit-sp-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#0a84ff,#34c759);transition:width .4s ease}
+.fit-sp-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#8fa855,#34c759);transition:width .4s ease}
 .fit-sp-v{width:62px;text-align:right;color:var(--t2);font-variant-numeric:tabular-nums;flex-shrink:0}
 /* 训练计划 */
 .fit-top-btns{display:flex;gap:8px;margin-bottom:12px}
@@ -210,7 +213,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .plan-today-badge{font-size:.62rem;font-weight:700;color:#fff;background:var(--pri);padding:1px 7px;border-radius:8px;margin-left:4px}
 .mf-hint{font-size:.68rem;color:var(--t3);margin:-4px 0 8px;line-height:1.4}
 /* tasks */
-.addbtn{width:100%;padding:12px;border-radius:13px;background:var(--brand-g);color:#fff;font-weight:700;font-size:.86rem;border:none;cursor:pointer;margin-bottom:12px;box-shadow:0 6px 18px rgba(99,102,241,.32)}
+.addbtn{width:100%;padding:12px;border-radius:13px;background:var(--brand-g);color:#fff;font-weight:700;font-size:.86rem;border:none;cursor:pointer;margin-bottom:12px;box-shadow:0 6px 18px rgba(158,184,104,.32)}
 .addbtn:active{transform:scale(.99)}
 .tk2{display:flex;align-items:center;gap:8px;padding:10px;background:var(--sf2);border-radius:8px;margin-bottom:5px;cursor:pointer}
 .ck{width:22px;height:22px;border-radius:6px;border:2px solid var(--t3);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:.2s}
@@ -346,11 +349,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .cld{aspect-ratio:.9;min-height:56px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;font-size:.7rem;cursor:pointer;background:var(--sf2);position:relative}
 .cld:hover{outline:2px solid var(--pri)}.cld.tdy{background:var(--priBg);color:var(--pri);font-weight:700}.cld.oth{opacity:.25}
 .cld.sel{outline:none;background:var(--sf2);font-weight:700}
-.cld.sel .cld-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 4px 12px rgba(10,132,255,.38)}
+.cld.sel .cld-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#a8c070,#8fa855);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 4px 12px rgba(143,168,85,.38)}
 .cld-num{line-height:1;display:flex;align-items:center;justify-content:center}
-[data-theme=dark] .cld.tdy{background:rgba(74,163,255,.18);color:#9cc3ff}
+[data-theme=dark] .cld.tdy{background:rgba(168,192,112,.18);color:#b8d18a}
 [data-theme=dark] .cld.sel{outline:none;background:var(--sf2)}
-[data-theme=dark] .cld.sel .cld-num{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+[data-theme=dark] .cld.sel .cld-num{background:linear-gradient(145deg,#a8c070,#8fa855);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .cld-tags{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;width:100%;line-height:1.05}
 .cld-tg{font-size:.5rem;color:var(--grn);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cld-tc{font-size:.5rem;color:var(--org);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -415,7 +418,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .cam-add{flex:0 0 auto;border:1px solid var(--pri);background:var(--brand-g);color:#fff;border-radius:9px;padding:5px 13px;font-size:.78rem;cursor:pointer;font-family:inherit}
 .cam-add.on{background:var(--priBg);color:var(--pri);cursor:pointer}
 .cam-note{flex:1 0 100%;font-size:.7rem;color:var(--pri);font-weight:500;margin-top:2px}
-[data-theme=dark] .cam-note{color:#9cc3ff}
+[data-theme=dark] .cam-note{color:#b8d18a}
 .cam-acts{display:flex;gap:8px;margin-top:8px}
 .cam-acts .exp-save{flex:1}
 .cam-acts .exp-save.c{background:var(--sf2);color:var(--t1);border:1px solid var(--bd)}
@@ -429,7 +432,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .mp-cat.on{background:var(--priBg);color:var(--pri);font-weight:700}
 .mp-cat .cnt{font-size:.64rem;color:var(--t2);background:rgba(255,255,255,.5);border-radius:8px;padding:1px 6px;white-space:nowrap}
 .mp-foods{flex:1;overflow-y:auto;border:1px solid rgba(255,255,255,.5);border-radius:12px;background:rgba(255,255,255,.35);padding:6px 10px 6px 14px;overscroll-behavior:contain}
-.food-item{padding:13px 14px;font-size:.92rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.5);border-radius:12px;margin-bottom:6px;box-shadow:0 1px 3px rgba(31,38,135,.06);transition:.15s}
+.food-item{padding:13px 14px;font-size:.92rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.5);border-radius:12px;margin-bottom:6px;box-shadow:0 1px 3px rgba(100,120,60,.06);transition:.15s}
 .food-item:last-child{margin-bottom:0}
 .food-item:hover{background:var(--priBg);border-color:var(--pri)}
 .food-item .fi-nm{flex:1}.food-item .fi-cal{color:var(--t2);font-size:.7rem;white-space:nowrap}
@@ -446,7 +449,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .mbn{flex:0 0 auto;min-width:110px;padding:10px 16px;border-radius:12px;font-size:.82rem;font-weight:600;border:none;outline:none;cursor:pointer;color:var(--t1);
   background:transparent;transition:background .2s,color .2s}
 .mbn.c{color:var(--t1);background:var(--btn-bg);border:1px solid var(--btn-bd);box-shadow:var(--btn-sh)}.mbn.c:active{background:var(--sf2);border-color:var(--pri);box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.mbn.ok{background:var(--brand-g);color:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(99,102,241,.4)}
+.mbn.ok{background:var(--brand-g);color:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(158,184,104,.4)}
 .mbn.ok:active{background:#006ee0;box-shadow:0 1px 4px rgba(0,122,255,.3)}
 /* 细滚动条：融合进卡片，不再单独突兀显示 */
 .mp-cats,.mp-foods,.mp-sel,.food-list,.ms2{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
@@ -506,17 +509,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 /* 1) 淡彩渐变背景：让毛玻璃模糊有内容可透 */
 .ph{
   background:
-    radial-gradient(92% 62% at 2% -6%,  rgba(10,132,255,.40), transparent 55%),
-    radial-gradient(80% 55% at 100% 4%, rgba(255,120,170,.32), transparent 55%),
-    radial-gradient(95% 70% at 50% 104%,rgba(60,224,156,.32), transparent 55%),
-    linear-gradient(180deg,#f2f5fc 0%,#ebedf6 100%);
+    radial-gradient(92% 62% at 2% -6%,  rgba(143,168,85,.40), transparent 55%),
+    radial-gradient(80% 55% at 100% 4%, rgba(200,180,100,.24), transparent 55%),
+    radial-gradient(95% 70% at 50% 104%,rgba(120,190,120,.24), transparent 55%),
+    linear-gradient(180deg,#f7f9f4 0%,#f0f2ec 100%);
 }
 /* 2) 玻璃设计令牌 */
 :root{
   --glass:rgba(255,255,255,.55);
   --glass-2:rgba(255,255,255,.42);
   --glass-brd:rgba(255,255,255,.70);
-  --glass-sh:0 8px 30px rgba(31,38,135,.10),0 2px 8px rgba(31,38,135,.06),inset 0 1px 0 rgba(255,255,255,.75);
+  --glass-sh:0 8px 30px rgba(100,120,60,.10),0 2px 8px rgba(100,120,60,.06),inset 0 1px 0 rgba(255,255,255,.75);
   --rd:22px;--rs:14px;
 }
 /* 3) 主内容卡片 → 毛玻璃 */
@@ -542,7 +545,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
   background:var(--brand-g);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,.35);
-  box-shadow:0 14px 36px rgba(99,102,241,.34),inset 0 1px 0 rgba(255,255,255,.45);
+  box-shadow:0 14px 36px rgba(158,184,104,.34),inset 0 1px 0 rgba(255,255,255,.45);
   border-radius:var(--rd);
 }
 /* 7) 弹窗（底部上滑 sheet）→ 大圆角毛玻璃 */
@@ -551,7 +554,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
   -webkit-backdrop-filter:blur(32px) saturate(180%);
   backdrop-filter:blur(32px) saturate(180%);
   border:1px solid rgba(255,255,255,.7);
-  box-shadow:0 -8px 40px rgba(31,38,135,.18),inset 0 1px 0 rgba(255,255,255,.9);
+  box-shadow:0 -8px 40px rgba(100,120,60,.18),inset 0 1px 0 rgba(255,255,255,.9);
   border-radius:28px 28px 0 0;
 }
 /* 8) 添加食物 / 列表类面板 → 轻玻璃 */
@@ -573,9 +576,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 /* ===== 深色主题：同样的高级感 ===== */
 [data-theme=dark] .ph{
   background:
-    radial-gradient(85% 55% at 6% 0%,   rgba(86,124,255,.34), transparent 55%),
-    radial-gradient(80% 55% at 100% 6%, rgba(255,96,176,.24), transparent 55%),
-    radial-gradient(90% 65% at 50% 102%,rgba(60,224,156,.24), transparent 55%),
+    radial-gradient(85% 55% at 6% 0%,   rgba(143,168,85,.30), transparent 55%),
+    radial-gradient(80% 55% at 100% 6%, rgba(200,180,100,.18), transparent 55%),
+    radial-gradient(90% 65% at 50% 102%,rgba(120,190,120,.18), transparent 55%),
     linear-gradient(180deg,#0c0c11 0%,#0a0a0d 100%);
 }
 [data-theme=dark]{
@@ -660,7 +663,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .fr-tip{font-size:.78rem;color:var(--t2);padding:2px 0;line-height:1.42}
 .fr-subtabs{display:flex;gap:8px;margin-bottom:12px}
 .fr-subtab{flex:1;padding:9px 0;border:none;border-radius:12px;background:rgba(127,127,127,.12);color:var(--txt);font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
-.fr-subtab.on{background:var(--brand-g);color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.36)}
+.fr-subtab.on{background:var(--brand-g);color:#fff;box-shadow:0 4px 14px rgba(158,184,104,.36)}
 .exp-form{display:flex;flex-direction:column;gap:8px;margin:4px 0 2px}
 .exp-in,.exp-ta{padding:10px 12px;border:none;border-radius:10px;background:rgba(127,127,127,.1);color:var(--txt);font-size:14px;width:100%;box-sizing:border-box;outline:none}
 .exp-ta{min-height:58px;resize:vertical}
@@ -696,7 +699,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 @keyframes frspin{to{transform:rotate(360deg)}}
 .fr-meta{font-size:.74rem;color:var(--t2);margin-top:3px}
 .fr-map{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;border:none;background:var(--priBg);color:var(--pri);border-radius:8px;cursor:pointer;margin-left:auto;vertical-align:middle;line-height:1;flex-shrink:0;transition:background .18s,color .18s,transform .18s,box-shadow .18s}
-.fr-map:hover{background:var(--brand-g);color:#fff;transform:translateY(-1px);box-shadow:0 3px 9px rgba(99,102,241,.36)}
+.fr-map:hover{background:var(--brand-g);color:#fff;transform:translateY(-1px);box-shadow:0 3px 9px rgba(158,184,104,.36)}
 .fr-map svg{width:13px;height:13px;display:block}
 .fr-shops{display:flex;flex-direction:column;gap:4px;margin-top:5px}
 .fr-shops-lb{display:flex;align-items:center;gap:5px;color:var(--t1);font-weight:700;font-size:.74rem;margin-bottom:5px}
@@ -732,7 +735,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 /* Home */
 /* ====== 首页 UI ====== */
 /* AI 建议卡片 */
-.ai-card{background:linear-gradient(135deg,#4F6EF6 0%,#6B8EFF 50%,#7B6FFF 100%);border-radius:18px;padding:20px 18px;color:#fff;margin:0 0 14px;position:relative;overflow:hidden}
+.ai-card{background:linear-gradient(135deg,#8fa855 0%,#a8c070 50%,#9eb868 100%);border-radius:18px;padding:20px 18px;color:#fff;margin:0 0 14px;position:relative;overflow:hidden}
 .ai-card::before{content:'';position:absolute;top:-30px;right:-20px;width:100px;height:100px;background:rgba(255,255,255,.08);border-radius:50%}
 .ai-card::after{content:'';position:absolute;bottom:-20px;left:-10px;width:70px;height:70px;background:rgba(255,255,255,.05);border-radius:50%}
 .ai-card .ai-title{font-size:1.05rem;font-weight:700;letter-spacing:-0.2px;display:flex;align-items:center;gap:6px;line-height:1.3}
@@ -740,7 +743,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .ai-card .ai-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
 .ai-card .ai-tag{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.3);padding:3px 10px;border-radius:8px;font-size:.74rem;font-weight:600}
 .ai-card .ai-bot{position:absolute;right:14px;bottom:12px;font-size:2.4rem;opacity:.25}
-.ai-card .ai-btn{display:inline-block;margin-top:12px;background:rgba(255,255,255,.95);color:#4F6EF6;font-size:.82rem;font-weight:700;padding:7px 22px;border-radius:20px;border:none;cursor:pointer;transition:transform .15s}
+.ai-card .ai-btn{display:inline-block;margin-top:12px;background:rgba(255,255,255,.95);color:#8fa855;font-size:.82rem;font-weight:700;padding:7px 22px;border-radius:20px;border:none;cursor:pointer;transition:transform .15s}
 .ai-card .ai-btn:active{transform:scale(.96)}
 /* AI 营养建议详情页 */
 .ai-advice-body{max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -819,7 +822,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .ds-cell{flex:0 0 auto;width:50px;min-height:64px;background:var(--sf2);border-radius:12px;display:flex;flex-direction:column;align-items:center;padding:7px 2px 5px;cursor:pointer;border:2px solid transparent;box-sizing:border-box;transition:background .15s,border-color .15s}
 .ds-cell.tdy{background:var(--priBg)}
 .ds-cell.sel{border-color:var(--pri);background:var(--priBg)}
-[data-theme=dark] .ds-cell.sel{background:var(--pri);border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.38),0 0 18px rgba(10,132,255,.55);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.55)}
+[data-theme=dark] .ds-cell.sel{background:var(--pri);border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.38),0 0 18px rgba(143,168,85,.55);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.55)}
 [data-theme=dark] .ds-cell.sel .ds-num{color:#fff;font-size:1.25rem;text-shadow:0 1px 3px rgba(0,0,0,.65)}
 [data-theme=dark] .ds-cell.sel .ds-wk{color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.55)}
 .ds-cell .ds-num{font-size:1.05rem;font-weight:800;color:var(--t1);line-height:1}
@@ -896,7 +899,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .home-diet .diet-row .dr-cal{font-size:.72rem;color:var(--t2);font-weight:500}
 .home-diet .diet-empty{font-size:.76rem;color:var(--t3);text-align:center;padding:12px 0}
 /* AI 卡 → 品牌渐变 */
-.ai-card{background:var(--brand-g);background:linear-gradient(135deg,#0a84ff,#6366f1)}
+.ai-card{background:var(--brand-g);background:linear-gradient(135deg,#8fa855,#9eb868)}
 .ai-card .ai-title{color:#fff}
 .ai-card .ai-sub{color:rgba(255,255,255,.92)}
 .ai-card .ai-tag{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.35)}
@@ -911,7 +914,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .ct-sub{font-size:.82rem;color:var(--t2);font-weight:600}
 .cal-card{padding:11px 12px;margin-bottom:13px}
 .cal-card .ds-wrap{margin:0}
-.hero-bmr{background:var(--brand-g);color:#fff;border:none;box-shadow:0 12px 30px rgba(10,132,255,.30);padding:18px 16px}
+.hero-bmr{background:var(--brand-g);color:#fff;border:none;box-shadow:0 12px 30px rgba(143,168,85,.30);padding:18px 16px}
 .hero-bmr .bmr-lb{color:rgba(255,255,255,.85);font-size:.74rem;font-weight:600}
 .hero-bmr .bmr-v{color:#fff;font-size:1.7rem;font-weight:800;letter-spacing:-.5px;margin:4px 0 8px}
 .hero-bmr .bmr-v small{font-size:.76rem;font-weight:600;opacity:.82}
@@ -963,7 +966,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .timer-card .tbs{display:flex;gap:10px;justify-content:center;margin-top:6px}
 .timer-card .timer-meta{font-size:.78rem;color:var(--t2);margin-top:4px}
 .timer-card .timer-meta strong{color:var(--t1)}
-.tbn.go{background:var(--brand-g);color:#fff;border:none;box-shadow:0 6px 16px rgba(10,132,255,.3)}
+.tbn.go{background:var(--brand-g);color:#fff;border:none;box-shadow:0 6px 16px rgba(143,168,85,.3)}
 .tbn.rst{background:var(--sf2);color:var(--t2)}
 .addbtn{width:100%;border:none;background:var(--priBg);color:var(--pri);border-radius:13px;padding:13px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .15s,background .18s}
 .addbtn:active{transform:scale(.97);background:var(--brand-g);color:#fff}
@@ -1015,7 +1018,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .ledger-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .ledger-mo{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:800;color:var(--t1)}
 .ledger-mo button{border:none;background:var(--sf2);border:1px solid var(--bd);width:30px;height:30px;border-radius:9px;font-size:1rem;cursor:pointer;color:var(--t1);line-height:1}
-.ledger-sum{display:flex;background:linear-gradient(135deg,#0a84ff,#6366f1);border-radius:16px;padding:16px 18px;color:#fff;margin-bottom:14px;box-shadow:0 10px 24px rgba(79,110,246,.28)}
+.ledger-sum{display:flex;background:linear-gradient(135deg,#8fa855,#9eb868);border-radius:16px;padding:16px 18px;color:#fff;margin-bottom:14px;box-shadow:0 10px 24px rgba(143,168,85,.28)}
 .ledger-sum .ls-item{flex:1;text-align:center}
 .ledger-sum .ls-item+.ls-item{border-left:1px solid rgba(255,255,255,.25)}
 .ls-label{font-size:.7rem;opacity:.85;margin-bottom:3px}
@@ -1064,9 +1067,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .ls-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
 .ls-key{border:none;background:var(--sf2);border:1px solid var(--bd);border-radius:13px;padding:15px 0;font-size:1.25rem;font-weight:700;color:var(--t1);cursor:pointer;transition:background .12s;font-family:inherit}
 .ls-key:active{background:var(--bd)}
-.ls-key.op{background:linear-gradient(135deg,#0a84ff,#6366f1);color:#fff;border-color:transparent;font-size:1.15rem}
+.ls-key.op{background:linear-gradient(135deg,#8fa855,#9eb868);color:#fff;border-color:transparent;font-size:1.15rem}
 .ls-key.dot{font-size:1.5rem}
-.ls-save{width:100%;border:none;background:var(--brand-g);color:#fff;font-size:1rem;font-weight:800;padding:15px 0;border-radius:15px;cursor:pointer;box-shadow:0 8px 20px rgba(79,110,246,.3)}
+.ls-save{width:100%;border:none;background:var(--brand-g);color:#fff;font-size:1rem;font-weight:800;padding:15px 0;border-radius:15px;cursor:pointer;box-shadow:0 8px 20px rgba(143,168,85,.3)}
 .ls-save:active{opacity:.85}
 /* 记账 · 预算 */
 .ledger-budget{margin-top:12px;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
@@ -1076,7 +1079,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .lg-bd-row .over{color:#e0523c;font-weight:700}
 .lg-bd-row .ok{color:#2ea86b;font-weight:700}
 .lg-bd-bar{height:8px;border-radius:5px;background:var(--bd);overflow:hidden}
-.lg-bd-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#0a84ff,#6366f1);transition:width .3s}
+.lg-bd-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#8fa855,#9eb868);transition:width .3s}
 .lg-bd-fill.over{background:linear-gradient(90deg,#ff9500,#e0523c)}
 /* 记账 · 统计报表 */
 .ls-title{font-size:.88rem;font-weight:800;color:var(--t1);margin-bottom:10px}
@@ -1096,13 +1099,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .sc-ic{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
 .sc-nm{width:44px;color:var(--t1);font-weight:600;flex-shrink:0}
 .sc-bar{flex:1;height:9px;border-radius:5px;background:var(--sf2);border:1px solid var(--bd);overflow:hidden}
-.sc-fill{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#0a84ff,#6366f1)}
+.sc-fill{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#8fa855,#9eb868)}
 .sc-v{font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums;flex-shrink:0;width:70px;text-align:right}
 .sc-pct{color:var(--t3);font-size:.7rem;width:38px;text-align:right;flex-shrink:0}
 /* 统计 · 范围切换（周/月/半年/一年） */
 .ls-ranges{display:flex;gap:6px;margin-bottom:12px}
 .ls-range{flex:1;text-align:center;padding:7px 0;border:1px solid var(--bd);background:var(--sf2);border-radius:10px;font-size:.74rem;font-weight:700;color:var(--t2);cursor:pointer}
-.ls-range.on{background:var(--brand-g);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(79,110,246,.25)}
+.ls-range.on{background:var(--brand-g);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(143,168,85,.25)}
 /* 预算弹窗 */
 .budget-box{background:var(--bg2,#fff);border-radius:18px;padding:20px 20px 16px;width:86%;max-width:340px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
 .bb-title{font-size:1rem;font-weight:800;color:var(--t1);text-align:center;margin-bottom:14px}
@@ -1178,10 +1181,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 /* 内容区 */
 .life-panel{min-height:0;display:flex;flex-direction:column;gap:10px}
 /* AI 卡片统一品牌渐变 */
-.ai-card{background:var(--brand-g);box-shadow:0 12px 30px rgba(10,132,255,.32)}
+.ai-card{background:var(--brand-g);box-shadow:0 12px 30px rgba(143,168,85,.32)}
 .ai-card .ai-btn{background:#fff;color:var(--pri)}
 /* ===== 对齐原型(mockup.html) · 整屏统一 Liquid Glass 排版（仅视觉层，全部 id / onclick 不变） ===== */
-:root{--brand-g:linear-gradient(135deg,#0a84ff,#5b5bf0);--bg:#eef1f6}
+:root{--brand-g:linear-gradient(135deg,#8fa855,#5b5bf0);--bg:#eef1f6}
 .card,.agg-card,.qk,.ml,.tk2,.life-rec-item,.fit-part,.fit-ex,.food-item,.heat-card,.cal-card,.timer-card,.cditem,.aiad-stat-item,.aiad-food,.aiad-tip{
   background:var(--glass);border:1px solid var(--glass-brd);box-shadow:var(--glass-sh);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
@@ -1203,8 +1206,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .aiad-food{border-radius:16px}
 .aiad-tip{border-radius:14px}
 /* 底部导航选中态：品牌蓝辉光（对齐原型 .tab.on 光晕） */
-.bn-ind{background:var(--priBg);border-color:rgba(10,132,255,.25);box-shadow:0 6px 16px rgba(10,132,255,.28),inset 0 1px 0 rgba(255,255,255,.8)}
-[data-theme=dark] .bn-ind{background:rgba(10,132,255,.30);border-color:rgba(10,132,255,.42);box-shadow:0 6px 16px rgba(10,132,255,.42),inset 0 1px 0 rgba(255,255,255,.14)}
+.bn-ind{background:var(--priBg);border-color:rgba(143,168,85,.25);box-shadow:0 6px 16px rgba(143,168,85,.28),inset 0 1px 0 rgba(255,255,255,.8)}
+[data-theme=dark] .bn-ind{background:rgba(143,168,85,.30);border-color:rgba(143,168,85,.42);box-shadow:0 6px 16px rgba(143,168,85,.42),inset 0 1px 0 rgba(255,255,255,.14)}
 /* 各屏标题间距对齐原型 .sech（18 / 10） */
 .sec{margin:18px 0 10px}
 .sl{margin:18px 0 10px}
@@ -1214,11 +1217,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .page-hd .ph-s{font-size:.8rem;color:var(--t2);margin-top:4px;line-height:1.4}
 /* 语音/文字智能助手：悬浮按钮 + 底部面板（辅助录入，不改底层数据逻辑） */
 .fab{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:110;width:56px;height:56px;border-radius:50%;border:none;
-  background:linear-gradient(135deg,#0a84ff,#6366f1);color:#fff;font-size:1.45rem;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 26px rgba(10,132,255,.45);cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;
+  background:linear-gradient(135deg,#8fa855,#9eb868);color:#fff;font-size:1.45rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px rgba(143,168,85,.45);cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;
   transition:transform .15s,box-shadow .2s}
 .fab-ic{width:28px;height:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
-.fab:active{transform:scale(.9);box-shadow:0 6px 16px rgba(99,102,241,.5)}
+.fab:active{transform:scale(.9);box-shadow:0 6px 16px rgba(158,184,104,.5)}
 [data-theme=dark] .fab{box-shadow:0 10px 26px rgba(0,0,0,.6)}
 .vf-hint{font-size:.72rem;line-height:1.55;color:var(--t2);background:var(--sf2);border:1px solid var(--btn-bd);border-radius:12px;padding:10px 12px;margin-bottom:14px}
 .vf-hint b{color:var(--t1)}
@@ -1259,16 +1262,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .pd-cell.tdy{font-weight:800;color:var(--pri)}
 .pd-cell.tdy::after{content:'';position:absolute;left:50%;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--pri);transform:translateX(-50%)}
 .pd-cell.period{background:rgba(255,59,48,.14);color:#ff3b30;font-weight:700}
-.pd-cell.ovu{background:rgba(191,90,242,.16);color:#bf5af2;font-weight:700}
+.pd-cell.ovu{background:rgba(168,155,92,.16);color:#a89b5c;font-weight:700}
 .pd-cell.fert{background:rgba(255,159,10,.14);color:#ff9f0a;font-weight:600}
-.pd-cell.sel{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(10,132,255,.38)}
-.pd-cell.sel.period,.pd-cell.sel.ovu,.pd-cell.sel.fert{background:linear-gradient(145deg,#4aa3ff,#0a84ff);color:#fff}
+.pd-cell.sel{background:linear-gradient(145deg,#a8c070,#8fa855);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(143,168,85,.38)}
+.pd-cell.sel.period,.pd-cell.sel.ovu,.pd-cell.sel.fert{background:linear-gradient(145deg,#a8c070,#8fa855);color:#fff}
 .pd-cell.sel.tdy::after{display:none}
 .pd-legend{display:flex;gap:14px;margin-top:8px}
 .pd-legend span{display:flex;align-items:center;gap:4px;font-size:.66rem;color:var(--t2)}
 .pd-lg-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
 .pd-lg-dot.period{background:#ff3b30}
-.pd-lg-dot.ovu{background:#bf5af2}
+.pd-lg-dot.ovu{background:#a89b5c}
 .pd-lg-dot.fert{background:#ff9f0a}
 .pd-sec-t{font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:10px}
 .pd-syms{display:flex;flex-wrap:wrap;gap:8px}
@@ -2388,7 +2391,7 @@ function rolloverIncomplete(){
 function dayActive(d){ if(!d) return false; var m=0; MEALS.forEach(function(x){(d.meals[x.k]||[]).forEach(function(i){m+=(i.cal||0)})}); var ts=(d.tasks||[]).length; var fit=(d.fit&&d.fit.parts||[]).reduce(function(a,p){return a+(p.items||[]).length},0); var fo=(d.focus||0); var lr=0; var tg=(d.life&&d.life.tags)||{}; for(var k in tg){lr+=(tg[k]||[]).length;} return m>0||ts>0||fit>0||fo>0||lr>0; }
 function getStreak(){ var n=0; var d=new Date(); for(var i=0;i<366;i++){ var ds=fmtDate(d); var a=dayActive(S.days[ds]); if(a){n++;} else if(i===0){} else {break;} d.setDate(d.getDate()-1); } return n; }
 function weeklyCal(goal){ var arr=[],kcal=[],labs=[],hit=0,sum=0; var base=new Date(); for(var i=6;i>=0;i--){ var dd=new Date(base); dd.setDate(base.getDate()-i); var ds=fmtDate(dd); var dy=gd(ds); var t=0; MEALS.forEach(function(x){(dy.meals[x.k]||[]).forEach(function(it){t+=(it.cal||0)})}); kcal.push(Math.round(t)); arr.push(goal?Math.round(Math.min(t/goal,1)*100):0); labs.push('日一二三四五六'[dd.getDay()]); if(goal&&t>=goal)hit++; sum+=t; } return {vals:arr,kcal:kcal,labels:labs,hit:hit,avg:Math.round(sum/7),goal:goal||0}; }
-function sparkSVG(vals,kcals,goal){ var W=300,H=98,pad=12,n=vals.length,max=100; var pts=vals.map(function(v,i){ var x=pad+(W-2*pad)*i/(n-1); var y=H-pad-(H-2*pad)*(v/max); return [x,y]; }); var dpath='M'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' L'); var area='M'+pad+','+(H-pad)+' L'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' L')+' L'+(W-pad)+','+(H-pad)+' Z'; var sid='sp'+Math.floor(Math.random()*1e6); var goalY=(H-pad).toFixed(1); var circles=pts.map(function(p,i){var col=vals[i]>=100?'#34c759':'#ff9500';return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.4" fill="'+col+'" stroke="var(--sf)" stroke-width="1.8"/>'}).join(''); var labels=(kcals||[]).map(function(k,i){return '<text x="'+pts[i][0].toFixed(1)+'" y="'+(pts[i][1]-7).toFixed(1)+'" font-size="9" text-anchor="middle" fill="var(--t3)" font-family="inherit">'+k+'</text>'}).join(''); return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:98px;display:block"><defs><linearGradient id="'+sid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(10,132,255,.30)"/><stop offset="100%" stop-color="rgba(10,132,255,0)"/></linearGradient></defs><path d="'+area+'" fill="url(#'+sid+')"/><line x1="'+pad+'" y1="'+goalY+'" x2="'+(W-pad)+'" y2="'+goalY+'" stroke="rgba(52,199,89,.55)" stroke-width="1.4" stroke-dasharray="4 4"/><path d="'+dpath+'" fill="none" stroke="#0a84ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'+labels+circles+'</svg>'; }
+function sparkSVG(vals,kcals,goal){ var W=300,H=98,pad=12,n=vals.length,max=100; var pts=vals.map(function(v,i){ var x=pad+(W-2*pad)*i/(n-1); var y=H-pad-(H-2*pad)*(v/max); return [x,y]; }); var dpath='M'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' L'); var area='M'+pad+','+(H-pad)+' L'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' L')+' L'+(W-pad)+','+(H-pad)+' Z'; var sid='sp'+Math.floor(Math.random()*1e6); var goalY=(H-pad).toFixed(1); var circles=pts.map(function(p,i){var col=vals[i]>=100?'#34c759':'#ff9500';return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.4" fill="'+col+'" stroke="var(--sf)" stroke-width="1.8"/>'}).join(''); var labels=(kcals||[]).map(function(k,i){return '<text x="'+pts[i][0].toFixed(1)+'" y="'+(pts[i][1]-7).toFixed(1)+'" font-size="9" text-anchor="middle" fill="var(--t3)" font-family="inherit">'+k+'</text>'}).join(''); return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:98px;display:block"><defs><linearGradient id="'+sid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(143,168,85,.30)"/><stop offset="100%" stop-color="rgba(143,168,85,0)"/></linearGradient></defs><path d="'+area+'" fill="url(#'+sid+')"/><line x1="'+pad+'" y1="'+goalY+'" x2="'+(W-pad)+'" y2="'+goalY+'" stroke="rgba(52,199,89,.55)" stroke-width="1.4" stroke-dasharray="4 4"/><path d="'+dpath+'" fill="none" stroke="#8fa855" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'+labels+circles+'</svg>'; }
 
 function renderHome(){
   var box=document.getElementById('homeContent');if(!box)return;
@@ -4006,7 +4009,7 @@ function splashWaterCup(n){
 }
 function celebrateWater(){
   try{
-    var colors=['#0a84ff','#34c759','#ff9500','#ff3b30','#af52de','#ffd60a'];
+    var colors=['#8fa855','#34c759','#ff9500','#ff3b30','#af52de','#ffd60a'];
     var conf=document.createElement('div');
     for(var i=0;i<46;i++){var c=document.createElement('span');c.className='confetti';
       c.style.left=(Math.random()*100)+'vw';
@@ -5672,7 +5675,7 @@ var FIT_DEMO_SIZE=108;
 var F3D_DIM={torso:0.50,neck:0.10,headR:0.12,upperArm:0.30,foreArm:0.28,shoulderW:0.12,hipW:0.10,thigh:0.42,shin:0.42};
 var F3D_CAM={x:0,y:-0.05,z:2.55},F3D_F=1.0;
 var F3D_BONES=[['pelvis','neck'],['neck','head'],['neck','shL'],['neck','shR'],['shL','elL'],['elL','hdL'],['shR','elR'],['elR','hdR'],['hipL','knL'],['knL','ftL'],['hipR','knR'],['knR','ftR']];
-var libAnims=[],PRI_COLOR='#007aff';
+var libAnims=[],PRI_COLOR='#8fa855';
 function f3rx(p,a){var c=Math.cos(a),s=Math.sin(a);return{x:p.x,y:p.y*c-p.z*s,z:p.y*s+p.z*c}}
 function f3ry(p,a){var c=Math.cos(a),s=Math.sin(a);return{x:p.x*c+p.z*s,y:p.y,z:-p.x*s+p.z*c}}
 function f3add(a,b){return{x:a.x+b.x,y:a.y+b.y,z:a.z+b.z}}
@@ -5705,7 +5708,7 @@ function f3pose(cat,t){
 }
 function f3proj(p,yaw){var q=f3ry(p,yaw);var z=F3D_CAM.z-q.z;if(z<0.2)z=0.2;return{x:(q.x-F3D_CAM.x)/z*F3D_F,y:(q.y-F3D_CAM.y)/z*F3D_F,z:z}}
 function shadeColor(hex,f){
-  if(!hex||hex[0]!=='#'||hex.length<7)return hex||'#007aff';
+  if(!hex||hex[0]!=='#'||hex.length<7)return hex||'#8fa855';
   var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
   r=Math.round(r*f);g=Math.round(g*f);b=Math.round(b*f);
   return'rgb('+r+','+g+','+b+')'
@@ -6099,7 +6102,7 @@ function toggleTheme(){applySystemTheme()}
 
 // 主题色
 var THEME_COLORS=[
-  {n:'蓝',c:'#007aff',bg:'#e3f0ff',ic:'🔵'},
+  {n:'橄榄绿',c:'#8fa855',bg:'#f1f6e8',ic:'🫒'},
   {n:'红',c:'#ff3b30',bg:'#ffe5e3',ic:'🔴'},
   {n:'橙',c:'#ff9500',bg:'#fff1e0',ic:'🟠'},
   {n:'黄',c:'#ffcc00',bg:'#fff8e0',ic:'🟡'},
