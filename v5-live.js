@@ -17,7 +17,7 @@
   function app() { return window.__xmV5 || null; }
   function state() { var a=app(); return a ? a.state() : {}; }
   function dayData(date) { try { var a=app(); return a ? a.day(date || state().curDate) : {}; } catch (e) { return {}; } }
-  function keyOffset(offset) { var d = new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate() + offset); return d.toISOString().slice(0, 10); }
+  function keyOffset(offset) { var base=String((state().curDate)||new Date().toISOString().slice(0,10)).replace(/-/g,'/'); var d = new Date(base); d.setHours(12,0,0,0); d.setDate(d.getDate() + offset); return d.toISOString().slice(0, 10); }
   function allItems(date) { var fit=dayData(date).fit||{},out=[];(fit.parts||[]).forEach(function(p){(p.items||[]).forEach(function(x){if(x&&!x.deleted)out.push(Object.assign({partId:p.id,partName:p.name},x));});});return out; }
   function activityMinutes(item) {
     if (item.type === 'cardio' || item.type === 'time') return n(item.duration || item.minutes || item.time);
@@ -59,7 +59,7 @@
     var dots = values.map(function(v,i) {
       var future = i > current, hot = v >= goal();
       var dash = i === 6 && future ? ' stroke-dasharray="4 3"' : '';
-      var line = '<line x1="'+x[i]+'" y1="'+y[i]+'" x2="'+x[i]+'" y2="86" stroke="#dfbf85" stroke-dasharray="3 3" stroke-width="1"/>';
+      var line = '<line x1="'+x[i]+'" y1="'+y[i]+'" x2="'+x[i]+'" y2="86" stroke="#dfbf85" stroke-dasharray="3 3" stroke-width="1" opacity="'+(future?'0.45':'1')+'"/>';
       var dot = '<circle cx="'+x[i]+'" cy="'+y[i]+'" r="5" fill="'+(hot?'#fb6235':'#789535')+'" stroke="#fff8ea" stroke-width="2"'+dash+'/>';
       var tag = hot ? '<rect x="'+(x[i]-14)+'" y="'+Math.max(2,y[i]-25)+'" width="28" height="16" rx="8" fill="#fb6235"/><text x="'+x[i]+'" y="'+Math.max(13,y[i]-12)+'" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">'+Math.round(v)+'</text>' : '';
       return line + tag + dot;
@@ -110,9 +110,13 @@
   }
   function refreshHome() {
     var root=q('.rb-home-pixel'); if(!root || !hasRecords()) return;
-    var d=dayData(), m=metrics(), goalK=n((state().S||{}).goalKcal||1800), eaten=n(d.kcal || d.calories);
-    if(!eaten && Array.isArray(d.meals)) eaten=d.meals.reduce(function(s,x){return s+n(x.kcal||x.calories);},0);
+    var d=dayData(), m=metrics(), goalK=n((state().S||{}).goalKcal||1800), eaten=n(d.kcal || d.calories), mealRows=[];
+    Object.keys(d.meals||{}).forEach(function(k){(d.meals[k]||[]).forEach(function(x){mealRows.push(x);});});
+    if(!eaten) eaten=mealRows.reduce(function(s,x){return s+n(x.cal||x.kcal||x.calories);},0);
     var ring=q('.rb-home-pixel-ring div',root); if(ring) ring.innerHTML='<b>'+Math.round(eaten)+'</b><span>/'+goalK+' kcal</span><small>\u76ee\u6807 '+goalK+' kcal</small>';
+    var macro={carb:0,protein:0,fat:0};mealRows.forEach(function(x){macro.carb+=n(x.carb);macro.protein+=n(x.protein);macro.fat+=n(x.fat);});
+    var macroMax={carb:n((state().S||{}).macroCarb||220)||220,protein:n((state().S||{}).macroProtein||110)||110,fat:n((state().S||{}).macroFat||60)||60};
+    qa('.rb-home-pixel-macros > div',root).forEach(function(row,i){var k=['carb','protein','fat'][i],b=row.querySelector('b'),em=row.querySelector('em');if(b)b.textContent=Math.round(macro[k])+' g';if(em)em.style.width=Math.min(100,Math.round(macro[k]/macroMax[k]*100))+'%';});
     var foot=qa('.rb-home-pixel-status-foot span',root),mood=(dayData().life||{}).mood||'\ud83d\ude42'; if(foot[0]){foot[0].textContent=mood+' \u5fc3\u60c5';foot[0].setAttribute('onclick','xmOpenMoodPicker()');foot[0].style.cursor='pointer';}if(foot[1]) foot[1].textContent='\u2668 '+Math.round(m.min)+' '+TEXT.min;
     var week=weekData(), complete=week.filter(function(v){return v>=goal();}).length; if(foot[2]) foot[2].textContent='\u25a3 '+complete+' / 4 '+TEXT.times;
     paintTrend(q('.rb-home-pixel-trend',root),week);
