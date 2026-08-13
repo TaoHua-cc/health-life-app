@@ -40,6 +40,7 @@
     var d = dayData(), fit = ((d.fit||{}).parts||[]).some(function(p){return (p.items||[]).length;}), meals=d.meals||{}, meal = Object.keys(meals).some(function(k){return (meals[k]||[]).length;}), tasks=(d.tasks||[]).length>0, focus=n(d.focus)>0, life=d.life||{};
     return fit || meal || tasks || focus || !!life.mood || Object.keys(life.tags||{}).some(function(k){return (life.tags[k]||[]).length;});
   }
+  function hasFitRecords() { var d=dayData(); return ((d.fit||{}).parts||[]).some(function(p){return (p.items||[]).length;}); }
   function streak() {
     var c = 0;
     for (var i=0;i<90;i++) { if (metrics(keyOffset(-i)).done.length) c++; else if (i) break; }
@@ -48,7 +49,7 @@
   function fmtVolume(v) { return v >= 1000 ? (v / 1000).toFixed(1) + 'k' : String(Math.round(v)); }
   function goal() { var s=state().S||{}; return n(s.weeklyGoal || s.activityGoal || s.exerciseGoal) || 30; }
   function paintTrend(section, values) {
-    if (!section || !values.some(Boolean)) return;
+    if (!section) return;
     var svg = q('svg', section), days = qa('.rb-home-pixel-days span,.rb-pixel-days span', section);
     if (!svg) return;
     var max = Math.max(goal() * 2, 60, Math.max.apply(Math, values) * 1.15);
@@ -96,7 +97,7 @@
   function dateStrip(){var s=state(),cur=new Date(String(s.curDate||new Date().toISOString().slice(0,10)).replace(/-/g,'/')),html='<div class="xm-fit-dates">';for(var i=-3;i<=3;i++){var d=new Date(cur);d.setDate(cur.getDate()+i);var k=d.toISOString().slice(0,10);html+='<button class="'+(i===0?'on':'')+'" onclick="__xmV5.selectDate(\''+k+'\')"><small>'+DAY[(d.getDay()+6)%7]+'</small><b>'+d.getDate()+'</b></button>';}return html+'</div>';}
   function refreshFit() {
     var root=q('.rb-fit-pixel'); if (!root) return;
-    if (!hasRecords()) {
+    if (!hasFitRecords()) {
       if (!q('.xm-fit-dates',root)) { var emptyStatus=q('.rb-pixel-status',root); if (emptyStatus) emptyStatus.insertAdjacentHTML('beforebegin',dateStrip()); }
       return;
     }
@@ -121,15 +122,17 @@
     var hasMeals=mealRows.length>0, hasFit=((d.fit||{}).parts||[]).some(function(p){return (p.items||[]).length;});
     if(!eaten) eaten=mealRows.reduce(function(s,x){return s+n(x.cal||x.kcal||x.calories);},0);
     if (hasMeals) { var ring=q('.rb-home-pixel-ring div',root); if(ring) ring.innerHTML='<b>'+Math.round(eaten)+'</b><span>/'+goalK+' kcal</span><small>\u76ee\u6807 '+goalK+' kcal</small>'; }
+    else if (records) { var emptyRing=q('.rb-home-pixel-ring div',root); if(emptyRing) emptyRing.innerHTML='<b>0</b><span>/'+goalK+' kcal</span><small>\u76ee\u6807 '+goalK+' kcal</small>'; }
     var macro={carb:0,protein:0,fat:0};mealRows.forEach(function(x){macro.carb+=n(x.carb);macro.protein+=n(x.protein);macro.fat+=n(x.fat);});
     var macroMax={carb:n((state().S||{}).macroCarb||220)||220,protein:n((state().S||{}).macroProtein||110)||110,fat:n((state().S||{}).macroFat||60)||60};
-    if (hasMeals) qa('.rb-home-pixel-macros > div',root).forEach(function(row,i){var k=['carb','protein','fat'][i],b=row.querySelector('b'),em=row.querySelector('em');if(b)b.textContent=Math.round(macro[k])+' g';if(em)em.style.width=Math.min(100,Math.round(macro[k]/macroMax[k]*100))+'%';});
+    if (hasMeals || records) qa('.rb-home-pixel-macros > div',root).forEach(function(row,i){var k=['carb','protein','fat'][i],b=row.querySelector('b'),em=row.querySelector('em'),value=hasMeals?macro[k]:0;if(b)b.textContent=Math.round(value)+' g';if(em)em.style.width=Math.min(100,Math.round(value/macroMax[k]*100))+'%';});
     var mood=(dayData().life||{}).mood||'\ud83d\ude42',foot=qa('.rb-home-status-item',root),moodLabel={'\ud83d\ude04':'开心','\ud83d\ude42':'平静','\ud83d\ude0a':'充实','\ud83d\ude14':'疲惫','\ud83d\ude23':'难过'}[mood]||'开心';
     if(foot[0]){var moodText=q('b',foot[0]),moodSub=q('small',foot[0]);if(moodText)moodText.textContent=moodLabel;if(moodSub)moodSub.textContent='点击选择心情';foot[0].setAttribute('onclick','xmOpenMoodPicker()');foot[0].style.cursor='pointer';}
     if(foot[1]){var mt=q('b',foot[1]);if(mt)mt.textContent=hasFit?Math.round(m.min)+' '+TEXT.min:'未记录';}
     var week=weekData(), complete=week.filter(function(v){return v>=goal();}).length; if(foot[2]){var gt=q('b',foot[2]);if(gt)gt.textContent=hasFit?complete+' / 4 天':'未记录';}
     var keys=['breakfast','lunch','dinner'],imgs=['home-breakfast-bowl.png','home-lunch-salmon.png','home-dinner-soup.png'],labels=['早餐','午餐','晚餐'],mealCards=qa('.rb-home-pixel-meal',root);mealCards.forEach(function(card,i){var rows=(d.meals&&d.meals[keys[i]])||[],total=rows.reduce(function(sum,x){return sum+n(x.cal||x.kcal||x.calories);},0),title=q('b',card),sub=q('small',card);if(title)title.textContent=labels[i];if(sub)sub.textContent=rows.length?Math.round(total)+' kcal':'未记录';var im=q('img',card);if(im){im.src='assets/xiaoman-v3/'+imgs[i];im.alt=labels[i];}});
-    if (records) paintTrend(q('.rb-home-pixel-trend',root),week);
+    if (hasFit) paintTrend(q('.rb-home-pixel-trend',root),week);
+    else { var trend=q('.rb-home-pixel-trend',root),svg=trend&&q('svg',trend); if(svg){var green=q('.home-trend-green',svg),orange=q('.home-trend-orange',svg);if(green)green.setAttribute('d','M 10 86 L 350 86');if(orange)orange.setAttribute('d','M 10 86 L 350 86');} }
   }
   function injectStyle(){ if(q('#xm-live-style'))return; var s=document.createElement('style');s.id='xm-live-style';s.textContent='.xm-fit-dates{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:8px 0 12px}.xm-fit-dates button{border:1px solid #ead8b8;border-radius:11px;background:#fffaf0;padding:5px 2px;color:#65462d}.xm-fit-dates button.on{background:#738d31;color:#fff;border-color:#738d31}.xm-fit-dates small,.xm-fit-dates b{display:block}.xm-edit-action{border:0;background:transparent;text-align:left;padding:0;min-width:0}.rb-pixel-session-row.xm-done{background:#f1e7ce;animation:xmDone .35s ease both}.rb-pixel-session-row .rb-pixel-check{border:0;cursor:pointer}.rb-pixel-session-row .rb-pixel-check.xm-check{background:#799235;color:#fff}.rb-pixel-session-row>img{object-fit:contain!important;width:64px!important;height:58px!important}.rb-body-sheet{position:fixed;inset:0;z-index:9999;background:rgba(57,34,18,.42);display:flex;align-items:flex-end}.rb-body-sheet[hidden]{display:none}.rb-body-panel{background:#fffaf0;border:2px solid #5b321b;border-radius:24px 24px 0 0;width:min(100%,430px);margin:auto;padding:20px;box-sizing:border-box}.rb-body-panel h2{margin:0 0 14px;color:#4a2b19}.rb-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rb-body-grid label{font-size:12px;color:#6f5744}.rb-body-grid input,.rb-body-grid select{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:9px;border:1px solid #d6bd97;border-radius:10px;background:#fffdf7}.rb-body-bmr{margin:14px 0;padding:12px;border:1px dashed #d9b06b;border-radius:12px;color:#55762e}.rb-body-actions{display:flex;gap:10px}.rb-body-actions button{flex:1;border:0;border-radius:14px;padding:11px;background:#6f8a2d;color:white;font-weight:700}.rb-body-actions button:first-child{background:#f5ead5;color:#6f5036}.xm-delete{background:#eb6b4b!important}.xm-mood-pop{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}.xm-mood-pop button{font-size:25px;border:1px solid #ead8b8;border-radius:12px;background:#fff}@keyframes xmDone{from{transform:translateX(4px);filter:brightness(1.12)}to{transform:none;filter:none}}';document.head.appendChild(s);}
   var planDay=1;
