@@ -99,10 +99,8 @@
   function dateStrip(){var s=state(),cur=new Date(String(s.curDate||new Date().toISOString().slice(0,10)).replace(/-/g,'/')),html='<div class="xm-fit-dates">';for(var i=-3;i<=3;i++){var d=new Date(cur);d.setDate(cur.getDate()+i);var k=d.toISOString().slice(0,10);html+='<button class="'+(i===0?'on':'')+'" onclick="__xmV5.selectDate(\''+k+'\')"><small>'+DAY[(d.getDay()+6)%7]+'</small><b>'+d.getDate()+'</b></button>';}return html+'</div>';}
   function refreshFit() {
     var root=q('.rb-fit-pixel'); if (!root) return;
-    if (!hasFitRecords()) {
-      if (!q('.xm-fit-dates',root)) { var emptyStatus=q('.rb-pixel-status',root); if (emptyStatus) emptyStatus.insertAdjacentHTML('beforebegin',dateStrip()); }
-      return;
-    }
+    /* Always repaint, including an empty day. Empty-day charts must be zeroed
+       rather than leaving the design-preview points on screen. */
     var m=metrics(), weekly=weekData(), weeklyDays=weekly.filter(function(v){return v>0;}).length;
     var ring=q('.rb-pixel-ring-copy',root); if(ring) ring.innerHTML='<b>'+Math.round(m.min)+'</b><span>'+TEXT.min+'</span><small>'+TEXT.week+' '+weeklyDays+'/4 '+TEXT.times+'</small>';
     var cards=qa('.rb-pixel-metrics > div',root);
