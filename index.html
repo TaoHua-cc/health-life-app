@@ -7426,7 +7426,12 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   };
   rbFit=rbFitPixelReference;
   rbHome=rbHomePixelReference;
-  rbDiet=rbRefDiet;rbWork=rbRefWork;rbLife=rbRefLife;rbProfile=rbRefProfile;
+  /* Keep the approved V5 reference artwork for empty/demo states, but restore
+     the original data-driven pages as soon as the user has real records. */
+  rbDiet=rbPreviewSession?rbRefDiet:rbDiet;
+  rbWork=rbPreviewSession?rbRefWork:rbWork;
+  rbLife=rbPreviewSession?rbRefLife:rbLife;
+  rbProfile=rbRefProfile;
   document.body.classList.add('rb-mode');rbRender();
 })();
 </script>
