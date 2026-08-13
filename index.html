@@ -7198,7 +7198,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   function rbPct(v,t){return t?Math.max(0,Math.min(100,Math.round(v/t*100))):0}
   function rbIcon(path,cls){return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24" aria-hidden="true"><path d="'+path+'"/></svg>'}
   function rbLeafIcon(cls){return '<img class="rb-leaf-sticker '+(cls||'')+'" src="assets/xiaoman-v3/ui-leaf-sticker.png" alt="" aria-hidden="true">'}
-  function rbTinyIcon(kind,cls){var f={carb:'ui-carb-sticker.png',protein:'ui-protein-sticker.png',fat:'ui-fat-sticker.png'}[kind];return f?'<img class="rb-tiny-sticker '+(cls||'')+'" src="assets/xiaoman-v3/'+f+'" alt="" aria-hidden="true">':''}
+  function rbTinyIcon(kind,cls){var f={carb:'macro-carb-v2.png',protein:'macro-protein-v2.png',fat:'macro-fat-v2.png'}[kind];return f?'<img class="rb-tiny-sticker '+(cls||'')+'" src="assets/xiaoman-v3/'+f+'" alt="" aria-hidden="true">':''}
   function rbArt(kind){
     if(kind==='mascot')return '<svg viewBox="10 3 72 64"><path class="rb-fill" d="M31 55c-3-11-1-27 10-33 10-5 24 1 27 13 3 12-4 24-17 27-9 2-17-1-20-7z"/><path class="rb-soft" d="M38 53c8 5 20 6 28-1v13H37zM15 45h12v11H15z"/><path class="rb-stroke" d="M46 22c-2-10 3-16 12-15 0 8-4 13-12 15M38 42h.5M56 42h.5M44 49c4 3 8 3 12 0M35 56c-7 3-11 0-12-5M67 55c7 3 11 0 12-5M15 45h12v11H15zM27 47h3c5 0 5 7 0 7h-3M13 58h17"/><circle class="rb-accent" cx="36" cy="46" r="3"/><circle class="rb-accent" cx="59" cy="46" r="3"/></svg>';
     if(kind==='cat')return '<svg viewBox="0 0 90 70"><path class="rb-fill" d="M26 25c4-9 21-10 28 1 5 9 2 22-6 27-9 5-22 1-25-8-2-7-1-14 3-20z"/><path class="rb-stroke" d="M22 48c-5-16 2-29 18-29 14 0 22 11 17 27-3 9-11 13-20 12-8-1-13-4-15-10zM24 23l-1-13 10 7M55 20l7-10 2 14M30 37h.5M47 37h.5M36 45c3 3 7 3 10 0M58 51c10 2 13-4 14-10 1-5 7-5 7 1 0 10-8 16-18 14"/></svg>';
@@ -7413,10 +7413,16 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   function rbRefProfile(){return '<div class="rb-ref-page-shell rb-ref-profile"><header class="rb-ref-profile-title"><h1>我的 '+rbLeafIcon()+'</h1><button aria-label="设置">⚙</button></header><section class="rb-ref-card rb-ref-profile-user" onclick="rbEditProfile()"><img src="assets/xiaoman-v3/profile-puppy-avatar.png" alt="小满头像"><div><b>小满</b><small>坚持记录的第 <strong style="color:#ef5c2b;font-size:15px">128</strong> 天</small></div><i>›</i></section><h2 class="rb-ref-health-title">健康数据</h2><section class="rb-ref-health-grid"><div class="rb-ref-health-cell"><img src="assets/xiaoman-v3/profile-dumbbell.png" alt="运动"><b>150 <small>分钟</small></b><span>运动时长　·　本周</span></div><div class="rb-ref-health-cell"><span class="rb-ref-health-glyph">'+rbTinyIcon('fat')+'</span><b>1650 <small>kcal</small></b><span>消耗热量　·　本周</span></div><div class="rb-ref-health-cell"><img src="assets/xiaoman-v3/profile-healthy-bowl.png" alt="饮食"><b>18 <small>份</small></b><span>饮食记录　·　本周</span></div><div class="rb-ref-health-cell"><span class="rb-ref-health-glyph">'+rbIcon('M12 3v6M12 15v6M3 12h6M15 12h6')+'</span><b>620 <small>分钟</small></b><span>专注时长　·　本周</span></div></section><section class="rb-ref-card rb-ref-sync"><img src="assets/xiaoman-v3/profile-health-sync.png" alt="健康同步"><b>Apple 健康同步</b><small>已连接　›</small></section><h2 class="rb-ref-service-title">服务与设置</h2><section class="rb-ref-card rb-ref-services">'+[['M4 5h16v14H4zM8 3v4M16 3v4','数据统计'],['M12 3v18M3 12h18','目标设置'],['M6 17h12l-2-3V9a4 4 0 0 0-8 0v5l-2 3Z','提醒设置'],['M12 3 20 6v5c0 5-3 8-8 10-5-2-8-5-8-10V6z','隐私与安全'],['M12 3v18M3 12h18','关于小满日常']].map(function(x){return '<div class="rb-ref-service">'+rbIcon(x[0])+'<b>'+x[1]+'</b><span>›</span></div>'}).join('')+'</section></div>'}
   window.__xmV5={
     state:function(){return {S:S,curDate:curDate}},
-    day:function(date){var before=curDate;if(date)curDate=date;var value=rbDay();curDate=before;return value},
+    day:function(date){return gd(date||curDate)},
     save:function(){save()},
     render:function(){rbRender()},
-    openExercise:function(id){if(window.rbOpenExerciseDetail)window.rbOpenExerciseDetail(id)}
+    selectDate:function(date){curDate=date;rbPreviewSession=false;rbRender()},
+    openExercise:function(id){if(window.rbOpenExerciseDetail)window.rbOpenExerciseDetail(id)},
+    updateExercise:function(partId,eid,patch){var d=gd(curDate),p=(d.fit.parts||[]).find(function(x){return x.id===partId}),it=p&&(p.items||[]).find(function(x){return x.eid===eid});if(!it)return false;Object.keys(patch||{}).forEach(function(k){it[k]=patch[k]});save();rbRender();return true},
+    removeExercise:function(partId,eid){var d=gd(curDate),p=(d.fit.parts||[]).find(function(x){return x.id===partId});if(!p)return false;p.items=(p.items||[]).filter(function(x){return x.eid!==eid});d.fit.parts=d.fit.parts.filter(function(x){return (x.items||[]).length});save();rbRender();return true},
+    toggleExercise:function(partId,eid){toggleFitItem(partId,eid);rbRender()},
+    setMood:function(m){gd(curDate).life.mood=m;save();rbRender()},
+    setGoal:function(v){S.activityGoal=Math.max(1,Number(v)||30);save();rbRender()}
   };
   rbFit=rbFitPixelReference;
   rbHome=rbHomePixelReference;
