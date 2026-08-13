@@ -7420,7 +7420,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
     openExercise:function(id){if(window.rbOpenExerciseDetail)window.rbOpenExerciseDetail(id)},
     updateExercise:function(partId,eid,patch){var d=gd(curDate),p=(d.fit.parts||[]).find(function(x){return x.id===partId}),it=p&&(p.items||[]).find(function(x){return x.eid===eid});if(!it)return false;Object.keys(patch||{}).forEach(function(k){it[k]=patch[k]});save();rbRender();return true},
     removeExercise:function(partId,eid){var d=gd(curDate),p=(d.fit.parts||[]).find(function(x){return x.id===partId});if(!p)return false;p.items=(p.items||[]).filter(function(x){return x.eid!==eid});d.fit.parts=d.fit.parts.filter(function(x){return (x.items||[]).length});save();rbRender();return true},
-    toggleExercise:function(partId,eid){toggleFitItem(partId,eid);rbRender()},
+    toggleExercise:function(partId,eid){toggleFitItem(partId,eid);S.fitHistory=S.fitHistory||{};S.fitHistory[(curDate||'')+'_'+eid]=Date.now();save();rbRender()},
     setMood:function(m){gd(curDate).life.mood=m;save();rbRender()},
     setGoal:function(v){S.activityGoal=Math.max(1,Number(v)||30);save();rbRender()}
   };
