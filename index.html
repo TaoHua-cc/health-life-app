@@ -7323,7 +7323,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   function rbRenderPlanSheet(){var sheet=document.getElementById('rbPlanSheet');if(!sheet)return;var plans=S.trainPlans||[];var list=plans.length?plans.map(function(p){var slots=(p.slots||[]).filter(function(s){return s&&s.parts&&s.parts.length}).length;return '<article class="rb-plan-item"><h3>'+rbEsc(p.name||'未命名计划')+'</h3><p>'+Number(p.days||7)+' 天循环 · 已安排 '+slots+' 天 · '+rbEsc(p.goal||'先从一个轻量目标开始')+'</p><div class="rb-plan-item-actions"><button onclick="openPlanEdit(\''+p.id+'\');rbClosePlanManager()">编辑计划</button><button onclick="applyPlan(\''+p.id+'\');rbClosePlanManager()">应用到今天</button></div></article>'}).join(''):'<div class="rb-plan-empty">还没有训练计划<br>创建一个周期计划，系统会按天同步到训练日程。</div>';sheet.innerHTML='<section class="rb-plan-panel" role="dialog" aria-modal="true" aria-labelledby="rbPlanTitle"><div class="rb-plan-head"><div><h2 id="rbPlanTitle">训练计划</h2><small>把部位和动作安排成可坚持的节奏</small></div><button class="rb-plan-close" onclick="rbClosePlanManager()" aria-label="关闭">×</button></div><button class="rb-plan-create" onclick="rbCreatePlan()">＋ 新建训练计划</button>'+list+'</section>'}
   window.rbSearchExercise=function(q){var s=(q||'').trim().toLowerCase();rbFitMatches=(EXERCISE_DB||[]).filter(function(e){var ok=!s||String(e.name).toLowerCase().indexOf(s)>=0||(e.alias||[]).join('|').toLowerCase().indexOf(s)>=0;return ok&&(!rbFitGroup||e.grp===rbFitGroup||rbFitGroup==='全部')}).slice(0,10);document.getElementById('rbFitResults').innerHTML=rbFitMatches.map(function(e,i){return '<button class="rb-food-result '+(rbFitSelected&&rbFitSelected.id===e.id?'on':'')+'" onclick="rbPickExercise('+i+')"><span><b>'+rbEsc(e.alias&&e.alias[0]||e.name)+'</b><small>'+rbEsc(e.grp||'训练')+' · '+rbEsc(e.name)+'</small></span><span class="rb-result-guide" onclick="event.stopPropagation();rbShowExerciseGuide(\''+e.id+'\')">讲解</span></button>'}).join('')||'<div class="rb-empty">没有找到动作</div>';document.getElementById('rbFitSave').disabled=!rbFitSelected}
   window.rbPickExercise=function(i){rbFitSelected=rbFitMatches[i];rbSearchExercise(document.getElementById('rbFitSearch').value)}
-  window.rbSaveExercise=function(){if(!rbFitSelected)return;quickAddExercise(rbFitSelected,3,12,0,30);rbCloseFitPart();rbRender()}
+  window.rbSaveExercise=function(){if(!rbFitSelected)return;var ex=rbFitSelected,isCardio=(ex.cat==='cardio'||ex.grp==='有氧');var ds=4,dr=12,dw=0,dd=0;var GM={'核心':[3,15],'胸':[4,10],'背':[4,12],'肩':[3,12],'手臂':[3,12],'大腿':[4,10],'小腿':[4,15]};if(GM[ex.grp]){ds=GM[ex.grp][0];dr=GM[ex.grp][1];}if(isCardio){ds=0;dr=0;dd=30;}quickAddExercise(ex,ds,dr,dw,dd);rbCloseFitPart();rbRender()}
   window.rbToggleFit=function(id){var d=rbDay(),found=false;(d.fit&&d.fit.parts||[]).forEach(function(p){(p.items||[]).forEach(function(i){if(i.eid===id){i.done=!i.done;found=true}})});if(found){save();rbRender()}}
   window.rbToggleTask=function(id){if(typeof toggleTask==='function')toggleTask(id);rbRender()}
   window.rbSetMood=function(m){if(typeof setMood==='function')setMood(m);rbRender()}
@@ -7450,6 +7450,6 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   document.body.classList.add('rb-mode');rbRender();
 })();
 </script>
-<script src="v5-live.js?v=20260814-0418"></script>
+<script src="v5-live.js?v=20260813-1411"></script>
 </body>
 </html>
