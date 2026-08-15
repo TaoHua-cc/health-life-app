@@ -251,6 +251,18 @@ body.rb-home-page .rb-screen,body.rb-fit-page .rb-screen,body.rb-ref-page .rb-sc
 .rb-fit-status{background:#fffaf0;border:1px solid #e2cda8}.rb-fit-status .rb-card-head{margin-bottom:8px}.rb-coral-tag{background:#fff0dc;color:#dd6e3c;border-radius:7px;padding:3px 6px;font-size:.56rem;font-weight:900}.rb-fit-status-grid{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:center}.rb-fit-ring{width:78px;height:78px;border-radius:50%;border:8px solid #788d3e;border-right-color:#ee6d43;border-bottom-color:#f5bd46;display:grid;place-items:center;align-content:center;color:#5b351c}.rb-fit-ring b{font-size:1.35rem;line-height:1}.rb-fit-ring span{font-size:.56rem;margin-top:2px}.rb-fit-metrics{display:grid;gap:5px}.rb-fit-metrics>div{display:grid;grid-template-columns:18px 1fr auto;align-items:center;gap:5px;font-size:.58rem;color:#856b55;padding-bottom:4px;border-bottom:1px dashed #e7d6ba}.rb-fit-metrics>div:last-child{border-bottom:0}.rb-fit-metrics i{font-style:normal;font-size:.7rem}.rb-fit-metrics b{font-size:.66rem;color:#5b351c}.m-olive{color:#788d3e}.m-coral{color:#ee6d43}.m-yellow{color:#d99b1f}
 .rb-fit-recommend{display:grid;grid-template-columns:1fr 84px;align-items:center;border:1px solid #ee6d43;background:#fffaf0}.rb-fit-recommend h3{font-size:.8rem;margin:0 0 3px}.rb-fit-recommend p{font-size:.6rem;color:#856b55;margin:0 0 7px}.rb-fit-reco-art{height:72px}.rb-fit-reco-art img{width:100%;height:100%;object-fit:contain}
 .rb-fit-trend{border:1px solid #e2cda8;background:#fffaf0}.rb-fit-trend .rb-card-head span{font-size:.58rem;color:#856b55}.rb-fit-trend .rb-card-head b{color:#ee6d43;font-size:.85rem}.rb-trend-line{height:53px;border-bottom:1px solid #eadcc4;background:repeating-linear-gradient(to bottom,transparent 0,transparent 16px,#f3e7d4 17px,#f3e7d4 18px)}.rb-trend-line svg{width:100%;height:100%}.rb-trend-days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;padding-top:4px;color:#957b62;font-size:.56rem}
+/* v3 健身页新增：tab 切换 + session 列表 */
+.rb-fit-tabs{display:flex;gap:0;background:#fffdf8;border:1.5px solid #5a351f;border-radius:20px;padding:3px;margin-bottom:10px}
+.rb-fit-tab{flex:1;border:none;background:transparent;border-radius:17px;color:#4b2c18;font:inherit;font-size:14px;font-weight:800;padding:8px 0;cursor:pointer;text-align:center}
+.rb-fit-tab.on{background:#789438;color:#fff;box-shadow:0 2px 0 #566e26}
+.rb-fit-plan-btn{width:100%;border:1.5px solid #789438;border-radius:14px;background:transparent;color:#789438;font:inherit;font-size:13px;font-weight:800;padding:8px;margin-top:8px;cursor:pointer;text-align:center}
+.rb-fit-sessions{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-session-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:#fff8ea;border:1px solid #ead9be}
+.rb-session-item.done{background:#edf5e8;border-color:#d5e2bd}
+.rb-session-name{flex:1;font-size:13px;font-weight:700;color:#4b2c18;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rb-session-time{font-size:11px;color:#76543c;font-weight:650;white-space:nowrap}
+.rb-session-check{width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#789438;color:#fff;font-size:12px;font-weight:900;flex-shrink:0}
+.rb-fit-ring small{display:block;font-size:9px;color:#76543c;margin-top:2px}
 @media(max-width:390px){.rb-fit-status-grid{grid-template-columns:78px 1fr;gap:8px}.rb-fit-ring{width:70px;height:70px}.rb-fit-action-main{padding:9px}.rb-fit-action-main b{font-size:.68rem}}
 /* iPhone 17 Pro Max priority: preserve a 440px phone canvas, safe areas and readable tap targets. */
 @media (min-width:391px) and (max-width:699px){
@@ -540,6 +552,87 @@ body.rb-home-page .rb-home-pixel-trend-plot{height:88px!important}
 body.rb-home-page .rb-home-pixel-trend-scale,
 body.rb-home-page .rb-home-pixel-days{font-size:9px!important}
 body.rb-home-page .rb-home-pixel .sticker{z-index:3!important;pointer-events:none!important}
+/* v3 首页新增组件样式 */
+.rb-status-badge{display:inline-flex;align-items:center;gap:4px;background:#f25b32;color:#fff;font-size:12px;font-weight:800;padding:4px 10px;border-radius:8px;letter-spacing:.02em;margin-bottom:10px}
+.rb-home-stats-row{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1.5px dashed #e8d2ae}
+.rb-home-stat{flex:1;display:flex;align-items:center;gap:5px;min-width:0}
+.rb-home-stat-icon{font-size:18px;flex-shrink:0}
+.rb-home-stat b{font-size:13px;font-weight:900;color:#4b2c18;display:block;line-height:1.2}
+.rb-home-stat small{font-size:9px;color:#76543c;display:block}
+.rb-home-meals{margin-top:17px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;padding:10px 11px 12px;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-home-meals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.rb-home-meal-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 3px 8px;border-radius:11px;background:#fff8ea;border:1px solid #ead9be;cursor:pointer;transition:transform .15s}
+.rb-home-meal-card:active{transform:scale(.96)}
+.rb-home-meal-card img{width:56px;height:42px;object-fit:contain}
+.rb-home-meal-info{display:flex;flex-direction:column;align-items:center;width:100%}
+.rb-home-meal-info b{font-size:11px;font-weight:800;color:#4b2c18}
+.rb-home-meal-info span{font-size:8px;color:#76543c;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;display:block}
+.rb-home-meal-cal{font-size:14px;font-weight:900;color:#ef5c2b}
+.rb-home-meal-cal small{font-size:9px;font-weight:700;color:#ef5c2b}
+.rb-macro-icon{width:26px;height:26px;display:grid;place-items:center;font-size:16px;border-radius:8px;background:#fff8ea;border:1px solid #ead9be;flex-shrink:0}
+.rb-macro-body{flex:1;min-width:0}
+.rb-macro-body label{font-size:10px}
+/* v3 饮食页新增组件样式 */
+.rb-diet-summary{margin-top:12px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;padding:14px 15px;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-diet-kcal-row{display:flex;align-items:baseline;gap:6px;margin-bottom:12px}
+.rb-diet-kcal-row b{font-size:34px;font-weight:900;color:#4b2c18;line-height:1}
+.rb-diet-kcal-row span{font-size:13px;color:#76543c;font-weight:650}
+.rb-diet-macros{margin-top:4px}
+.rb-diet-meals{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.rb-diet-meal-card{display:flex;flex-direction:column;border:1.5px solid #5a351f;border-radius:15px;background:#fffdf8;padding:10px 12px;box-shadow:0 2px 0 rgba(82,48,24,.06);cursor:pointer;transition:transform .15s}
+.rb-diet-meal-card:active{transform:scale(.98)}
+.rb-diet-meal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.rb-diet-meal-head h3{font-size:15px;font-weight:900;color:#4b2c18;margin:0}
+.rb-diet-meal-head small{font-size:11px;color:#76543c;font-weight:700}
+.rb-diet-meal-body{display:grid;grid-template-columns:72px 1fr auto;gap:8px;align-items:center}
+.rb-diet-meal-body img{width:68px;height:54px;object-fit:contain;border-radius:10px}
+.rb-diet-meal-info{min-width:0}
+.rb-diet-meal-info p{font-size:11px;color:#4b2c18;margin:0;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rb-diet-meal-cal{font-size:20px;font-weight:900;color:#ef5c2b;text-align:right;white-space:nowrap}
+.rb-diet-meal-cal small{font-size:11px;font-weight:700;color:#ef5c2b}
+.rb-diet-add-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:14px;padding:12px;border:none;border-radius:16px;background:#ef5c2b;color:#fff;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #b43e1e;transition:transform .1s}
+.rb-diet-add-btn:active{transform:scale(.98)}
+/* v3 工作页新增组件样式 */
+.rb-work-progress{margin-top:12px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;padding:14px 15px;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-work-count-row{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.rb-work-count-row b{font-size:42px;font-weight:900;color:#4b2c18;line-height:1}
+.rb-work-count-row span{font-size:17px;color:#76543c;font-weight:700}
+.rb-work-label{margin-left:auto;font-size:12px;color:#789438;font-weight:800;background:#edf3df;padding:3px 10px;border-radius:8px}
+.rb-work-stats-inline{display:flex;gap:16px;margin-top:8px;padding-top:10px;border-top:1.5px dashed #e8d2ae}
+.rb-work-stat-inline b{font-size:15px;font-weight:900;color:#4b2c18}
+.rb-work-stat-inline small{font-size:9px;color:#76543c}
+.rb-work-tasks{margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.rb-task-tag{font-size:9px;font-weight:800;padding:2px 7px;border-radius:6px;margin-left:auto;white-space:nowrap;flex-shrink:0}
+.rb-task-tag.important{background:#fff0e8;color:#ed704c;border:1px solid #ffd0bc}
+.rb-task-tag.habit{background:#f2f4fb;color:#5a54a0;border:1px solid #e3e6f0}
+.rb-work-focus{margin-top:14px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;padding:14px 15px;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-work-focus-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rb-work-focus-state{font-size:13px;color:#76543c;margin-top:2px}
+.rb-work-focus-state b{color:#789438;font-size:22px;font-weight:900}
+.rb-work-focus-btn{width:100%;padding:11px;border:none;border-radius:14px;background:#789438;color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 3px 0 #566e26}
+/* v3 生活页新增组件样式 */
+.rb-life-moods{display:flex;gap:6px;margin-top:8px}
+.rb-life-mood{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 2px;border:1.5px solid #ead9be;border-radius:13px;background:#fff8ea;cursor:pointer;transition:transform .12s}
+.rb-life-mood:active{transform:scale(.94)}
+.rb-life-mood.on{border-color:#789438;background:#edf3df}
+.rb-life-mood-face{font-size:22px;line-height:1}
+.rb-life-mood-label{font-size:9px;color:#76543c;font-weight:700}
+.rb-life-mood.on .rb-life-mood-label{color:#5a7a2e}
+.rb-life-diary{display:flex;gap:12px;padding:12px;margin-top:12px;border:1.5px solid #5a351f;border-radius:16px;background:#fffdf8;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-life-diary-img{width:110px;height:90px;object-fit:cover;border-radius:13px;flex-shrink:0}
+.rb-life-diary-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.rb-life-diary-body p{font-size:12px;color:#4b2c18;line-height:1.5;margin:0 0 8px}
+.rb-life-diary-empty{color:#a19b8b !important}
+.rb-life-diary-meta{font-size:10px;color:#789438;font-weight:700;margin-top:auto}
+.rb-life-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.rb-life-stat-card{display:flex;align-items:center;gap:7px;padding:11px 10px;border:1.5px solid #5a351f;border-radius:14px;background:#fffdf8;box-shadow:0 2px 0 rgba(82,48,24,.06)}
+.rb-life-stat-icon{font-size:20px;flex-shrink:0}
+.rb-life-stat-title{font-size:9px;color:#76543c;font-weight:650}
+.rb-life-stat-card b{font-size:15px;font-weight:900;color:#4b2c18;display:block;line-height:1.1}
+.rb-life-stat-card b small{font-size:9px;font-weight:700}
+.rb-life-note-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px dashed #e8d2ae;font-size:12px;color:#4b2c18}
+.rb-life-note-item:last-child{border-bottom:0}
+.rb-life-note-item span:last-child{font-size:10px;color:#76543c;white-space:nowrap;flex-shrink:0}
 </style>
 <style id="xiaoman-v5-final-lock">
 /* final cascade layer: keep the approved v5 geometry above legacy media queries */
@@ -583,6 +676,8 @@ body.rb-ref-page .rb-screen{width:400px!important;max-width:400px!important;marg
 body.rb-ref-page .rb-ref-page-shell{width:400px!important;max-width:400px!important;margin:0 auto!important}
 
 body.rb-fit-page .rb-pixel-head i{display:none!important}
+
+
 </style>
 </head>
 <body>
@@ -624,228 +719,41 @@ body.rb-fit-page .rb-pixel-head i{display:none!important}
     <div class="rb-sheet-actions"><button class="rb-secondary" onclick="rbCloseFitPart()">取消</button><button class="rb-primary" id="rbFitSave" onclick="rbSaveExercise()" disabled>加入训练</button></div>
   </section>
 </div>
-<div class="ph">
-<div class="hdr" id="topHdr"><div class="hdr-inner"><div><div class="hdr-greet" id="hdrGreet">早上好，G <span class="emoji">🐸</span></div><div class="hdr-date" id="hdrDate">6月2日 周五 · <span class="cd-dot">中碳日</span></div></div><div class="ha"><button class="hb avbtn" id="avBtn" onclick="openProfile()">👤</button></div></div></div>
-
-<!-- DIET -->
-<div class="pnl" id="p-diet">
-<div class="page-hd"><div class="ph-t">饮食</div><div class="ph-s">记录每一餐，AI 帮你吃够目标</div></div>
-<div class="card cal-card" id="dietCalCard"><div class="ds-wrap"><div class="date-strip" id="dietDateStrip"></div><button class="ds-expand" type="button" onclick="toggleCal('diet')" title="展开日历">📅</button></div><div id="dietCalBody" style="display:none;margin-top:10px"><div class="clh"><div class="diet-cal-hd"><button class="cln" onclick="calNav('diet',-1)">‹</button><button class="cln" onclick="calNav('diet',1)">›</button></div><div class="clt" id="dietCalTitle"></div><button class="cln" style="width:auto;padding:0 12px;font-size:.72rem;font-weight:600" onclick="calToday('diet')">今日</button></div><div class="clg" id="dietCalGrid"></div><div class="cur-date-label" id="dietCurDate"></div></div></div>
-
-<div class="bmr hero-bmr" id="bmrBox"><div style="display:flex;align-items:center;justify-content:space-between"><div class="bmr-lb" id="bmrLb">基础代谢率 (BMR) · Mifflin-St Jeor</div><button class="bmr-ai-btn" onclick="openAiAdvice()" title="AI 营养建议">🤖 AI 建议</button></div><div class="bmr-v" id="bmrVal">—</div><div class="bmr-sub"><span>📊 TDEE <strong id="tdeeVal">—</strong></span><span>🎯 目标 <strong id="goalVal">—</strong></span><span>🥓 体脂 <strong id="bfVal">—</strong></span></div><div class="bmr-cal"><div class="bci"><span class="bcl">🍽️ 已摄入</span><span class="bcv"><b id="bmrEaten">0</b><i>kcal</i></span></div><div class="bci"><span class="bcl">⚡ 剩余</span><span class="bcv"><b id="bmrLeft">0</b><i>kcal</i></span></div></div></div>
-
-<div class="sec"><span>碳水日类型</span><span class="sec-add" id="cdAddLink" onclick="openCarbDay()">＋ 添加</span></div>
-<div class="card">
-  <div id="cdList"></div>
-  <div id="cdContent" style="display:none">
-    <div class="cd-divider">
-      <div class="cd-h">🗓️ 今日碳水日类型</div>
-      <div class="cdchips" id="cdChips"></div>
-      <div class="mb"><div class="hd"><span class="mn" style="color:var(--org)">🍞 碳水化合物</span><span id="cVal">0 / — g</span></div><div class="tk"><div class="fl" id="cFill" style="background:var(--org);width:0%"></div></div><div class="sb" id="cSub">—</div></div>
-      <div class="mb"><div class="hd"><span class="mn" style="color:var(--grn)">🥩 蛋白质</span><span id="pVal">0 / — g</span></div><div class="tk"><div class="fl" id="pFill" style="background:var(--grn);width:0%"></div></div><div class="sb" id="pSub">—</div></div>
-      <div class="mb"><div class="hd"><span class="mn" style="color:var(--fat)">🥑 脂肪</span><span id="fVal">0 / — g</span></div><div class="tk"><div class="fl" id="fFill" style="background:var(--fat);width:0%"></div></div><div class="sb" id="fSub">—</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="sec"><span>今日饮食</span></div>
-<div id="mealList"></div>
-
-<div class="sec"><span>饮水量</span></div>
-<div class="card"><div class="ct"><span>💧 饮水</span><span class="ct-sub" id="waterTxt">0/8 杯</span></div><div class="wc" id="waterCups"></div></div>
-</div>
-
-<!-- WORK -->
-<div class="pnl" id="p-work">
-<div class="page-hd"><div class="ph-t">工作</div><div class="ph-s">任务 · 专注 · 节奏管理</div></div>
-<div class="card cal-card" id="workCalCard"><div class="ds-wrap"><div class="date-strip" id="workDateStrip"></div><button class="ds-expand" type="button" onclick="toggleCal('work')" title="展开日历">📅</button></div><div id="workCalBody" style="display:none;margin-top:10px"><div class="clh"><div class="diet-cal-hd"><button class="cln" onclick="calNav('work',-1)">‹</button><button class="cln" onclick="calNav('work',1)">›</button></div><div class="clt" id="workCalTitle"></div><button class="cln" style="width:auto;padding:0 12px;font-size:.72rem;font-weight:600" onclick="calToday('work')">今日</button></div><div class="clg" id="workCalGrid"></div><div class="cur-date-label" id="workCurDate"></div></div></div>
-<div class="sec"><span>专注计时</span></div>
-<div class="card timer-card"><div class="tb"><div class="td" id="timerD">00:00</div><div class="tbs"><button class="tbn go" id="timerBtn" onclick="toggleTimer()">开始</button><button class="tbn rst" onclick="resetTimer()">重置</button></div></div><div class="timer-meta">今日累计专注：<strong id="totalFocus">0.0</strong> 小时 · 完成率 <strong id="taskRate">0%</strong></div></div>
-<div class="sec"><span>今日任务</span></div>
-<div class="card"><button class="addbtn" onclick="openTaskModal()">＋ 添加任务（可设时间 / 紧急程度）</button><div id="taskList"></div></div>
-</div>
-
-<!-- LIFE -->
-<div class="pnl" id="p-life">
-<div class="life-header">
-  <div class="life-title">生活</div>
-  <div class="life-sub">标签 · 随记</div>
-</div>
-<div class="card cal-card" id="lifeCalCard" style="margin-bottom:12px"><div class="ds-wrap"><div class="date-strip" id="lifeDateStrip"></div><button class="ds-expand" type="button" onclick="toggleCal('life')" title="展开日历">📅</button></div><div id="lifeCalBody" style="display:none;margin-top:10px"><div class="clh"><div class="diet-cal-hd"><button class="cln" onclick="calNav('life',-1)">‹</button><button class="cln" onclick="calNav('life',1)">›</button></div><div class="clt" id="lifeCalTitle"></div><button class="cln" style="width:auto;padding:0 12px;font-size:.72rem;font-weight:600" onclick="calToday('life')">今日</button></div><div class="clg" id="lifeCalGrid"></div></div></div>
-<div class="life-cats" id="lifeCats"></div>
-<div class="life-panel" id="lifePanel"></div>
-</div>
-<div class="pnl fit-theme" id="p-fit">
-<div class="page-hd"><div class="ph-t">健身</div><div class="ph-s">今天动一动，状态更轻盈</div></div>
-<div class="fit-tabs" style="margin:6px 0 12px">
-  <div class="ftab on" data-f="train" onclick="swFit('train')">今日训练</div>
-  <div class="ftab" data-f="lib" onclick="swFit('lib')">动作库</div>
-  <div class="ftab" data-f="plan" onclick="swFit('plan')">训练计划</div>
-</div>
-<div id="fitTrain">
-<div class="card cal-card fit-date-card" id="fitCalCard"><div class="ds-wrap"><div class="date-strip" id="fitDateStrip"></div><button class="ds-expand" type="button" onclick="toggleCal('fit')" title="展开日历">📅</button></div><div id="fitCalBody" style="display:none;margin-top:10px"><div class="clh"><div class="diet-cal-hd"><button class="cln" onclick="calNav('fit',-1)">‹</button><button class="cln" onclick="calNav('fit',1)">›</button></div><div class="clt" id="fitCalTitle"></div><button class="cln" style="width:auto;padding:0 12px;font-size:.72rem;font-weight:600" onclick="calToday('fit')">今日</button></div><div class="clg" id="fitCalGrid"></div><div class="cur-date-label" id="fitCurDate"></div></div></div>
-<div class="fit-section-label"><span class="sprig">✦</span><span>今日状态</span></div>
-<div class="card fit-sum-card" id="fitSummary"></div>
-<div class="card fit-actions-card">
-  <div class="fit-top">
-    <div class="fit-top-btns">
-      <button class="addbtn" onclick="openFitPartModal()">＋ 添加训练部位</button>
-      <button class="addbtn ai" onclick="openFitAiAdvice()">🤖 AI 建议</button>
-    </div>
-    <div class="fit-prog" id="fitProg" style="display:none">
-      <div class="fp-bar"><div class="fp-fill" id="fitProgFill"></div></div>
-      <span class="fp-pct" id="fitProgPct">0%</span>
-    </div>
-  </div>
-  <div id="fitList"></div>
-</div>
-<div class="fit-section-label"><span class="sprig">✦</span><span>训练趋势</span></div>
-<div class="fit-trend-card" aria-label="训练趋势"><div class="fit-trend-head"><span>本周完成 <b>3</b> 次</span><span>保持节奏</span></div><div class="fit-trend-chart"><svg viewBox="0 0 330 58" preserveAspectRatio="none" aria-hidden="true"><polyline points="8,44 60,30 112,18 164,34 216,25 268,42 322,30" fill="none" stroke="#788d3e" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="8,50 60,45 112,48 164,39 216,44 268,49 322,41" fill="none" stroke="#ee6d43" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85"></polyline><g fill="#fffaf0" stroke="#788d3e" stroke-width="2"><circle cx="8" cy="44" r="3.5"></circle><circle cx="60" cy="30" r="3.5"></circle><circle cx="112" cy="18" r="3.5"></circle><circle cx="164" cy="34" r="3.5"></circle><circle cx="216" cy="25" r="3.5"></circle><circle cx="268" cy="42" r="3.5"></circle><circle cx="322" cy="30" r="3.5"></circle></g></svg></div><div class="fit-trend-days"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div></div>
-</div>
-<div id="fitPlan" style="display:none">
-  <div class="sec"><span>🗓️ 训练计划</span></div>
-  <button class="addbtn" onclick="openPlanModal()">＋ 新建训练计划</button>
-  <div id="planList"></div>
-</div>
-<div id="fitLib" style="display:none">
-  <div class="sec"><span>📚 动作资料库</span></div>
-  <div class="mf" style="margin-top:6px"><label>🔍 搜索动作（模糊匹配动作名 / 别名 / 器械 / 部位）</label><input type="text" id="libSearch" placeholder="如：卧推、哑铃、胸、squat…" oninput="libSearch()" autocomplete="off"></div>
-  <div class="lib-wrap">
-    <div class="lib-cats" id="libCats"></div>
-    <div class="lib-exes" id="libExes"></div>
-  </div>
-  <div class="lib-tip">点击动作右侧的「添加」按钮可加入今日训练</div>
-</div>
-</div>
-
-<!-- HOME -->
-<div class="pnl" id="p-home">
-<div id="homeContent"></div>
-</div>
-
-<!-- 记账 · 记一笔（底部抽屉） -->
-<div class="ledger-sheet" id="ledgerSheet" onclick="event.stopPropagation()">
-  <div class="ls-grip"></div>
-  <div class="ls-top">
-    <div class="ls-type" id="lsType">
-      <button id="lsBtnExp" class="on-exp" onclick="setLedgerType('exp')">支出</button>
-      <button id="lsBtnInc" onclick="setLedgerType('inc')">收入</button>
-    </div>
-    <button class="ls-x" onclick="closeLedger()">✕</button>
-  </div>
-  <div class="ls-amt exp" id="lsAmt">¥0.00</div>
-  <div class="ls-cats" id="lsCats"></div>
-  <div class="ls-note">
-    <input id="lsNote" placeholder="备注（选填）" maxlength="30">
-    <input type="date" id="lsDate">
-  </div>
-  <div class="ls-keys" id="lsKeys"></div>
-  <button class="ls-save" onclick="saveLedger()">保存</button>
-</div>
-<div class="ov" id="ledgerMask" onclick="closeLedger()"></div>
-<!-- 预算设置弹窗 -->
-<div class="ov" id="budgetOv" onclick="if(event.target===this)closeBudget()">
-  <div class="budget-box" onclick="event.stopPropagation()">
-    <div class="bb-title">💰 设置每月支出预算</div>
-    <div class="bb-input"><span>¥</span><input type="number" id="budgetInput" placeholder="如 3000" inputmode="decimal"></div>
-    <div class="bb-hint" id="budgetHint"></div>
-    <div class="bb-btns">
-      <button class="bb-btn c" onclick="closeBudget()">取消</button>
-      <button class="bb-btn" onclick="saveBudget()">确定</button>
-    </div>
-  </div>
-</div>
-<!-- AI ADVICE OVERLAY -->
-<div class="ov aiad-ov" id="aiAdviceOv" onclick="if(event.target===this)closeAiAdvice()"><div class="aiad-page" onclick="event.stopPropagation()">
-<div class="aiad-hd"><span id="aiadTitle">🤖 AI 营养建议</span><button class="aiad-close" onclick="closeAiAdvice()">✕</button></div>
-<div class="aiad-content" id="aiAdviceContent"></div>
-</div></div>
-
-<!-- PROFILE OVERLAY -->
-<div class="ov" id="profileOv" onclick="if(event.target===this)closeProfile()"><div class="ms2" onclick="event.stopPropagation()">
-<div class="pf-top"><div class="av-edit"><div class="av-big" id="avBig">👤</div><div class="av-acts"><button class="av-change" onclick="toggleAvPicker()">😀 表情</button><button class="av-change" onclick="avPhotoSystem()">📷 照片</button></div></div><span class="pf-tools"><button class="hb txt" onclick="exportData()">导出</button><button class="hb txt" onclick="document.getElementById('fi').click()">导入</button><button class="hb thc" id="thcBtn" onclick="openThemeColor()" title="主题色"><span class="dot" id="thcDot"></span>🎨</button></span></div>
-<div class="av-picker" id="avPicker" style="display:none"><div class="av-opts" id="avOpts"></div></div>
-<div class="card">
-<div class="ct">📋 身体数据</div>
-<div class="pg">
-<div class="pi"><label>性别</label><select id="p-gender" onchange="saveProfile()"><option value="male">男</option><option value="female">女</option></select></div>
-<div class="pi"><label>年龄</label><input type="number" id="p-age" min="1" max="120" placeholder="25" oninput="saveProfile()" onchange="saveProfile()"></div>
-<div class="pi"><label>身高 (cm)</label><input type="number" id="p-height" min="50" max="250" placeholder="170" oninput="saveProfile()" onchange="saveProfile()"></div>
-<div class="pi"><label>体重 (kg)</label><input type="number" id="p-weight" min="10" max="300" step="0.1" placeholder="65" oninput="saveProfile()" onchange="saveProfile()"></div>
-<div class="pi"><label>体脂率 (%)</label><input type="number" id="p-bf" min="1" max="60" step="0.1" placeholder="选填" oninput="saveProfile()" onchange="saveProfile()"></div>
-</div>
-<div style="margin-top:10px"><label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">活动水平</label>
-<div class="act-row" id="actRow">
-<div class="act-opt" data-act="1.2" onclick="setAct(1.2)">久坐</div>
-<div class="act-opt" data-act="1.375" onclick="setAct(1.375)">轻度运动</div>
-<div class="act-opt on" data-act="1.55" onclick="setAct(1.55)">中度运动</div>
-<div class="act-opt" data-act="1.725" onclick="setAct(1.725)">高强度</div>
-<div class="act-opt" data-act="1.9" onclick="setAct(1.9)">极高强度</div></div></div>
-<div style="margin-top:8px"><label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">目标</label>
-<div class="gm-row">
-<div class="gm-opt" data-gm="lose" onclick="setGM('lose')">减脂</div>
-<div class="gm-opt on" data-gm="maintain" onclick="setGM('maintain')">维持</div>
-<div class="gm-opt" data-gm="gain" onclick="setGM('gain')">增肌</div>
-</div></div>
-</div>
-<div class="card">
-<div class="ct">🤖 AI 识别设置</div>
-<div class="pg">
-<div class="pi pi-full"><label>识别引擎</label><select id="aiProvider" onchange="saveAiCfg()"><option value="qwen">通义千问（有免费额度）</option><option value="sensenova">商汤 SenseNova（公测免费）</option></select></div>
-<div class="pi pi-full" id="qwenBox"><label>通义千问 API Key</label><input type="password" id="aiKey" placeholder="sk-..." oninput="saveAiCfg()"></div>
-<div class="pi pi-full" id="qwenModelBox"><label>识别模型</label><select id="aiModel" onchange="saveAiCfg()"><option value="qwen-vl-max">qwen-vl-max（最强）</option><option value="qwen-vl-plus">qwen-vl-plus（均衡）</option><option value="qwen-vl-max-latest">qwen-vl-max-latest</option></select></div>
-<div class="pi pi-full" id="senseBox" style="display:none"><label>商汤 SenseNova API Key</label><input type="password" id="aiKeySense" placeholder="sk-..." oninput="saveAiCfg()"></div>
-<div class="pi pi-full"><label>中转代理 URL（可选，解决跨域）</label><input type="text" id="aiProxy" placeholder="https://你的worker.workers.dev/ 留空则直连" oninput="saveAiCfg()"></div>
-</div>
-<div class="ai-hint">通义千问：阿里云百炼获取 Key，浏览器可直连，有免费额度。商汤 SenseNova：注册即免费（每 5 小时 1500 次）但浏览器不能直接调用，需在「中转代理 URL」填一个 CORS 中转（可用免费 Cloudflare Worker，见下方说明）。Key 仅存本机。</div>
-</div>
-<div class="macts"><button class="mbn c" onclick="closeProfile()">关闭</button></div>
-</div></div>
-
-
-<div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
-
-<button class="fab" id="voiceFab" onclick="openVoice()" aria-label="AI 智能助手"><svg class="fab-ic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3 L16.7 7.8 L21.5 12.5 L16.7 17.2 L12 22 L7.3 17.2 L2.5 12.5 L7.3 7.8 Z" fill="#fff"/><path d="M19 0.8 L20.6 2.6 L22.2 4 L20.6 5.4 L19 7.2 L17.4 5.4 L15.8 4 L17.4 2.6 Z" fill="#fff" opacity="0.9"/></svg></button>
-<div class="ov" id="voiceOv" onclick="if(event.target===this)closeVoice()"><div class="ms2" onclick="event.stopPropagation()">
-<div class="ct"><span class="ct-ai"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3 L16.7 7.8 L21.5 12.5 L16.7 17.2 L12 22 L7.3 17.2 L2.5 12.5 L7.3 7.8 Z" fill="currentColor"/><path d="M19 0.8 L20.6 2.6 L22.2 4 L20.6 5.4 L19 7.2 L17.4 5.4 L15.8 4 L17.4 2.6 Z" fill="currentColor" opacity="0.6"/></svg> AI 智能助手</span> <span class="dx" onclick="closeVoice()">✕</span></div>
-<div class="vf-hint">说或输入即可<b>快捷添加</b>：<br>· 健身「卧推3组12次60公斤」「跑步20分钟」<br>· 饮食「早餐吃一个鸡蛋」「喝一杯牛奶」「米饭200克」<br>· 工作「任务：写周报」<br>· 提醒「三点开会」「提醒我取快递」<br>· 生活「随记今天很开心」「学习看了书」<br>· 其他「喝水3杯」「体重70.5」「睡眠7.5小时」</div>
-<textarea class="vf-input" id="voiceInput" rows="3" placeholder="点击麦克风说话，或手动输入…"></textarea>
-<div class="vf-row"><button class="vf-mic" id="voiceMic" onclick="toggleVoiceRec()">🎤 点击说话</button><button class="mbn ok" onclick="runVoiceCommand(document.getElementById('voiceInput').value)">添加</button></div>
-<div class="vf-log" id="voiceLog"></div>
-</div></div>
-
-<div class="ov" id="mealOv" onclick="if(event.target===this)closeMeal()"><div class="ms2" onclick="event.stopPropagation()"><h3 id="mealTitle">添加饮食</h3><div class="mf"><label>🔍 搜索食物（模糊匹配，自动识别热量）</label><div class="m-food-row"><input type="text" id="m-food" placeholder="输入食物名，如：米饭、鸡胸肉、牛奶…" oninput="foodSearch()" autocomplete="off"><button type="button" class="m-cam" onclick="mealCamera()" aria-label="拍照识别食物" title="拍照识别食物"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.2A1.6 1.6 0 0 1 5.6 6.6h2L9 4.6h6l1.4 2h2A1.6 1.6 0 0 1 20 8.2v8.2A1.6 1.6 0 0 1 18.4 18H5.6A1.6 1.6 0 0 1 4 16.4z"/><circle cx="12" cy="12.4" r="3.3"/></svg></button></div></div>
-<input type="file" id="mealCam" accept="image/*" capture="environment" style="display:none" onchange="mealCamChange(this)">
-<div class="cam-res" id="camRes" style="display:none"><img class="cam-pv" id="camPv" style="display:none"><div id="camBody"></div></div><div class="mp-row"><div class="mp-cats" id="mpCats"></div><div class="mp-foods"><div class="food-list" id="foodList"></div></div></div><div class="mp-sel" id="mpSel"></div><div class="macts"><button class="mbn c" onclick="closeMeal()">取消</button><button class="mbn ok" id="mpSave" onclick="saveMp()" disabled>保存</button></div></div></div>
-
-<div class="ov" id="editMealOv" onclick="if(event.target===this)closeEditMeal()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">✏️ 修改食物 <span class="dx" onclick="closeEditMeal()">✕</span></div><div class="em-name" id="emName"></div><div class="mf"><label>📊 数量</label><input type="number" id="emAmt" min="0.5" step="0.5" oninput="emPreview()"></div><div class="mf" id="emUnitWrap"><label>📏 单位</label><select id="emUnit" onchange="emPreview()"></select></div><div class="em-prev" id="emPrev"></div><div class="macts"><button class="mbn c" onclick="closeEditMeal()">取消</button><button class="mbn ok" onclick="applyEditMeal()">保存</button></div></div></div>
-<input type="file" id="fi" accept=".json" style="display:none">
-<div class="cdov" id="cdModal">
-  <div class="cdmd">
-    <h3 id="cdModalTitle">添加碳水日类型</h3>
-    <div class="cdf"><label>类型</label><select id="cdType" onchange="onCdTypeChange()"><option value="高碳日">高碳日</option><option value="中碳日">中碳日</option><option value="低碳日">低碳日</option></select></div>
-    <div class="cdf"><label>碳水倍率 (×)</label><input id="cdCarb" type="number" step="0.1" min="0" value="1" oninput="updateCdPreview()"></div>
-    <div class="cdf"><label>蛋白质倍率 (×)</label><input id="cdPro" type="number" step="0.1" min="0" value="1" oninput="updateCdPreview()"></div>
-    <div class="cdf"><label>脂肪倍率 (×)</label><input id="cdFat" type="number" step="0.1" min="0" value="1" oninput="updateCdPreview()"></div>
-    <div class="cdprev" id="cdPrev"></div>
-    <div class="cdacts"><button class="cdbtn c" onclick="closeCd()">取消</button><button class="cdbtn s" onclick="saveCarbDay()">保存</button></div>
-  </div>
-</div>
-<div class="ov" id="taskOv" onclick="if(event.target===this)closeTask()"><div class="ms2" onclick="event.stopPropagation()"><h3 id="taskModalTitle">添加任务</h3><div class="mf"><label>🕐 时间</label><select id="t-time"></select></div><div class="mf"><label>📝 内容</label><textarea id="t-text" class="nt" style="min-height:64px" placeholder="输入任务内容..."></textarea></div><div class="mf"><label>⚠️ 紧急程度</label><select id="t-urgency"><option value="normal">一般</option><option value="important">重要</option><option value="urgent">紧急</option></select></div><div class="macts"><button class="mbn c" onclick="closeTask()">取消</button><button class="mbn ok" onclick="saveTask()">保存</button></div></div></div>
-
-<div class="ov" id="thcOv" onclick="if(event.target===this)closeThemeColor()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">🎨 主题色 <span class="dx" onclick="closeThemeColor()">✕</span></div><div class="swatches" id="thcSwatches"></div><div class="custom-row" id="thcCustomRow"><input type="color" id="thcCustom" value="#ff3b30" oninput="setCustomColor(this.value)" onchange="setCustomColor(this.value)"><span>自定义颜色</span></div><div class="thc-hint">选择后，所有页面的高亮色立即生效</div></div></div>
-
-<div class="ov" id="reminderOv" onclick="if(event.target===this)closeReminder()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">🔔 <span id="reminderModalTitle">添加提醒</span> <span class="dx" onclick="closeReminder()">✕</span></div><div class="mf"><label>🕐 时间（可选，用于排序提醒）</label><input type="time" id="r-time" style="padding:9px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--t1);font-size:.85rem;outline:none;font-family:inherit"></div><div class="mf"><label>📝 内容</label><textarea id="r-text" class="nt" placeholder="提醒内容，如：下午 3 点吃药 / 给妈妈打电话…"></textarea></div><div class="macts"><button class="mbn c" onclick="closeReminder()">取消</button><button class="mbn ok" onclick="saveReminder()">保存</button></div></div></div>
-<div class="ov" id="fitPartOv" onclick="if(event.target===this)closeFitPart()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct" id="fitPartTitle">💪 添加训练部位 <span class="dx" onclick="closeFitPart()">✕</span></div><div class="mf"><label>训练部位</label><select id="fit-part-name" onchange="onFitPartChange()" style="padding:9px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--t1);font-size:.85rem;outline:none;font-family:inherit;-webkit-appearance:none;appearance:none;width:100%"><option value="胸">胸</option><option value="背">背</option><option value="肩">肩</option><option value="手臂">手臂</option><option value="前臂">前臂</option><option value="大腿">大腿</option><option value="小腿">小腿</option><option value="核心">核心</option><option value="有氧">有氧</option><option value="颈部">颈部</option></select></div><div class="mf"><label>🔍 从动作库选择动作（模糊匹配，可多选）</label><input type="text" id="fit-ex-search" placeholder="输入动作名或拼音首字母，如：卧推、wotui、squat" oninput="fitSearch()" autocomplete="off" style="padding:9px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);color:var(--t1);font-size:.85rem;outline:none;font-family:inherit"><div class="food-list" id="fit-ex-list"></div></div><div class="fex-sel" id="fit-ex-sel"></div><div class="macts"><button class="mbn c" onclick="closeFitPart()">取消</button><button class="mbn ok" onclick="saveFitPart()">保存</button></div></div></div>
-<div class="ov" id="planModal" onclick="if(event.target===this)closePlanModal()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">新建训练计划 <span class="dx" onclick="closePlanModal()">✕</span></div><div class="mf"><label>计划名称</label><input id="planName" class="pf-input" placeholder="如：推拉腿分化 / 胸背腿循环"></div><div class="mf"><label>循环周期（天）</label><input id="planDays" type="number" min="1" max="14" value="7" class="pf-input"><div class="mf-hint">按此天数循环排训练，例如 7 天一轮（可含休息日）</div></div><div class="mf"><label>开始日期（这天为第 1 天）</label><input id="planStart" type="date" class="pf-input"><div class="mf-hint">计划从这天开始算第 1 天，之后按周期循环；默认今天</div></div><div class="mf"><label>计划目标（选填）</label><textarea id="planGoal" class="pf-input nt" style="min-height:54px" placeholder="如：增肌 3 个月 / 备战半马 / 维持健康"></textarea></div><div class="macts"><button class="mbn c" onclick="closePlanModal()">取消</button><button class="mbn ok" onclick="savePlan()">创建并编辑</button></div></div></div>
-<div class="ov" id="planEditOv" onclick="if(event.target===this)closePlanEdit()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">🗓️ <span id="planEditName"></span> <span class="dx" onclick="closePlanEdit()">✕</span></div><div id="planEditBody"></div><div class="macts"><button class="mbn c" onclick="closePlanEdit()">关闭</button></div></div></div>
-<div class="toast" id="toast"></div>
-<div class="ov" id="exDetailOv" onclick="if(event.target===this)closeExDetail()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">💪 <span id="exDetailName">动作讲解</span> <span class="dx" onclick="closeExDetail()">✕</span></div><div class="exd-canvas-wrap"><img id="exDetailGif" class="exd-gif" style="display:none" alt="动作动画"><canvas id="exDetailCv"></canvas></div><div class="exd-desc" id="exDetailDesc"></div><ol class="exd-steps" id="exDetailSteps"></ol><div class="exd-muscles" id="exDetailMuscles"></div><div class="macts"><button class="mbn ok" onclick="closeExDetail()">明白了</button></div></div></div>
-<div class="ov" id="cfmOv" onclick="if(event.target===this)closeCfm()"><div class="ms2" onclick="event.stopPropagation()"><div class="ct">提示</div><div class="cfm-msg" id="cfmMsg"></div><div class="macts"><button class="mbn c" onclick="closeCfm()">取消</button><button class="mbn ok" onclick="runCfm()">确定</button></div></div></div>
-<div class="ov" id="imgOv" onclick="if(event.target===this)closeImgView()"><div class="imgv-wrap" onclick="event.stopPropagation()"><img id="imgBig" class="imgv-img" alt="查看大图"><button class="imgv-x" type="button" onclick="closeImgView()" aria-label="关闭">✕</button></div></div>
-</div>
 
 <script>
+/* 兼容垫片：旧 v1 的渲染函数仍被新壳的数据操作（保存心情/勾选任务/加饮食/加训练等）
+   复用，但旧版 DOM（<div class="ph">）已彻底删除。此处让 document.getElementById 在找不到
+   节点时返回一个安全的空壳对象，使旧渲染逻辑变为 no-op 而不抛错；新壳随后会自行 rbRender 重绘。 */
+(function(){
+  if(document.__rbGbiPatched)return;
+  document.__rbGbiPatched=true;
+  var _gbi=document.getElementById.bind(document);
+  var _noop=function(){};
+  var _dummy;
+  function _dumbVal(){return _dummy;}
+  _dummy={
+    innerHTML:'',textContent:'',value:'',hidden:false,disabled:false,readOnly:false,src:'',alt:'',id:'',className:'',name:'',
+    tagName:'DIV',nodeType:1,nodeValue:null,checked:false,selected:false,selectedIndex:-1,
+    offsetWidth:0,offsetHeight:0,offsetLeft:0,offsetTop:0,clientWidth:0,clientHeight:0,scrollWidth:0,scrollHeight:0,scrollLeft:0,scrollTop:0,
+    children:[],childNodes:[],firstChild:null,lastChild:null,firstElementChild:null,lastElementChild:null,nextSibling:null,previousSibling:null,nextElementSibling:null,previousElementSibling:null,
+    style:{setProperty:_noop,removeProperty:_noop},
+    dataset:{},
+    classList:{add:_noop,remove:_noop,toggle:_noop,contains:function(){return false}},
+    setAttribute:_noop,removeAttribute:_noop,remove:_noop,
+    appendChild:_noop,removeChild:_noop,insertBefore:_noop,replaceChild:_noop,insertAdjacentHTML:_noop,insertAdjacentText:_noop,
+    append:_noop,prepend:_noop,after:_noop,before:_noop,replaceWith:_noop,
+    addEventListener:_noop,removeEventListener:_noop,dispatchEvent:_noop,
+    focus:_noop,blur:_noop,click:_noop,scrollIntoView:_noop,scrollIntoViewIfNeeded:_noop,
+    contains:function(){return false},matches:function(){return false},closest:function(){return null},
+    getAttribute:function(){return null},setAttributeNS:_noop,getAttributeNS:function(){return null},hasAttribute:function(){return false},hasAttributes:function(){return false},
+    querySelector:function(){return null},querySelectorAll:function(){return []},
+    cloneNode:function(){return _dumbVal()},
+    getBoundingClientRect:function(){return {top:0,left:0,right:0,bottom:0,width:0,height:0,x:0,y:0}},
+    ownerDocument:null,namespaceURI:null,localName:'div',prefix:null,isConnected:false
+  };
+  _dummy.parentNode=_dummy.parentElement=_dummy;
+  document.getElementById=function(id){var el=_gbi(id);return el||_dummy};
+})();
 var KEY='dlj_v2';
 var MEALS=[{k:'breakfast',n:'早餐',ic:'🌅',t:'08:30'},{k:'lunch',n:'午餐',ic:'☀️',t:'12:30'},{k:'dinner',n:'晚餐',ic:'🌙',t:'19:00'},{k:'snack',n:'加餐',ic:'🍪',t:'随时'}];
 // 食物营养库：每 100g / 100ml 的热量(kcal)、碳水(g)、蛋白(g)、脂肪(g)，unit 为计量单位
@@ -2182,7 +2090,6 @@ function init(){
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applySystemTheme);
   updateStatusBarStyle();
   applyThemeColor();
-  loadProfileUI();
   // 吃喝玩乐攻略数据：每天自动更新一次（拉取 GitHub Pages 最新 boards-data.json，成功替换数据，失败用内置兜底）
   try{loadRemoteBoards()}catch(e){console.error('loadRemoteBoards',e)}
   // 仅当数据版本低于当前时执行迁移，避免每次启动重复遍历
@@ -2190,17 +2097,11 @@ function init(){
   migrateCarbDays(); // 独立于 SCHEMA，每次加载都执行，彻底清除历史脏数据（被全局套用的"基础"类型）且不回生
   try{cleanFoodFreq()}catch(e){console.error('cleanFoodFreq',e)} // 移除 30 天未添加的常见食物
   saveNow()
-  // 各渲染模块独立 try-catch：单点出错不再导致整页白屏
+  // 数据模块独立 try-catch：单点出错不再导致整页白屏
   try{rolloverIncomplete()}catch(e){console.error('rolloverIncomplete',e)}
   try{buildTimeOptions()}catch(e){console.error('buildTimeOptions',e)}
-  try{renderAll()}catch(e){console.error('renderAll',e)}
-  try{buildCal('diet');buildCal('work');buildCal('life');buildCal('fit')}catch(e){console.error('buildCal',e)}
+  // 健身动作库数据准备（新壳动作库页使用 FIT_CATS / EXERCISE）
   try{libCat=FIT_CATS[0];renderLibCats();renderLibExes()}catch(e){console.error('renderLib',e)}
-  try{renderDietSummary()}catch(e){console.error('renderDietSummary',e)}
-  try{restoreTimer()}catch(e){console.error('restoreTimer',e)}
-  try{checkBackupReminder()}catch(e){console.error('checkBackupReminder',e)}
-  try{updateHdr()}catch(e){console.error('updateHdr',e)}
-  try{initAiAdviceSwipe()}catch(e){console.error('initAiAdviceSwipe',e)}
 }
 function updateHdr(){
   var g=document.getElementById('hdrGreet'),d=document.getElementById('hdrDate'),ab=document.getElementById('avBtn');
@@ -5579,7 +5480,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   function rbDay(){var real=gd(curDate);if(!rbPreviewSession)return real;if(!rbPreviewState)rbPreviewState=rbClonePreview();return rbPreviewState}
   function rbPct(v,t){return t?Math.max(0,Math.min(100,Math.round(v/t*100))):0}
   function rbIcon(path,cls){return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24" aria-hidden="true"><path d="'+path+'"/></svg>'}
-  function rbLeafIcon(cls){return '<img class="rb-leaf-sticker '+(cls||'')+'" src="assets/xiaoman-v3/ui-leaf-sticker.png" alt="" aria-hidden="true">'}
+  function rbLeafIcon(cls){return ''}
   window.rbLeafIcon=rbLeafIcon;
   function rbTinyIcon(kind,cls){var f={carb:'macro-carb-v2.png',protein:'macro-protein-v2.png',fat:'macro-fat-v2.png'}[kind];return f?'<img class="rb-tiny-sticker '+(cls||'')+'" src="assets/xiaoman-v3/'+f+'" alt="" aria-hidden="true">':''}
   function rbArt(kind){
@@ -5597,13 +5498,15 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   function rbNav(){var n=document.getElementById('rbNav');if(!n)return;var active=rbPage;if(rbPage==='mealAdd'||rbPage==='foodResult')active='diet';if(rbPage==='exerciseDetail')active='fit';if(rbPage==='taskDetail')active='work';if(rbPage==='profile')active='life';n.innerHTML=rbNavItems.map(function(x){return '<button class="'+(x[0]===active?'on':'')+'" onclick="rbNavTo(\''+x[0]+'\')">'+rbIcon(x[2],'rb-nav-icon')+'<span>'+x[1]+'</span></button>'}).join('')}
   function rbHome(){
     var d=rbDay(),m=rbPreviewSession?{cal:1800,c:220,p:110,f:60}:(calcMacros()||{}),goal=Math.round(m.cal||1800),meals=rbMeals(d),tc=meals.reduce(function(a,x){return a+x.cal},0),carb=meals.reduce(function(a,x){return a+(x.item.carb||0)},0),pro=meals.reduce(function(a,x){return a+(x.item.protein||0)},0),fat=meals.reduce(function(a,x){return a+(x.item.fat||0)},0),parts=(d.fit&&d.fit.parts)||[],fits=[];parts.forEach(function(p){(p.items||[]).forEach(function(x){fits.push(x)})});var wk=rbPreviewSession?{kcal:[1420,980,1310,1120,1380,900,1460],burn:[880,1260,1040,1320,950,1220,1080],labels:['一','二','三','四','五','六','日']} : weeklyCal(goal),mood=d.life&&d.life.mood||'';
-    var dietRows=meals.slice(0,3).map(function(x){return '<div class="rb-mini-row rb-meal-row"><span class="rb-food-thumb">'+foodIcon(x.food)+'</span><span>'+rbEsc(x.food)+'</span><span class="rb-meal-check">✓</span></div>'}).join('');
-    if(!dietRows)dietRows='<div class="rb-mini-row rb-placeholder-row"><span class="rb-food-dot">🥣</span><span>早餐 · 记录一份早餐</span><b>＋</b></div><div class="rb-mini-row rb-placeholder-row"><span class="rb-food-dot">🍱</span><span>午餐 · 记录一份午餐</span><b>＋</b></div><div class="rb-mini-row rb-placeholder-row"><span class="rb-food-dot">🥗</span><span>晚餐 · 记录一份晚餐</span><b>＋</b></div>';
+    var mealImgs=['home-breakfast-bowl','home-lunch-salmon','home-dinner-soup'],mealNames=['早餐','午餐','晚餐'];
+    var dietCards=meals.slice(0,3).map(function(x,i){return '<div class="rb-home-meal-card" onclick="rbOpenMealPage(\''+x.type+'\')"><img src="assets/xiaoman-v3/'+mealImgs[i]+'.png" alt="'+mealNames[i]+'"><div class="rb-home-meal-info"><b>'+rbEsc(mealNames[i])+'</b><span>'+rbEsc(x.food)+'</span></div><div class="rb-home-meal-cal">'+Math.round(x.cal)+'<small>kcal</small></div></div>'}).join('');
+    if(!dietCards)dietCards='<div class="rb-home-meal-card" onclick="rbOpenMealPage(\'breakfast\')"><img src="assets/xiaoman-v3/home-breakfast-bowl.png" alt="早餐"><div class="rb-home-meal-info"><b>早餐</b><span>记录一份早餐</span></div><div class="rb-home-meal-cal">—</div></div><div class="rb-home-meal-card" onclick="rbOpenMealPage(\'lunch\')"><img src="assets/xiaoman-v3/home-lunch-salmon.png" alt="午餐"><div class="rb-home-meal-info"><b>午餐</b><span>记录一份午餐</span></div><div class="rb-home-meal-cal">—</div></div><div class="rb-home-meal-card" onclick="rbOpenMealPage(\'dinner\')"><img src="assets/xiaoman-v3/home-dinner-soup.png" alt="晚餐"><div class="rb-home-meal-info"><b>晚餐</b><span>记录一份晚餐</span></div><div class="rb-home-meal-cal">—</div></div>';
     var trend=rbTrendSvg(wk,goal);
-    return '<div class="rb-topline"><div class="rb-greeting">早上好，小满<span class="rb-sun" aria-hidden="true"></span><small>今天也要好好照顾自己呀~</small></div><button class="rb-avatar" onclick="rbOpenProfilePage()"><img src="assets/illustrations/xiaoman-cup.png" alt="小满捧着热饮"></button></div>'+
-      '<section class="rb-card rb-heat rb-home-heat"><div class="rb-card-head"><div class="rb-card-title">今日热量</div><span class="rb-nutri-title">☷ 三大营养素</span></div><div class="rb-heat-grid"><div><div class="rb-ring">'+rbRingSvg(rbPct(tc,goal)/100)+'<div class="rb-ring-center"><b>'+Math.round(tc)+'</b><span>/ '+goal+' kcal</span></div></div><div class="rb-ring-foot">剩余 <strong>'+Math.max(0,goal-Math.round(tc))+' kcal</strong></div></div><div class="rb-macros"><div class="rb-macro"><label>碳水</label><div class="rb-meter c"><i style="width:'+rbPct(carb,m.c||220)+'%"></i></div><b>'+Math.round(carb)+' g</b></div><div class="rb-macro"><label>蛋白质</label><div class="rb-meter p"><i style="width:'+rbPct(pro,m.p||110)+'%"></i></div><b>'+Math.round(pro)+' g</b></div><div class="rb-macro"><label>脂肪</label><div class="rb-meter f"><i style="width:'+rbPct(fat,m.f||60)+'%"></i></div><b>'+Math.round(fat)+' g</b></div></div></div></section>'+
-      '<div class="rb-home-grid"><section class="rb-card rb-mini rb-home-diet"><div class="rb-card-head"><h3>今日饮食</h3><button class="rb-card-sticker" onclick="rbOpenMealPage(\'breakfast\')" aria-label="添加饮食"><img src="assets/illustrations/puppy-peek.png" alt="线条小狗"></button></div><div class="rb-mini-list">'+dietRows+'</div></section><section class="rb-card rb-mini rb-home-fit"><h3>运动打卡</h3><div class="rb-mini-count">'+(rbPreviewSession?12:fits.length)+'<small>天</small></div><div class="rb-mini-note">连续记录</div><div class="rb-mini-action"><img class="rb-active-mascot" src="assets/illustrations/xiaoman-active.png" alt="小满运动打卡"></div></section><section class="rb-card rb-mini rb-home-mood" onclick="rbSetMood(\'😄\')"><h3>今日心情</h3><div class="rb-home-mood-summary"><span>🙂</span><b>开心</b></div><p>很棒的一天！</p></section></div>'+
-      '<section class="rb-card rb-trend"><div class="rb-card-head"><div class="rb-card-title">本周趋势</div><div class="rb-trend-key"><span class="olive">热量摄入</span><span class="coral">运动消耗</span></div></div>'+trend+'</section>';
+    var moodIcons=[{k:'😄',t:'开心'},{k:'😐',t:'一般'}],curMood=d.life&&d.life.mood||'';
+    return '<div class="rb-topline"><div class="rb-greeting">早上好，小满<span class="rb-sun" aria-hidden="true"></span><small>今天也要照顾好自己</small></div><button class="rb-avatar" onclick="rbOpenProfilePage()"><img src="assets/xiaoman-v3/home-puppy-mug.png" alt="小满"></button></div>'+
+      '<section class="rb-card rb-heat rb-home-heat"><div class="rb-status-badge">📋 今日状态</div><div class="rb-heat-grid"><div><div class="rb-ring">'+rbRingSvg(rbPct(tc,goal)/100)+'<div class="rb-ring-center"><b>'+Math.round(tc)+'</b><span>kcal</span><small>目标 '+goal+' kcal</small></div></div></div><div class="rb-macros"><div class="rb-macro"><div class="rb-macro-icon">🍞</div><div class="rb-macro-body"><label>碳水化合物</label><div class="rb-meter c"><i style="width:'+rbPct(carb,m.c||220)+'%"></i></div></div><b>'+Math.round(carb)+'g <small>/ '+(m.c||220)+'g</small></b></div><div class="rb-macro"><div class="rb-macro-icon">🥩</div><div class="rb-macro-body"><label>蛋白质</label><div class="rb-meter p"><i style="width:'+rbPct(pro,m.p||110)+'%"></i></div></div><b>'+Math.round(pro)+'g <small>/ '+(m.p||110)+'g</small></b></div><div class="rb-macro"><div class="rb-macro-icon">🥑</div><div class="rb-macro-body"><label>脂肪</label><div class="rb-meter f"><i style="width:'+rbPct(fat,m.f||60)+'%"></i></div></div><b>'+Math.round(fat)+'g <small>/ '+(m.f||60)+'g</small></b></div></div><div class="rb-home-stats-row"><div class="rb-home-stat"><span class="rb-home-stat-icon">😊</span><div><b>开心</b><small>心情</small></div></div><div class="rb-home-stat"><span class="rb-home-stat-icon">💪</span><div><b>'+(rbPreviewSession?32:fits.length*8)+'</b><small>分钟运动</small></div></div><div class="rb-home-stat"><span class="rb-home-stat-icon">💧</span><div><b>'+(rbPreviewSession?3.4:2.4)+'</b><small>L 饮水</small></div></div></div></div></section>'+
+      '<section class="rb-card rb-home-meals"><div class="rb-home-pixel-card-head"><span>🍽️</span>今日饮食<small>请输入 ></small></div><div class="rb-home-meals-grid">'+dietCards+'</div></section>'+
+      '<section class="rb-card rb-home-trend"><div class="rb-home-pixel-card-head"><span>📈</span>本周趋势<small>适时(分)</small></div>'+trend+'</section>';
   }
   function rbTaskRow(t){return '<div class="rb-task"><button class="rb-task-check '+(t.done?'on':'')+'" onclick="rbToggleTask(\''+t.id+'\')">'+(t.done?'✓':'')+'</button><span class="rb-task-text '+(t.done?'done':'')+'" onclick="rbOpenTaskDetail(\''+t.id+'\')" style="cursor:pointer">'+rbEsc(t.text)+'</span><span class="rb-task-time">'+rbEsc(t.time||'—')+'</span></div>'}
   function rbFit(){var d=rbDay(),parts=(d.fit&&d.fit.parts)||[],items=[];parts.forEach(function(p){(p.items||[]).forEach(function(i){items.push({part:p.name,item:i})})});var cards=items.slice(0,3).map(function(x,idx){var ex=(EXERCISE_DB||[]).filter(function(e){return e.name===x.item.name||e.id===x.item.eid})[0],img=ex&&ex.image,art=idx===1?'dog':idx===2?'plant':'cat';return '<section class="rb-card rb-fit-card"><div><h3 onclick="rbOpenExerciseDetail(\''+(x.item.eid||'')+'\')" style="cursor:pointer">'+rbEsc(x.item.name)+'</h3><p>'+rbEsc(x.part)+' · '+(x.item.type==='cardio'?(x.item.duration||30)+' 分钟':(x.item.sets||3)+' 组 × '+(x.item.reps||12))+'</p><button class="rb-primary" onclick="rbToggleFit(\''+(x.item.eid||'')+'\')">'+(x.item.done?'已完成':'开始训练')+'</button></div><div class="rb-fit-thumb" onclick="rbOpenExerciseDetail(\''+(x.item.eid||'')+'\')">'+(img?'<img src="'+rbEsc(img)+'" alt="">':'<div class="rb-placeholder">'+rbArt(art)+'</div>')+'</div></section>'}).join('');if(!cards)cards='<section class="rb-card rb-empty rb-fit-empty"><div class="rb-empty-art">'+rbArt('cat')+'</div><div>还没有训练计划</div><button class="rb-primary" onclick="rbOpenFitPart()">添加训练</button></section>';var total=items.length,done=items.filter(function(x){return x.item.done}).length;return rbHeader('健身','动起来，让身体充满能量！','cat')+'<section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">今日训练计划</div><button class="rb-card-link" onclick="rbOpenFitPart()">添加 ›</button></div><div class="rb-stats-row"><div class="rb-stat"><b>'+done+'/'+total+'</b><span>动作完成</span></div><div class="rb-stat"><b>'+Math.round(done*12)+'</b><span>分钟训练</span></div><div class="rb-stat"><b>'+Math.round(done*80)+'</b><span>消耗 kcal</span></div></div></section><div class="rb-section-label">训练清单 <span>今天 · '+total+' 项</span></div>'+cards+'<section class="rb-card rb-fit-card"><div><h3>本周运动进度</h3><p>保持每周至少 4 天活动，给自己一点小目标。</p><div class="rb-progress"><i style="width:'+Math.min(100,done/Math.max(1,total)*100)+'%"></i></div></div><div class="rb-doodle">'+rbArt('dog')+'</div></section>'}
@@ -5617,13 +5520,14 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
       return '<section class="rb-card rb-fit-card"><div><h3 onclick="rbOpenExerciseDetail(\''+(x.item.eid||'')+'\')" style="cursor:pointer">'+rbEsc(x.item.name)+'</h3><p>'+rbEsc(x.part)+' · '+sets+'</p><button class="rb-primary" onclick="rbToggleFit(\''+(x.item.eid||'')+'\')">'+(x.item.done?'已完成':'开始训练')+'</button></div><div class="rb-fit-thumb" onclick="rbOpenExerciseDetail(\''+(x.item.eid||'')+'\')">'+(img?'<img src="'+rbEsc(img)+'" alt="">':'<div class="rb-placeholder">'+rbArt(art)+'</div>')+'</div></section>';
     }).join('');
     if(!cards)cards='<section class="rb-card rb-empty rb-fit-empty"><div class="rb-empty-art">'+rbArt('cat')+'</div><div>还没有训练计划</div><button class="rb-primary" onclick="rbOpenFitPart()">添加训练</button></section>';
-    var action='<section class="rb-fit-actions"><button class="rb-fit-action-main" onclick="rbOpenFitPart()"><span class="rb-action-icon">✦</span><span><b>开始今天的训练</b><small>选择部位和动作，加入今日训练</small></span><em>开始训练 ›</em></button><button class="rb-fit-mini" onclick="rbOpenFitLibrary()">动作库</button><button class="rb-fit-mini" onclick="rbOpenPlanManager()">训练计划</button></section>';
-    return rbHeader('健身','今天动一动，状态更轻盈','cat')+action+'<section class="rb-card rb-fit-status"><div class="rb-card-head"><div class="rb-card-title">今日状态</div><span class="rb-coral-tag">本周 3/4 次</span></div><div class="rb-fit-status-grid"><div class="rb-fit-ring"><b>'+Math.round(done*10+32)+'</b><span>分钟</span></div><div class="rb-fit-metrics"><div><i class="m-olive">◒</i><span>训练容量</span><b>'+((done*2.1+4.1).toFixed(1))+'k</b></div><div><i class="m-coral">◆</i><span>消耗热量</span><b>'+Math.round(done*70+280)+' kcal</b></div><div><i class="m-yellow">✓</i><span>连续打卡</span><b>5 天</b></div></div></div></section><div class="rb-section-label">推荐训练</div><section class="rb-card rb-fit-recommend"><div><h3>全身燃脂 · 初级</h3><p>20 分钟 · 8 个动作</p><button class="rb-primary" onclick="rbOpenFitPart()">开始</button></div><div class="rb-fit-reco-art">'+rbIllustration('fit-header-sticker.png','训练插画')+'</div></section><div class="rb-section-label">本次训练</div>'+cards+'<section class="rb-card rb-fit-trend"><div class="rb-card-head"><div class="rb-card-title">训练趋势</div><span>本周完成 <b>'+Math.max(3,done)+'</b> 次</span></div><div class="rb-trend-line"><svg viewBox="0 0 320 58" preserveAspectRatio="none"><polyline points="8,45 60,30 112,18 164,34 216,25 268,42 312,30" fill="none" stroke="#788d3e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="8,51 60,46 112,48 164,40 216,44 268,50 312,41" fill="none" stroke="#ee6d43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div><div class="rb-trend-days"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div></section>';
+    var action='<section class="rb-fit-actions"><div class="rb-fit-tabs"><button class="rb-fit-tab on">今日</button><button class="rb-fit-tab" onclick="rbOpenFitLibrary()">动作库</button></div><button class="rb-fit-plan-btn" onclick="rbOpenPlanManager()">📋 训练计划</button></section>';
+    var sessionItems=parts.length?parts.slice(0,3).map(function(p){var d=(p.duration||5),nm=p.name||'训练';return '<div class="rb-session-item'+(p.done&&p.items&&p.items.every(function(x){return x.done})?' done':'')+'<span class="rb-session-name">'+rbEsc(nm)+'</span><span class="rb-session-time">'+d+' 分钟</span><span class="rb-session-check">'+(p.done?'✓':'')+'</span></div>'}).join(''):'<div class="rb-session-item"><span class="rb-session-name">暂无训练</span><span class="rb-session-time">—</span></div>';
+    return rbHeader('健身','今天动一动，状态更轻盈','fit-puppy-dumbbell')+action+'<section class="rb-card rb-fit-status"><div class="rb-status-badge">🔥 今日状态</div><div class="rb-fit-status-grid"><div class="rb-fit-ring"><b>'+Math.round(done*10+32)+'</b><span>分钟</span><small>本周目标 4次</small></div><div class="rb-fit-metrics"><div><i class="m-olive">◒</i><span>训练容量</span><b>'+((done*2.1+4.1).toFixed(1))+'k</b></div><div><i class="m-coral">◆</i><span>消耗热量</span><b>'+Math.round(done*70+280)+' kcal</b></div><div><i class="m-yellow">✓</i><span>连续打卡</span><b>5 天</b></div></div></div></section><div class="rb-section-label">推荐训练</div><section class="rb-card rb-fit-recommend"><div><h3>全身燃脂 · 初级</h3><p>20 分钟 · 8 个动作</p><button class="rb-primary" onclick="rbOpenFitPart()">开始</button></div><div class="rb-fit-reco-art"><img src="assets/illustrations/fit-puppy-dumbbell.png" alt="训练插画"></div></section><div class="rb-section-label">本次训练</div><section class="rb-card rb-fit-sessions">'+sessionItems+'</section><section class="rb-card rb-fit-trend"><div class="rb-card-head"><div class="rb-card-title">训练趋势</div><span>本周完成 <b>'+Math.max(3,done)+'</b> 次</span></div><div class="rb-trend-line"><svg viewBox="0 0 320 58" preserveAspectRatio="none"><polyline points="8,45 60,30 112,18 164,34 216,25 268,42 312,30" fill="none" stroke="#788d3e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><polyline points="8,51 60,46 112,48 164,40 216,44 268,50 312,41" fill="none" stroke="#ee6d43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div><div class="rb-trend-days"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div></section>';
   }
   var rbFitOriginal=rbFit; rbFit=rbFitTheme;
-  function rbDiet(){var d=rbDay(),m=rbPreviewSession?{cal:1800,c:220,p:110,f:60}:(calcMacros()||{}),goal=Math.round(m.cal||1800),meals=rbMeals(d),tc=meals.reduce(function(a,x){return a+x.cal},0);return rbHeader('饮食','吃得营养，身体更有活力！','sprout')+'<div class="rb-date-strip">'+rbDateStrip()+'</div><section class="rb-card rb-heat"><div class="rb-card-head"><div class="rb-card-title">今日营养概览</div><button class="rb-card-link" onclick="rbOpenMealPage(\'lunch\')">添加饮食 ›</button></div><div class="rb-heat-grid"><div><div class="rb-ring">'+rbRingSvg(rbPct(tc,goal)/100)+'<div class="rb-ring-center"><b>'+Math.round(tc)+'</b><span>/ '+goal+' kcal</span></div></div></div><div class="rb-macros"><div class="rb-macro"><label>碳水</label><div class="rb-meter c"><i style="width:'+rbPct(meals.reduce(function(a,x){return a+(x.item.carb||0)},0),m.c||220)+'%"></i></div><b>'+Math.round(meals.reduce(function(a,x){return a+(x.item.carb||0)},0))+' g</b></div><div class="rb-macro"><label>蛋白质</label><div class="rb-meter p"><i style="width:'+rbPct(meals.reduce(function(a,x){return a+(x.item.protein||0)},0),m.p||110)+'%"></i></div><b>'+Math.round(meals.reduce(function(a,x){return a+(x.item.protein||0)},0))+' g</b></div><div class="rb-macro"><label>脂肪</label><div class="rb-meter f"><i style="width:'+rbPct(meals.reduce(function(a,x){return a+(x.item.fat||0)},0),m.f||60)+'%"></i></div><b>'+Math.round(meals.reduce(function(a,x){return a+(x.item.fat||0)},0))+' g</b></div></div></div></section><div class="rb-section-label">今日饮食 <span>'+meals.length+' 条记录</span></div>'+(MEALS.map(function(mt){var arr=meals.filter(function(x){return x.type===mt.k});return '<section class="rb-card rb-meal-card"><div class="rb-meal-meta"><h3>'+mt.n+' <small>'+mt.t+'</small></h3><p>'+(arr.length?arr.map(function(x){return rbEsc(x.food)+' · '+Math.round(x.cal)+' kcal'}).join('<br>'):'还没有记录这一餐')+'</p><div class="rb-add-row"><button class="rb-primary" onclick="rbOpenMealPage(\''+mt.k+'\')">'+(arr.length?'继续添加':'添加这一餐')+'</button></div></div><div class="rb-food-photo">'+(arr.length?foodIcon(arr[0].food):'＋')+'</div></section>'}).join(''))+'<section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">饮水量</div><span class="rb-card-link">'+(d.water||0)+'/8 杯</span></div><div class="rb-progress"><i style="width:'+Math.min(100,(d.water||0)/8*100)+'%"></i></div></section>'}
-  function rbWork(){var d=rbDay(),tasks=d.tasks||[],done=tasks.filter(function(t){return t.done}).length;return rbHeader('工作','专注当下，高效完成目标！','dog')+'<section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">今日任务进度</div><span class="rb-card-link">'+done+'/'+tasks.length+' 完成</span></div><div class="rb-progress"><i style="width:'+rbPct(done,tasks.length||1)+'%"></i></div><div class="rb-stats-row" style="margin-top:12px"><div class="rb-stat"><b>'+done+'</b><span>已完成</span></div><div class="rb-stat"><b>'+Math.max(0,tasks.length-done)+'</b><span>待处理</span></div><div class="rb-stat"><b>'+Math.round((d.focus||0)/60)+'</b><span>专注分钟</span></div></div></section><div class="rb-section-label">今日任务 <span>点击勾选完成</span></div><section class="rb-card">'+(tasks.map(rbTaskRow).join('')||'<div class="rb-empty">给今天安排一件重要的小事吧</div>')+'<div class="rb-add-row"><input id="rbTaskInput" class="rb-input" placeholder="写下一个待办事项"><button class="rb-primary" onclick="rbAddTask()">添加</button></div></section><section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">专注计时</div><span class="rb-card-link">今日 '+Math.round((d.focus||0)/60)+' 分钟</span></div><button class="rb-primary" onclick="rbStartFocus()">开始专注</button></section>'}
-  function rbLife(){var d=rbDay(),tags=d.life&&d.life.tags||{},notes=[];Object.keys(tags).forEach(function(k){(tags[k]||[]).forEach(function(x){notes.push({tag:k,text:x.text,ts:x.ts})})});return rbHeader('生活','记录生活的点滴美好~','plant')+'<section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">今日心情</div><span class="rb-card-link">'+(d.life&&d.life.mood?'已记录':'还没记录')+'</span></div><div class="rb-mood">'+['😞','😐','🙂','😄','🥰'].map(function(x){return '<button class="'+(x===(d.life&&d.life.mood)?'on':'')+'" onclick="rbSetMood(\''+x+'\')">'+x+'</button>'}).join('')+'</div></section><div class="rb-section-label">生活记录 <span>写下今天的一个瞬间</span></div><section class="rb-card"><textarea id="rbLifeInput" class="rb-input" rows="3" placeholder="今天发生了什么？"></textarea><div class="rb-add-row"><button class="rb-primary" onclick="rbAddLife()">保存随记</button></div></section><section class="rb-card">'+(notes.slice(-3).reverse().map(function(n){return '<div class="rb-life-note">'+rbEsc(n.text)+'<div class="rb-note-meta">'+rbEsc(n.tag)+' · '+new Date(n.ts||Date.now()).toLocaleDateString()+'</div></div>'}).join('')||'<div class="rb-empty">还没有生活记录</div>')+'</section><div class="rb-money-grid"><section class="rb-card rb-money"><div class="rb-card-title">本月支出</div><b>¥'+Number((d.life&&d.life.expense)||0).toFixed(2)+'</b><span>把每一笔花销记下来</span></section><section class="rb-card rb-money"><div class="rb-card-title">本月喝咖啡</div><b>'+(d.life&&d.life.coffee||0)+' 次</b><span>和喜欢的人一起创造回忆</span></section></div>'}
+  function rbDiet(){var d=rbDay(),m=rbPreviewSession?{cal:1800,c:220,p:110,f:60}:(calcMacros()||{}),goal=Math.round(m.cal||1800),meals=rbMeals(d),tc=meals.reduce(function(a,x){return a+x.cal},0);var carb=meals.reduce(function(a,x){return a+(x.item.carb||0)},0),pro=meals.reduce(function(a,x){return a+(x.item.protein||0)},0),fat=meals.reduce(function(a,x){return a+(x.item.fat||0)},0);var dietImgs=['diet-breakfast-oatmeal','diet-lunch-chicken','diet-dinner-soup'],dietTimes=['08:00','12:30','18:30'];var mealCards=meals.slice(0,3).map(function(x,i){var mt=x.type||(i===0?'breakfast':i===1?'lunch':'dinner'),idx={breakfast:0,lunch:1,dinner:2}[mt]||0;return '<div class="rb-diet-meal-card" onclick="rbOpenMealPage(\''+mt+'\')"><div class="rb-diet-meal-head"><h3>'+{breakfast:'早餐',lunch:'午餐',dinner:'晚餐'}[mt]||mt+'</h3><small>'+dietTimes[idx]+'</small></div><div class="rb-diet-meal-body"><img src="assets/xiaoman-v3/'+dietImgs[idx]+'.png" alt="'+mt+'"><div class="rb-diet-meal-info"><p>'+rbEsc(x.food)+'</p></div><div class="rb-diet-meal-cal">'+Math.round(x.cal)+'<small>kcal</small></div></div></div>'}).join('');if(!mealCards)mealCards='<div class="rb-diet-meal-card" onclick="rbOpenMealPage(\'breakfast\')"><div class="rb-diet-meal-head"><h3>早餐</h3><small>08:00</small></div><div class="rb-diet-meal-body"><img src="assets/xiaoman-v3/diet-breakfast-oatmeal.png" alt="早餐"><div class="rb-diet-meal-info"><p>记录一份早餐</p></div><div class="rb-diet-meal-cal">—</div></div></div><div class="rb-diet-meal-card" onclick="rbOpenMealPage(\'lunch\')"><div class="rb-diet-meal-head"><h3>午餐</h3><small>12:30</small></div><div class="rb-diet-meal-body"><img src="assets/xiaoman-v3/diet-lunch-chicken.png" alt="午餐"><div class="rb-diet-meal-info"><p>记录一份午餐</p></div><div class="rb-diet-meal-cal">—</div></div></div><div class="rb-diet-meal-card" onclick="rbOpenMealPage(\'dinner\')"><div class="rb-diet-meal-head"><h3>晚餐</h3><small>18:30</small></div><div class="rb-diet-meal-body"><img src="assets/xiaoman-v3/diet-dinner-soup.png" alt="晚餐"><div class="rb-diet-meal-info"><p>记录一份晚餐</p></div><div class="rb-diet-meal-cal">—</div></div></div>';return rbHeader('饮食','吃得营养，身体更有活力','diet-header-sticker')+'<div class="rb-date-strip">'+rbDateStrip()+'</div><section class="rb-card rb-diet-summary"><div class="rb-status-badge">📋 今日热量</div><div class="rb-diet-kcal-row"><b>'+Math.round(tc)+'</b><span>/ '+goal+' kcal</span></div><div class="rb-macros rb-diet-macros"><div class="rb-macro"><div class="rb-macro-icon">🍞</div><div class="rb-macro-body"><label>碳水化合物</label><div class="rb-meter c"><i style="width:'+rbPct(carb,m.c||220)+'%"></i></div></div><b>'+Math.round(carb)+'g <small>/ '+(m.c||220)+'g</small></b></div><div class="rb-macro"><div class="rb-macro-icon">🥩</div><div class="rb-macro-body"><label>蛋白质</label><div class="rb-meter p"><i style="width:'+rbPct(pro,m.p||110)+'%"></i></div></div><b>'+Math.round(pro)+'g <small>/ '+(m.p||110)+'g</small></b></div><div class="rb-macro"><div class="rb-macro-icon">🥑</div><div class="rb-macro-body"><label>脂肪</label><div class="rb-meter f"><i style="width:'+rbPct(fat,m.f||60)+'%"></i></div></div><b>'+Math.round(fat)+'g <small>/ '+(m.f||60)+'g</small></b></div></div></section><div class="rb-diet-meals">'+mealCards+'</div><button class="rb-diet-add-btn" onclick="rbOpenMealPage(\'breakfast\')">🔽 添加饮食</button>'}
+  function rbWork(){var d=rbDay(),tasks=d.tasks||[],done=tasks.filter(function(t){return t.done}).length;var taskTags=['重要','','重要','','习惯','习惯'];var taskList=tasks.map(function(t,i){return '<div class="rb-task"'+(t.done?' done':'')+'><button class="rb-task-check '+(t.done?'on':'')+'" onclick="rbToggleTask(\''+t.id+'\')">'+(t.done?'✓':'')+'</button><span class="rb-task-text '+(t.done?'done':'')+'">'+rbEsc(t.text)+'</span><span class="rb-task-time">'+rbEsc(t.time||'—')+'</span>'+(taskTags[i]?'<em class="rb-task-tag '+(taskTags[i]==='习惯'?'habit':'important')+'">'+taskTags[i]+'</em>':'')+'</div>'}).join('')||'<div class="rb-empty">给今天安排一件重要的小事吧</div>';return rbHeader('工作','专注当下，高效完成目标','work-puppy-clipboard')+'<section class="rb-card rb-work-progress"><div class="rb-status-badge">✅ 今日任务</div><div class="rb-work-count-row"><b>'+done+'</b><span>/ '+tasks.length+'</span><span class="rb-work-label">任务完成</span></div><div class="rb-progress"><i style="width:'+rbPct(done,tasks.length||1)+'%"></i></div><div class="rb-work-stats-inline"><span class="rb-work-stat-inline"><b>'+done+'</b><small>已完成</small></span><span class="rb-work-stat-inline"><b>'+Math.max(0,tasks.length-done)+'</b><small>待处理</small></span></div></section><div class="rb-work-tasks">'+taskList+'</div><div class="rb-add-row" style="margin-top:10px"><input id="rbTaskInput" class="rb-input" placeholder="写下一个待办事项"><button class="rb-primary" onclick="rbAddTask()">添加</button></div><section class="rb-card rb-work-focus"><div class="rb-work-focus-head"><div><div class="rb-card-title">专注计时</div><div class="rb-work-focus-state">专注中 <b>25</b> 分钟</div></div><img src="assets/xiaoman-v3/work-puppy-laptop.png" alt="专注" style="width:80px;height:64px;object-fit:contain"></div></div><button class="rb-work-focus-btn" onclick="rbStartFocus()">开始专注</button></section>'}
+  function rbLife(){var d=rbDay(),tags=d.life&&d.life.tags||{},notes=[];Object.keys(tags).forEach(function(k){(tags[k]||[]).forEach(function(x){notes.push({tag:k,text:x.text,ts:x.ts})})});var mood=d.life&&d.life.mood||'',moodData=[{k:'😞',l:'很糟'},{k:'😐',l:'难过'},{k:'🙂',l:'一般'},{k:'😄',l:'开心'},{k:'😥',l:'超棒'}];var diaryText=d.life&&d.life.diary||'';var recentNotes=notes.slice(-3).reverse();return rbHeader('生活','记录生活的点滴美好','life-puppy-cat-flowers')+'<section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">今日心情</div><span class="rb-card-link">'+(mood?((moodData.find(function(m){return m.k===mood})||{}).l||'已记录'):'还没记录')+'</span></div><div class="rb-life-moods">'+moodData.map(function(m){return '<button class="rb-life-mood'+(m.k===mood?' on':'')+'" onclick="rbSetMood(\''+m.k+'\')"><span class="rb-life-mood-face">'+m.k+'</span><span class="rb-life-mood-label">'+m.l+'</span></button>'}).join('')+'</div></section><section class="rb-card rb-life-diary"><img src="assets/xiaoman-v3/life-sunset-photo.png" alt="日记照片" class="rb-life-diary-img"><div class="rb-life-diary-body">'+(diaryText?'<p>'+rbEsc(diaryText)+'</p>':'<p class="rb-life-diary-empty">今天发生了什么？记录下来吧~</p>')+'<div class="rb-life-diary-meta"># 记录美好 · '+(new Date().toLocaleDateString())+'</div></div></section><div class="rb-life-stats-grid"><div class="rb-life-stat-card"><div class="rb-life-stat-icon">💰</div><div><div class="rb-life-stat-title">本月支出</div><b>¥'+Number((d.life&&d.life.expense)||0).toFixed(2)+'</b></div></div><div class="rb-life-stat-card"><div class="rb-life-stat-icon">🍿</div><div><div class="rb-life-stat-title">娱乐放松</div><b>'+(d.life&&d.life.fun||0)+' <small>次</small></b></div></div><div class="rb-life-stat-card"><div class="rb-life-stat-icon">✅</div><div><div class="rb-life-stat-title">生活打卡</div><b>'+(d.life&&d.life.checkin||0)+' <small>天</small></b></div></div></div><section class="rb-card"><div class="rb-card-head"><div class="rb-card-title">近期记录</div><span class="rb-card-link">查看全部 ›</span></div>'+(recentNotes.length?recentNotes.map(function(n){return '<div class="rb-life-note-item"><span>'+rbEsc(n.text)+'</span><span>'+new Date(n.ts||Date.now()).toLocaleDateString()+'</span></div>'}).join(''):'<div class="rb-empty">还没有生活记录</div>')+'</section>'}
   function rbDetailTop(title,back,more){var right=more==='bell'?rbIcon('M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4'):more?'···':'';return '<div class="rb-detail-top"><button class="rb-back" onclick="rbBackTo(\''+back+'\')" aria-label="返回">'+rbIcon('M15 18l-6-6 6-6M9 12h10')+'</button><h1>'+rbEsc(title)+'</h1><button class="rb-detail-more" aria-label="更多">'+right+'</button></div>'}
   function rbDetailDate(){return '<div class="rb-detail-date"><button aria-label="上一天">‹</button><b>2025年5月20日&nbsp;&nbsp;今天 ›</b><button aria-label="打开日历">□</button></div>'}
   function rbPhotoCard(action){return '<div class="rb-photo-card"><span class="rb-photo-caption">早餐 · 蓝莓燕麦碗</span>'+(action?'<button class="rb-photo-action" onclick="rbOpenFoodResultPage()">拍照识别</button>':'')+'</div>'}
@@ -5652,7 +5556,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   window.rbEditProfile=function(){var p=S.profile||{};document.getElementById('rbName').value=S.name||'';document.getElementById('rbAge').value=p.age||'';document.getElementById('rbHeight').value=p.height||'';document.getElementById('rbWeight').value=p.weight||'';document.getElementById('rbProfileSheet').hidden=false}
   function rbPreviewLayout(){if(!rbPreviewSession)return;var box=document.getElementById('rbScreen');if(!box)return;box.classList.add('rb-design-preview');
     if(rbPage==='home'){
-      var homeDiet=box.querySelector('.rb-home-diet'),homeList=homeDiet&&homeDiet.querySelector('.rb-mini-list');if(homeList)homeList.innerHTML='<div class="rb-home-diet-summary"><span>3/3 餐记录</span><span class="rb-food-dot">🍲</span></div>';var homeMood=box.querySelector('.rb-home-mood');if(homeMood&&!homeMood.querySelector('.rb-home-mood-art'))homeMood.insertAdjacentHTML('beforeend','<div class="rb-doodle rb-home-mood-art">'+rbArt('dog')+'</div>');
+      var homeMeals=box.querySelector('.rb-home-meals');var mealCals=homeMeals&&homeMeals.querySelectorAll('.rb-home-meal-cal');if(mealCals&&mealCals.length){mealCals[0].innerHTML='340<small>kcal</small>';mealCals[1].innerHTML='520<small>kcal</small>';mealCals[2].innerHTML='380<small>kcal</small>'}
     }
     if(rbPage==='fit'){
       var statusRef=box.querySelector('.rb-status-reference');
@@ -5720,10 +5624,7 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
     function setArt(selector,file,alt){var el=box.querySelector(selector);if(el)el.innerHTML=rbIllustration(file,alt)}
     function setSrc(selector,file,alt){var el=box.querySelector(selector);if(el){el.src='assets/illustrations/'+file;el.alt=alt||''}}
     if(rbPage==='home'){
-      setArt('.rb-avatar','xiaoman-cup-sticker.png','小满捧着热饮');
-      setArt('.rb-card-sticker','puppy-peek-sticker.png','线条小狗');
-      setSrc('.rb-active-mascot','xiaoman-active-sticker.png','小满运动打卡');
-      setArt('.rb-home-mood-art','puppy-peek-sticker.png','开心的小狗');
+      setSrc('.rb-avatar img','home-puppy-mug.png','小满');
     }
     var headerFiles={fit:'fit-puppy-dumbbell.png',diet:'diet-header-sticker.png',work:'work-header-sticker.png',life:'life-header-sticker.png'};
     if(headerFiles[rbPage])setArt('.rb-header .rb-doodle',headerFiles[rbPage],rbPage+'页插画');
@@ -5744,13 +5645,10 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   rbApplyIllustrations=function(){
     rbHomeCompareBase();
     var box=document.getElementById('rbScreen');
-    if(rbPage==='home'&&box){var dietSticker=box.querySelector('.rb-home-diet .rb-card-sticker');if(dietSticker)dietSticker.innerHTML=rbIllustration('diet-cat-sticker.png','饮食记录小猫')}
+    if(rbPage==='home'&&box){var dietCard=box.querySelector('.rb-home-meals');if(dietCard)dietCard.querySelector('.rb-home-pixel-card-head').insertAdjacentHTML('beforeend','<img src="assets/illustrations/diet-cat-sticker.png" style="width:18px;height:18px;object-fit:contain;margin-left:auto" alt="">')}
     if(rbPage==='home'&&rbPreviewSession&&box){
-      var list=box.querySelector('.rb-home-diet .rb-mini-list');
-      if(list&&!list.dataset.compareRows){
-        list.innerHTML='<div class="rb-home-diet-summary"><span>3/3 餐记录</span><span class="rb-food-dot">🍲</span></div>';
-        list.dataset.compareRows='1';
-      }
+      var cals=box.querySelectorAll('.rb-home-meal-cal');
+      if(cals.length===3&&!cals[0].dataset.v3demo){cals[0].innerHTML='340<small>kcal</small>';cals[1].innerHTML='520<small>kcal</small>';cals[2].innerHTML='380<small>kcal</small>';cals[0].dataset.v3demo='1'}
     }
   };
   function rbEnsureFitTools(){var box=document.getElementById('rbScreen');if(rbPage!=='fit'||!box||box.querySelector('.rb-fit-reference'))return;if(box.querySelector('.rb-fit-tools'))return;var header=box.querySelector('.rb-header');if(!header)return;header.insertAdjacentHTML('afterend','<section class="rb-fit-tools" aria-label="健身入口"><button class="rb-fit-tool primary" onclick="rbOpenFitPart()">'+rbIcon('M12 5v14M5 12h14')+'<b>开始今天的训练</b><small>选择部位和动作，加入今日训练</small></button><button class="rb-fit-tool" onclick="rbOpenFitLibrary()">'+rbIcon('M4 5h16v14H4zM8 9h8M8 13h5')+'<b>动作库</b><small>搜索动作 · 查看讲解</small></button><button class="rb-fit-tool" onclick="rbOpenPlanManager()">'+rbIcon('M6 3h12v18H6zM9 7h6M9 11h6M9 15h4')+'<b>训练计划</b><small>周期安排</small></button></section>')}
