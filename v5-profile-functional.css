@@ -1,4 +1,4 @@
-body.rb-ref-page .xm-profile-page {
+body.rb-mode .xm-profile-page {
   min-height: 100%;
   padding: 16px 18px 104px;
   background: #fff8ea;
@@ -16,6 +16,69 @@ body.rb-ref-page .xm-profile-page {
 .xm-profile-user b { font-size: 16px; }
 .xm-profile-user small { margin-top: 4px; color: #987e63; font-size: 10px; }
 .xm-profile-user i { color: #a78969; font-size: 25px; font-style: normal; }
+.xm-profile-user { cursor: default; }
+.xm-profile-body-card { margin-top: 14px; padding: 13px; border: 1px solid #dfcdb0; border-radius: 17px; background: #fffdf8; }
+.xm-profile-card-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.xm-profile-card-title > div { min-width: 0; }
+.xm-profile-card-title h2, .xm-profile-card-title small { display: inline; }
+.xm-profile-card-title h2 { margin: 0 0 0 4px; font-size: 16px; font-weight: 900; }
+.xm-profile-card-title > div > span { color: #789438; font-size: 14px; }
+.xm-profile-card-title small { display: block; margin: 5px 0 0 20px; color: #92785e; font-size: 10px; }
+.xm-profile-card-title button, .xm-profile-goal-card button { border: 1px solid #b8c98b; border-radius: 9px; padding: 5px 9px; background: #eef3df; color: #69812f; font: inherit; font-size: 10px; font-weight: 900; cursor: pointer; }
+.xm-profile-body-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 13px; }
+.xm-profile-body-grid div { min-width: 0; padding: 8px 4px; border-radius: 11px; background: #f6f1e5; text-align: center; }
+.xm-profile-body-grid b, .xm-profile-body-grid span { display: block; }
+.xm-profile-body-grid b { color: #4b2f1d; font-size: 16px; line-height: 1.1; }
+.xm-profile-body-grid b small { margin-left: 2px; color: #8a7158; font-size: 9px; }
+.xm-profile-body-grid span { margin-top: 4px; color: #92785e; font-size: 9px; }
+.xm-profile-energy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e5d5b9; }
+.xm-profile-energy div { min-width: 0; }
+.xm-profile-energy span, .xm-profile-energy b { display: block; }
+.xm-profile-energy span { color: #92785e; font-size: 9px; white-space: nowrap; }
+.xm-profile-energy b { margin-top: 3px; color: #789438; font-size: 15px; white-space: nowrap; }
+.xm-profile-energy b small { margin-left: 2px; font-size: 9px; }
+.xm-profile-goal-card { display: flex; align-items: center; gap: 9px; margin-top: 10px; padding: 10px 11px; border: 1px solid #d8c9aa; border-radius: 15px; background: #f4f5e8; }
+.xm-profile-goal-card > div { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+.xm-profile-goal-card > div > span:nth-child(2) { min-width: 0; }
+.xm-profile-goal-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: #789438; color: #fff; font-size: 20px; }
+.xm-profile-goal-card b, .xm-profile-goal-card small { display: block; }
+.xm-profile-goal-card b { font-size: 12px; }
+.xm-profile-goal-card small { margin-top: 3px; color: #806a50; font-size: 9px; white-space: nowrap; }
+.xm-profile-goal-card > strong { color: #4b2f1d; font-size: 18px; white-space: nowrap; }
+.xm-profile-goal-card > strong small { display: inline; margin-left: 2px; font-size: 9px; font-weight: 800; }
+.xm-profile-goal-card button { flex: 0 0 auto; background: #fffdf8; }
+.xm-body-settings-open { overflow: hidden; }
+.xm-body-settings-overlay { position: fixed; z-index: 96; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 12px; background: rgba(53, 37, 24, .42); }
+.xm-body-settings-panel { width: min(100%, 520px); max-height: min(90svh, 760px); overflow: auto; padding: 16px; border: 1.5px solid #65452c; border-radius: 22px 22px 16px 16px; background: #fff8ea; color: #4b2c18; box-shadow: 0 16px 38px rgba(51, 35, 20, .24); }
+.xm-body-settings-panel > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.xm-body-settings-panel > header span { display: block; color: #9b826b; font-size: 10px; }
+.xm-body-settings-panel h2 { margin: 3px 0 0; font-size: 20px; line-height: 1.2; }
+.xm-body-settings-panel > header button { width: 34px; height: 34px; border: 1px solid #d8c5a6; border-radius: 10px; background: #fffdf8; color: #6f553c; font-size: 22px; line-height: 1; cursor: pointer; }
+.xm-body-settings-note { margin: 10px 0 0; color: #806a50; font-size: 10px; line-height: 1.5; }
+.xm-body-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-top: 13px; }
+.xm-body-fields label, .xm-body-select-field, .xm-body-motion-field { position: relative; display: block; }
+.xm-body-fields label > span, .xm-body-select-field > span, .xm-body-motion-field > span, .xm-body-goal-options > span { display: block; margin-bottom: 5px; color: #6e553d; font-size: 10px; font-weight: 900; }
+.xm-body-fields label > span small { color: #a58d73; font-size: 9px; font-weight: 700; }
+.xm-body-fields input, .xm-body-fields select, .xm-body-select-field select, .xm-body-motion-field input { width: 100%; min-height: 39px; box-sizing: border-box; border: 1px solid #ddcdb2; border-radius: 10px; outline: 0; background: #fffdf8; color: #4b2c18; font: inherit; font-size: 12px; padding: 0 29px 0 10px; }
+.xm-body-fields select, .xm-body-select-field select { padding-right: 8px; }
+.xm-body-fields input:focus, .xm-body-fields select:focus, .xm-body-select-field select:focus, .xm-body-motion-field input:focus { border-color: #789438; box-shadow: 0 0 0 3px rgba(120,148,56,.14); }
+.xm-body-fields label > b, .xm-body-motion-field > b { position: absolute; right: 10px; bottom: 11px; color: #92785e; font-size: 10px; }
+.xm-body-select-field { margin-top: 11px; }
+.xm-body-goal-options { margin-top: 12px; }
+.xm-body-goal-options > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.xm-body-goal-options button { min-height: 48px; border: 1px solid #ddcdb2; border-radius: 11px; background: #fffdf8; color: #6e553d; font: inherit; font-size: 11px; font-weight: 900; cursor: pointer; }
+.xm-body-goal-options button small { color: #a58d73; font-size: 9px; font-weight: 700; }
+.xm-body-goal-options button.on { border-color: #789438; background: #789438; color: #fff; }
+.xm-body-goal-options button.on small { color: #eff4df; }
+.xm-body-motion-field { margin-top: 11px; }
+.xm-body-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 10px; border: 1px dashed #bdc994; border-radius: 12px; background: #f1f5e5; }
+.xm-body-preview span, .xm-body-preview b { display: block; }
+.xm-body-preview span { color: #6e7f3d; font-size: 9px; }
+.xm-body-preview b { margin-top: 3px; color: #4b2f1d; font-size: 15px; }
+.xm-body-settings-panel footer { display: flex; gap: 8px; margin-top: 13px; }
+.xm-body-settings-panel footer button { min-height: 42px; border-radius: 11px; font: inherit; font-size: 12px; font-weight: 900; cursor: pointer; }
+.xm-body-cancel { flex: 1; border: 1px solid #d8c5a6; background: #fffdf8; color: #806a50; }
+.xm-body-save { flex: 1.5; border: 0; background: #ef6a3a; color: #fff; }
 .xm-profile-section { margin-top: 17px; }
 .xm-profile-section-title { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
 .xm-profile-section-title h2, .xm-profile-services-title { margin: 0; font-size: 16px; font-weight: 900; }
@@ -72,7 +135,7 @@ body.rb-ref-page .xm-profile-page {
 .xm-ai-test { flex: 1; border: 1px solid #b8c98b; background: #eef3df; color: #64802d; }
 .xm-ai-save { flex: 1.25; border: 0; background: #ef6a3a; color: #fff; }
 @media (min-width: 680px) { .xm-ai-settings-overlay { align-items: center; } .xm-ai-settings-panel { border-radius: 22px; } .xm-profile-stats { grid-template-columns: repeat(4, 1fr); } }
-[data-theme="dark"] body.rb-ref-page .xm-profile-page { background: #26291f; color: #f8f2e7; }
+[data-theme="dark"] body.rb-mode .xm-profile-page { background: #26291f; color: #f8f2e7; }
 [data-theme="dark"] .xm-profile-user, [data-theme="dark"] .xm-profile-sync, [data-theme="dark"] .xm-profile-services button, [data-theme="dark"] .xm-profile-services { background: #34372b; border-color: #555746; color: #f8f2e7; }
 [data-theme="dark"] .xm-profile-gear { background: #34372b; border-color: #555746; color: #f8f2e7; }
 [data-theme="dark"] .xm-profile-head p, [data-theme="dark"] .xm-profile-user small, [data-theme="dark"] .xm-profile-section-title small, [data-theme="dark"] .xm-profile-stats span, [data-theme="dark"] .xm-profile-services small, [data-theme="dark"] .xm-profile-sync small { color: #c6c0ae; }
@@ -88,3 +151,19 @@ body.rb-ref-page .xm-profile-page {
 [data-theme="dark"] .xm-ai-provider { background: #34402b; border-color: #697650; }
 [data-theme="dark"] .xm-ai-provider small { color: #d1d7bc; }
 [data-theme="dark"] .xm-ai-field input, [data-theme="dark"] .xm-ai-field select { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-body-card { background: #34372b; border-color: #555746; }
+[data-theme="dark"] .xm-profile-card-title small, [data-theme="dark"] .xm-profile-body-grid span, [data-theme="dark"] .xm-profile-energy span, [data-theme="dark"] .xm-profile-goal-card small { color: #c6c0ae; }
+[data-theme="dark"] .xm-profile-body-grid div { background: #414535; }
+[data-theme="dark"] .xm-profile-body-grid b, [data-theme="dark"] .xm-profile-goal-card > strong { color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-energy { border-top-color: #5b604b; }
+[data-theme="dark"] .xm-profile-goal-card { background: #34402b; border-color: #697650; }
+[data-theme="dark"] .xm-profile-card-title button, [data-theme="dark"] .xm-profile-goal-card button { background: #414535; border-color: #697650; color: #d8e3b8; }
+[data-theme="dark"] .xm-body-settings-overlay { background: rgba(11, 15, 10, .58); }
+[data-theme="dark"] .xm-body-settings-panel { background: #26291f; border-color: #697650; color: #f8f2e7; }
+[data-theme="dark"] .xm-body-settings-panel > header button, [data-theme="dark"] .xm-body-cancel { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-body-settings-note, [data-theme="dark"] .xm-body-fields label > span, [data-theme="dark"] .xm-body-select-field > span, [data-theme="dark"] .xm-body-motion-field > span, [data-theme="dark"] .xm-body-goal-options > span { color: #c6c0ae; }
+[data-theme="dark"] .xm-body-fields input, [data-theme="dark"] .xm-body-fields select, [data-theme="dark"] .xm-body-select-field select, [data-theme="dark"] .xm-body-motion-field input, [data-theme="dark"] .xm-body-goal-options button { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-body-goal-options button.on { background: #789438; border-color: #789438; color: #fff; }
+[data-theme="dark"] .xm-body-preview { background: #34402b; border-color: #697650; }
+[data-theme="dark"] .xm-body-preview span { color: #d8e3b8; }
+@media (min-width: 680px) { .xm-body-settings-overlay { align-items: center; } .xm-body-settings-panel { border-radius: 22px; } }
