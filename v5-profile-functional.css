@@ -1,0 +1,90 @@
+body.rb-ref-page .xm-profile-page {
+  min-height: 100%;
+  padding: 16px 18px 104px;
+  background: #fff8ea;
+  color: #4b2c18;
+}
+.xm-profile-head { display: flex; align-items: start; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.xm-profile-head h1 { margin: 0; font-size: 26px; line-height: 1.15; font-weight: 900; }
+.xm-profile-head p { margin: 5px 0 0; color: #866d53; font-size: 11px; line-height: 1.45; }
+.xm-profile-gear { width: 38px; height: 38px; border: 1px solid #d8c5a6; border-radius: 12px; background: #fffdf8; color: #70563b; font-size: 19px; cursor: pointer; }
+.xm-profile-user, .xm-profile-ai-entry, .xm-profile-sync, .xm-profile-services button { width: 100%; border: 1px solid #dfcdb0; background: #fffdf8; color: #4b2c18; font: inherit; text-align: left; cursor: pointer; }
+.xm-profile-user { display: flex; align-items: center; gap: 11px; padding: 11px; border-radius: 16px; }
+.xm-profile-user img { width: 54px; height: 54px; object-fit: contain; border-radius: 14px; background: #f2f5e7; }
+.xm-profile-user span { min-width: 0; flex: 1; }
+.xm-profile-user b, .xm-profile-user small { display: block; }
+.xm-profile-user b { font-size: 16px; }
+.xm-profile-user small { margin-top: 4px; color: #987e63; font-size: 10px; }
+.xm-profile-user i { color: #a78969; font-size: 25px; font-style: normal; }
+.xm-profile-section { margin-top: 17px; }
+.xm-profile-section-title { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.xm-profile-section-title h2, .xm-profile-services-title { margin: 0; font-size: 16px; font-weight: 900; }
+.xm-profile-section-title small { color: #92785e; font-size: 10px; }
+.xm-profile-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.xm-profile-stats div { padding: 10px 11px; border: 1px solid #e2d3ba; border-radius: 13px; background: #fffdf8; }
+.xm-profile-stats b, .xm-profile-stats span { display: block; }
+.xm-profile-stats b { color: #69812f; font-size: 20px; line-height: 1.1; }
+.xm-profile-stats b small { display: inline; margin-left: 3px; font-size: 10px; font-weight: 800; }
+.xm-profile-stats span { margin-top: 5px; color: #92785e; font-size: 10px; }
+.xm-profile-ai-entry, .xm-profile-sync { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 11px; border-radius: 15px; }
+.xm-profile-ai-entry { border-color: #b8c98b; background: #eef3df; }
+.xm-profile-ai-mark { display: grid; place-items: center; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 11px; background: #738d31; color: #fff; font-size: 12px; font-weight: 900; }
+.xm-profile-ai-entry > span:nth-child(2), .xm-profile-sync > span { min-width: 0; flex: 1; }
+.xm-profile-ai-entry b, .xm-profile-ai-entry small, .xm-profile-sync b, .xm-profile-sync small { display: block; }
+.xm-profile-ai-entry b, .xm-profile-sync b { font-size: 13px; }
+.xm-profile-ai-entry small, .xm-profile-sync small { margin-top: 3px; color: #76654d; font-size: 10px; line-height: 1.4; }
+.xm-profile-ai-entry em, .xm-profile-sync em { flex: 0 0 auto; color: #6f842f; font-size: 10px; font-style: normal; font-weight: 800; }
+.xm-profile-sync img { width: 42px; height: 42px; object-fit: contain; }
+.xm-profile-services-title { margin-top: 20px; margin-bottom: 8px; }
+.xm-profile-services { overflow: hidden; border: 1px solid #dfcdb0; border-radius: 15px; background: #fffdf8; }
+.xm-profile-services button { display: flex; align-items: center; gap: 9px; min-height: 56px; padding: 8px 11px; border: 0; border-bottom: 1px dashed #e7d9c1; }
+.xm-profile-services button:last-child { border-bottom: 0; }
+.xm-profile-services button:active, .xm-profile-user:active, .xm-profile-ai-entry:active, .xm-profile-sync:active, .xm-profile-gear:active { transform: scale(.99); }
+.xm-profile-service-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #f3ead8; color: #738d31; font-size: 17px; }
+.xm-profile-services button span:nth-child(2) { min-width: 0; flex: 1; }
+.xm-profile-services b, .xm-profile-services small { display: block; }
+.xm-profile-services b { font-size: 12px; }
+.xm-profile-services small { margin-top: 3px; color: #987e63; font-size: 10px; }
+.xm-profile-services i { color: #a78969; font-size: 20px; font-style: normal; }
+.xm-ai-settings-open { overflow: hidden; }
+.xm-ai-settings-overlay { position: fixed; z-index: 95; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 12px; background: rgba(53, 37, 24, .42); }
+.xm-ai-settings-panel { width: min(100%, 520px); max-height: min(88svh, 720px); overflow: auto; padding: 15px; border: 1.5px solid #65452c; border-radius: 22px 22px 16px 16px; background: #fff8ea; color: #4b2c18; box-shadow: 0 16px 38px rgba(51, 35, 20, .24); }
+.xm-ai-settings-panel > header { display: flex; align-items: center; gap: 10px; }
+.xm-ai-settings-panel > header > button { width: 36px; height: 36px; border: 1px solid #d8c5a6; border-radius: 11px; background: #fffdf8; color: #6f553c; font-size: 25px; line-height: 1; cursor: pointer; }
+.xm-ai-settings-panel > header > div { min-width: 0; flex: 1; }
+.xm-ai-settings-panel header span:first-child { display: block; color: #9b826b; font-size: 10px; }
+.xm-ai-settings-panel h2 { margin: 2px 0 0; font-size: 21px; line-height: 1.2; }
+.xm-ai-qwen-badge { padding: 5px 8px; border-radius: 8px; background: #e8efd4; color: #627c2a; font-size: 10px; font-weight: 900; }
+.xm-ai-provider { display: flex; align-items: center; gap: 10px; margin: 14px 0 11px; padding: 10px; border: 1px solid #b8c98b; border-radius: 14px; background: #eef3df; }
+.xm-ai-provider-logo { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #738d31; color: #fff; font-size: 18px; font-weight: 900; }
+.xm-ai-provider div { min-width: 0; flex: 1; }
+.xm-ai-provider b, .xm-ai-provider small { display: block; }
+.xm-ai-provider small { margin-top: 3px; color: #76654d; font-size: 10px; }
+.xm-ai-provider strong { color: #6f842f; font-size: 10px; }
+.xm-ai-field { display: block; margin-top: 10px; }
+.xm-ai-field > span { display: block; margin-bottom: 5px; color: #6e553d; font-size: 11px; font-weight: 800; }
+.xm-ai-field input, .xm-ai-field select { width: 100%; min-height: 40px; box-sizing: border-box; border: 1px solid #ddcdb2; border-radius: 10px; outline: 0; background: #fffdf8; color: #4b2c18; font: inherit; font-size: 12px; padding: 0 10px; }
+.xm-ai-field input:focus, .xm-ai-field select:focus { border-color: #789438; box-shadow: 0 0 0 3px rgba(120,148,56,.14); }
+.xm-ai-hint { margin: 10px 0 0; color: #987e63; font-size: 10px; line-height: 1.5; }
+.xm-ai-settings-status { min-height: 18px; margin-top: 8px; color: #69812f; font-size: 10px; line-height: 1.5; }
+.xm-ai-settings-panel footer { display: flex; gap: 8px; margin-top: 10px; }
+.xm-ai-settings-panel footer button { min-height: 42px; border-radius: 11px; font: inherit; font-size: 12px; font-weight: 900; cursor: pointer; }
+.xm-ai-test { flex: 1; border: 1px solid #b8c98b; background: #eef3df; color: #64802d; }
+.xm-ai-save { flex: 1.25; border: 0; background: #ef6a3a; color: #fff; }
+@media (min-width: 680px) { .xm-ai-settings-overlay { align-items: center; } .xm-ai-settings-panel { border-radius: 22px; } .xm-profile-stats { grid-template-columns: repeat(4, 1fr); } }
+[data-theme="dark"] body.rb-ref-page .xm-profile-page { background: #26291f; color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-user, [data-theme="dark"] .xm-profile-sync, [data-theme="dark"] .xm-profile-services button, [data-theme="dark"] .xm-profile-services { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-gear { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-head p, [data-theme="dark"] .xm-profile-user small, [data-theme="dark"] .xm-profile-section-title small, [data-theme="dark"] .xm-profile-stats span, [data-theme="dark"] .xm-profile-services small, [data-theme="dark"] .xm-profile-sync small { color: #c6c0ae; }
+[data-theme="dark"] .xm-profile-stats div { background: #34372b; border-color: #555746; }
+[data-theme="dark"] .xm-profile-ai-entry { background: #34402b; border-color: #697650; color: #f8f2e7; }
+[data-theme="dark"] .xm-profile-ai-entry small { color: #d1d7bc; }
+[data-theme="dark"] .xm-profile-services button { border-bottom-color: #5b604b; }
+[data-theme="dark"] .xm-profile-service-icon { background: #4b3e2c; color: #d8e3b8; }
+[data-theme="dark"] .xm-ai-settings-overlay { background: rgba(11, 15, 10, .58); }
+[data-theme="dark"] .xm-ai-settings-panel { background: #26291f; border-color: #697650; color: #f8f2e7; }
+[data-theme="dark"] .xm-ai-settings-panel > header > button { background: #34372b; border-color: #555746; color: #f8f2e7; }
+[data-theme="dark"] .xm-ai-settings-panel header span:first-child, [data-theme="dark"] .xm-ai-hint, [data-theme="dark"] .xm-ai-field > span { color: #c6c0ae; }
+[data-theme="dark"] .xm-ai-provider { background: #34402b; border-color: #697650; }
+[data-theme="dark"] .xm-ai-provider small { color: #d1d7bc; }
+[data-theme="dark"] .xm-ai-field input, [data-theme="dark"] .xm-ai-field select { background: #34372b; border-color: #555746; color: #f8f2e7; }

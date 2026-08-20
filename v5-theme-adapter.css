@@ -1,0 +1,338 @@
+/* Global light/dark adaptation: keep Xiaoman's paper palette in light mode and
+   use warm olive night surfaces in dark mode. The html data-theme attribute is
+   written by applySystemTheme() from the phone/browser color preference. */
+:root { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+/* The reference pages use a separate, illustration-led palette with a number
+   of intentionally warm fixed colors. Re-map those surfaces together so a
+   system dark-mode switch never leaves brown text on a dark card. */
+[data-theme="dark"] body.rb-ref-page .rb-ref-page-shell {
+  background: #14170f !important;
+  color: #f8f2e7;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-card,
+[data-theme="dark"] body.rb-ref-page .rb-ref-date button,
+[data-theme="dark"] body.rb-ref-page .rb-ref-meal-row,
+[data-theme="dark"] body.rb-ref-page .rb-ref-life-stats > div,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task button,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-modal,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-modal .rb-input {
+  background: #262b22;
+  border-color: #656a55;
+  color: #f8f2e7;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-header p,
+[data-theme="dark"] body.rb-ref-page .rb-ref-section-title small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-nutrition-macros small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-meal-row p,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-focus p,
+[data-theme="dark"] body.rb-ref-page .rb-ref-life-note p,
+[data-theme="dark"] body.rb-ref-page .rb-ref-life-stats small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-recent small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-profile-user small,
+[data-theme="dark"] body.rb-ref-page .rb-ref-health-cell span,
+[data-theme="dark"] body.rb-ref-page .rb-ref-empty,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-x {
+  color: #c7c0ae;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-card {
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .24);
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-date button {
+  border-color: #656a55;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-date button.on {
+  background: #789438;
+  border-color: #789438;
+  color: #fff;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-kcal i,
+[data-theme="dark"] body.rb-ref-page .rb-ref-nutrition-macros i,
+[data-theme="dark"] body.rb-ref-page .rb-ref-work-progress i {
+  background: #3d4334;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-list,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task,
+[data-theme="dark"] body.rb-ref-page .rb-ref-recent div,
+[data-theme="dark"] body.rb-ref-page .rb-ref-service {
+  border-color: #4d5342;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-moods button,
+[data-theme="dark"] body.rb-ref-page .rb-ref-profile-title button,
+[data-theme="dark"] body.rb-ref-page .rb-ref-service span,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-add {
+  color: #f8f2e7;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-moods span,
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-cancel {
+  background: #3d3b2d;
+  color: #e5d8c4;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-sync {
+  background: #2c3625;
+  border-color: #697650;
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-modal {
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .42);
+}
+[data-theme="dark"] body.rb-ref-page .rb-ref-task-modal .rb-input::placeholder {
+  color: #9fa38e;
+}
+
+/* The 1,324-action library. These rules cover controls and media wells that
+   were previously still using light fixed colors in dark mode. */
+[data-theme="dark"] .xm-fitlib {
+  background: linear-gradient(180deg, #181b24, #0e1016);
+  color: #f4eee2;
+}
+[data-theme="dark"] .xm-fitlib-back {
+  background: #2a302a;
+  border-color: #5b624d;
+  color: #d8e3b8;
+}
+[data-theme="dark"] .xm-fitlib-count {
+  background: #2d3a22;
+  border-color: #596747;
+}
+[data-theme="dark"] .xm-fitlib-count b { color: #f0a37d; }
+[data-theme="dark"] .xm-fitlib-cats {
+  background: linear-gradient(180deg, rgba(24, 27, 36, .98), rgba(24, 27, 36, .92));
+}
+[data-theme="dark"] .xm-cat-chip {
+  background: #2a302a;
+  border-color: #535b49;
+  color: #eee7d9;
+}
+[data-theme="dark"] .xm-cat-chip small,
+[data-theme="dark"] .xm-group-head small { color: #b9b59f; }
+[data-theme="dark"] .xm-cat-chip.on {
+  background: linear-gradient(135deg, #789438, #8fa855);
+  border-color: transparent;
+  color: #fff;
+}
+[data-theme="dark"] .xm-fitlib-search svg { stroke: #b9b59f; }
+[data-theme="dark"] .xm-group-ico {
+  background: #2c3625;
+  border-color: #536342;
+}
+[data-theme="dark"] .xm-group-head h3 { color: #f4eee2; }
+[data-theme="dark"] .xm-item-img { background: #30352e; }
+[data-theme="dark"] .xm-item-play {
+  background: rgba(8, 10, 9, .78);
+  color: #f4eee2;
+}
+[data-theme="dark"] .xm-item-add {
+  background: #789438;
+  border-color: #789438;
+  color: #fff;
+}
+[data-theme="dark"] .xm-fitlib-empty { color: #c4b6a1; }
+[data-theme="dark"] .xm-fitlib-empty small { color: #9fa38e; }
+
+/* The recommendation-plan catalog and its detail sheet share the same
+   treatment, including illustration wells and primary actions. */
+[data-theme="dark"] body.rb-fit-page .xm-plan-library-bookmark {
+  background: #35402a;
+  color: #d8e3b8;
+}
+[data-theme="dark"] body.rb-fit-page .xm-plan-library-art {
+  background: #30382a;
+}
+[data-theme="dark"] body.rb-fit-page .xm-plan-library-art img {
+  mix-blend-mode: normal;
+  filter: brightness(.88) saturate(.92);
+}
+[data-theme="dark"] body.rb-fit-page .xm-plan-library-card-foot button {
+  background: #e26b3d;
+}
+[data-theme="dark"] body.rb-fit-page .xm-plan-library-empty {
+  border-color: #656a55;
+  color: #c6c0ae;
+}
+[data-theme="dark"] .xm-extra-plan-hero strong { color: #c5dc8f; }
+[data-theme="dark"] .xm-extra-plan-step b { color: #f8f2e7; }
+[data-theme="dark"] .xm-extra-plan-start { background: #e26b3d; }
+
+/* Native inputs/selects and the bottom shell follow the same color scheme. */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea,
+[data-theme="dark"] button { color-scheme: dark; }
+html[data-theme="dark"] .rb-nav {
+  background: rgba(24, 27, 36, .96) !important;
+  border-color: #3c4239 !important;
+}
+html[data-theme="dark"] .rb-nav button {
+  color: #c7c0ae !important;
+}
+html[data-theme="dark"] .rb-nav button.on {
+  color: #b7d078 !important;
+}
+
+/* Shared V5 shell variables. Variable-based legacy cards inherit this map;
+   the explicit rules below cover the illustration-first pixel cards whose
+   paper colors are intentionally fixed by the reference design. */
+html[data-theme="dark"] body.rb-mode {
+  --paper: #14170f;
+  --paper-2: #20261b;
+  --ink: #f8f2e7;
+  --muted: #c7c0ae;
+  --olive-2: #34402b;
+  --coral-2: #3d2b20;
+  --line: #4d5342;
+  background: #0f120d !important;
+  color: #f8f2e7;
+}
+html[data-theme="dark"] .rebuild-app {
+  background: #14170f !important;
+}
+
+/* 首页状态、饮食、趋势三张像素卡 */
+html[data-theme="dark"] .xm-home-v6 {
+  background: #14170f !important;
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] .xm-v6-status,
+html[data-theme="dark"] .xm-v6-meals,
+html[data-theme="dark"] .xm-v6-trend {
+  background: #262b22 !important;
+  border-color: #656a55 !important;
+  color: #f8f2e7 !important;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .24) !important;
+}
+html[data-theme="dark"] .xm-v6-head h1,
+html[data-theme="dark"] .xm-v6-card-head b,
+html[data-theme="dark"] .xm-v6-meal b,
+html[data-theme="dark"] .xm-v6-status-foot b,
+html[data-theme="dark"] .xm-v6-ring-goal {
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] .xm-v6-head p,
+html[data-theme="dark"] .xm-v6-meal small,
+html[data-theme="dark"] .xm-v6-status-foot small,
+html[data-theme="dark"] .xm-v6-trend > strong,
+html[data-theme="dark"] .xm-v6-scale,
+html[data-theme="dark"] .xm-v6-days {
+  color: #c7c0ae !important;
+}
+html[data-theme="dark"] .xm-v6-detail-link { color: #b7d078 !important; }
+html[data-theme="dark"] .xm-v6-meal {
+  background: #20261b !important;
+  border-color: #596247 !important;
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] .xm-v6-macro i { background: #3d4334 !important; }
+html[data-theme="dark"] .xm-v6-macro {
+  background: #20261b !important;
+  border-color: #596247 !important;
+}
+html[data-theme="dark"] .xm-v6-macro-body b { color: #f8f2e7 !important; }
+html[data-theme="dark"] .xm-v6-macro-body label { color: #c7c0ae !important; }
+html[data-theme="dark"] .xm-v6-days {
+  background: #20261b !important;
+  border-color: #596247 !important;
+}
+html[data-theme="dark"] body.rb-home-page .xm-v6-days {
+  background-color: #20261b !important;
+}
+html[data-theme="dark"] .xm-v6-ring .track { stroke: #3d4334 !important; }
+html[data-theme="dark"] .xm-v6-chart .grid { stroke: #4d5342 !important; }
+html[data-theme="dark"] .xm-v6-chart .line { stroke: #a9c46c !important; }
+html[data-theme="dark"] .xm-v6-tip {
+  background: #789438 !important;
+  color: #fff !important;
+}
+
+/* 健身页今日训练与推荐训练 */
+html[data-theme="dark"] body.rb-fit-page .rb-fit-pixel {
+  background: #14170f !important;
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-status,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-session,
+html[data-theme="dark"] body.rb-fit-page .xm-v6-trend {
+  background: #262b22 !important;
+  border-color: #656a55 !important;
+  color: #f8f2e7 !important;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .24) !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-metrics label,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-head p,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-section-title,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-section-title small,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-ring-copy span,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-ring-copy small,
+html[data-theme="dark"] body.rb-fit-page .xm-fit-daylabel,
+html[data-theme="dark"] body.rb-fit-page .xm-v6-trend > strong,
+html[data-theme="dark"] body.rb-fit-page .xm-v6-scale,
+html[data-theme="dark"] body.rb-fit-page .xm-v6-days {
+  color: #c7c0ae !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-head h1 {
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-ring-copy b,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-metrics b,
+html[data-theme="dark"] body.rb-fit-page .xm-plan-name,
+html[data-theme="dark"] body.rb-fit-page .xm-plan-desc,
+html[data-theme="dark"] body.rb-fit-page .xm-part-title,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-session-copy h3 {
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-more-btn {
+  color: #b7d078 !important;
+  background: transparent !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-fit-today-btn,
+html[data-theme="dark"] body.rb-fit-page .xm-fit-lib-btn,
+html[data-theme="dark"] body.rb-fit-page .xm-daytab {
+  background: #20261b !important;
+  border-color: #596247 !important;
+  color: #eee7d9 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-daytab.today:not(.on) {
+  background: #34402b !important;
+  border-color: #697650 !important;
+  color: #d8e3b8 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-daytab.on {
+  background: linear-gradient(180deg, #87a33c, #6b8629) !important;
+  border-color: #789438 !important;
+  color: #fff !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-plan-card {
+  background: #20261b !important;
+  border-color: #656a55 !important;
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-plan-meta,
+html[data-theme="dark"] body.rb-fit-page .xm-plan-pg-row {
+  color: #c7c0ae !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-plan-progress,
+html[data-theme="dark"] body.rb-fit-page .xm-plan-pg-row i {
+  background: #3d4334 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-session-row {
+  border-color: #4d5342 !important;
+  color: #f8f2e7 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-session-row.xm-done {
+  background: #34402b !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-session-copy p,
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-guide {
+  color: #b7d078 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-guide {
+  background: rgba(113, 140, 60, .16) !important;
+  border-color: rgba(168, 192, 112, .48) !important;
+}
+html[data-theme="dark"] body.rb-fit-page .rb-pixel-check:not(.xm-check) {
+  background: #2a302a !important;
+  border-color: #697650 !important;
+}
+html[data-theme="dark"] body.rb-fit-page .xm-v6-chart .grid { stroke: #4d5342 !important; }
+html[data-theme="dark"] body.rb-fit-page .xm-v6-chart .line { stroke: #a9c46c !important; }

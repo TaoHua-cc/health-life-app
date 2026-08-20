@@ -33,7 +33,7 @@ function renderFitLibraryPage(){
         return '<button class="xm-cat-chip'+(g?'':' on')+'" data-cat="'+esc(g)+'" onclick="xmFitLibCat(\''+esc(g)+'\')">'+(g?esc(g):'全部')+'<small>'+cnt+'</small></button>';
     }).join('');
     var html='<div class="xm-fitlib">';
-    html+='<div class="xm-fitlib-head"><button class="xm-fitlib-back" onclick="__xmV5.backToFit()" aria-label="返回">‹</button><div class="xm-fitlib-title"><h2>动作库</h2><p>挑一个动作，看动图学姿势</p></div><span class="xm-fitlib-count"><b>'+db.length+'</b><small>个动作</small></span></div>';
+    html+='<div class="xm-fitlib-head"><span class="xm-fitlib-leaf" aria-hidden="true"></span><div class="xm-fitlib-title"><h2>动作资料库</h2><p>挑一个动作，让今天的训练更有方向</p></div><span class="xm-fitlib-count"><b>'+db.length+'</b><small>个动作</small></span><button class="xm-fitlib-back" onclick="__xmV5.backToFit()" aria-label="返回">‹</button></div>';
     html+='<div class="xm-fitlib-cats" id="xmFitLibCats">'+chips+'</div>';
     html+='<div class="xm-fitlib-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg><input id="xmFitLibSearch" type="search" placeholder="搜索动作，如：卧推、深蹲、卷腹" oninput="xmFitLibFilter(this.value)"></div>';
     html+='<div class="xm-fitlib-body">';
@@ -46,8 +46,8 @@ function renderFitLibraryPage(){
             var zh=(ex.alias&&ex.alias[0])?ex.alias[0]:ex.name;
             var kw=((ex.alias&&ex.alias.join(' '))+' '+ex.name+' '+(ex.grp||'')).toLowerCase();
             html+='<div class="xm-fitlib-item" data-cat="'+esc(ex.grp||'')+'" data-kw="'+esc(kw)+'" onclick="rbShowExerciseGuide(\''+esc(ex.id)+'\')">';
-            html+='<div class="xm-item-img"><img loading="lazy" src="'+esc(ex.image||'')+'" alt="'+esc(zh)+'"><span class="xm-item-play">▶</span></div>';
-            html+='<div class="xm-item-name">'+esc(zh)+'</div><div class="xm-item-tag">'+esc(ex.grp||'训练')+'</div>';
+            html+='<div class="xm-item-img"><img loading="lazy" src="'+esc(ex.image||'')+'" alt="'+esc(zh)+'"><span class="xm-item-play">动作讲解</span></div>';
+            html+='<div class="xm-item-info"><div class="xm-item-name">'+esc(zh)+'</div><div class="xm-item-alias">'+esc(ex.name||'')+'</div><div class="xm-item-meta">'+(ex.equipment?'<span>'+esc(ex.equipment)+'</span>':'')+(ex.target?'<span>'+esc(ex.target)+'</span>':'')+'<span>'+esc(ex.grp||'训练')+'</span></div><div class="xm-item-actions"><button type="button" class="xm-item-guide" onclick="event.stopPropagation();rbShowExerciseGuide(\''+esc(ex.id)+'\')">查看讲解</button><button type="button" class="xm-item-add" onclick="event.stopPropagation();addExToTrain(\''+esc(ex.grp||'')+'\',\''+esc(ex.name||'')+'\')">＋ 加入今日</button></div></div>';
             html+='</div>';
         });
         html+='</div></section>';

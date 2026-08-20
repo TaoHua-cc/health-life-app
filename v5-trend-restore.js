@@ -10,6 +10,8 @@
   var X = [26, 77, 128, 179, 230, 281, 332];
   var BASELINE = 118;
   var CURRENT_MARK = '__xmTrendRestore';
+  var lastSignature = '';
+  var lastCard = null;
 
   function n(value) {
     var number = Number(value);
@@ -42,25 +44,16 @@
     return data.S && data.S.days && data.S.days[date] || {};
   }
 
-  function activityMinutes(item) {
-    if (!item || !item.done) return 0;
-    if (item.type === 'cardio' || item.type === 'time') {
-      return n(item.duration || item.minutes || item.time);
-    }
-    if (item.duration) return n(item.duration);
-    return Math.max(3, n(item.sets) * 2);
-  }
-
-  function minutesFor(date) {
+  function completedFor(date) {
     var day = dayFor(date);
     var parts = day.fit && day.fit.parts || [];
-    var minutes = 0;
+    var completed = 0;
     parts.forEach(function (part) {
       (part.items || []).forEach(function (item) {
-        if (!item.deleted) minutes += activityMinutes(item);
+        if (item && !item.deleted && (item.done || item.ck)) completed += 1;
       });
     });
-    return Math.round(minutes);
+    return completed;
   }
 
   function week() {
@@ -75,7 +68,7 @@
     for (var index = 0; index < 7; index += 1) {
       var day = new Date(monday);
       day.setDate(monday.getDate() + index);
-      values.push(minutesFor(iso(day)));
+      values.push(completedFor(iso(day)));
     }
     return {
       values: values,
@@ -83,11 +76,7 @@
     };
   }
 
-  function goal() {
-    var data = snapshot();
-    var state = data.S || {};
-    return n(state.weeklyGoal || state.activityGoal || state.exerciseGoal) || 30;
-  }
+  function goal() { return 3; }
 
   function element(tag, attrs) {
     var node = document.createElementNS(NS, tag);
@@ -100,7 +89,7 @@
   function paint(card, values, current) {
     var svg = card.querySelector('.xm-v6-chart svg');
     if (!svg) return;
-    var maximum = Math.max(goal() * 2, 60, Math.max.apply(Math, values) * 1.15);
+    var maximum = Math.max(6, Math.ceil(Math.max.apply(Math, values) / 3) * 3);
     var y = values.map(function (value) {
       return Math.round(BASELINE - Math.min(100, value / maximum * 100));
     });
@@ -113,6 +102,11 @@
     }).join(' ');
     var actualCount = lineEnd + 1;
     var actualValues = values.slice(0, actualCount);
+
+    var title = card.querySelector('.xm-v6-card-head b');
+    var summary = card.querySelector('strong');
+    if (title) title.textContent = '完成趋势';
+    if (summary) summary.textContent = '本周完成 ' + actualValues.reduce(function (total, value) { return total + value; }, 0) + ' 次';
 
     svg.setAttribute('viewBox', '0 0 360 140');
     svg.setAttribute('preserveAspectRatio', 'none');
@@ -168,7 +162,7 @@
         markers.appendChild(text);
       }
       markers.appendChild(element('circle', {
-        cx: X[index], cy: y[index], r: futurePoint ? 5.5 : 7,
+        cx: X[index], cy: y[index], r: 6.5,
         fill: futurePoint ? '#fffdf8' : (value > 0 ? (hot ? '#f2683d' : '#789438') : '#fffdf8'),
         stroke: futurePoint || value === 0 ? '#806b55' : '#fffdf8',
         'stroke-width': futurePoint || value === 0 ? '2' : '2.5',
@@ -176,11 +170,26 @@
       }));
     });
     svg.appendChild(markers);
+    var scale = card.querySelectorAll('.xm-v6-scale span');
+    if (scale.length >= 3) {
+      scale[0].textContent = String(maximum);
+      scale[1].textContent = String(Math.round(maximum / 2));
+      scale[2].textContent = '0';
+    }
   }
 
   function repaint() {
     var data = week();
-    document.querySelectorAll('.xm-v6-trend').forEach(function (card) {
+    if (!document.body.classList.contains('rb-fit-page')) return;
+    var cards = document.querySelectorAll('body.rb-fit-page .xm-v6-trend');
+    var signature = data.values.join(',') + '|' + data.current;
+    var activeSvg = cards[0] && cards[0].querySelector('svg');
+    var activeLine = activeSvg && activeSvg.querySelector('.line');
+    var covered = !activeLine || /\b112\b/.test(activeLine.getAttribute('d') || '') || (activeSvg.querySelector('circle') && activeSvg.querySelector('circle').getAttribute('r') === '4');
+    if (cards.length === 1 && cards[0] === lastCard && signature === lastSignature && !covered) return;
+    lastSignature = signature;
+    lastCard = cards[0] || null;
+    Array.prototype.forEach.call(cards, function (card) {
       paint(card, data.values, data.current);
     });
   }
@@ -202,7 +211,7 @@
       screen[CURRENT_MARK] = new MutationObserver(function () {
         setTimeout(repaint, 0);
       });
-      screen[CURRENT_MARK].observe(screen, { childList: true });
+      screen[CURRENT_MARK].observe(screen, { childList: true, subtree: true });
     }
   }
 

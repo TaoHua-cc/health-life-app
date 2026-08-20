@@ -694,9 +694,15 @@ body.rb-home-page .rb-home-pixel-meal{border:1px solid #e5cda9!important;border-
 body.rb-home-page .rb-home-pixel-meal img{width:56px!important;height:56px!important;object-fit:contain!important}
 body.rb-home-page .rb-home-pixel-meal b{font-size:12px!important}
 body.rb-home-page .rb-home-pixel-meal small{font-size:10px!important;color:#f15c32!important}
-body.rb-home-page .rb-home-pixel-trend-plot{height:88px!important}
-body.rb-home-page .rb-home-pixel-trend-scale,
-body.rb-home-page .rb-home-pixel-days{font-size:9px!important}
+ body.rb-home-page .rb-home-pixel-trend-plot{height:86px!important;padding-bottom:0!important;box-sizing:content-box!important}
+ body.rb-home-page .rb-home-pixel-trend svg{height:60px!important;margin-bottom:12px!important;display:block!important}
+ body.rb-home-page .rb-home-pixel-trend-scale,
+ body.rb-home-page .rb-home-pixel-days{font-size:9px!important;line-height:14px!important;min-height:14px!important;margin-top:0!important;position:relative!important;z-index:2!important;background:#fffdf8!important}
+ /* 当前首页由 V5 live 渲染为 xm-v6-trend；将 0 刻度线与日期行明确分层。 */
+ body.rb-home-page .xm-v6-trend .xm-v6-chart{padding-bottom:0!important;box-sizing:content-box!important}
+ body.rb-home-page .xm-v6-trend .xm-v6-chart svg{height:92px!important;margin-bottom:0!important;display:block!important}
+ body.rb-home-page .xm-v6-trend .xm-v6-scale{top:2px!important;bottom:auto!important;height:78px!important}
+ body.rb-home-page .xm-v6-trend .xm-v6-days{position:relative!important;z-index:2!important;background:#fffdf8!important;line-height:16px!important;min-height:16px!important;margin-top:0!important}
 body.rb-home-page .rb-home-pixel .sticker{z-index:3!important;pointer-events:none!important}
 /* v3 首页新增组件样式 */
 .rb-status-badge{display:inline-flex;align-items:center;gap:4px;background:#f25b32;color:#fff;font-size:12px;font-weight:800;padding:4px 10px;border-radius:8px;letter-spacing:.02em;margin-bottom:10px}
@@ -886,13 +892,15 @@ body.rb-fit-page .rb-pixel-head i{display:none!important}
 
 <style>
 /* 动作库（小满日常风格） */
-.xm-fitlib{position:relative;min-height:100%;background:linear-gradient(180deg,#fafbf6,#f3f1e8);padding:12px 12px 104px}
-.xm-fitlib-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.xm-fitlib{position:relative;min-height:100%;background:linear-gradient(180deg,#fafbf6,#f3f1e8);padding:16px 12px 104px}
+.xm-fitlib-head{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:16px 14px;border:1px solid #67462d;border-radius:18px;background:rgba(255,253,246,.88);box-shadow:0 5px 14px rgba(94,68,39,.08)}
+.xm-fitlib-leaf{width:18px;height:25px;border:3px solid #718c3c;border-radius:100% 0 100% 0;transform:rotate(-35deg);position:relative;flex:none}
+.xm-fitlib-leaf:after{content:"";position:absolute;width:3px;height:19px;left:7px;top:3px;background:#718c3c;transform:rotate(35deg);border-radius:3px}
 .xm-fitlib-back{flex:none;width:34px;height:34px;border-radius:12px;background:#fff;border:1px solid #ece6d4;color:#789438;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 6px rgba(86,64,33,.05)}
 .xm-fitlib-title{flex:1;min-width:0}
 .xm-fitlib-title h2{font-size:19px;color:#5a351d;margin:0;font-weight:900}
 .xm-fitlib-title p{font-size:11px;color:#9b8a6a;margin:2px 0 0}
-.xm-fitlib-count{flex:none;background:#fff;border:1px solid #ece6d4;border-radius:999px;padding:5px 10px;display:flex;align-items:baseline;gap:3px}
+.xm-fitlib-count{flex:none;background:#f1f6e8;border:1px solid #d4e0bf;border-radius:999px;padding:5px 10px;display:flex;align-items:baseline;gap:3px}
 .xm-fitlib-count b{color:#e8835a;font-size:15px;font-weight:900}
 .xm-fitlib-count small{color:#9b8a6a;font-size:10px}
 .xm-fitlib-cats{display:flex;gap:7px;overflow-x:auto;margin:0 -12px;padding:2px 12px 10px;position:sticky;top:0;z-index:6;background:linear-gradient(180deg,rgba(250,251,246,.98),rgba(250,251,246,.92));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);scrollbar-width:none}
@@ -902,27 +910,43 @@ body.rb-fit-page .rb-pixel-head i{display:none!important}
 .xm-cat-chip:active{transform:scale(.93)}
 .xm-cat-chip.on{background:linear-gradient(135deg,#8fa855,#9eb868);border-color:transparent;color:#fff;box-shadow:0 4px 10px rgba(115,150,82,.28)}
 .xm-cat-chip.on small{color:rgba(255,255,255,.85)}
-.xm-fitlib-search{position:relative;margin-bottom:14px}
+.xm-fitlib-search{position:relative;margin:2px 0 14px;padding:0 12px;border:1px solid rgba(103,70,45,.22);border-radius:14px;background:#f4f0e5}
 .xm-fitlib-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:#9b8a6a;fill:none;stroke-width:2;stroke-linecap:round}
-.xm-fitlib-search input{width:100%;box-sizing:border-box;padding:11px 14px 11px 36px;border:1.5px solid #e3dcc6;border-radius:14px;font-size:13px;background:#fff;outline:none;color:#5a351d;box-shadow:0 2px 8px rgba(86,64,33,.04)}
+.xm-fitlib-search input{width:100%;box-sizing:border-box;padding:11px 4px 11px 24px;border:0;border-radius:14px;font-size:13px;background:transparent;outline:none;color:#5a351d;box-shadow:none}
 .xm-fitlib-search input:focus{border-color:#8fa855;box-shadow:0 0 0 3px rgba(143,168,85,.14)}
 .xm-fitlib-search input::placeholder{color:#b9a98c}
-.xm-fitlib-group{margin-bottom:20px}
+.xm-fitlib-group{margin-bottom:14px}
 .xm-group-head{display:flex;align-items:center;gap:6px;margin:0 0 9px}
 .xm-group-ico{width:26px;height:26px;border-radius:9px;background:#f1f6e8;border:1px solid #dce8c8;display:grid;place-items:center;font-size:13px}
 .xm-group-head h3{font-size:14px;color:#5a351d;margin:0;font-weight:850}
 .xm-group-head small{font-size:11px;color:#9b8a6a;margin-left:auto}
-.xm-fitlib-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.xm-fitlib-item{background:#fff;border:1px solid #ece6d4;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 8px rgba(86,64,33,.05);transition:transform .14s ease,box-shadow .14s ease;animation:xmCardIn .3s ease both}
+.xm-fitlib-grid{display:flex;flex-direction:column;gap:10px}
+.xm-fitlib-item{display:flex;align-items:stretch;gap:12px;background:rgba(255,253,246,.82);border:1px solid rgba(103,70,45,.20);border-radius:16px;padding:10px;overflow:hidden;cursor:pointer;box-shadow:0 5px 14px rgba(100,75,42,.06);transition:transform .14s ease,box-shadow .14s ease;animation:xmCardIn .3s ease both}
 .xm-fitlib-item:active{transform:scale(.96)}
-.xm-item-img{position:relative;aspect-ratio:1/1;background:#f0ece0;overflow:hidden}
+.xm-item-img{width:116px;height:116px;flex:0 0 116px;position:relative;background:#efe9da;border-radius:12px;overflow:hidden}
 .xm-item-img img{width:100%;height:100%;object-fit:cover;display:block}
-.xm-item-play{position:absolute;right:6px;bottom:6px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.92);color:#789438;display:grid;place-items:center;font-size:9px;padding-left:2px;box-shadow:0 1px 4px rgba(86,64,33,.25)}
-.xm-item-name{font-size:12.5px;color:#5a351d;font-weight:800;padding:8px 10px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.xm-item-tag{display:inline-block;margin:0 0 8px 10px;font-size:9.5px;color:#789438;background:#f1f6e8;border:1px solid #dce8c8;border-radius:6px;padding:1px 6px;font-weight:750}
+.xm-item-play{position:absolute;left:7px;bottom:7px;padding:3px 6px;border-radius:7px;background:rgba(61,48,37,.76);color:#fffaf0;font-size:9px;font-weight:800}
+.xm-item-info{display:flex;flex:1;min-width:0;flex-direction:column;padding:2px 0 0}
+.xm-item-name{font-size:14px;color:#5a351d;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xm-item-alias{font-size:10px;color:#9b8a6a;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xm-item-meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.xm-item-meta span{font-size:9px;color:#756553;background:#f1ecdf;border:1px solid rgba(103,70,45,.12);border-radius:6px;padding:3px 5px}
+.xm-item-actions{display:flex;gap:6px;margin-top:auto;padding-top:10px}
+.xm-item-guide,.xm-item-add{height:30px;flex:1;border-radius:9px;font:inherit;font-size:10px;font-weight:800;cursor:pointer}
+.xm-item-guide{color:#718c3c;background:#eff4e1;border:1px solid rgba(113,140,60,.38)}
+.xm-item-add{color:#fffdf6;background:#718c3c;border:1px solid #718c3c;box-shadow:0 3px 8px rgba(113,140,60,.22)}
 .xm-fitlib-empty{text-align:center;padding:52px 20px;color:#9b8a6a;font-size:13px}
 .xm-fitlib-empty b{display:block;font-size:30px;margin-bottom:8px}
 .xm-fitlib-empty small{color:#b9a98c;font-size:11px}
+[data-theme=dark] .xm-fitlib{background:linear-gradient(180deg,#181b24,#0e1016)}
+[data-theme=dark] .xm-fitlib-head{background:rgba(30,35,43,.82);border-color:rgba(210,185,145,.30)}
+[data-theme=dark] .xm-fitlib-title h2,[data-theme=dark] .xm-item-name{color:#f4eee2}
+[data-theme=dark] .xm-fitlib-title p,[data-theme=dark] .xm-item-alias,[data-theme=dark] .xm-fitlib-count small{color:#c4b6a1}
+[data-theme=dark] .xm-fitlib-search{background:rgba(42,47,57,.86);border-color:rgba(255,255,255,.14)}
+[data-theme=dark] .xm-fitlib-search input{color:#f4eee2}
+[data-theme=dark] .xm-fitlib-item{background:rgba(30,35,43,.76);border-color:rgba(255,255,255,.10)}
+[data-theme=dark] .xm-item-meta span{background:rgba(72,67,57,.82);border-color:rgba(255,255,255,.10);color:#d4c6af}
+[data-theme=dark] .xm-item-guide{background:rgba(113,140,60,.14);border-color:rgba(168,192,112,.48);color:#b8d18a}
 @keyframes xmCardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 </style>
 </head>
@@ -2333,7 +2357,11 @@ function init(){
   // 每次打开默认进入首页（不再恢复上次浏览的页面）
   sw('home');
   applySystemTheme();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applySystemTheme);
+  var themeMedia=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)');
+  if(themeMedia){
+    if(themeMedia.addEventListener)themeMedia.addEventListener('change',applySystemTheme);
+    else if(themeMedia.addListener)themeMedia.addListener(applySystemTheme);
+  }
   updateStatusBarStyle();
   applyThemeColor();
   // 吃喝玩乐攻略数据：每天自动更新一次（拉取 GitHub Pages 最新 boards-data.json，成功替换数据，失败用内置兜底）
@@ -2906,7 +2934,7 @@ function cloudRecog(url){
         }).catch(function(e){camFail('大模型识别失败（检查中转代理是否可用）：'+((e&&e.message)||e)+'。');});
       return;
     }
-    var model=S.aiModel||'qwen-vl-max';
+    var model=S.aiVisionModel||S.aiModel||'qwen-vl-max';
     var realApi='https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation';
     var finalUrl=S.aiProxy?(S.aiProxy.replace(/\/?$/,'')+'?target='+encodeURIComponent(realApi)):realApi;
     var body2={model:model,input:{messages:[{role:'user',content:[{image:b64},{text:prompt}]}]}};
@@ -5443,9 +5471,10 @@ if(bnavEl){
 // Theme
 function updateStatusBarStyle(){try{var m=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(m)m.setAttribute('content','black-translucent')}catch(e){}}
 function applySystemTheme(){
-  var dark=window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if(dark){document.documentElement.setAttribute('data-theme','dark')}
-  else{document.documentElement.removeAttribute('data-theme')}
+  var root=document.documentElement;
+  var dark=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if(dark){root.setAttribute('data-theme','dark');root.style.colorScheme='dark'}
+  else{root.removeAttribute('data-theme');root.style.colorScheme='light'}
   applyThemeColor();
   updateStatusBarStyle();
 }
@@ -6043,8 +6072,15 @@ function rbRefWork(){var d=gd(curDate),tasks=d.tasks||[],done=tasks.filter(funct
 })();
 </script>
 <link rel="stylesheet" href="v5-trend-restore.css?v=20260820-1">
-<script src="v5-live.js?v=20260818-0841"></script>
-<script src="v5-trend-restore.js?v=20260820-1"></script>
+<script src="v5-live.js?v=20260820-lib-redesign"></script>
+<link rel="stylesheet" href="v5-plan-library.css?v=20260820-plan-library-contrast">
+<script src="v5-plan-library.js?v=20260820-plan-library-illustrations"></script>
+<link rel="stylesheet" href="v5-profile-functional.css?v=20260820-profile-settings">
+<script src="v5-plan-library-expanded.js?v=20260820-plan-library-expanded"></script>
+<script src="v5-profile-functional.js?v=20260820-profile-settings"></script>
+<link rel="stylesheet" href="v5-theme-adapter.css?v=20260820-system-theme">
+<script src="v5-home-trend-fix.js?v=20260820-home-trend-coordinates"></script>
+<script src="v5-trend-restore.js?v=20260820-completion-counts"></script>
 <script src="./health-bridge.js"></script>
 </body>
 </html>
