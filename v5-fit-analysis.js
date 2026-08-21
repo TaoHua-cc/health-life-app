@@ -64,6 +64,29 @@
   }
   function aiUrl(target) { var s = appData(); return s.aiProxy ? String(s.aiProxy).replace(/\/?$/, '') + '?target=' + encodeURIComponent(target) : target; }
   function cardRoot() { return document.querySelector('.rb-fit-pixel'); }
+  function bindFitInteractions() {
+    if (document.getElementById('xmFitAnalysisSheet') && document.documentElement.getAttribute('data-xm-fit-events')) return;
+    document.documentElement.setAttribute('data-xm-fit-events', '1');
+    function returnToday(event) {
+      var node = event.target;
+      while (node && node !== document && node.nodeType === 1) {
+        if (node.hasAttribute('data-xm-fit-back-today')) { event.preventDefault(); event.stopImmediatePropagation(); if (window.__xmV5 && typeof window.__xmV5.selectDate === 'function') window.__xmV5.selectDate(iso()); else { var today = document.querySelector('.xm-daytab.today'); if (today && !today.classList.contains('on')) today.click(); } return; }
+        node = node.parentNode;
+      }
+    }
+    document.addEventListener('click', function (event) {
+      var node = event.target;
+      while (node && node !== document && node.nodeType === 1) {
+        if (node.hasAttribute('data-xm-fit-library')) { event.preventDefault(); event.stopImmediatePropagation(); if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); return; }
+        if (node.hasAttribute('data-xm-fit-analysis')) { event.preventDefault(); event.stopImmediatePropagation(); if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); return; }
+        if (node.hasAttribute('data-xm-fit-more')) { event.preventDefault(); event.stopImmediatePropagation(); if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); return; }
+        if (node.hasAttribute('data-xm-fit-back-today')) { event.preventDefault(); event.stopImmediatePropagation(); if (window.__xmV5 && typeof window.__xmV5.selectDate === 'function') window.__xmV5.selectDate(iso()); else { var today = document.querySelector('.xm-daytab.today'); if (today && !today.classList.contains('on')) today.click(); } return; }
+        node = node.parentNode;
+      }
+    }, true);
+    document.addEventListener('pointerup', returnToday, true);
+    document.addEventListener('touchend', returnToday, true);
+  }
   function makeActions(head) {
     if (!head) return;
     var actions = head.querySelector('.xm-rec-actions'), lib = head.querySelector('[data-xm-fit-library]'), analysis = head.querySelector('[data-xm-fit-analysis]'), more = head.querySelector('[data-xm-fit-more]');
@@ -73,6 +96,9 @@
     if (!lib) { lib = document.createElement('button'); lib.type = 'button'; lib.className = 'xm-fit-lib-head-btn'; lib.setAttribute('data-xm-fit-library', '1'); lib.textContent = '动作库'; lib.onclick = function () { if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); }; }
     if (!analysis) { analysis = document.createElement('button'); analysis.type = 'button'; analysis.className = 'xm-fit-analysis-head-btn'; analysis.setAttribute('data-xm-fit-analysis', '1'); analysis.textContent = '训练分析'; analysis.onclick = function () { if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); }; }
     if (!more) { more = document.createElement('button'); more.type = 'button'; more.className = 'xm-fit-more-head-btn'; more.setAttribute('data-xm-fit-more', '1'); more.textContent = '更多 ›'; more.onclick = function () { if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); }; }
+    lib.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); };
+    analysis.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); };
+    more.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); };
     actions.appendChild(lib); actions.appendChild(analysis); actions.appendChild(more);
   }
   function sessionDateLabel() {
@@ -86,9 +112,20 @@
     var h2 = head.querySelector('.rb-pixel-section-title'), mark = h2 && h2.querySelector('.xm-leaf-title'), title = h2 && (h2.getAttribute('data-rb-title-label') || '本次训练');
     if (h2 && !h2.getAttribute('data-xm-session-title')) { h2.innerHTML = (mark ? mark.outerHTML : '') + esc(title); h2.setAttribute('data-xm-session-title', '1'); }
     var tabs = root.querySelector('.xm-fit-daytabs'), meta = root.querySelector('.xm-fit-session-meta');
-    if (!meta) { meta = document.createElement('div'); meta.className = 'xm-fit-session-meta'; meta.setAttribute('data-xm-fit-date', '1'); if (tabs && tabs.parentNode) tabs.parentNode.insertBefore(meta, tabs); else head.parentNode.insertBefore(meta, head.nextSibling); }
     var date = sessionDateLabel();
-    meta.innerHTML = '<span class="xm-fit-session-date">'+date.date+'</span>' + (date.current ? '<span class="xm-fit-current-chip">今天</span>' : '<button type="button" class="xm-fit-back-today" onclick="__xmV5.selectDate(\''+dateString(iso())+'\')">今天</button>');
+    if (date.current) { if (meta) meta.remove(); return; }
+    if (!meta) { meta = document.createElement('div'); meta.className = 'xm-fit-session-meta'; meta.setAttribute('data-xm-fit-date', '1'); if (tabs && tabs.parentNode) tabs.parentNode.insertBefore(meta, tabs); else head.parentNode.insertBefore(meta, head.nextSibling); }
+    var todayKey = dateString(iso());
+    if (meta.getAttribute('data-xm-fit-date-key') !== date.iso || !meta.querySelector('[data-xm-fit-back-today]')) {
+      meta.innerHTML = '<span class="xm-fit-session-date">'+date.date+'</span><button type="button" class="xm-fit-back-today" data-xm-fit-back-today="1" aria-label="返回今天" onpointerup="event.preventDefault();if(window.__xmV5&&typeof window.__xmV5.selectDate===\'function\')window.__xmV5.selectDate(\''+todayKey+'\')">今天</button>';
+      meta.setAttribute('data-xm-fit-date-key', date.iso);
+    }
+    var back = meta.querySelector('[data-xm-fit-back-today]');
+    if (back && !back.getAttribute('data-xm-fit-bound')) back.onclick = function (event) {
+      if (event) { event.preventDefault(); event.stopPropagation(); }
+      if (window.__xmV5 && typeof window.__xmV5.selectDate === 'function') window.__xmV5.selectDate(iso());
+      else { var today = root.querySelector('.xm-daytab.today'); if (today) today.click(); }
+    }, back && back.setAttribute('data-xm-fit-bound', '1');
   }
   function dateString(value) { return String(value || '').replace(/'/g, ''); }
   function flattenDayTabs(root) {
@@ -121,6 +158,7 @@
   }
   function normalizeFitNav(root) {
     if (!root) return;
+    bindFitInteractions();
     var toolbar = root.querySelector('.xm-fit-toolbar'); if (toolbar) toolbar.remove();
     makeActions(root.querySelector('.xm-rec-head'));
     var oldAnalysis = root.querySelector('.xm-fit-analysis'); if (oldAnalysis && !oldAnalysis.closest('#xmFitAnalysisSheet')) oldAnalysis.remove();
