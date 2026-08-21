@@ -993,6 +993,58 @@ body.rb-fit-page .rb-pixel-head i{display:none!important}
   </section>
 </div>
 
+<style id="xm-fit-layout-static">
+  .xm-rec-head{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:6px!important;min-height:34px!important;position:relative!important}
+  .xm-rec-head>.rb-pixel-section-title{flex:0 1 auto!important;min-width:0!important;max-width:calc(100% - 156px)!important;margin-right:auto!important;white-space:nowrap!important}
+  .xm-rec-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex:0 0 auto!important;flex-wrap:nowrap!important;gap:4px!important;width:max-content!important;min-width:max-content!important;white-space:nowrap!important}
+  .xm-rec-actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;flex:0 0 auto!important;width:auto!important;height:27px!important;min-height:27px!important;margin:0!important;padding:0 5px!important;border-radius:8px!important;font-family:inherit!important;font-size:10px!important;font-weight:900!important;line-height:25px!important;white-space:nowrap!important}
+  .xm-fit-lib-head-btn{border:1px solid #b6c88e!important;background:#f0f5e4!important;color:#587328!important}
+  .xm-fit-analysis-head-btn{border:1px solid #d9b978!important;background:#fff5df!important;color:#9b6b25!important}
+  .xm-fit-more-head-btn{border:0!important;background:transparent!important;color:#789438!important;padding:0 2px!important}
+  .xm-fit-session-head{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;min-height:34px!important}
+  .xm-fit-session-head>.rb-pixel-section-title{flex:0 1 auto!important;min-width:0!important;margin-right:auto!important;white-space:nowrap!important}
+  .xm-fit-session-head>.rb-pixel-add-action{flex:0 0 auto!important;white-space:nowrap!important}
+  .xm-fit-session-meta{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:7px!important;width:100%!important;height:28px!important;margin:1px 2px 5px!important;overflow:visible!important;color:#846d56!important;font-size:11px!important;line-height:28px!important}
+  .xm-fit-session-date{font-weight:800!important;white-space:nowrap!important}
+  .xm-fit-current-chip,.xm-fit-back-today{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:24px!important;padding:0 9px!important;border:1px solid #b8c98e!important;border-radius:999px!important;background:#f1f5e5!important;color:#61782f!important;font:inherit!important;font-size:11px!important;font-weight:900!important;line-height:22px!important;white-space:nowrap!important}
+  .xm-daytabs-wrap{position:static!important;display:block!important;width:100%!important;min-width:0!important;overflow:visible!important}
+  .xm-daytabs-wrap .xm-fit-daytabs{display:flex!important;align-items:stretch!important;justify-content:space-between!important;width:100%!important;min-width:0!important;gap:4px!important;margin:0!important;padding:0!important;overflow:visible!important}
+  .xm-fit-daytabs .xm-daytab{flex:1 1 0!important;width:auto!important;min-width:0!important;margin:0!important;padding:5px 2px!important;white-space:nowrap!important}
+  .xm-fit-analysis-sheet{position:fixed!important;inset:0!important;z-index:9999!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important;padding:0!important;background:rgba(55,41,26,.3)!important}
+  .xm-fit-analysis-sheet[hidden]{display:none!important}
+  .xm-fit-analysis-panel{box-sizing:border-box!important;width:min(100%,430px)!important;max-height:min(72svh,560px)!important;overflow:auto!important;margin:0!important;padding:12px 15px calc(16px + env(safe-area-inset-bottom))!important;border:1px solid rgba(180,154,112,.52)!important;border-bottom:0!important;border-radius:25px 25px 0 0!important;background:#fffdf8!important;color:#4b2c18!important;box-shadow:0 -15px 34px rgba(86,64,33,.2)!important;animation:xmFitAnalysisUp .28s cubic-bezier(.22,1,.36,1)!important}
+  .xm-fit-analysis-sheet .xm-sheet-grabber{width:38px!important;height:4px!important;margin:0 auto 10px!important;border-radius:99px!important;background:#d8c9b2!important}
+  .xm-fit-analysis-sheet-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;padding:2px 0 10px!important;border-bottom:1px dashed #e2d4bd!important}
+  .xm-fit-analysis-sheet-head>div{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+  .xm-fit-analysis-sheet-head>div>div{min-width:0!important}
+  .xm-fit-analysis-sheet-head b{display:block!important;margin:0!important;color:#4b2c18!important;font-size:16px!important;font-weight:900!important;line-height:1.2!important;white-space:nowrap!important}
+  .xm-fit-analysis-sheet-head small{display:block!important;margin-top:3px!important;color:#9a8066!important;font-size:10px!important;line-height:1.3!important;white-space:nowrap!important}
+  .xm-fit-analysis-mark{display:grid!important;place-items:center!important;flex:0 0 24px!important;width:24px!important;height:24px!important;border-radius:8px!important;background:#789438!important;color:#fff!important;font-size:13px!important}
+  .xm-fit-analysis-close{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 30px!important;width:30px!important;height:30px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:#f4ead9!important;color:#806b55!important;font:inherit!important;font-size:20px!important;line-height:30px!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis{margin:12px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+  .xm-fit-analysis-toolbar{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;min-height:28px!important}
+  .xm-fit-analysis-toolbar>small{color:#789438!important;font-size:11px!important;font-weight:900!important}
+  .xm-fit-analysis-toolbar button{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:28px!important;padding:0 10px!important;border:1px solid #d5a447!important;border-radius:999px!important;background:#fff8e8!important;color:#9a681e!important;font:inherit!important;font-size:11px!important;font-weight:900!important;white-space:nowrap!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis-body{margin-top:8px!important;padding:11px 12px!important;border:1px solid #ead9bb!important;border-radius:14px!important;background:linear-gradient(145deg,#fffdf8,#f8f1e3)!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis-body b{display:block!important;margin:0!important;color:#789438!important;font-size:12px!important;font-weight:900!important;line-height:1.4!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis-body b~b{margin-top:12px!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis-body p{margin:3px 0 0!important;color:#62503d!important;font-size:13px!important;line-height:1.65!important}
+  .xm-fit-analysis-sheet .xm-fit-analysis-body p+b{margin-top:10px!important}
+  @keyframes xmFitAnalysisUp{from{transform:translateY(100%);opacity:.7}to{transform:translateY(0);opacity:1}}
+  @media(prefers-reduced-motion:reduce){.xm-fit-analysis-panel{animation:none!important}}
+</style>
+
+<div class="xm-fit-analysis-sheet" id="xmFitAnalysisSheet" hidden>
+  <section class="xm-fit-analysis-panel" role="dialog" aria-modal="true" aria-labelledby="xmFitAnalysisTitle">
+    <div class="xm-sheet-grabber" aria-hidden="true"></div>
+    <header class="xm-fit-analysis-sheet-head">
+      <div><span class="xm-fit-analysis-mark">✦</span><div><b id="xmFitAnalysisTitle">训练分析</b><small>今日与本周训练综合分析</small></div></div>
+      <button type="button" class="xm-fit-analysis-close" aria-label="关闭">×</button>
+    </header>
+    <div class="xm-fit-analysis"></div>
+  </section>
+</div>
+
 <script>
 /* 兼容垫片：旧 v1 的渲染函数仍被新壳的数据操作（保存心情/勾选任务/加饮食/加训练等）
    复用，但旧版 DOM（<div class="ph">）已彻底删除。此处让 document.getElementById 在找不到
@@ -6926,7 +6978,7 @@ html body.rb-mode .rb-ref-food-main>b,html body.rb-mode .rb-ref-food-main>small{
 <div id="rbFoodEditSheet" class="rb-food-edit-sheet" hidden onclick="if(event.target===this&&window.rbCloseFoodEdit)window.rbCloseFoodEdit()"></div>
 <script src="v5-diet-food-actions.js?v=20260821-meal-actions-v16"></script>
 <script src="v5-diet-vision.js?v=20260822-diet-vision-v1"></script>
-<script src="v5-fit-analysis.js?v=20260822-fit-analysis-v1"></script>
+<script src="v5-fit-analysis.js?v=20260822-fit-layout-v14"></script>
 <script>
 /* 统一所有卡片标题：内容文字保留真实功能，标题签只负责层级和识别。 */
 (function(){
