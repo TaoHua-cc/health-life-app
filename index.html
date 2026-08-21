@@ -6519,9 +6519,409 @@ body.rb-ref-page .rb-ref-diet .rb-ref-header p{
   font-weight:650!important;
   letter-spacing:.02em!important;
 }
+/* 今日XX标题签移除：保留普通标题和详情入口，不再使用橙色贴签或两侧装饰。 */
+body.rb-mode .xm-v6-ribbon,
+body.rb-mode .rb-home-pixel-status-title,
+body.rb-mode .rb-pixel-status-title,
+body.rb-mode .rb-ref-ribbon,
+body.rb-mode .xm-v6-meals .xm-v6-card-head,
+body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head{
+  position:static!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:23px!important;
+  height:23px!important;
+  margin:0 0 10px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#4b2c18!important;
+  box-shadow:none!important;
+  filter:none!important;
+  font-size:17px!important;
+  line-height:23px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-shadow:none!important;
+}
+body.rb-mode .xm-v6-ribbon .xm-leaf-title,
+body.rb-mode .rb-home-pixel-status-title .xm-leaf-title,
+body.rb-mode .rb-pixel-status-title .xm-leaf-title,
+body.rb-mode .rb-ref-ribbon .xm-leaf-title,
+body.rb-mode .xm-v6-ribbon .rb-wleaf,
+body.rb-mode .rb-home-pixel-status-title .rb-wleaf,
+body.rb-mode .rb-pixel-status-title .rb-wleaf,
+body.rb-mode .rb-ref-ribbon .rb-wleaf,
+body.rb-mode .xm-v6-meals .xm-v6-card-head>span,
+body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head>span{
+  display:none!important;
+}
+body.rb-mode .xm-v6-meals .xm-v6-card-head b,
+body.rb-mode .xm-v6-meals .xm-v6-card-head small,
+body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head small{
+  color:inherit!important;
+}
+body.rb-mode .xm-v6-meals{
+  height:auto!important;
+  min-height:0!important;
+  padding:10px 8px 10px!important;
+}
+body.rb-mode .xm-v6-status{
+  height:auto!important;
+  min-height:0!important;
+  padding:12px 12px 12px!important;
+}
+body.rb-mode .xm-v6-status-foot{
+  position:static!important;
+  margin-top:12px!important;
+}
+body.rb-mode .rb-home-pixel-status{
+  height:auto!important;
+  min-height:0!important;
+  padding:12px 14px 12px!important;
+}
+/* 延迟注入的旧版标题规则优先级更高，这里用更明确的作用域确保标题签最终保持简洁。 */
+html body.rb-mode .xm-v6-ribbon,
+html body.rb-mode .rb-home-pixel-status-title,
+html body.rb-mode .rb-pixel-status-title,
+html body.rb-mode .rb-ref-ribbon,
+html body.rb-mode .xm-v6-meals .xm-v6-card-head,
+html body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head{
+  position:static!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:23px!important;
+  height:23px!important;
+  margin:0 0 10px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#4b2c18!important;
+  box-shadow:none!important;
+  filter:none!important;
+  font-size:17px!important;
+  line-height:23px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-shadow:none!important;
+}
+html body.rb-mode .xm-v6-ribbon .xm-leaf-title,
+html body.rb-mode .rb-home-pixel-status-title .xm-leaf-title,
+html body.rb-mode .rb-pixel-status-title .xm-leaf-title,
+html body.rb-mode .rb-ref-ribbon .xm-leaf-title,
+html body.rb-mode .xm-v6-ribbon .rb-wleaf,
+html body.rb-mode .rb-home-pixel-status-title .rb-wleaf,
+html body.rb-mode .rb-pixel-status-title .rb-wleaf,
+html body.rb-mode .rb-ref-ribbon .rb-wleaf,
+html body.rb-mode .xm-v6-meals .xm-v6-card-head>span,
+html body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head>span{
+  display:none!important;
+}
+html body.rb-mode .xm-v6-meals{
+  height:auto!important;
+  min-height:0!important;
+  padding:10px 8px 10px!important;
+}
+html body.rb-mode .xm-v6-status{
+  height:auto!important;
+  min-height:0!important;
+  padding:12px 12px 12px!important;
+}
+html body.rb-mode .xm-v6-status-foot{position:static!important;margin-top:12px!important}
+html body.rb-mode .rb-home-pixel-status{
+  height:auto!important;
+  min-height:0!important;
+  padding:12px 14px 12px!important;
+}
+/* 页面级标题选择器带有父级限定，优先级更高，必须一并覆盖。 */
+html body.rb-mode .xm-v6-status > .xm-v6-ribbon,
+html body.rb-mode .rb-pixel-status > .rb-pixel-status-title,
+html body.rb-mode .rb-ref-card > .rb-ref-ribbon,
+html body.rb-mode .rb-ref-work-hero > .rb-ref-ribbon,
+html body.rb-mode .rb-ref-life-mood > .rb-ref-ribbon,
+html body.rb-mode .rb-ref-diet .rb-ref-ribbon,
+html body.rb-mode .rb-ref-meal-board-head > .rb-ref-ribbon{
+  position:static!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:23px!important;
+  height:23px!important;
+  margin:0 0 10px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#4b2c18!important;
+  box-shadow:none!important;
+  filter:none!important;
+  font-size:17px!important;
+  line-height:23px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-shadow:none!important;
+}
+html body.rb-mode .xm-v6-ribbon,
+html body.rb-mode .rb-home-pixel-status-title,
+html body.rb-mode .rb-pixel-status-title,
+html body.rb-mode .rb-ref-ribbon,
+html body.rb-mode .xm-v6-meals .xm-v6-card-head,
+html body.rb-mode .rb-home-pixel-meals .rb-home-pixel-card-head{transform:none!important}
+html body.rb-mode .xm-v6-meals .xm-v6-card-head .xm-v6-detail-link{
+  display:inline-block!important;
+  margin-left:auto!important;
+  color:#789438!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+}
+</style>
+<style id="rb-card-title-system-v1">
+/* 小满日常卡片标题签：暖纸底、深棕描边、内容图标和轻微压纸阴影。 */
+html body.rb-mode .rb-card-title-sticker,
+html body.rb-mode .xm-v6-status > .rb-card-title-sticker,
+html body.rb-mode .xm-v6-meals > .rb-card-title-sticker,
+html body.rb-mode .rb-pixel-status > .rb-card-title-sticker,
+html body.rb-mode .rb-ref-card > .rb-card-title-sticker,
+html body.rb-mode .rb-ref-meal-board-head > .rb-card-title-sticker{
+  --rb-title-accent:#ef5c2b;
+  --rb-title-icon:url('assets/xiaoman-v3/ui-leaf-sticker.png');
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  align-self:flex-start!important;
+  width:max-content!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:32px!important;
+  min-height:32px!important;
+  margin:0 0 10px!important;
+  padding:0 12px 0 8px!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  color:#4b2c18!important;
+  background:#fff9ed!important;
+  border:1.5px solid #755238!important;
+  border-radius:10px 10px 10px 3px!important;
+  box-shadow:0 2px 0 var(--rb-title-accent),inset 0 1px 0 rgba(255,255,255,.92)!important;
+  font-size:15px!important;
+  line-height:32px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-shadow:none!important;
+  transform:none!important;
+}
+html body.rb-mode .rb-card-title-sticker::before{
+  content:"";
+  display:block;
+  flex:0 0 18px;
+  width:18px;
+  height:18px;
+  background:var(--rb-title-icon) center/contain no-repeat;
+}
+html body.rb-mode .rb-card-title-sticker::after{
+  content:"";
+  position:absolute;
+  left:9px;
+  bottom:-5px;
+  width:24px;
+  height:5px;
+  background:var(--rb-title-accent);
+  clip-path:polygon(0 0,100% 0,78% 100%,22% 100%);
+  opacity:.9;
+}
+html body.rb-mode .rb-card-title-sticker .xm-leaf-title,
+html body.rb-mode .rb-card-title-sticker .rb-wleaf,
+html body.rb-mode .rb-card-title-sticker .rb-gleaf,
+html body.rb-mode .rb-card-title-sticker>span:empty{
+  display:none!important;
+}
+html body.rb-mode .rb-card-title-status{--rb-title-accent:#789438!important;--rb-title-icon:url('assets/xiaoman-v3/status-mood-v3.png')!important}
+html body.rb-mode .rb-card-title-diet{--rb-title-accent:#ef5c2b!important;--rb-title-icon:url('assets/xiaoman-v3/diet-breakfast-oatmeal.png')!important}
+html body.rb-mode .rb-card-title-trend{--rb-title-accent:#d79b2c!important;--rb-title-icon:url('assets/xiaoman-v3/ui-leaf-sticker.png')!important}
+html body.rb-mode .rb-card-title-fit{--rb-title-accent:#ef5c2b!important;--rb-title-icon:url('assets/illustrations/fit-part-cardio-v2.png')!important}
+html body.rb-mode .rb-card-title-nutrition{--rb-title-accent:#789438!important;--rb-title-icon:url('assets/xiaoman-v3/macro-protein-v2.png')!important}
+html body.rb-mode .rb-card-title-tool{--rb-title-accent:#789438!important;--rb-title-icon:url('assets/xiaoman-v3/diet-lunch-chicken.png')!important}
+html body.rb-mode .rb-card-title-work{--rb-title-accent:#e0a13a!important;--rb-title-icon:url('assets/xiaoman-v3/work-checklist.png')!important}
+html body.rb-mode .rb-card-title-life{--rb-title-accent:#a77d35!important;--rb-title-icon:url('assets/xiaoman-v3/status-mood-v3.png')!important}
+html body.rb-mode .rb-card-title-plan{--rb-title-accent:#ef5c2b!important;--rb-title-icon:url('assets/illustrations/fit-puppy-dumbbell.png')!important}
+html body.rb-mode .rb-card-title-meal{
+  --rb-title-accent:#ef5c2b;
+  --rb-title-icon:url('assets/xiaoman-v3/diet-breakfast-oatmeal.png');
+  height:26px!important;
+  min-height:26px!important;
+  margin:0!important;
+  padding:0 8px 0 6px!important;
+  border-radius:8px 8px 8px 3px!important;
+  font-size:13px!important;
+  line-height:26px!important;
+}
+html body.rb-mode .rb-card-title-meal::before{flex-basis:14px;width:14px;height:14px}
+html body.rb-mode .rb-card-title-meal::after{left:7px;bottom:-4px;width:18px;height:4px}
+html body.rb-mode .rb-ref-card>.rb-card-title-sticker,
+html body.rb-mode .rb-ref-meal-board-head>.rb-card-title-sticker,
+html body.rb-mode .xm-v6-status>.rb-card-title-sticker,
+html body.rb-mode .xm-v6-meals>.rb-card-title-sticker,
+html body.rb-mode .rb-pixel-status>.rb-card-title-sticker{margin-left:auto!important;margin-right:auto!important}
+html body.rb-mode .rb-pixel-section-head>.rb-card-title-sticker{margin:0!important}
+html body.rb-mode .rb-ref-section-title.rb-card-title-sticker{margin:12px 0 8px 5px!important}
+html body.rb-mode .rb-diet-tools-head{align-items:center!important}
+html body.rb-mode .rb-diet-tools-head>.rb-card-title-sticker{margin:0!important}
+html body.rb-mode .rb-diet-tools-head>.rb-card-title-sticker+small{margin-left:auto!important}
+html body.rb-mode .rb-ref-focus>.rb-card-title-sticker{margin:0 0 8px!important}
+html body.rb-mode .rb-ref-focus>.rb-card-title-sticker{display:flex!important;margin-right:0!important}
+html body.rb-mode .xm-v6-meals .xm-v6-detail-link{display:inline-block!important;margin-left:auto!important;color:#789438!important;font-size:11px!important;font-weight:800!important;white-space:nowrap!important}
+html body.rb-mode .rb-card-title-sticker .xm-v6-detail-link{margin-left:auto!important}
+html body.rb-mode .rb-pixel-section-head{align-items:center!important}
+html body.rb-mode .rb-pixel-section-head>.rb-card-title-sticker small{margin-left:4px!important;color:#9b826b!important;font-size:10px!important;font-weight:700!important}
+html body.rb-mode .rb-diet-tools-head>.rb-card-title-sticker small,
+html body.rb-mode .rb-diet-reminders>.rb-card-title-sticker small{color:inherit!important}
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker{height:28px!important;min-height:28px!important;margin:0!important;padding:0 8px!important;font-size:12px!important;line-height:28px!important}
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker::before{width:15px;height:15px;flex-basis:15px}
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker::after{left:7px;bottom:-4px;width:19px;height:4px}
+</style>
+<style id="rb-card-title-precision-v1">
+/* 标题签精简：三餐名称、两个趋势和推荐计划保持内容层级，不再重复套签。 */
+html body.rb-mode .rb-card-title-meal,
+html body.rb-mode .xm-v6-trend > .rb-card-title-sticker,
+html body.rb-mode .rb-home-pixel-trend > .rb-card-title-sticker,
+html body.rb-mode .rb-fit-pixel .xm-v6-trend > .rb-card-title-sticker,
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker{
+  display:flex!important;
+  align-items:center!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:22px!important;
+  min-height:22px!important;
+  margin:0 0 6px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#4b2c18!important;
+  font-size:15px!important;
+  line-height:22px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+}
+html body.rb-mode .rb-card-title-meal{
+  display:inline!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  color:#4b2c18!important;
+  font-size:inherit!important;
+  line-height:inherit!important;
+  font-weight:900!important;
+}
+html body.rb-mode .rb-card-title-meal::before,
+html body.rb-mode .rb-card-title-meal::after,
+html body.rb-mode .xm-v6-trend > .rb-card-title-sticker::before,
+html body.rb-mode .xm-v6-trend > .rb-card-title-sticker::after,
+html body.rb-mode .rb-home-pixel-trend > .rb-card-title-sticker::before,
+html body.rb-mode .rb-home-pixel-trend > .rb-card-title-sticker::after,
+html body.rb-mode .rb-fit-pixel .xm-v6-trend > .rb-card-title-sticker::before,
+html body.rb-mode .rb-fit-pixel .xm-v6-trend > .rb-card-title-sticker::after,
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker::before,
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker::after{
+  display:none!important;
+  content:none!important;
+}
+html body.rb-mode .xm-plan-card-head.rb-card-title-sticker{
+  height:20px!important;
+  min-height:20px!important;
+  margin:0!important;
+  font-size:12px!important;
+  line-height:20px!important;
+}
+/* 底部导航保留选中底色，不再绘制额外的下划线。 */
+html body.rb-mode .rb-nav button.on::after,
+html body.rb-mode .rb-nav button::after{
+  display:none!important;
+  content:none!important;
+}
+html body.rb-mode .rb-nav button{text-decoration:none!important;border-bottom:0!important}
+/* 动作库：移除左侧异常叶片，把返回固定到标题栏最左侧。 */
+html body.rb-mode .xm-fitlib-head .xm-fitlib-leaf{display:none!important}
+html body.rb-mode .xm-fitlib-head .xm-fitlib-back{order:-2!important;margin:0 2px 0 0!important}
 </style>
 <div id="rbHomeMealSheet" class="rb-home-meal-sheet" hidden onclick="if(event.target===this&&window.rbCloseHomeMealSheet)window.rbCloseHomeMealSheet()"></div>
 <div id="rbFoodEditSheet" class="rb-food-edit-sheet" hidden onclick="if(event.target===this&&window.rbCloseFoodEdit)window.rbCloseFoodEdit()"></div>
 <script src="v5-diet-food-actions.js?v=20260821-meal-actions-v16"></script>
+<script>
+/* 统一所有卡片标题：内容文字保留真实功能，标题签只负责层级和识别。 */
+(function(){
+  var rules=[
+    ['.xm-v6-status > .xm-v6-ribbon','今日状态','status'],
+    ['.xm-v6-meals > .xm-v6-card-head','今日饮食','diet'],
+    ['.xm-v6-trend > .xm-v6-card-head','本周趋势','trend'],
+    ['.rb-home-pixel-status > .rb-home-pixel-status-title','今日状态','status'],
+    ['.rb-home-pixel-meals > .rb-home-pixel-card-head','今日饮食','diet'],
+    ['.rb-home-pixel-trend > .rb-home-pixel-card-head','本周趋势','trend'],
+    ['.rb-pixel-status > .rb-pixel-status-title','今日运动','fit'],
+    ['.rb-pixel-section-head.xm-rec-head > .rb-pixel-section-title','推荐训练','fit'],
+    ['.rb-pixel-section-head:not(.xm-rec-head) > .rb-pixel-section-title','本次训练','fit'],
+    ['.rb-fit-pixel .xm-v6-trend > .xm-v6-card-head','完成趋势','trend'],
+    ['.rb-ref-nutrition > .rb-ref-ribbon','今日营养','nutrition'],
+    ['.rb-ref-meal-board .rb-ref-ribbon','今日餐盘','diet'],
+    ['.rb-diet-tools-head > h2','饮食功能','tool'],
+    ['.rb-diet-reminders > h2','营养提醒','nutrition'],
+    ['.rb-ref-work-hero > .rb-ref-ribbon','今日任务','work'],
+    ['.rb-ref-focus > b:first-child','专注计时','work'],
+    ['.rb-ref-life-mood > .rb-ref-ribbon','今日心情','life'],
+    ['.rb-ref-life .rb-ref-section-title',null,'life']
+  ];
+  function directText(el,text){
+    var node=Array.prototype.slice.call(el.childNodes).filter(function(n){return n.nodeType===3})[0];
+    if(node)node.nodeValue=text;
+    else el.insertBefore(document.createTextNode(text),el.firstChild||null);
+  }
+  function mark(el,text,kind){
+    if(!el)return;
+    el.classList.add('rb-card-title-sticker','rb-card-title-'+kind);
+    if(text&&el.getAttribute('data-rb-title-label')!==text){
+      if(el.matches('.xm-v6-card-head')){
+        var b=el.querySelector('b');if(b)b.textContent=text;
+      }else if(el.matches('.rb-pixel-section-title,.rb-diet-tools-head > h2,.rb-diet-reminders > h2,.rb-ref-section-title')){
+        directText(el,text);
+      }else if(el.matches('.rb-ref-focus > b:first-child')){
+        el.textContent=text;
+      }else{
+        el.textContent=text;
+      }
+      el.setAttribute('data-rb-title-label',text);
+    }
+  }
+  function apply(){
+    var box=document.getElementById('rbScreen');if(!box)return;
+    rules.forEach(function(rule){box.querySelectorAll(rule[0]).forEach(function(el){mark(el,rule[1],rule[2])})});
+    box.querySelectorAll('.xm-plan-card-head').forEach(function(el){mark(el,null,'plan')});
+    box.querySelectorAll('.rb-ref-plate-copy > b').forEach(function(el){mark(el,null,'meal')});
+  }
+  var queued=false;
+  function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;apply()})}
+  var box=document.getElementById('rbScreen');
+  if(box&&window.MutationObserver)new MutationObserver(schedule).observe(box,{childList:true,subtree:true});
+  window.rbApplyCardTitleSystem=apply;
+  schedule();
+})();
+</script>
 </body>
 </html>
