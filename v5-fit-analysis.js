@@ -7,6 +7,8 @@
   var CACHE_KEY = 'xiaoman-fit-analysis-v1';
   var requested = {};
   var busy = '';
+  function q(selector, root) { return (root || document).querySelector(selector); }
+  function qa(selector, root) { return Array.prototype.slice.call((root || document).querySelectorAll(selector)); }
 
   function apiState() {
     var api = window.__xmV5;
@@ -98,6 +100,25 @@
       node.remove();
     });
   }
+  function exerciseImageFor(label) {
+    var db = window.EXERCISE_DB || window.__xmExerciseDB || [], text = String(label || '').trim();
+    for (var i = 0; i < db.length; i++) {
+      var item = db[i], aliases = item.alias || [];
+      if (item.name === text || aliases.indexOf(text) >= 0 || aliases.some(function (alias) { return String(alias).trim() === text; })) return item.image || '';
+    }
+    return '';
+  }
+  function exerciseImageForId(id) {
+    var db = window.EXERCISE_DB || window.__xmExerciseDB || [], key = String(id || '').trim();
+    for (var i = 0; i < db.length; i++) if (String(db[i].id || '').trim() === key) return db[i].image || '';
+    return '';
+  }
+  function syncExerciseArt(root) {
+    qa('.rb-pixel-session-row', root).forEach(function (row) {
+      var title = q('.rb-pixel-session-copy h3', row), image = q('img', row), guide = q('.rb-pixel-guide', row), guideOnclick = guide && guide.getAttribute('onclick') || '', idMatch = guideOnclick.match(/rbShowExerciseGuide\(['"]([^'"]+)/), label = title && String(title.textContent || '').split('·').pop().trim(), src = idMatch ? exerciseImageForId(idMatch[1]) : exerciseImageFor(label);
+      if (image && src) { image.src = src; image.classList.add('xm-exercise-static-art'); image.setAttribute('data-xm-exercise-art', '1'); }
+    });
+  }
   function normalizeFitNav(root) {
     if (!root) return;
     var toolbar = root.querySelector('.xm-fit-toolbar'); if (toolbar) toolbar.remove();
@@ -105,6 +126,7 @@
     var oldAnalysis = root.querySelector('.xm-fit-analysis'); if (oldAnalysis && !oldAnalysis.closest('#xmFitAnalysisSheet')) oldAnalysis.remove();
     normalizeSessionDate(root);
     flattenDayTabs(root);
+    syncExerciseArt(root);
   }
   function ensureAnalysisSheet() {
     var sheet = document.getElementById('xmFitAnalysisSheet');
