@@ -227,6 +227,12 @@ body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > button::be
   ) !important;
 }
 
+body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > div,
+body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > button {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot .rb-diet-foot-icon {
   width: 42px !important;
   height: 42px !important;
