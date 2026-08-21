@@ -7053,5 +7053,39 @@ html body.rb-mode .rb-ref-food-main>b,html body.rb-mode .rb-ref-food-main>small{
   schedule();
 })();
 </script>
+<link rel="stylesheet" href="v5-status-metrics.css?v=20260822-status-metrics-v1">
+<script>
+(function(){
+  function num(v){v=Number(v);return isFinite(v)?v:0}
+  function state(){return window.__xmV5&&typeof window.__xmV5.state==='function'?window.__xmV5.state():{S:{},curDate:''}}
+  function paint(circle,value,target){
+    if(!circle)return;
+    var r=num(circle.getAttribute('r'))||73,c=2*Math.PI*r,p=Math.max(0,Math.min(1,num(value)/Math.max(1,num(target)))),split=.5;
+    var parent=circle.parentNode,g=parent&&parent.querySelector('.green,.ring-green'),o=parent&&parent.querySelector('.orange,.ring-orange');
+    if(!g||!o)return;
+    g.style.strokeDasharray=(c*Math.min(p,split)).toFixed(3)+' '+c.toFixed(3);g.style.strokeDashoffset='0';
+    o.style.strokeDasharray=(c*Math.max(0,p-split)).toFixed(3)+' '+c.toFixed(3);o.style.strokeDashoffset=(-c*split).toFixed(3);
+  }
+  function apply(){
+    var st=state(),s=st.S||{},days=s.days||{},d=days[String(st.curDate||'')]||{},meals=d.meals||{},rows=[];
+    Object.keys(meals).forEach(function(k){(meals[k]||[]).forEach(function(x){if(x)rows.push(x)})});
+    var cal=rows.reduce(function(a,x){return a+num(x.cal||x.kcal||x.calories)},0),goal=num(s.goalKcal)||1800,home=document.querySelector('.xm-home-v6');
+    if(home)paint(home.querySelector('.xm-v6-ring .orange'),cal,goal);
+    var parts=d.fit&&d.fit.parts||[],minutes=0;
+    parts.forEach(function(part){(part.items||[]).forEach(function(x){if(!x||x.deleted)return;if(x.type==='cardio'||x.type==='time'||x.duration||x.minutes)minutes+=num(x.duration||x.minutes||x.time);else if(x.done)minutes+=Math.max(3,num(x.sets)*2)})});
+    var fit=document.querySelector('.rb-fit-pixel');
+    if(fit)paint(fit.querySelector('.rb-pixel-ring .ring-orange'),minutes,num(s.activityGoal||s.exerciseGoal)||30);
+  }
+  function boot(){
+    apply();
+    var screen=document.getElementById('rbScreen');
+    if(screen&&window.MutationObserver)new MutationObserver(function(){setTimeout(apply,0)}).observe(screen,{childList:true,subtree:true});
+    window.addEventListener('hashchange',function(){setTimeout(apply,0)});
+    window.xmRefreshStatusMetrics=apply;
+    setTimeout(apply,120);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
 </body>
 </html>
