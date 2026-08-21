@@ -182,6 +182,18 @@
     select.value = options.indexOf(previous) >= 0 ? previous : defaultUnit;
     select.onchange = function () { if (window.rbMealAmtInput) window.rbMealAmtInput(); };
   }
+  function syncAmountRow() {
+    var row = document.querySelector('.rb-meal-add-page .rb-meal-amount-row'), food = selectedFood();
+    if (!row) return;
+    if (!food) {
+      row.hidden = true;
+      row.removeAttribute('data-meal-selected');
+      return;
+    }
+    row.hidden = false;
+    row.setAttribute('data-meal-selected', '1');
+    installUnitSelector();
+  }
   function wrapAmountInput() {
     var original = window.rbMealAmtInput; if (!original || original.__visionWrapped) return;
     var wrapped = function () { var food = selectedFood(), input = document.getElementById('rbMealAmount'), select = document.getElementById('rbMealUnitSelect'); if (!food || !input || !select) return original(); var n = input.value ? Number(input.value) : 1, unit = select.value || '份', sv = typeof window.defaultServing === 'function' ? window.defaultServing(food) : {amt:100}, k = /^(g|ml)$/i.test(unit) ? n / 100 : n * (sv.amt || 100) / 100, cells = document.querySelectorAll('#rbMealNutri .rb-nutri-cell b'); if (cells.length >= 4) { cells[0].textContent = Math.round((food.cal || 0) * k); cells[1].textContent = Math.round((food.protein || 0) * k); cells[2].textContent = Math.round((food.fat || 0) * k); cells[3].textContent = Math.round((food.carb || 0) * k); } };
@@ -216,7 +228,7 @@
     fetch(String(s.foodSyncUrl), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({source:'xiaoman-web',date:today,foods:s.customFoods})}).then(function (response) { if (!response.ok) throw new Error('sync'); s._foodLibrarySyncState = 'uploaded'; saveData(); }).catch(function () { s._foodLibrarySyncState = 'error'; saveData(); });
   }
   window.rbSyncFoodLibraryNow = function () { var s = data(); s._foodLibrarySyncDate = ''; syncFoodLibraryDaily(); };
-  window.rbMealVisionRefresh = function () { installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); syncFoodLibraryDaily(); };
+  window.rbMealVisionRefresh = function () { syncAmountRow(); installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); syncFoodLibraryDaily(); };
   function installFoodSyncSetting() {
     var original = window.xmSaveAiSettings;
     if (original && !original.__foodSyncWrapped) {
@@ -233,8 +245,13 @@
     label.innerHTML = '<span>食物库同步接口（可选）</span><input id="xmAiFoodSyncUrl" type="url" placeholder="你的服务器同步地址" value="'+esc(data().foodSyncUrl || '')+'">';
     if (hint) panel.insertBefore(label, hint); else panel.appendChild(label);
   }
-  var observerTarget = document.getElementById('rbScreen');
-  if (observerTarget && window.MutationObserver) new MutationObserver(function () { setTimeout(function () { installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); }, 0); }).observe(observerTarget, {childList:true, subtree:true});
+  var observerTarget = document.getElementById('rbScreen'), mealSheetTarget = document.getElementById('rbMealSheet');
+  function observeMealSurface(target) {
+    if (!target || !window.MutationObserver) return;
+    new MutationObserver(function () { setTimeout(function () { syncAmountRow(); installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); }, 0); }).observe(target, {childList:true, subtree:true});
+  }
+  observeMealSurface(observerTarget);
+  observeMealSurface(mealSheetTarget);
   if (window.MutationObserver) new MutationObserver(installFoodSyncSetting).observe(document.body, {childList:true, subtree:true});
-  setTimeout(function () { installFoodSyncSetting(); installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); syncFoodLibraryDaily(); }, 300);
+  setTimeout(function () { installFoodSyncSetting(); syncAmountRow(); installUnitSelector(); wrapAmountInput(); paintFoodAdvice(); paintRecordedPhotos(); syncFoodLibraryDaily(); }, 300);
 }());
