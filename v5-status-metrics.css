@@ -212,6 +212,21 @@ body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > button {
   column-gap: 6px !important;
 }
 
+body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot {
+  border-top: 1px dashed #e6d2b2 !important;
+}
+
+body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > div + div::before,
+body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot > button::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    #e6d2b2 0,
+    #e6d2b2 4px,
+    transparent 4px,
+    transparent 7px
+  ) !important;
+}
+
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot .rb-diet-foot-icon {
   width: 42px !important;
   height: 42px !important;
@@ -220,6 +235,28 @@ body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot .rb-diet-foo
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot .rb-diet-foot-icon .rb-foot-sticker {
   width: 42px !important;
   height: 42px !important;
+}
+
+body.rb-mode .xm-home-v6 .xm-v6-status-foot > div,
+body.rb-mode .xm-home-v6 .xm-v6-status-foot > button {
+  position: relative !important;
+}
+
+body.rb-mode .xm-home-v6 .xm-v6-status-foot > div + div::before,
+body.rb-mode .xm-home-v6 .xm-v6-status-foot > button + div::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 8px !important;
+  bottom: 8px !important;
+  width: 1px !important;
+  background: repeating-linear-gradient(
+    to bottom,
+    #e6d2b2 0,
+    #e6d2b2 4px,
+    transparent 4px,
+    transparent 7px
+  ) !important;
 }
 
 body.rb-mode .xm-home-v6 .xm-v6-ring .green,
