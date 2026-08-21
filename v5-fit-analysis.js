@@ -96,9 +96,26 @@
     if (!lib) { lib = document.createElement('button'); lib.type = 'button'; lib.className = 'xm-fit-lib-head-btn'; lib.setAttribute('data-xm-fit-library', '1'); lib.textContent = '动作库'; lib.onclick = function () { if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); }; }
     if (!analysis) { analysis = document.createElement('button'); analysis.type = 'button'; analysis.className = 'xm-fit-analysis-head-btn'; analysis.setAttribute('data-xm-fit-analysis', '1'); analysis.textContent = '训练分析'; analysis.onclick = function () { if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); }; }
     if (!more) { more = document.createElement('button'); more.type = 'button'; more.className = 'xm-fit-more-head-btn'; more.setAttribute('data-xm-fit-more', '1'); more.textContent = '更多 ›'; more.onclick = function () { if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); }; }
-    lib.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); };
-    analysis.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); };
-    more.onclick = function (event) { if (event) { event.preventDefault(); event.stopPropagation(); } if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); };
+    function bindAction(button, callback) {
+      button.onclick = function (event) {
+        if (button.__xmTouchAt && Date.now() - button.__xmTouchAt < 450) return;
+        if (event) { event.preventDefault(); event.stopPropagation(); }
+        callback();
+      };
+      if (button.getAttribute('data-xm-native-action-bound') === '1') return;
+      var touchRelease = function (event) {
+        if (button.__xmTouchAt && Date.now() - button.__xmTouchAt < 80) return;
+        button.__xmTouchAt = Date.now();
+        if (event) { event.preventDefault(); event.stopPropagation(); }
+        callback();
+      };
+      button.addEventListener('pointerup', touchRelease, {passive:false});
+      button.addEventListener('touchend', touchRelease, {passive:false});
+      button.setAttribute('data-xm-native-action-bound', '1');
+    }
+    bindAction(lib, function () { if (typeof window.rbOpenFitLibrary === 'function') window.rbOpenFitLibrary(); });
+    bindAction(analysis, function () { if (typeof window.xmOpenFitAnalysis === 'function') window.xmOpenFitAnalysis(); });
+    bindAction(more, function () { if (window.__xmV5 && typeof window.__xmV5.openPlanList === 'function') window.__xmV5.openPlanList(); });
     actions.appendChild(lib); actions.appendChild(analysis); actions.appendChild(more);
   }
   function sessionDateLabel() {
@@ -122,10 +139,10 @@
     var date = sessionDateLabel();
     var dateKey = date.current ? 'today' : date.iso;
     if (side.getAttribute('data-xm-fit-date-key') !== dateKey) {
-      side.innerHTML = date.current ? '' : '<span class="xm-fit-session-date">'+esc(date.date)+'</span><button type="button" class="xm-fit-back-today" data-xm-fit-back-today="1" aria-label="返回今天">今天</button>';
+      side.innerHTML = '<button type="button" class="xm-fit-back-today" data-xm-fit-back-today="1" aria-label="返回今天">今天</button>';
       side.setAttribute('data-xm-fit-date-key', dateKey);
     }
-    side.hidden = date.current;
+    side.hidden = false;
     var back = side.querySelector('[data-xm-fit-back-today]');
     if (back && !back.getAttribute('data-xm-fit-bound')) {
       back.onclick = function (event) {
