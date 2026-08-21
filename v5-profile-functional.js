@@ -77,7 +77,21 @@
     var target = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions', url = proxy ? proxy.replace(/\/?$/, '') + '?target=' + encodeURIComponent(target) : target;
     fetch(url, {method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer ' + key}, body:JSON.stringify({model:model,messages:[{role:'user',content:'只回复：连接成功'}],temperature:0})}).then(function (response) { return response.json().then(function (data) { return {ok:response.ok,data:data}; }); }).then(function (result) { if (!status) return; if (result.ok && !(result.data && result.data.error)) status.textContent = '连接成功，可以使用通义千问生成建议。'; else status.textContent = '连接失败：' + (((result.data || {}).error || {}).message || (result.data || {}).message || '请检查 Key、模型或代理地址。'); }).catch(function () { if (status) status.textContent = '连接失败：浏览器跨域或网络不可用，可填写中转代理后重试。'; });
   };
-  window.xmHealthSyncInfo = function () { toast('网页端暂不直接连接系统健康数据；本地训练、饮食和专注记录仍会正常统计。'); };
+  window.xmHealthSyncInfo = function () {
+    try {
+      if (window.uni && typeof window.uni.postMessage === 'function') {
+        window.uni.postMessage({data:{action:'openHealth'}});
+        return;
+      }
+    } catch (e) {}
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({action:'openHealth'}, '*');
+        return;
+      }
+    } catch (e) {}
+    toast('当前网页端使用本地健康记录；在 iOS App 中点击这里可打开 Apple 健康同步。');
+  };
   window.xmProfileMessage = function (message) { toast(message); };
   var originalNav = window.rbNavTo;
   function syncProfileNav() {

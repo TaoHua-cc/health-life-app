@@ -3,6 +3,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fff8ea">
+<script>
+if (/[?&]native=ios(?:&|$)/.test(location.search)) document.documentElement.setAttribute('data-native-shell', 'ios')
+</script>
 <style>
 @font-face{font-family:'XiaoManFangYuan';src:url('static/fonts/AlimamaFangYuanTiVF-Thin.woff2') format('woff2');font-weight:100 900;font-display:block}
 body.rb-home-page .rebuild-app,body.rb-ref-page .rebuild-app,.rebuild-app{font-family:'XiaoManFangYuan','PingFang SC','Microsoft YaHei',sans-serif}
@@ -5854,7 +5857,9 @@ function updateMicBtn(){var b=document.getElementById('voiceMic');if(!b)return;b
   window.rbOpenHomeMealSheet=function(type){var sheet=document.getElementById('rbHomeMealSheet');if(!sheet)return;type=type||'breakfast';sheet.innerHTML=rbHomeMealSheetHtml(type);sheet.hidden=false;var add=sheet.querySelector('.rb-home-meal-sheet-actions .primary');if(add)add.onclick=function(e){e.preventDefault();e.stopPropagation();rbCloseHomeMealSheet();setTimeout(function(){rbMealType=type;rbPage='mealAdd';rbRender();document.getElementById('rbScreen').scrollTop=0},150)};requestAnimationFrame(function(){sheet.classList.add('on')})};
   window.rbCloseHomeMealSheet=function(){var sheet=document.getElementById('rbHomeMealSheet');if(!sheet)return;sheet.classList.remove('on');setTimeout(function(){if(!sheet.classList.contains('on'))sheet.hidden=true},260)};
   window.rbHomeMealAdd=function(type){rbCloseHomeMealSheet();setTimeout(function(){try{if(typeof window.rbOpenMealPage==='function'){window.rbOpenMealPage(type);return}}catch(e){}try{if(typeof window.rbOpenMealList==='function'){window.rbOpenMealList(type);return}}catch(e){}var nav=document.querySelector('#rbNav button:nth-child(3)');if(nav)nav.click()},150)};
-  window.rbOpenMealPage=function(type){rbDietFoodLibraryMode=false;rbDietSupplementFocus='';rbMealType=type||'breakfast';rbRender();document.getElementById('rbScreen').scrollTop=0}
+  window.rbOpenMealAddFromPlate=function(type){rbDietFoodLibraryMode=false;rbDietSupplementFocus='';rbMealType=type||'breakfast';rbPage='mealAdd';rbRender();var screen=document.getElementById('rbScreen');if(screen)screen.scrollTop=0}
+  window.rbOpenMealPage=function(type){window.rbOpenMealAddFromPlate(type)}
+  window.rbOpenNativeHealth=function(){try{if(window.uni&&typeof window.uni.postMessage==='function'){window.uni.postMessage({data:{action:'openHealth'}});return}}catch(e){}try{if(window.parent&&window.parent!==window)window.parent.postMessage({action:'openHealth'},'*')}catch(e){}}
   window.rbOpenFoodResultPage=function(){rbPage='foodResult';rbRender();document.getElementById('rbScreen').scrollTop=0};
   window.rbOpenMealList=function(type){rbMealType=type||'breakfast';rbPage='mealList';rbRender();document.getElementById('rbScreen').scrollTop=0};window.rbOpenDietAI=function(){rbPage='dietAI';rbRender();document.getElementById('rbScreen').scrollTop=0};
   window.rbConfirmFoodResult=function(){rbDetailMealFood='燕麦牛奶 + 蓝莓 + 鸡蛋';rbPage='mealAdd';rbRender()}
@@ -6438,6 +6443,82 @@ body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot>div b,
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot>button b{position:static!important;grid-area:auto!important;grid-column:2!important;grid-row:1!important;width:auto!important;font-size:10px!important;color:#76543c!important}
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot>div strong{position:static!important;grid-area:auto!important;grid-column:2!important;grid-row:2!important;font-size:16px!important;color:#789438!important}
 body.rb-mode .rb-ref-page-shell.rb-ref-diet .rb-diet-nutrition-foot>button strong{position:static!important;grid-area:1 / 3 / 3 / 4!important;align-self:center!important;font-size:20px!important;color:#789438!important}
+
+/* 统一各页顶部标题高度、去除标题右侧叶片，并让卡片沿用首页宽度。 */
+body.rb-mode .xm-v6-head,
+body.rb-mode .rb-pixel-head,
+body.rb-mode .rb-ref-header,
+body.rb-mode .rb-ref-profile-title,
+body.rb-mode .rb-home-pixel-head,
+body.rb-mode .xm-profile-head{height:100px!important;min-height:100px!important;box-sizing:border-box!important;align-items:flex-end!important;margin-bottom:12px!important}
+body.rb-mode .rb-ref-profile-title{padding-bottom:0!important}
+body.rb-mode .xm-v6-head h1 .rb-leaf-sticker,
+body.rb-mode .rb-pixel-head h1 .rb-leaf-sticker,
+body.rb-mode .rb-ref-header h1 .rb-leaf-sticker,
+body.rb-mode .rb-ref-profile-title h1 .rb-leaf-sticker,
+body.rb-mode .rb-home-pixel-head h1 .rb-leaf-sticker,
+body.rb-mode .xm-v6-head h1 .rb-gleaf,
+body.rb-mode .rb-pixel-head h1 .rb-gleaf,
+body.rb-mode .rb-ref-header h1 .rb-gleaf,
+body.rb-mode .rb-ref-profile-title h1 .rb-gleaf,
+body.rb-mode .rb-home-pixel-head h1 .rb-gleaf,
+body.rb-mode .xm-profile-head h1 .rb-gleaf{display:none!important}
+body.rb-mode .rb-ref-page-shell,
+body.rb-mode .rb-fit-pixel{width:100%!important;max-width:400px!important;box-sizing:border-box!important;padding-left:13px!important;padding-right:13px!important}
+body.rb-mode .xm-home-v6{width:100%!important;max-width:400px!important;box-sizing:border-box!important;padding-left:12px!important;padding-right:12px!important}
+body.rb-mode .xm-profile-page{width:calc(100% + 10px)!important;max-width:none!important;box-sizing:border-box!important;margin-left:-5px!important;padding-left:12px!important;padding-right:12px!important}
+/* iOS 原生壳通过 query 标识自己，去掉浏览器预览用的左右留白。 */
+html[data-native-shell="ios"] body.rb-mode .rb-ref-page-shell,
+html[data-native-shell="ios"] body.rb-mode .rb-fit-pixel,
+html[data-native-shell="ios"] body.rb-mode .xm-home-v6,
+html[data-native-shell="ios"] body.rb-mode .rebuild-app,
+html[data-native-shell="ios"] body.rb-mode #rbScreen{width:100%!important;max-width:none!important}
+html[data-native-shell="ios"] body.rb-mode .xm-home-v6{padding-left:13px!important;padding-right:13px!important}
+html[data-native-shell="ios"] body.rb-mode .xm-profile-page{width:calc(100% + 40px)!important;max-width:none!important;margin-left:-20px!important;padding-left:13px!important;padding-right:13px!important}
+/* 饮食页原有的高规格头图规则更具体，最后统一覆盖它。 */
+body.rb-ref-page .rb-ref-diet .rb-ref-header{height:100px!important;min-height:100px!important;box-sizing:border-box!important;align-items:flex-end!important;margin-bottom:12px!important}
+/* 最终字号锁定：饮食页旧版高规格规则使用了更高选择器，必须在同等高优先级下覆盖。 */
+body.rb-mode .xm-v6-head h1,
+body.rb-mode .rb-pixel-head h1,
+body.rb-mode .rb-ref-header h1,
+body.rb-mode .rb-ref-profile-title h1,
+body.rb-mode .xm-profile-head h1,
+body.rb-ref-page .rb-ref-diet .rb-ref-header h1{
+  font-size:30px!important;
+  line-height:33px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  margin:0 0 6px!important;
+}
+/* 顶部标题和右侧贴纸共用同一条 100px 标题带；贴纸底部与首张今日卡片上沿对齐。 */
+body.rb-mode .xm-v6-head{padding:0 0 0 1px!important}
+body.rb-mode .rb-ref-header{padding:0!important}
+body.rb-mode .rb-ref-header>div:first-child{align-self:flex-start!important;padding-top:14px!important}
+body.rb-ref-page .rb-ref-diet{padding-top:14px!important}
+body.rb-ref-page .rb-ref-diet .rb-ref-header{padding:0!important}
+body.rb-ref-page .rb-ref-diet .rb-ref-header>div:first-child{padding-top:14px!important}
+body.rb-mode .xm-profile-page{padding-top:14px!important}
+body.rb-mode .xm-profile-head{padding-left:1px!important}
+body.rb-mode .xm-profile-head>div:first-child{align-self:flex-start!important;padding-top:14px!important}
+body.rb-mode .xm-v6-head button{width:125px!important;height:100px!important;align-self:flex-end!important;margin-bottom:-12px!important}
+body.rb-mode .xm-v6-head button img{width:125px!important;height:100px!important;margin:0!important;object-fit:contain!important}
+body.rb-mode .rb-pixel-head-art{width:125px!important;height:100px!important;margin-bottom:-12px!important}
+body.rb-mode .rb-pixel-head-art img{width:125px!important;height:100px!important;object-fit:contain!important}
+body.rb-mode .rb-ref-header>img{width:125px!important;height:100px!important;margin:0 0 -12px 0!important;object-fit:contain!important}
+body.rb-ref-page .rb-ref-diet .rb-ref-header>img{width:125px!important;height:100px!important;margin:0 0 -12px 0!important;object-fit:contain!important}
+body.rb-ref-page .rb-ref-header.rb-life-head>img{width:125px!important;height:100px!important;margin:0 0 -12px 0!important;object-fit:contain!important}
+/* 第二排副标题也统一：字号、字重、行高和字距保持一致。 */
+body.rb-mode .xm-v6-head p,
+body.rb-mode .rb-pixel-head p,
+body.rb-mode .rb-ref-header p,
+body.rb-mode .xm-profile-head p,
+body.rb-ref-page .rb-ref-diet .rb-ref-header p{
+  margin:0!important;
+  font-size:13px!important;
+  line-height:18px!important;
+  font-weight:650!important;
+  letter-spacing:.02em!important;
+}
 </style>
 <div id="rbHomeMealSheet" class="rb-home-meal-sheet" hidden onclick="if(event.target===this&&window.rbCloseHomeMealSheet)window.rbCloseHomeMealSheet()"></div>
 <div id="rbFoodEditSheet" class="rb-food-edit-sheet" hidden onclick="if(event.target===this&&window.rbCloseFoodEdit)window.rbCloseFoodEdit()"></div>
