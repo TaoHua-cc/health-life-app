@@ -1,0 +1,107 @@
+/* Xiaoman recipe library: vertical category rail for fast one-handed browsing. */
+body.rb-mode .rb-diet-recipes-page {
+  display: grid !important;
+  grid-template-columns: 108px minmax(0, 1fr) !important;
+  column-gap: 10px !important;
+  align-items: start !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-detail-top,
+body.rb-mode .rb-diet-recipes-page > .rb-diet-subtitle,
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-source,
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-search {
+  grid-column: 1 / -1 !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-filters {
+  grid-column: 1 !important;
+  grid-row: 5 / span 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  width: 100% !important;
+  max-height: calc(100vh - 190px) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 2px 4px 6px 0 !important;
+  margin: 0 !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #c9b990 transparent !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-filters button {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  border: 1px solid #e5d4ba !important;
+  border-radius: 11px !important;
+  background: #fffaf0 !important;
+  color: #76543c !important;
+  padding: 7px 7px !important;
+  font-size: .56rem !important;
+  font-weight: 850 !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-filters button.on {
+  border-color: #789438 !important;
+  background: #789438 !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 2px 0 rgba(86, 104, 42, .22) !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-status {
+  grid-column: 2 !important;
+  grid-row: 5 !important;
+  min-width: 0 !important;
+  margin: 2px 1px 8px !important;
+}
+
+body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-online-list {
+  grid-column: 2 !important;
+  grid-row: 6 !important;
+  min-width: 0 !important;
+  gap: 8px !important;
+}
+
+body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online {
+  gap: 7px !important;
+  padding: 8px 7px !important;
+}
+
+body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online img {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 11px !important;
+}
+
+body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online b {
+  font-size: .64rem !important;
+}
+
+body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online small,
+body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online em {
+  font-size: .51rem !important;
+}
+
+@media (max-width: 360px) {
+  body.rb-mode .rb-diet-recipes-page {
+    grid-template-columns: 92px minmax(0, 1fr) !important;
+    column-gap: 8px !important;
+  }
+
+  body.rb-mode .rb-diet-recipes-page > .rb-diet-recipe-filters button {
+    font-size: .52rem !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  body.rb-mode .rb-diet-recipes-page .rb-diet-recipe-online img {
+    width: 52px !important;
+    height: 52px !important;
+  }
+}
