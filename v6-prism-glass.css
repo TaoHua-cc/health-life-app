@@ -197,3 +197,4 @@ html[data-theme=dark] #profileOv .pi{background:rgba(9,29,51,.48)!important;bord
 /* QA captures freeze bottom sheets at their settled state. Normal visits keep
    the approved spring-like bottom-sheet entrance animation. */
 html[data-qa] .ov.on .ms2{animation:none!important;transform:none!important}
+html[data-qa] .ledger-sheet.on{transition:none!important;transform:none!important}
