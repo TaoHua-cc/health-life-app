@@ -141,4 +141,7 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
   #profileOv .pi label,#profileOv .ai-hint{color:var(--t2)!important}
   #profileOv .pi input,#profileOv .pi select{background:rgba(255,255,255,.74)!important;color:var(--t1)!important;border-color:rgba(73,111,148,.18)!important}
   #profileOv .av-change{background:rgba(255,255,255,.62)!important;color:var(--t1)!important;border-color:rgba(73,111,148,.17)!important}
+  .ov .ms2 h3,.ov .ms2 .ct{color:var(--t1)!important}
+  .ov .ms2 .mf label,.ov .ms2 .pf-input+ .mf-hint,.ov .ms2 .mf-hint{color:var(--t2)!important}
+  .ov .ms2 .mbn.c{background:rgba(255,255,255,.62)!important;color:var(--t1)!important;border-color:rgba(73,111,148,.18)!important}
 }
