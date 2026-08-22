@@ -237,3 +237,63 @@ html[data-theme=dark] #p-fit .fit-sum-card,html[data-theme=dark] #p-fit .fit-par
    the approved spring-like bottom-sheet entrance animation. */
 html[data-qa] .ov.on .ms2{animation:none!important;transform:none!important}
 html[data-qa] .ledger-sheet.on{transition:none!important;transform:none!important}
+
+/* Shared sheet shell: every editable/confirmable flow uses the same physical
+   glass surface, grip, rhythm, and action rail.  The existing modal IDs and
+   handlers stay untouched; this is a visual/structural layer only. */
+.ov .ms2{
+  padding:30px clamp(16px,5vw,22px) calc(18px + env(safe-area-inset-bottom))!important;
+  border-radius:30px 30px 0 0!important;
+  isolation:isolate;
+}
+.ov .ms2:after{
+  content:'';
+  position:absolute;
+  top:10px;
+  left:50%;
+  width:40px;
+  height:4px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:rgba(224,243,255,.38);
+  box-shadow:0 1px 0 rgba(255,255,255,.14);
+  pointer-events:none;
+  z-index:3;
+}
+#profileOv .ms2{padding-top:calc(14px + env(safe-area-inset-top))!important}
+#profileOv .ms2:after{display:none}
+.ov .ms2 h3,.ov .ms2 .ct{
+  min-height:28px;
+  margin-top:0!important;
+  margin-bottom:16px!important;
+}
+.ov .ms2 .macts{
+  width:100%;
+  max-width:420px;
+  box-sizing:border-box;
+  justify-content:stretch;
+  margin:14px auto 0;
+  padding:8px;
+  border-radius:18px;
+  gap:8px;
+}
+.ov .ms2 .macts .mbn{flex:1 1 0;min-width:0;min-height:44px}
+.pm-box{padding-top:28px!important;border-radius:22px 22px 0 0!important}
+.pm-box:after{
+  content:'';
+  position:absolute;
+  top:9px;
+  left:50%;
+  width:40px;
+  height:4px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:rgba(224,243,255,.38);
+  box-shadow:0 1px 0 rgba(255,255,255,.14);
+  pointer-events:none;
+  z-index:3;
+}
+@media (prefers-color-scheme:light){
+  .ov .ms2:after,.pm-box:after{background:rgba(64,101,137,.28);box-shadow:0 1px 0 rgba(255,255,255,.65)}
+}
+html[data-theme=dark] .ov .ms2:after,html[data-theme=dark] .pm-box:after{background:rgba(235,250,255,.38);box-shadow:0 1px 0 rgba(255,255,255,.14)}
