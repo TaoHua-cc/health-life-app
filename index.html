@@ -6123,7 +6123,10 @@ function renderDateStrip(prefix){
   if(sel&&el.clientWidth>0){
     var maxScroll=Math.max(0,el.scrollWidth-el.clientWidth);
     var target=Math.max(0,Math.min(maxScroll,sel.offsetLeft-(el.clientWidth-sel.offsetWidth)/2));
-    el.scrollTo({left:target,behavior:'auto'});
+    var oldBehavior=el.style.scrollBehavior;
+    el.style.scrollBehavior='auto';
+    el.scrollLeft=target;
+    el.style.scrollBehavior=oldBehavior;
   }
 }
 function calGoto(prefix,dk){curDate=dk;var p=dk.split('-'),st=calState[prefix];st.y=+p[0];st.m=+p[1]-1;renderDateStrip(prefix);buildCal(prefix);renderPage(prefix)}
