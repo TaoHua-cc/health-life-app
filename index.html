@@ -1546,8 +1546,9 @@ FIRST VIEWPORT: 顶部问候，实时主数据居中，主操作与五栏导航�
 FORM: mobile-operate / approved-prism-glass; unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md.
 -->
 <div class="ph">
-<div class="hdr" id="topHdr"><div class="hdr-inner"><div><div class="hdr-greet" id="hdrGreet">早上好，G <span class="emoji">🐸</span></div><div class="hdr-date" id="hdrDate">6月2日 周五 · <span class="cd-dot">中碳日</span></div></div><div class="ha"><button class="hb avbtn" id="avBtn" onclick="openProfile()">👤</button></div></div></div>
+<header class="hdr" id="topHdr"><div class="hdr-inner"><div><div class="hdr-greet" id="hdrGreet">早上好，G <span class="emoji">🐸</span></div><div class="hdr-date" id="hdrDate">6月2日 周五 · <span class="cd-dot">中碳日</span></div></div><div class="ha"><button class="hb avbtn" id="avBtn" onclick="openProfile()">👤</button></div></div></header>
 
+<main class="app-main" id="appMain">
 <!-- DIET -->
 <div class="pnl" id="p-diet">
 <div class="page-hd"><div class="ph-t">饮食</div><div class="ph-s">记录每一餐，AI 帮你吃够目标</div></div>
@@ -1641,6 +1642,7 @@ FORM: mobile-operate / approved-prism-glass; unreviewed and undocumented is unfi
 <div class="pnl" id="p-home">
 <div id="homeContent"></div>
 </div>
+</main>
 
 <!-- 记账 · 记一笔（底部抽屉） -->
 <div class="ledger-sheet" id="ledgerSheet" onclick="event.stopPropagation()">
@@ -1723,7 +1725,7 @@ FORM: mobile-operate / approved-prism-glass; unreviewed and undocumented is unfi
 </div></div>
 
 
-<div class="bnav"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></div>
+<nav class="bnav" aria-label="主导航"><div class="bn-ind" id="bnInd"></div><button class="bn" data-t="home" onclick="sw('home')"><div class="ic">🏠</div><div class="lb">首页</div></button><button class="bn" data-t="fit" onclick="sw('fit')"><div class="ic">💪</div><div class="lb">健身</div></button><button class="bn" data-t="diet" onclick="sw('diet')"><div class="ic">🍽️</div><div class="lb">饮食</div></button><button class="bn" data-t="work" onclick="sw('work')"><div class="ic">💼</div><div class="lb">工作</div></button><button class="bn" data-t="life" onclick="sw('life')"><div class="ic">🌙</div><div class="lb">生活</div></button></nav>
 
 <button class="fab" id="voiceFab" onclick="openVoice()" aria-label="AI 智能助手"><svg class="fab-ic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3 L16.7 7.8 L21.5 12.5 L16.7 17.2 L12 22 L7.3 17.2 L2.5 12.5 L7.3 7.8 Z" fill="#fff"/><path d="M19 0.8 L20.6 2.6 L22.2 4 L20.6 5.4 L19 7.2 L17.4 5.4 L15.8 4 L17.4 2.6 Z" fill="#fff" opacity="0.9"/></svg></button>
 <div class="ov" id="voiceOv" onclick="if(event.target===this)closeVoice()"><div class="ms2" onclick="event.stopPropagation()">
