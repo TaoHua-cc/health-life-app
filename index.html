@@ -2734,6 +2734,11 @@ function renderHome(){
 }
 // ====== AI 营养建议详情页 ======
 function openAiAdvice(){
+  var _aiOv=document.getElementById('aiAdviceOv');
+  var _aiContent=document.getElementById('aiAdviceContent');
+  if(_aiOv)_aiOv.classList.add('on');
+  if(_aiContent)_aiContent.innerHTML='<div class="aiad-loading">正在整理你的营养数据…</div>';
+  try{
   var day=gd(curDate);
   var macros=calcMacros();var goal=macros?macros.cal:null;
   var tc=0,tC=0,tP=0,tF=0;
@@ -2810,6 +2815,10 @@ function openAiAdvice(){
     aiBox.innerHTML=aiDeepCache.html+'<div style="margin-top:10px;font-size:.7rem;color:var(--t3);opacity:.75">⚡ 已为你缓存，饮食更新后自动重新生成</div>';
   }else{
     fetchAiDeepAdvice({tc:tc,goal:goal,tP:tP,pGoal:pGoal,tC:tC,cGoal:cGoal,tF:tF,fGoal:fGoal,water:water,cdName:cdName,hr:hr,remainCal:remainCal,remainP:remainP,remainC:remainC,remainF:remainF,mealLabel:mealLabel,_sig:aiSig});
+  }
+  }catch(e){
+    console.error('openAiAdvice',e);
+    if(_aiContent)_aiContent.innerHTML='<div class="aiad-empty">暂时无法生成营养建议，请稍后重试。</div>';
   }
 }
 function closeAiAdvice(){document.getElementById('aiAdviceOv').classList.remove('on')}
