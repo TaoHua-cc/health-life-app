@@ -4590,8 +4590,9 @@ function openBudgetModal(){
 function closeBudget(){document.getElementById('budgetOv').style.display='none';}
 function saveBudget(){
   var inp=document.getElementById('budgetInput');
-  var n=parseFloat(inp.value);
-  if(isNaN(n)||n<0){toast('请输入有效金额');return;}
+  var raw=(inp&&inp.value||'').trim();
+  var n=raw===''?0:parseFloat(raw);
+  if(raw!==''&&(isNaN(n)||n<0)){toast('请输入有效金额');return;}
   S.budget=n>0?Math.round(n*100)/100:0;
   closeBudget();save();renderLedger();
   toast(n>0?'预算已设置 ¥'+fmtMoney(S.budget):'已清除预算');
