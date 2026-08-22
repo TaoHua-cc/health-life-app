@@ -194,7 +194,6 @@ html[data-theme=dark] #profileOv .mine-page-sub,html[data-theme=dark] .ov .ms2 .
 html[data-theme=dark] #profileOv .pf-top,html[data-theme=dark] #profileOv .card{background:var(--glass)!important;border-color:var(--glass-brd)!important;box-shadow:var(--glass-sh)!important}
 html[data-theme=dark] #profileOv .pi{background:rgba(9,29,51,.48)!important;border-color:rgba(219,239,255,.2)!important}
 
-/* Bottom sheets are full interaction surfaces. Keep their settled state
-   deterministic so a paused capture/visibility timeline cannot leave a
-   form at translateY(100%) and make its controls unreachable. */
-.ov.on .ms2{animation:none!important;transform:none!important}
+/* QA captures freeze bottom sheets at their settled state. Normal visits keep
+   the approved spring-like bottom-sheet entrance animation. */
+html[data-qa] .ov.on .ms2{animation:none!important;transform:none!important}
