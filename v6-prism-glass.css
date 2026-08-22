@@ -86,6 +86,7 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
 #p-diet .bmr,#p-diet .cal-card{background:linear-gradient(135deg,rgba(113,61,79,.58),rgba(73,53,111,.56))!important}#p-diet .food-item{background:rgba(102,73,96,.28)!important}
 #p-work .timer-card,#p-work .task-item{background:linear-gradient(135deg,rgba(75,52,125,.54),rgba(35,60,108,.54))!important}#p-work .task-item{margin-bottom:7px;border:1px solid rgba(225,230,255,.15)!important;border-radius:13px;padding:11px 10px}
 #p-life .life-rec-item,#p-life .ledger-card,#p-life .ledger-stat-card{background:linear-gradient(135deg,rgba(105,52,100,.54),rgba(41,67,111,.52))!important}
+#p-life .sec,#p-life .life-recs{background:linear-gradient(135deg,rgba(45,92,119,.38),rgba(61,48,105,.3))!important;border:1px solid var(--glass-brd)!important;border-radius:16px;box-shadow:var(--glass-sh)!important;backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%)}#p-life .sec{padding:10px 12px;margin-top:16px;margin-bottom:10px}#p-life .life-recs{padding:10px 12px}
 
 ::selection{background:rgba(200,255,50,.42);color:#07172c}*:focus-visible{outline:2px solid rgba(200,255,50,.92);outline-offset:3px}body{scrollbar-color:rgba(200,255,50,.56) transparent}body::-webkit-scrollbar{width:7px}body::-webkit-scrollbar-thumb{background:rgba(200,255,50,.45);border-radius:999px}
 
@@ -113,6 +114,7 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
   input,select,textarea,.mf input,.mf select,.life-add input,.ls-note input{background:rgba(255,255,255,.68)!important;color:var(--t1)!important;border-color:rgba(67,106,145,.2)!important}
   .prog-section .ph-title,.prog-section .pr-val,.home-diet .hd-diet .ttl,.wk-card .ct{color:var(--t1)!important}.prog-section .pn-lb,.prog-section .pn-v,.home-diet .diet-sum-item .ds-lb,.home-diet .diet-row .dr-cal{color:var(--t2)!important}.prog-section .ph-edit,.wk-card .wk-rate{color:#315d16!important;background:rgba(181,235,68,.18)!important;border-color:rgba(119,170,31,.28)!important}.prog-section .pr-val{text-shadow:0 3px 14px rgba(89,143,77,.18)}
   #p-fit .page-hd .ph-t{color:#087894!important}#p-diet .page-hd .ph-t{color:#b55327!important}#p-work .page-hd .ph-t{color:#6c4aa1!important}#p-life .life-title{color:#ae3e70!important}#p-life .life-cat.on{color:#315d16!important}input::placeholder,textarea::placeholder{color:rgba(29,59,94,.52)!important;opacity:1}#p-diet .bmr,#p-diet .bmr .bmr-v,#p-diet .bmr .bmr-sub strong{color:var(--t1)!important}#p-diet .bmr .bmr-lb,#p-diet .bmr .bmr-sub,#p-diet .bmr .bcl,#p-diet .bmr .bci i{color:var(--t2)!important}#p-diet .bmr .bmr-ai-btn{color:#7b3b22!important;background:rgba(255,255,255,.58)!important;border-color:rgba(170,91,48,.22)!important}
+  #p-life .sec,#p-life .life-recs{background:linear-gradient(135deg,rgba(255,255,255,.56),rgba(232,242,255,.48))!important;border-color:rgba(255,255,255,.72)!important;box-shadow:0 14px 36px rgba(40,74,110,.13),inset 0 1px 0 rgba(255,255,255,.82)!important}
 }
 
 /* Light mode keeps the approved prism depth: translucent, readable, and
