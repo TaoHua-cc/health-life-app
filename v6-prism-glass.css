@@ -196,6 +196,8 @@ html[data-theme=dark] #profileOv .mine-page-title,html[data-theme=dark] #profile
 html[data-theme=dark] #profileOv .mine-page-sub,html[data-theme=dark] .ov .ms2 .mf label,html[data-theme=dark] .ov .ms2 .mf-hint{color:var(--t2)!important}
 html[data-theme=dark] #profileOv .pf-top,html[data-theme=dark] #profileOv .card{background:var(--glass)!important;border-color:var(--glass-brd)!important;box-shadow:var(--glass-sh)!important}
 html[data-theme=dark] #profileOv .pi{background:rgba(9,29,51,.48)!important;border-color:rgba(219,239,255,.2)!important}
+html[data-theme=dark] #profileOv .pi input,html[data-theme=dark] #profileOv .pi select,html[data-theme=dark] #profileOv .pi textarea{background:rgba(9,29,51,.48)!important;color:var(--t1)!important;border-color:rgba(219,239,255,.2)!important}
+html[data-theme=dark] #profileOv .av-change,html[data-theme=dark] #profileOv .mine-page-close,html[data-theme=dark] #profileOv .hb{background:rgba(235,249,255,.12)!important;color:var(--t1)!important;border-color:rgba(235,250,255,.22)!important}
 html[data-theme=dark] .te,html[data-theme=dark] .cdempty,html[data-theme=dark] .diet-empty{border-color:rgba(224,243,255,.27)!important;background:rgba(224,243,255,.055)!important;color:var(--t2)!important}
 
 /* QA captures freeze bottom sheets at their settled state. Normal visits keep
