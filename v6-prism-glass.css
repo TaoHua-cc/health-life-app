@@ -166,6 +166,8 @@ html[data-theme=dark] .page-hd .ph-s,html[data-theme=dark] .life-sub{color:rgba(
 html[data-theme=dark] .tabs,html[data-theme=dark] .fit-tabs,html[data-theme=dark] .seg,html[data-theme=dark] .life-cats{background:rgba(9,30,52,.28)!important;border-color:rgba(224,241,255,.14)!important;box-shadow:none!important}
 html[data-theme=dark] .ftab,html[data-theme=dark] .life-cat{background:transparent!important;color:rgba(229,239,255,.72)!important;border-color:transparent!important;box-shadow:none!important}
 html[data-theme=dark] .ftab.on,html[data-theme=dark] #p-life .life-cat.on{background:rgba(200,255,50,.17)!important;border-color:rgba(200,255,50,.48)!important;color:#edffbd!important;box-shadow:0 6px 20px rgba(200,255,50,.15),inset 0 1px 0 rgba(255,255,255,.17)!important}
+html[data-theme=dark] .mbn.c,html[data-theme=dark] .tbn.rst,html[data-theme=dark] .bb-btn.c{background:rgba(230,241,255,.1)!important;color:var(--t1)!important;border-color:rgba(230,241,255,.18)!important}
+html[data-theme=dark] .food-list.show,html[data-theme=dark] .food-item:not(.sel),html[data-theme=dark] .fex-sel,html[data-theme=dark] .mp-sel-item:not(.sel),html[data-theme=dark] .cam-item{background:rgba(255,255,255,.07)!important;border-color:rgba(227,244,255,.16)!important}
 html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(224,241,255,.22)!important;box-shadow:0 18px 48px rgba(0,7,22,.34),inset 0 1px 0 rgba(255,255,255,.18)!important}
 html[data-theme=dark] .bn,html[data-theme=dark] .bn .lb{color:rgba(229,239,255,.66)!important}
 html[data-theme=dark] .ai-card{background:linear-gradient(135deg,rgba(32,100,129,.78),rgba(76,57,136,.76))!important;box-shadow:0 20px 48px rgba(7,19,48,.32),inset 0 1px 0 rgba(255,255,255,.22)!important}
