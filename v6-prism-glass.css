@@ -201,6 +201,17 @@ html[data-theme=dark] #profileOv .pi{background:rgba(9,29,51,.48)!important;bord
 html[data-theme=dark] #profileOv .pi input,html[data-theme=dark] #profileOv .pi select,html[data-theme=dark] #profileOv .pi textarea{background:rgba(9,29,51,.48)!important;color:var(--t1)!important;border-color:rgba(219,239,255,.2)!important}
 html[data-theme=dark] #profileOv .av-change,html[data-theme=dark] #profileOv .mine-page-close,html[data-theme=dark] #profileOv .hb{background:rgba(235,249,255,.12)!important;color:var(--t1)!important;border-color:rgba(235,250,255,.22)!important}
 html[data-theme=dark] .te,html[data-theme=dark] .cdempty,html[data-theme=dark] .diet-empty{border-color:rgba(224,243,255,.27)!important;background:rgba(224,243,255,.055)!important;color:var(--t2)!important}
+/* Keep the page-level accents and data controls on the dark glass palette
+   when a light-system media query is also present. */
+html[data-theme=dark] #p-fit .page-hd .ph-t,html[data-theme=dark] #p-fit .sec-add{color:#55dcff!important}
+html[data-theme=dark] #p-diet .page-hd .ph-t,html[data-theme=dark] #p-diet .sec-add{color:#ffad73!important}
+html[data-theme=dark] #p-work .page-hd .ph-t{color:#c39bff!important}
+html[data-theme=dark] #p-life .life-title{color:#ff9fc5!important}
+html[data-theme=dark] input::placeholder,html[data-theme=dark] textarea::placeholder{color:rgba(222,237,255,.48)!important;opacity:1}
+html[data-theme=dark] .prog-section .ph-edit,html[data-theme=dark] .wk-card .wk-rate{color:#eaffc2!important;background:rgba(200,255,50,.13)!important;border-color:rgba(200,255,50,.32)!important}
+html[data-theme=dark] .task-item .ti-ck{background:rgba(224,243,255,.08)!important;border-color:rgba(224,243,255,.34)!important}
+html[data-theme=dark] #p-diet .bmr .bmr-ai-btn{color:#ffd2bf!important;background:rgba(255,255,255,.10)!important;border-color:rgba(255,174,114,.30)!important}
+html[data-theme=dark] #p-fit .fit-sum-card,html[data-theme=dark] #p-fit .fit-part,html[data-theme=dark] #p-diet .bmr,html[data-theme=dark] #p-diet .cal-card,html[data-theme=dark] #p-work .timer-card,html[data-theme=dark] #p-work .task-item,html[data-theme=dark] #p-life .life-rec-item,html[data-theme=dark] #p-life .ledger-card,html[data-theme=dark] #p-life .ledger-stat-card{border-color:var(--glass-brd)!important;box-shadow:var(--glass-sh)!important}
 
 /* QA captures freeze bottom sheets at their settled state. Normal visits keep
    the approved spring-like bottom-sheet entrance animation. */
