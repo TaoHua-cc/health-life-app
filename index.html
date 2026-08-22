@@ -6228,7 +6228,10 @@ if(bnavEl){
 // Theme
 function updateStatusBarStyle(){try{var m=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(m)m.setAttribute('content','black-translucent')}catch(e){}}
 function applySystemTheme(){
-  var dark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  /* QA-only override: normal visits still follow the system appearance. */
+  var forced='';
+  try{forced=new URLSearchParams(window.location.search).get('qa-theme')||''}catch(e){}
+  var dark=forced==='dark'||(forced!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);
   if(dark){document.documentElement.setAttribute('data-theme','dark')}
   else{document.documentElement.removeAttribute('data-theme')}
   applyThemeColor();
