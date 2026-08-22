@@ -1,0 +1,114 @@
+/*
+  小满 Prism Glass — approved visual direction
+  THESIS: 把实时健康与生活记录放进带环境光的深色玻璃工作台，拒绝平淡仪表盘。
+  OWN-WORLD: 午夜海军蓝、彩色环境光、烟熏透明玻璃、克制的青橙紫粉黄绿高亮。
+  STORY: 用户一眼读到今天的状态，随后记录、训练、饮食或完成任务。
+  FIRST VIEWPORT: 顶部问候，实时主数据居中；主操作与五栏导航始终可见。
+  FORM: mobile-operate / approved-prism-glass; unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md.
+*/
+
+:root{
+  --bg:#07172c;--sf:rgba(15,40,67,.58);--sf2:rgba(31,63,96,.48);--bd:rgba(211,235,255,.23);
+  --t1:#f4f8ff;--t2:rgba(227,239,255,.78);--t3:rgba(210,228,248,.58);
+  --pri:#c8ff32;--priBg:rgba(200,255,50,.14);--priBd:rgba(200,255,50,.42);
+  --grn:#63f0aa;--org:#ff9a61;--pur:#b58cff;--fat:#ff83ad;--tea:#41d9ff;
+  --glass:rgba(15,40,67,.55);--glass-strong:rgba(9,27,49,.76);--glass-brd:rgba(222,241,255,.22);
+  --glass-sh:0 14px 36px rgba(0,8,22,.26),inset 0 1px 0 rgba(255,255,255,.13);
+  --nav:rgba(8,27,49,.66);--rd:16px;--btn-r:14px;
+}
+html[data-theme=dark]{
+  --bg:#07172c;--sf:rgba(15,40,67,.58);--sf2:rgba(31,63,96,.48);--bd:rgba(211,235,255,.23);
+  --t1:#f4f8ff;--t2:rgba(227,239,255,.78);--t3:rgba(210,228,248,.58);
+  --pri:#c8ff32;--priBg:rgba(200,255,50,.14);--priBd:rgba(200,255,50,.42);
+  --glass:rgba(15,40,67,.55);--glass-strong:rgba(9,27,49,.76);--glass-brd:rgba(222,241,255,.22);
+  --glass-sh:0 14px 36px rgba(0,8,22,.26),inset 0 1px 0 rgba(255,255,255,.13);--nav:rgba(8,27,49,.66);
+}
+
+body{background:radial-gradient(58% 34% at -10% 10%,rgba(47,181,255,.26),transparent 66%),radial-gradient(46% 34% at 108% 38%,rgba(255,125,92,.18),transparent 70%),radial-gradient(48% 32% at 48% 105%,rgba(180,112,255,.18),transparent 72%),#07172c;color:var(--t1)}
+.ph{background:transparent;isolation:isolate}
+.ph:before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(45% 24% at 15% 18%,rgba(200,255,50,.12),transparent 78%),radial-gradient(42% 28% at 92% 72%,rgba(70,214,255,.12),transparent 76%);filter:blur(16px)}
+.hdr{background:linear-gradient(180deg,rgba(5,21,40,.44),transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+
+.pnl{background:transparent!important}
+.card,.agg-card,.qk,.ml,.tk2,.life-rec-item,.fit-part,.fit-ex,.food-item,.heat-card,.cal-card,.timer-card,.cditem,.aiad-stat-item,.aiad-food,.aiad-tip,.bmr,.task-item,.fit-sum-card,.life-panel>*,.pd-overview{
+  background:var(--glass)!important;border:1px solid var(--glass-brd)!important;box-shadow:var(--glass-sh)!important;backdrop-filter:blur(22px) saturate(138%);-webkit-backdrop-filter:blur(22px) saturate(138%);
+}
+.bmr,.hero-bmr{background:linear-gradient(135deg,rgba(20,72,99,.72),rgba(42,56,108,.56))!important}
+.home-week,.home-diet{background:linear-gradient(135deg,rgba(25,72,98,.63),rgba(52,42,104,.5))!important;border:1px solid var(--glass-brd)!important;box-shadow:var(--glass-sh)!important;backdrop-filter:blur(22px) saturate(138%);-webkit-backdrop-filter:blur(22px) saturate(138%)}
+.ms2,.aiad-page,.ledger-sheet,.pm-box,.cdmd,.budget-box{background:rgba(10,30,52,.86)!important;border:1px solid rgba(230,244,255,.26)!important;box-shadow:0 24px 64px rgba(0,8,22,.42),inset 0 1px 0 rgba(255,255,255,.14)!important;backdrop-filter:blur(30px) saturate(148%);-webkit-backdrop-filter:blur(30px) saturate(148%)}
+html[data-theme=dark] .ms2,html[data-theme=dark] .aiad-page,html[data-theme=dark] .ledger-sheet,html[data-theme=dark] .pm-box,html[data-theme=dark] .cdmd,html[data-theme=dark] .budget-box{background:rgba(10,30,52,.86)!important;border-color:rgba(230,244,255,.26)!important}
+.ov{background:rgba(2,12,26,.52)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+input,select,textarea,.mf input,.mf select,.life-add input,.ls-note input{background:rgba(9,29,51,.48)!important;color:var(--t1)!important;border-color:rgba(219,239,255,.2)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+input::placeholder,textarea::placeholder{color:rgba(222,237,255,.48)}
+.tabs,.fit-tabs,.seg,.life-cats{background:rgba(9,30,52,.28)!important;border-color:rgba(224,241,255,.14)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.tab.on,.ftab.on,.life-cat.on,.lib-cat.on,.mp-cat.on{background:rgba(200,255,50,.17)!important;border-color:rgba(200,255,50,.48)!important;color:#edffbd!important;box-shadow:0 6px 20px rgba(200,255,50,.15),inset 0 1px 0 rgba(255,255,255,.17)!important}
+
+.bnav{background:var(--nav)!important;border:1px solid rgba(224,241,255,.22)!important;box-shadow:0 18px 48px rgba(0,7,22,.34),inset 0 1px 0 rgba(255,255,255,.18)!important;backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%)}
+html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(224,241,255,.22)!important;box-shadow:0 18px 48px rgba(0,7,22,.34),inset 0 1px 0 rgba(255,255,255,.18)!important}
+.bn{color:rgba(229,239,255,.66)!important}.bn.on,.bn.on .lb{color:var(--pri)!important}.bn-ind{background:linear-gradient(180deg,rgba(235,255,181,.96),rgba(200,255,50,.7))!important;box-shadow:0 5px 18px rgba(200,255,50,.25),inset 0 1px 1px rgba(255,255,255,.92)!important}
+.fab,.addbtn,.mbn.ok,.ls-save,.bb-btn:not(.c),.tbn.go{background:linear-gradient(135deg,#c8ff32,#54e6a1 46%,#5ee9ff)!important;color:#082039!important;border:0!important;box-shadow:0 10px 24px rgba(72,226,161,.24),inset 0 1px 0 rgba(255,255,255,.68)!important}
+.mbn.c,.tbn.rst,.bb-btn.c{background:rgba(230,241,255,.1)!important;color:var(--t1)!important;border:1px solid rgba(230,241,255,.18)!important}
+
+#p-fit .page-hd .ph-t,#p-fit .sec-add{color:#55dcff!important}#p-diet .page-hd .ph-t,#p-diet .sec-add{color:#ffad73!important}#p-work .page-hd .ph-t{color:#c39bff!important}#p-life .life-title{color:#ff9fc5!important}
+#p-fit{background:radial-gradient(76% 28% at 88% 0,rgba(65,217,255,.19),transparent 72%)}#p-diet{background:radial-gradient(80% 28% at 88% 0,rgba(255,137,90,.18),transparent 72%)}#p-work{background:radial-gradient(78% 28% at 84% 0,rgba(181,140,255,.2),transparent 72%)}#p-life{background:radial-gradient(78% 28% at 20% 0,rgba(255,117,170,.16),transparent 72%)}
+
+.cal-ring,.hrc-ring,.timer-card:before{filter:drop-shadow(0 0 12px rgba(65,217,255,.22))}.timer-card{position:relative;overflow:hidden}.timer-card:before{content:'';position:absolute;width:190px;height:190px;border-radius:50%;right:-52px;top:-78px;background:radial-gradient(circle at 33% 30%,rgba(255,255,255,.16),rgba(181,140,255,.14) 38%,transparent 69%);pointer-events:none}.td{position:relative;text-shadow:0 3px 18px rgba(191,158,255,.25)}
+.fit-ex:active,.food-item:active,.task-item:active,.life-rec-item:active,.card:active{transform:translateY(1px) scale(.992)}
+
+@keyframes prismFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-3px,0)}}
+.bmr,.hero-bmr,.timer-card,.fit-sum-card{animation:prismFloat 7s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:.01ms!important}}
+
+@media (prefers-color-scheme:light){
+  :root{--bg:#edf4ff;--sf:rgba(255,255,255,.54);--sf2:rgba(241,248,255,.58);--bd:rgba(72,111,151,.18);--t1:#10243f;--t2:rgba(29,59,94,.75);--t3:rgba(38,70,104,.57);--glass:rgba(255,255,255,.57);--glass-strong:rgba(246,251,255,.82);--glass-brd:rgba(255,255,255,.72);--glass-sh:0 14px 36px rgba(40,74,110,.15),inset 0 1px 0 rgba(255,255,255,.78);--nav:rgba(240,247,255,.72)}
+  body{background:radial-gradient(52% 38% at 2% 8%,rgba(77,198,255,.27),transparent 67%),radial-gradient(46% 35% at 100% 34%,rgba(255,163,116,.22),transparent 70%),radial-gradient(44% 34% at 52% 100%,rgba(183,145,255,.2),transparent 72%),#edf4ff}
+  .ms2,.aiad-page,.ledger-sheet,.pm-box,.cdmd,.budget-box{background:rgba(247,251,255,.86)!important;border-color:rgba(255,255,255,.88)!important;box-shadow:0 24px 64px rgba(38,74,112,.2),inset 0 1px 0 #fff!important}
+  .ov{background:rgba(55,87,119,.24)!important}.bnav{border-color:rgba(255,255,255,.86)!important}.bn{color:rgba(26,58,92,.64)!important}
+  input,select,textarea,.mf input,.mf select,.life-add input,.ls-note input{background:rgba(255,255,255,.54)!important;color:var(--t1)!important;border-color:rgba(91,127,166,.2)!important}
+}
+
+/* Dynamic home content: keep the existing live calculations, but give each
+   destination one recognisable, restrained prism cue. */
+.ai-card{background:linear-gradient(135deg,rgba(32,100,129,.78),rgba(76,57,136,.76))!important;border:1px solid rgba(224,247,255,.3)!important;box-shadow:0 20px 48px rgba(7,19,48,.32),inset 0 1px 0 rgba(255,255,255,.22)!important;backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%)}
+.ai-card:before{width:146px;height:146px;right:-28px;top:-62px;background:radial-gradient(circle,rgba(83,232,255,.3),rgba(83,232,255,0) 68%)}
+.ai-card:after{width:118px;height:118px;left:-38px;bottom:-52px;background:radial-gradient(circle,rgba(200,255,50,.22),rgba(200,255,50,0) 70%)}
+.ai-card .ai-btn{border:1px solid rgba(255,255,255,.74)!important;box-shadow:0 7px 18px rgba(4,18,41,.16)}
+.prog-section,.home-diet,.wk-card,.task-section{border:1px solid var(--glass-brd)!important;box-shadow:var(--glass-sh)!important;backdrop-filter:blur(22px) saturate(138%);-webkit-backdrop-filter:blur(22px) saturate(138%)}
+.prog-section{background:linear-gradient(135deg,rgba(34,83,104,.64),rgba(65,54,116,.54))!important}.prog-section:before{background:rgba(200,255,50,.15)!important}
+.prog-ring svg path:first-of-type{stroke:rgba(224,243,255,.18)!important}.prog-ring svg path:nth-of-type(2){filter:drop-shadow(0 0 8px rgba(200,255,50,.58))}
+.home-diet{background:linear-gradient(135deg,rgba(18,65,84,.6),rgba(29,51,93,.52))!important}.home-diet .diet-sum-item,.home-diet .diet-row{background:rgba(233,249,255,.09)!important;border:1px solid rgba(233,249,255,.13)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.09)}
+.wk-card{background:linear-gradient(135deg,rgba(27,65,99,.64),rgba(62,50,109,.52))!important}.wk-card svg{filter:drop-shadow(0 7px 11px rgba(82,219,255,.14))}
+.task-section{background:linear-gradient(135deg,rgba(57,45,105,.5),rgba(27,56,93,.54))!important}.task-item{border-bottom-color:rgba(224,243,255,.14)!important}.task-item .ti-ck{background:rgba(224,243,255,.08);border-color:rgba(224,243,255,.34)}
+
+/* Page-specific glass cues for real records and tools. */
+#p-fit .fit-sum-card,#p-fit .fit-part{background:linear-gradient(135deg,rgba(19,84,110,.66),rgba(22,54,101,.54))!important}#p-fit .fit-ex{background:rgba(43,116,143,.28)!important}
+#p-diet .bmr,#p-diet .cal-card{background:linear-gradient(135deg,rgba(113,61,79,.58),rgba(73,53,111,.56))!important}#p-diet .food-item{background:rgba(102,73,96,.28)!important}
+#p-work .timer-card,#p-work .task-item{background:linear-gradient(135deg,rgba(75,52,125,.54),rgba(35,60,108,.54))!important}#p-work .task-item{margin-bottom:7px;border:1px solid rgba(225,230,255,.15)!important;border-radius:13px;padding:11px 10px}
+#p-life .life-rec-item,#p-life .ledger-card,#p-life .ledger-stat-card{background:linear-gradient(135deg,rgba(105,52,100,.54),rgba(41,67,111,.52))!important}
+
+::selection{background:rgba(200,255,50,.42);color:#07172c}*:focus-visible{outline:2px solid rgba(200,255,50,.92);outline-offset:3px}body{scrollbar-color:rgba(200,255,50,.56) transparent}body::-webkit-scrollbar{width:7px}body::-webkit-scrollbar-thumb{background:rgba(200,255,50,.45);border-radius:999px}
+
+/* Existing sheets and overlays: colour is attached to the action, never to
+   copied data. This keeps add, edit, confirmation, and empty states legible. */
+.ov .ms2,.ledger-sheet,.pm-box,.cdmd,.budget-box{position:relative;overflow:hidden}.ov .ms2:before,.ledger-sheet:before,.pm-box:before,.cdmd:before,.budget-box:before{content:'';position:absolute;inset:-44% -20% auto 42%;height:180px;background:radial-gradient(ellipse,rgba(106,218,255,.16),transparent 68%);pointer-events:none}.ov .ms2>*:not(.dx),.ledger-sheet>*,.pm-box>*,.cdmd>*,.budget-box>*{position:relative;z-index:1}
+#mealOv .ms2,#editMealOv .ms2,#cdModal .cdmd{background:linear-gradient(145deg,rgba(95,47,55,.9),rgba(36,37,75,.88))!important}#fitPartOv .ms2,#planModal .ms2,#planEditOv .ms2,#exDetailOv .ms2{background:linear-gradient(145deg,rgba(16,67,94,.9),rgba(28,42,89,.9))!important}#taskOv .ms2,#reminderOv .ms2{background:linear-gradient(145deg,rgba(68,43,106,.9),rgba(25,45,86,.9))!important}#profileOv .ms2,#thcOv .ms2{background:linear-gradient(145deg,rgba(65,87,42,.9),rgba(23,51,72,.9))!important}
+.food-list.show,.food-item,.fex-sel,.mp-sel-item,.cam-item{border-color:rgba(227,244,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.food-item.sel,.mp-sel-item{background:rgba(200,255,50,.12)!important;border-color:rgba(200,255,50,.32)!important}.food-item:active,.mp-sel-item:active,.cam-item:active{background:rgba(224,243,255,.13)!important}
+.te,.cdempty,.diet-empty{margin:10px 0;padding:15px 12px;border:1px dashed rgba(224,243,255,.27);border-radius:14px;background:rgba(224,243,255,.055);color:var(--t2)!important;text-align:center}.te:before,.cdempty:before,.diet-empty:before{content:'✦';display:block;margin-bottom:5px;color:var(--pri);font-size:1.05rem}
+.aiad-page{background:linear-gradient(160deg,rgba(11,42,69,.92),rgba(34,35,82,.89))!important}.aiad-page .aiad-sec{border-color:rgba(225,244,255,.15)!important}.aiad-page .aiad-stat-item{background:rgba(226,245,255,.085)!important;border-color:rgba(226,245,255,.14)!important}.aiad-page .aiad-food,.aiad-page .aiad-tip{background:rgba(226,245,255,.07)!important;border-color:rgba(226,245,255,.13)!important}
+.ledger-sheet{background:linear-gradient(160deg,rgba(74,46,87,.91),rgba(16,39,70,.92))!important}.budget-box{background:linear-gradient(160deg,rgba(94,61,111,.9),rgba(24,42,78,.91))!important}.pm-box{background:linear-gradient(160deg,rgba(104,55,90,.9),rgba(25,46,82,.91))!important}
+.ov .ms2,.ledger-sheet{overflow-x:hidden;overflow-y:auto}
+.toast,.ts,.cfm-msg{box-shadow:0 14px 34px rgba(0,8,22,.3),inset 0 1px 0 rgba(255,255,255,.16)}
+
+/* System-light counterpart. applySystemTheme removes data-theme in light mode,
+   so these rules follow the existing matchMedia listener without new script. */
+@media (prefers-color-scheme:light){
+  .bn{color:rgba(23,56,90,.68)!important}.bnav{background:rgba(240,247,255,.72)!important;box-shadow:0 18px 48px rgba(40,74,110,.14),inset 0 1px 0 rgba(255,255,255,.88)!important}.mbn.c,.tbn.rst,.bb-btn.c{background:rgba(39,77,116,.09)!important;color:var(--t1)!important;border-color:rgba(53,95,136,.17)!important}
+  .ai-card{background:linear-gradient(135deg,rgba(52,139,173,.87),rgba(106,86,171,.82))!important;box-shadow:0 18px 42px rgba(49,88,135,.22),inset 0 1px 0 rgba(255,255,255,.38)!important}.prog-section{background:linear-gradient(135deg,rgba(235,252,245,.74),rgba(238,237,255,.7))!important}.home-diet{background:linear-gradient(135deg,rgba(237,253,255,.73),rgba(241,239,255,.7))!important}.wk-card{background:linear-gradient(135deg,rgba(235,247,255,.76),rgba(242,237,255,.72))!important}.task-section{background:linear-gradient(135deg,rgba(244,238,255,.78),rgba(235,246,255,.72))!important}
+  .home-diet .diet-sum-item,.home-diet .diet-row{background:rgba(255,255,255,.58)!important;border-color:rgba(89,127,165,.13)!important}.task-item{border-bottom-color:rgba(63,100,139,.14)!important}.task-item .ti-ck{background:rgba(255,255,255,.58);border-color:rgba(63,100,139,.3)}.prog-ring svg path:first-of-type{stroke:rgba(55,99,138,.17)!important}
+  #p-fit .fit-sum-card,#p-fit .fit-part{background:linear-gradient(135deg,rgba(224,250,255,.78),rgba(229,241,255,.7))!important}#p-fit .fit-ex{background:rgba(224,247,255,.66)!important}#p-diet .bmr,#p-diet .cal-card{background:linear-gradient(135deg,rgba(255,240,237,.78),rgba(244,237,255,.72))!important}#p-diet .food-item{background:rgba(255,244,246,.66)!important}#p-work .timer-card,#p-work .task-item{background:linear-gradient(135deg,rgba(242,235,255,.78),rgba(235,244,255,.72))!important}#p-life .life-rec-item,#p-life .ledger-card,#p-life .ledger-stat-card{background:linear-gradient(135deg,rgba(255,238,246,.78),rgba(237,245,255,.72))!important}
+  .ov{background:rgba(41,75,110,.25)!important}.ov .ms2,.cdmd,.budget-box,.pm-box{border-color:rgba(255,255,255,.88)!important;box-shadow:0 24px 64px rgba(39,76,112,.2),inset 0 1px 0 rgba(255,255,255,.92)!important}#mealOv .ms2,#editMealOv .ms2,#cdModal .cdmd{background:linear-gradient(145deg,rgba(255,246,244,.94),rgba(244,244,255,.92))!important}#fitPartOv .ms2,#planModal .ms2,#planEditOv .ms2,#exDetailOv .ms2{background:linear-gradient(145deg,rgba(240,252,255,.95),rgba(240,245,255,.93))!important}#taskOv .ms2,#reminderOv .ms2{background:linear-gradient(145deg,rgba(248,242,255,.95),rgba(240,247,255,.93))!important}#profileOv .ms2,#thcOv .ms2{background:linear-gradient(145deg,rgba(248,255,237,.95),rgba(239,248,255,.94))!important}
+  .food-list.show,.food-item,.fex-sel,.mp-sel-item,.cam-item{border-color:rgba(69,108,147,.16)!important;background:rgba(255,255,255,.55)!important}.food-item.sel,.mp-sel-item{background:rgba(200,255,50,.16)!important;border-color:rgba(125,173,29,.35)!important}.te,.cdempty,.diet-empty{border-color:rgba(64,105,145,.25);background:rgba(255,255,255,.46)}
+  .aiad-page{background:linear-gradient(160deg,rgba(242,252,255,.96),rgba(244,242,255,.94))!important}.aiad-page .aiad-sec{border-color:rgba(66,105,145,.14)!important}.aiad-page .aiad-stat-item,.aiad-page .aiad-food,.aiad-page .aiad-tip{background:rgba(255,255,255,.56)!important;border-color:rgba(66,105,145,.13)!important}.ledger-sheet{background:linear-gradient(160deg,rgba(255,244,251,.96),rgba(242,248,255,.95))!important}.budget-box{background:linear-gradient(160deg,rgba(250,244,255,.96),rgba(241,248,255,.95))!important}.pm-box{background:linear-gradient(160deg,rgba(255,245,251,.96),rgba(242,249,255,.95))!important}
+  input,select,textarea,.mf input,.mf select,.life-add input,.ls-note input{background:rgba(255,255,255,.68)!important;color:var(--t1)!important;border-color:rgba(67,106,145,.2)!important}
+}
