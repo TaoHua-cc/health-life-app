@@ -71,8 +71,8 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
 /* Dynamic home content: keep the existing live calculations, but give each
    destination one recognisable, restrained prism cue. */
 .ai-card{background:linear-gradient(135deg,rgba(32,100,129,.78),rgba(76,57,136,.76))!important;border:1px solid rgba(224,247,255,.3)!important;box-shadow:0 20px 48px rgba(7,19,48,.32),inset 0 1px 0 rgba(255,255,255,.22)!important;backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%)}
-.ai-card:before{width:146px;height:146px;right:-28px;top:-62px;background:radial-gradient(circle,rgba(83,232,255,.3),rgba(83,232,255,0) 68%)}
-.ai-card:after{width:118px;height:118px;left:-38px;bottom:-52px;background:radial-gradient(circle,rgba(200,255,50,.22),rgba(200,255,50,0) 70%)}
+.ai-card:before{width:146px;height:146px;right:-28px;top:-62px;background:radial-gradient(circle,rgba(83,232,255,.3),rgba(83,232,255,0) 68%);pointer-events:none}
+.ai-card:after{width:118px;height:118px;left:-38px;bottom:-52px;background:radial-gradient(circle,rgba(200,255,50,.22),rgba(200,255,50,0) 70%);pointer-events:none}
 .ai-card .ai-btn{border:1px solid rgba(255,255,255,.74)!important;box-shadow:0 7px 18px rgba(4,18,41,.16)}
 .prog-section,.home-diet,.wk-card,.task-section{border:1px solid var(--glass-brd)!important;box-shadow:var(--glass-sh)!important;backdrop-filter:blur(22px) saturate(138%);-webkit-backdrop-filter:blur(22px) saturate(138%)}
 .prog-section{background:linear-gradient(135deg,rgba(34,83,104,.64),rgba(65,54,116,.54))!important}.prog-section:before{background:rgba(200,255,50,.15)!important}
