@@ -1535,7 +1535,7 @@ button,input,select,textarea{font:inherit}
 .wk-card svg circle{filter:drop-shadow(0 0 4px rgba(200,255,50,.42))}
 .wk-card svg text{fill:rgba(231,243,255,.68)}
 </style>
-<link rel="stylesheet" href="v6-prism-glass.css?v=440b02f">
+<link rel="stylesheet" href="v6-prism-glass.css?v=home-primary-20260823">
 </head>
 <body>
 <!--
@@ -2597,6 +2597,7 @@ function renderHome(){
   var hg='hg'+Math.floor(Math.random()*1e6);
   var C2=2*Math.PI*46;
 
+  h+='<div class="home-primary">';
   h+='<div class="ai-card">';
   h+='<div class="ai-title">🤖 '+aiTitle+'</div>';
   h+='<div class="ai-sub">'+aiSub+'</div>';
@@ -2642,6 +2643,7 @@ function renderHome(){
   h+='</div>'; // prog-nuts
   h+='</div>'; // prog-body
   h+='</div>'; // prog-section
+  h+='</div>'; // home-primary
 
   // 3) 今日饮食（只读摘要）
   var allMeals=[];

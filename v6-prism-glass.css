@@ -73,6 +73,9 @@ html[data-theme=dark] .map-pick-mask{background:rgba(8,22,40,.54)!important;back
 
 /* Dynamic home content: keep the existing live calculations, but give each
    destination one recognisable, restrained prism cue. */
+.home-primary{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.home-primary>.prog-section{order:1;margin-bottom:0}
+.home-primary>.ai-card{order:2;margin-bottom:0}
 .ai-card{background:linear-gradient(135deg,rgba(32,100,129,.78),rgba(76,57,136,.76))!important;border:1px solid rgba(224,247,255,.3)!important;box-shadow:0 20px 48px rgba(7,19,48,.32),inset 0 1px 0 rgba(255,255,255,.22)!important;backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%)}
 .ai-card:before{width:146px;height:146px;right:-28px;top:-62px;background:radial-gradient(circle,rgba(83,232,255,.3),rgba(83,232,255,0) 68%);pointer-events:none}
 .ai-card:after{width:118px;height:118px;left:-38px;bottom:-52px;background:radial-gradient(circle,rgba(200,255,50,.22),rgba(200,255,50,0) 70%);pointer-events:none}
