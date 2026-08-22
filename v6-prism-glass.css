@@ -114,3 +114,20 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
   .prog-section .ph-title,.prog-section .pr-val,.home-diet .hd-diet .ttl,.wk-card .ct{color:var(--t1)!important}.prog-section .pn-lb,.prog-section .pn-v,.home-diet .diet-sum-item .ds-lb,.home-diet .diet-row .dr-cal{color:var(--t2)!important}.prog-section .ph-edit,.wk-card .wk-rate{color:#315d16!important;background:rgba(181,235,68,.18)!important;border-color:rgba(119,170,31,.28)!important}.prog-section .pr-val{text-shadow:0 3px 14px rgba(89,143,77,.18)}
   #p-fit .page-hd .ph-t{color:#087894!important}#p-diet .page-hd .ph-t{color:#b55327!important}#p-work .page-hd .ph-t{color:#6c4aa1!important}#p-life .life-title{color:#ae3e70!important}#p-life .life-cat.on{color:#315d16!important}input::placeholder,textarea::placeholder{color:rgba(29,59,94,.52)!important;opacity:1}#p-diet .bmr,#p-diet .bmr .bmr-v,#p-diet .bmr .bmr-sub strong{color:var(--t1)!important}#p-diet .bmr .bmr-lb,#p-diet .bmr .bmr-sub,#p-diet .bmr .bcl,#p-diet .bmr .bci i{color:var(--t2)!important}#p-diet .bmr .bmr-ai-btn{color:#7b3b22!important;background:rgba(255,255,255,.58)!important;border-color:rgba(170,91,48,.22)!important}
 }
+
+/* Light mode keeps the approved prism depth: translucent, readable, and
+   page-coloured instead of a washed-out white dashboard. */
+@media (prefers-color-scheme:light){
+  body{background:radial-gradient(55% 40% at 0 4%,rgba(55,197,255,.35),transparent 66%),radial-gradient(48% 39% at 104% 34%,rgba(255,148,101,.29),transparent 70%),radial-gradient(52% 40% at 52% 104%,rgba(174,126,255,.27),transparent 73%),linear-gradient(150deg,#e7f7ff 0%,#eff4ff 52%,#fff0f5 100%)}
+  .ph:before{background:radial-gradient(44% 28% at 11% 17%,rgba(200,255,50,.18),transparent 75%),radial-gradient(42% 29% at 95% 73%,rgba(65,217,255,.17),transparent 76%)}
+  .page-hd .ph-s,.life-sub{color:rgba(29,59,94,.73)!important}
+  .tabs,.fit-tabs,.seg,.life-cats{background:rgba(54,91,132,.14)!important;border-color:rgba(255,255,255,.74)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.74),0 10px 25px rgba(54,91,132,.09)!important}
+  .ftab,.life-cat{background:rgba(255,255,255,.40)!important;color:rgba(27,60,95,.76)!important;border-color:rgba(255,255,255,.48)!important}
+  .ftab.on{background:linear-gradient(135deg,rgba(201,255,50,.47),rgba(89,231,196,.34))!important;color:#294f15!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 8px 19px rgba(95,192,85,.17)!important}
+  #p-life .life-cat.on{background:linear-gradient(135deg,rgba(201,255,50,.47),rgba(89,231,196,.34))!important;border-color:rgba(122,184,35,.42)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 8px 19px rgba(95,192,85,.17)!important}
+  #p-fit .fit-sum-card,#p-fit .fit-part{border-color:rgba(85,201,235,.25)!important;box-shadow:0 17px 38px rgba(41,151,193,.16),inset 0 1px 0 rgba(255,255,255,.82)!important}
+  #p-diet .bmr,#p-diet .cal-card{border-color:rgba(237,129,91,.23)!important;box-shadow:0 17px 38px rgba(203,105,83,.14),inset 0 1px 0 rgba(255,255,255,.82)!important}
+  #p-work .timer-card,#p-work .task-item{border-color:rgba(144,112,224,.24)!important;box-shadow:0 17px 38px rgba(113,83,179,.15),inset 0 1px 0 rgba(255,255,255,.82)!important}
+  #p-life .life-rec-item,#p-life .ledger-card,#p-life .ledger-stat-card{border-color:rgba(217,99,151,.22)!important;box-shadow:0 17px 38px rgba(186,76,129,.14),inset 0 1px 0 rgba(255,255,255,.82)!important}
+  .bnav{background:rgba(232,243,255,.78)!important;border-color:rgba(255,255,255,.91)!important;box-shadow:0 18px 48px rgba(45,82,124,.18),inset 0 1px 0 rgba(255,255,255,.94)!important}
+}
