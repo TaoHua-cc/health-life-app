@@ -191,6 +191,8 @@ html[data-theme=dark] #fitPartOv .ms2,html[data-theme=dark] #planModal .ms2,html
 html[data-theme=dark] #taskOv .ms2,html[data-theme=dark] #reminderOv .ms2{background:linear-gradient(145deg,rgba(68,43,106,.9),rgba(25,45,86,.9))!important}
 html[data-theme=dark] #profileOv .ms2,html[data-theme=dark] #thcOv .ms2{background:linear-gradient(145deg,rgba(65,87,42,.9),rgba(23,51,72,.9))!important}
 html[data-theme=dark] .aiad-page{background:linear-gradient(160deg,rgba(11,42,69,.92),rgba(34,35,82,.89))!important}
+html[data-theme=dark] .aiad-page .aiad-stat-item{background:rgba(226,245,255,.085)!important;border-color:rgba(226,245,255,.14)!important}
+html[data-theme=dark] .aiad-page .aiad-food,html[data-theme=dark] .aiad-page .aiad-tip{background:rgba(226,245,255,.07)!important;border-color:rgba(226,245,255,.13)!important}
 html[data-theme=dark] input,html[data-theme=dark] select,html[data-theme=dark] textarea,html[data-theme=dark] .mf input,html[data-theme=dark] .mf select,html[data-theme=dark] .life-add input,html[data-theme=dark] .ls-note input{background:rgba(9,29,51,.48)!important;color:var(--t1)!important;border-color:rgba(219,239,255,.2)!important}
 html[data-theme=dark] #profileOv .mine-page-title,html[data-theme=dark] #profileOv .card .ct,html[data-theme=dark] #profileOv .card .sl,html[data-theme=dark] #profileOv .pi label,html[data-theme=dark] #profileOv .ai-hint{color:var(--t1)!important}
 html[data-theme=dark] #profileOv .mine-page-sub,html[data-theme=dark] .ov .ms2 .mf label,html[data-theme=dark] .ov .ms2 .mf-hint{color:var(--t2)!important}
