@@ -68,6 +68,9 @@ html[data-theme=dark] .bnav{background:var(--nav)!important;border-color:rgba(22
   input,select,textarea,.mf input,.mf select,.life-add input,.ls-note input{background:rgba(255,255,255,.54)!important;color:var(--t1)!important;border-color:rgba(91,127,166,.2)!important}
 }
 
+/* QA forced-dark themes must win over a light host system, too. */
+html[data-theme=dark] .map-pick-mask{background:rgba(8,22,40,.54)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}html[data-theme=dark] .map-pick{background:linear-gradient(145deg,rgba(23,54,83,.96),rgba(47,43,83,.96))!important;border-color:rgba(235,250,255,.22)!important;box-shadow:0 -14px 44px rgba(4,17,37,.34)!important}html[data-theme=dark] .mp-grip{background:rgba(235,250,255,.45)!important}html[data-theme=dark] .mp-cancel{background:rgba(255,127,141,.12)!important;color:#ffb3bd!important;border-color:rgba(255,127,141,.24)!important}
+
 /* Dynamic home content: keep the existing live calculations, but give each
    destination one recognisable, restrained prism cue. */
 .ai-card{background:linear-gradient(135deg,rgba(32,100,129,.78),rgba(76,57,136,.76))!important;border:1px solid rgba(224,247,255,.3)!important;box-shadow:0 20px 48px rgba(7,19,48,.32),inset 0 1px 0 rgba(255,255,255,.22)!important;backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%)}
